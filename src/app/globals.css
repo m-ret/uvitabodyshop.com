@@ -46,6 +46,24 @@ body::before {
   animation: marquee 25s linear infinite;
 }
 
+/* Guarantee section — drifting grid */
+@keyframes grid-drift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(60px, 60px); }
+}
+.animate-grid-drift {
+  animation: grid-drift 12s linear infinite;
+}
+
+/* Guarantee section — sweeping shimmer */
+@keyframes shimmer-sweep {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+.animate-shimmer-sweep {
+  animation: shimmer-sweep 8s ease-in-out infinite;
+}
+
 /* Scroll-reveal initial state (CSS-driven, animated by GSAP) */
 .gsap-reveal {
   opacity: 0;
@@ -67,6 +85,206 @@ body::before {
 ::-webkit-scrollbar-thumb {
   background: #333;
   border-radius: 2px;
+}
+
+/* Responsive typography */
+h1, h2, h3 {
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Design 2 — "Color Spectrum" tokens                                 */
+/* ------------------------------------------------------------------ */
+
+.design2 {
+  --d2-bg: #0c0c0e;
+  --d2-fg: #f0ece8;
+  --d2-accent: #c4922a;
+  --d2-accent-hover: #d4a23a;
+  --d2-navy: #0a1628;
+  --d2-teal: #0d7377;
+  --d2-emerald: #0a6847;
+  --d2-gold: #c4922a;
+  --d2-amber: #d4731a;
+  --d2-orange: #c45420;
+  --d2-crimson: #a82020;
+
+  --color-accent: var(--d2-accent);
+  --color-accent-hover: var(--d2-accent-hover);
+  --background: var(--d2-bg);
+  --foreground: var(--d2-fg);
+
+  font-family: var(--font-plus-jakarta), system-ui, sans-serif;
+}
+
+.design2 .font-display {
+  font-family: var(--font-syne), system-ui, sans-serif;
+}
+
+/* Mosaic column stagger animation */
+@keyframes mosaic-col-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Timeline line draw */
+@keyframes timeline-draw {
+  from { height: 0; }
+  to { height: 100%; }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Design 3 — "Forge" tokens                                         */
+/* ------------------------------------------------------------------ */
+
+.design3 {
+  --d3-bg: #0a0a0a;
+  --d3-fg: #e8e8e8;
+  --d3-accent: #ff4d00;
+  --d3-accent-hover: #ff6a2a;
+  --d3-steel: #1a1a1e;
+  --d3-steel-light: #2a2a2e;
+  --d3-steel-mid: #3a3a3e;
+  --d3-concrete: #161618;
+  --d3-spark: #ff4d00;
+
+  --color-accent: var(--d3-accent);
+  --color-accent-hover: var(--d3-accent-hover);
+  --background: var(--d3-bg);
+  --foreground: var(--d3-fg);
+
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+}
+
+.design3 .font-display {
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+}
+
+/* Industrial tech grid */
+.d3-tech-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Horizontal scroll snap */
+.d3-h-scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.d3-h-scroll::-webkit-scrollbar { display: none; }
+.d3-h-scroll > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* Scroll progress bar */
+.d3-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--d3-accent);
+  z-index: 100;
+  transform-origin: left;
+  will-change: transform;
+}
+
+/* Clip text reveal */
+.d3-clip-reveal {
+  clip-path: inset(0 100% 0 0);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Design 4 — "Clean Machine" (Gumroad-style light)                   */
+/* ------------------------------------------------------------------ */
+
+.design4 {
+  --d4-bg: #ffffff;
+  --d4-bg-soft: #f5f7fa;
+  --d4-fg: #0f172a;
+  --d4-fg-muted: #64748b;
+  --d4-fg-light: #94a3b8;
+  --d4-accent: #1e3a5f;
+  --d4-accent-hover: #2a4f7a;
+  --d4-border: #e2e8f0;
+  --d4-card: #ffffff;
+  --d4-success: #10b981;
+
+  --color-accent: var(--d4-accent);
+  --color-accent-hover: var(--d4-accent-hover);
+
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  background: var(--d4-bg);
+  color: var(--d4-fg);
+}
+
+.design4 .font-display {
+  font-family: var(--font-mona), system-ui, sans-serif;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Design 5 — Neo-Brutalist Tech UI                                   */
+/* ------------------------------------------------------------------ */
+
+.design5 {
+  --d5-bg: #f2f2ed;
+  --d5-bg-dark: #1a1a1a;
+  --d5-fg: #1a1a1a;
+  --d5-fg-muted: #777777;
+  --d5-fg-light: #aaaaaa;
+  --d5-accent: #ff5c00;
+  --d5-accent-hover: #ff7a2e;
+  --d5-border: rgba(0,0,0,0.12);
+  --d5-grid: rgba(0,0,0,0.08);
+  --d5-card: #ffffff;
+
+  --color-accent: var(--d5-accent);
+  --color-accent-hover: var(--d5-accent-hover);
+
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  background: var(--d5-bg);
+  color: var(--d5-fg);
+}
+
+.design5 .font-display {
+  font-family: var(--font-space-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* Visible structural grid — 4-column like the reference */
+.d5-grid-bg {
+  background-image:
+    linear-gradient(var(--d5-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--d5-grid) 1px, transparent 1px);
+  background-size: 100% 80px, 25% 100%;
+}
+
+/* Accent dot — small orange square marker */
+.d5-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--d5-accent);
+  flex-shrink: 0;
+}
+
+/* Oversized text that crops at container edges */
+.d5-bleed-text {
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 0.85;
 }
 
 /* Reduced motion */
