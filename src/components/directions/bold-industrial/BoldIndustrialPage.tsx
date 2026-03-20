@@ -45,9 +45,9 @@ const SERVICES = [
     icon: '⬡',
   },
   {
-    title: 'Insurance Claims',
+    title: 'Accessories Installation',
     description:
-      "Direct-to-insurer billing. We handle the paperwork so you don't have to.",
+      'Professional installation of aftermarket accessories and trim. Factory-quality fit, every time.',
     icon: '⬡',
   },
 ]
@@ -277,7 +277,7 @@ export function BoldIndustrialPage() {
 
             {/* Trust badges */}
             <div className="flex items-center gap-6 mt-10 pt-8 border-t border-[#1e1e1e]">
-              {['Licensed & Insured', 'OEM Certified', 'Free Estimates'].map(
+              {['Lifetime Warranty', 'Premium Materials', 'Free Estimates'].map(
                 (badge) => (
                   <div
                     key={badge}
@@ -420,7 +420,7 @@ export function BoldIndustrialPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
               { step: '01', title: 'Contact Us', desc: 'Call or submit online for a free, no-obligation estimate.' },
-              { step: '02', title: 'Drop Off', desc: 'Bring your vehicle in. We handle insurance paperwork.' },
+              { step: '02', title: 'Drop Off', desc: 'Bring your vehicle in. We assess the damage and walk you through the repair plan.' },
               { step: '03', title: 'We Repair', desc: 'Precision work by certified technicians. Regular updates throughout.' },
               { step: '04', title: 'Drive Away', desc: 'Inspected, detailed, and ready. Usually within 48 hours.' },
             ].map((item, i) => (

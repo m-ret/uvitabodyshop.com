@@ -61,10 +61,10 @@ const SERVICES = [
     emoji: '🌿',
   },
   {
-    title: 'Insurance Claims',
+    title: 'Accessories Installation',
     description:
-      "Direct-to-insurer billing. We handle the paperwork — you just hand us the keys.",
-    emoji: '📋',
+      'Professional installation of aftermarket accessories and trim. Done right the first time.',
+    emoji: '🔩',
   },
 ]
 
@@ -85,7 +85,7 @@ const TESTIMONIALS = [
   {
     name: 'Sarah K.',
     location: 'Dominical',
-    text: "Had a fender bender on the coastal highway. They handled everything with my insurance and the repair was perfect. Couldn't be happier!",
+    text: "Had a fender bender on the coastal highway. The team was professional, fast, and the repair was absolutely perfect. Couldn't be happier with how it came out!",
     rating: 5,
   },
   {
@@ -424,7 +424,7 @@ export function TropicalLocalPage() {
               className="flex flex-wrap items-center gap-5 mt-10 pt-8"
               style={{ borderTop: '1px solid rgba(45,106,79,0.15)' }}
             >
-              {['Licensed & Insured', 'OEM Certified', 'Free Estimates'].map(
+              {['Lifetime Warranty', 'Premium Materials', 'Free Estimates'].map(
                 (badge) => (
                   <div
                     key={badge}
@@ -682,7 +682,7 @@ export function TropicalLocalPage() {
               {
                 step: '02',
                 title: 'Drop Off',
-                desc: 'Bring your vehicle in. We handle all the insurance paperwork for you.',
+                desc: 'Bring your vehicle in. We review the damage together and walk you through the repair plan.',
                 icon: '🚗',
               },
               {

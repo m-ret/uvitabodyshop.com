@@ -62,9 +62,9 @@ const SERVICES = [
     icon: '◈',
   },
   {
-    title: 'Insurance Claims',
+    title: 'Accessories Installation',
     description:
-      "Direct-to-insurer billing. We handle the paperwork so you don't have to.",
+      'Professional installation of aftermarket accessories and trim. Factory-quality fit, every time.',
     icon: '◈',
   },
 ]
@@ -89,8 +89,8 @@ const TRUST_SIGNALS = [
   },
   {
     icon: '✓',
-    title: 'Insurance Direct',
-    desc: 'Preferred partner with all major insurance providers.',
+    title: 'Premium Materials',
+    desc: 'Roberlo, BESA, 3M, and VICCO products used on every repair.',
   },
   {
     icon: '✓',
@@ -99,13 +99,11 @@ const TRUST_SIGNALS = [
   },
 ]
 
-const INSURANCE_PARTNERS = [
-  'INS Nacional',
-  'Seguros Bolívar',
-  'Qualitas',
-  'Mapfre',
-  'AXA',
-  'Allianz',
+const MATERIAL_PARTNERS = [
+  'Roberlo',
+  'BESA',
+  '3M',
+  'VICCO',
 ]
 
 function CountUp({
@@ -535,7 +533,7 @@ export function CleanProfessionalPage() {
               className="flex flex-col gap-3 pt-8 border-t border-[#1C1C1A]/10"
             >
               {[
-                'Licensed & insured in Costa Rica',
+                'Lifetime warranty on all repairs',
                 'OEM-certified technicians',
                 'Free estimate — 2-hour response',
               ].map((badge) => (
@@ -883,16 +881,16 @@ export function CleanProfessionalPage() {
             ))}
           </div>
 
-          {/* Insurance partners */}
+          {/* Material partners */}
           <div className="border-t border-[#1C1C1A]/10 pt-12">
             <p
               className="text-center text-[#9a9a98] text-xs tracking-[0.2em] uppercase mb-8"
               style={displayStyle}
             >
-              Preferred Partner With Major Insurance Providers
+              Premium Materials We Trust
             </p>
             <div className="flex flex-wrap items-center justify-center gap-8">
-              {INSURANCE_PARTNERS.map((partner) => (
+              {MATERIAL_PARTNERS.map((partner) => (
                 <div
                   key={partner}
                   className="px-6 py-3 border border-[#1C1C1A]/10 rounded-sm"
@@ -943,7 +941,7 @@ export function CleanProfessionalPage() {
               {
                 step: '02',
                 title: 'Drop Off',
-                desc: 'Bring your vehicle in. We handle all insurance paperwork.',
+                desc: 'Bring your vehicle in. We assess the damage and walk you through every step.',
               },
               {
                 step: '03',
