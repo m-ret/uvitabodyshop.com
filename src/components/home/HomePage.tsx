@@ -8,6 +8,7 @@ import { useGSAP } from '@gsap/react'
 import Navigation from '@/components/ui/Navigation'
 import ReactiveGrid from '@/components/ui/ReactiveGrid'
 import SiteFooter from '@/components/ui/SiteFooter'
+import OpenNowBadge from '@/components/ui/OpenNowBadge'
 import QuoteForm from '@/components/home/QuoteForm'
 import {
   services,
@@ -739,6 +740,48 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===== MAP ===== */}
+      {business.map.embedUrl && (
+        <section
+          aria-labelledby="map-heading"
+          className="relative border-t border-zinc-800/50 bg-background"
+        >
+          <h2 id="map-heading" className="sr-only">
+            Ubicación en Uvita, Puntarenas
+          </h2>
+          <div className="relative h-[320px] sm:h-[420px] overflow-hidden">
+            <iframe
+              src={business.map.embedUrl}
+              title="Mapa · Uvita Body Shop"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="absolute inset-0 h-full w-full grayscale-[0.6] contrast-110 brightness-75"
+              style={{ border: 0 }}
+            />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-background to-transparent" />
+          </div>
+          <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-12 lg:px-24">
+            <div>
+              <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-500">
+                Dónde estamos
+              </p>
+              <p className="mt-1 text-sm text-zinc-300">
+                {contactInfo.locationDisplay}
+              </p>
+            </div>
+            <a
+              href={business.map.linkUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 border border-zinc-700 px-5 py-3 font-mono text-[11px] tracking-[0.25em] uppercase text-zinc-300 hover:border-zinc-400 hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              Abrir en Google Maps →
+            </a>
+          </div>
+        </section>
+      )}
+
       {/* ===== CTA / CONTACT ===== */}
       <section
         id="contact"
@@ -796,7 +839,8 @@ export default function HomePage() {
               </a>
             </div>
 
-            <div className="font-mono text-xs text-zinc-600 space-y-1">
+            <div className="font-mono text-xs text-zinc-600 space-y-2">
+              <OpenNowBadge />
               <p>{contactInfo.locationDisplay}</p>
               <p>{contactInfo.hoursDisplay}</p>
             </div>

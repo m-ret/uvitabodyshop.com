@@ -145,11 +145,12 @@ export const business = {
   // Editing a single entry here flips JSON-LD sameAs + the footer.
   socialLinks: [] as SocialLink[],
 
-  // Static map: a single image URL (Mapbox static / Google Maps static).
-  // Keeping `null` keeps the map section empty until we pick a provider.
-  // mapLinkUrl is the "open in Maps" deep link.
+  // Google Maps deep link + keyless embed (no tracking cookie, no JS).
+  // `embedUrl` uses the public `q=` iframe, which doesn't require an API key.
+  // Swap for a Mapbox/Maps static image later if CWV budget requires it.
   map: {
-    embedUrl: null as string | null,
+    embedUrl:
+      'https://www.google.com/maps?q=Uvita+Body+Shop+Uvita+Puntarenas+Costa+Rica&output=embed',
     linkUrl: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
   },
 
