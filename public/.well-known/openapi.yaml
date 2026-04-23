@@ -1,0 +1,95 @@
+openapi: 3.1.0
+info:
+  title: Uvita Body Shop — Public API
+  version: 1.0.0
+  description: |
+    Minimal public surface for AI agents acting on behalf of users.
+    Submit a repair quote request with contact details and damage
+    description. The shop responds via WhatsApp within business hours.
+  contact:
+    name: Uvita Body Shop
+    url: https://uvitabodyshop.com
+servers:
+  - url: https://uvitabodyshop.com
+paths:
+  /api/quote-request:
+    post:
+      operationId: submitQuoteRequest
+      summary: Submit a quote request for auto body repair
+      description: |
+        Creates a quote request. The shop contacts the user via WhatsApp
+        within business hours (Mon-Sat 8am-5pm CST).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuoteRequest"
+      responses:
+        "200":
+          description: Quote request accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuoteRequestResponse"
+        "400":
+          description: Invalid request payload
+        "429":
+          description: Rate limit exceeded
+components:
+  schemas:
+    QuoteRequest:
+      type: object
+      required: [name, phone, service, description]
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 80
+          description: Customer's full name.
+        phone:
+          type: string
+          description: Phone or WhatsApp number in international format.
+          example: "+50688991234"
+        email:
+          type: string
+          format: email
+          description: Optional email for follow-up.
+        service:
+          type: string
+          enum:
+            - enderezado
+            - pintura-completa
+            - retoques-pintura
+            - reparacion-golpes
+            - instalacion-accesorios
+            - otro
+          description: Service category.
+        vehicle:
+          type: string
+          maxLength: 120
+          description: Vehicle make/model/year (e.g., "Toyota Hilux 2019").
+        description:
+          type: string
+          minLength: 10
+          maxLength: 2000
+          description: Damage description in Spanish or English.
+        photoUrls:
+          type: array
+          items: { type: string, format: uri }
+          maxItems: 10
+          description: Optional public URLs of damage photos.
+        preferredLanguage:
+          type: string
+          enum: [es, en]
+          default: es
+    QuoteRequestResponse:
+      type: object
+      required: [ok, message]
+      properties:
+        ok: { type: boolean }
+        message: { type: string }
+        contactUrl:
+          type: string
+          format: uri
+          description: WhatsApp deep link for immediate follow-up.

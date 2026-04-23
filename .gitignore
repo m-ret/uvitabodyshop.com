@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -30,8 +28,10 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files (commit .env.example only)
+.env
+.env.*
+!.env.example
 
 # vercel
 .vercel
@@ -39,4 +39,42 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# exploration-phase artifacts (should not reappear)
 .gstack/
+
+# claude code runtime state
+.claude/scheduled_tasks.lock
+
+# skills CLI regenerable symlink directories for non-target agents
+# The source of truth lives in .agents/skills/; .claude/skills/ symlinks
+# into it for Claude Code. Everything else regenerates via `npm run skills:sync`.
+/.adal/
+/.augment/
+/.bob/
+/.codebuddy/
+/.commandcode/
+/.continue/
+/.cortex/
+/.crush/
+/.factory/
+/.goose/
+/.iflow/
+/.junie/
+/.kilocode/
+/.kiro/
+/.kode/
+/.mcpjam/
+/.mux/
+/.neovate/
+/.openhands/
+/.pi/
+/.pochi/
+/.qoder/
+/.qwen/
+/.roo/
+/.trae/
+/.vibe/
+/.windsurf/
+/.zencoder/
+/skills/

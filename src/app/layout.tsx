@@ -1,5 +1,6 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Bebas_Neue, DM_Sans, JetBrains_Mono } from 'next/font/google'
+import { business, siteUrl, buildStructuredData } from '@/data/business'
 import './globals.css'
 
 const bebasNeue = Bebas_Neue({
@@ -21,10 +22,62 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
+export const viewport: Viewport = {
+  themeColor: '#050505',
+  colorScheme: 'dark',
+}
+
 export const metadata: Metadata = {
-  title: 'Uvita Body Shop — Premium Auto Body Repair & Paint Restoration',
-  description:
-    'Expert collision repair, paint restoration, and custom finishes in Uvita, Costa Rica. Precision craftsmanship and flawless results.',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${business.name} — Enderezado y Pintura Profesional en Uvita, Costa Rica`,
+    template: `%s · ${business.name}`,
+  },
+  description: business.meta.descriptionEs,
+  keywords: [...business.meta.keywords],
+  applicationName: business.name,
+  authors: [{ name: business.owner }],
+  alternates: {
+    canonical: '/',
+    languages: {
+      es: '/',
+      'x-default': '/',
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'es_CR',
+    url: siteUrl,
+    siteName: business.name,
+    title: `${business.name} — Enderezado y Pintura Profesional`,
+    description: business.meta.descriptionEs,
+    images: [
+      {
+        url: '/og.jpg',
+        width: 1200,
+        height: 630,
+        alt: `${business.name} — Taller de enderezado y pintura en Uvita, Costa Rica`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${business.name} — Enderezado y Pintura`,
+    description: business.meta.descriptionEs,
+    images: ['/og.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: { icon: '/favicon.ico' },
+  category: 'automotive',
 }
 
 export default function RootLayout({
@@ -32,12 +85,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const structuredData = buildStructuredData()
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${bebasNeue.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </body>
     </html>
   )
 }
