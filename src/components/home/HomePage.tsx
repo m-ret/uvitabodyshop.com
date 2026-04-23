@@ -12,8 +12,10 @@ import {
   processSteps,
   materialBrands,
   marqueeItems,
-  contactInfo,
 } from '@/data/content'
+import { displayContact } from '@/data/business'
+
+const contactInfo = displayContact()
 
 const CarPaintScene = dynamic(() => import('@/components/3d/CarPaintScene'), {
   ssr: false,
@@ -730,8 +732,8 @@ export default function HomePage() {
             </div>
 
             <div className="font-mono text-xs text-zinc-600 space-y-1">
-              <p>{contactInfo.location}</p>
-              <p>{contactInfo.hours}</p>
+              <p>{contactInfo.locationDisplay}</p>
+              <p>{contactInfo.hoursDisplay}</p>
             </div>
           </div>
 

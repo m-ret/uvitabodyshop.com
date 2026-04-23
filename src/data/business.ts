@@ -1,12 +1,36 @@
 /**
  * Business data — single source of truth for SEO, schema.org, llms.txt,
- * quote-request API, and any place that needs a canonical fact about
+ * quote-request API, UI, and any place that needs a canonical fact about
  * Uvita Body Shop.
  *
  * Anything user-facing that duplicates these values is a bug.
  */
 
-import { services as displayServices, contactInfo } from './content'
+export interface Testimonial {
+  id: string
+  author: string
+  vehicle?: string
+  service?: string
+  quote: string
+  rating?: 1 | 2 | 3 | 4 | 5
+  dateIso?: string
+}
+
+export interface GalleryItem {
+  id: string
+  src: string
+  alt: string
+  caption?: string
+  beforeSrc?: string
+  width?: number
+  height?: number
+}
+
+export interface SocialLink {
+  platform: 'facebook' | 'instagram' | 'tiktok' | 'google'
+  url: string
+  handle: string
+}
 
 export const business = {
   name: 'Uvita Body Shop',
@@ -17,9 +41,9 @@ export const business = {
   yearsExperience: 9,
 
   contact: {
-    phone: contactInfo.phone,
-    phoneDisplay: contactInfo.phoneDisplay,
-    whatsapp: contactInfo.whatsapp,
+    phone: '+5068769927',
+    phoneDisplay: '(506) 8769-9927',
+    whatsapp: 'https://wa.me/5068769927',
     whatsappNumber: '5068769927',
   },
 
@@ -29,13 +53,22 @@ export const business = {
     countryCode: 'CR',
     country: 'Costa Rica',
     areaServed: ['Uvita', 'Dominical', 'Ojochal', 'Bahía Ballena', 'Zona Sur'],
+    locationDisplay: 'Uvita, Puntarenas, Costa Rica',
   },
 
   hours: {
-    display: contactInfo.hours,
+    display: 'Lun–Sáb · 8:00 a.m. – 5:00 p.m.',
     opens: '08:00',
     closes: '17:00',
-    daysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    daysOfWeek: [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ],
+    timeZone: 'America/Costa_Rica',
   },
 
   capabilities: {
@@ -52,31 +85,36 @@ export const business = {
       slug: 'enderezado',
       es: 'Enderezado',
       en: 'Frame & Collision Repair',
-      description: 'Reparación estructural y de chasis con medición computarizada.',
+      description:
+        'Reparación estructural y de chasis con medición computarizada.',
     },
     {
       slug: 'pintura-completa',
       es: 'Pintura completa',
       en: 'Full Paint',
-      description: 'Pintura de vehículo completo en cabina con horno infrarrojo.',
+      description:
+        'Pintura de vehículo completo en cabina con horno infrarrojo.',
     },
     {
       slug: 'retoques-pintura',
       es: 'Retoques de pintura',
       en: 'Paint Touch-Up',
-      description: 'Retoques localizados, remoción de rayones, mezcla de color perfecta.',
+      description:
+        'Retoques localizados, remoción de rayones, mezcla de color perfecta.',
     },
     {
       slug: 'reparacion-golpes',
       es: 'Reparación de golpes',
       en: 'Dent & Impact Repair',
-      description: 'Reparación de abolladuras e impactos sin reemplazo innecesario de paneles.',
+      description:
+        'Reparación de abolladuras e impactos sin reemplazo innecesario de paneles.',
     },
     {
       slug: 'instalacion-accesorios',
       es: 'Instalación de accesorios',
       en: 'Accessories & Custom',
-      description: 'Instalación de bumpers, spoilers, accesorios aftermarket con acabado perfecto.',
+      description:
+        'Instalación de bumpers, spoilers, accesorios aftermarket con acabado perfecto.',
     },
   ],
 
@@ -102,6 +140,23 @@ export const business = {
       'taller de enderezado zona sur',
     ],
   },
+
+  // Client-provided URLs. Placeholders until confirmed; do not remove.
+  // Editing a single entry here flips JSON-LD sameAs + the footer.
+  socialLinks: [] as SocialLink[],
+
+  // Static map: a single image URL (Mapbox static / Google Maps static).
+  // Keeping `null` keeps the map section empty until we pick a provider.
+  // mapLinkUrl is the "open in Maps" deep link.
+  map: {
+    embedUrl: null as string | null,
+    linkUrl: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
+  },
+
+  // When empty, downstream UI hides these sections. Ready to receive
+  // client-provided content without another PR.
+  testimonials: [] as Testimonial[],
+  gallery: [] as GalleryItem[],
 } as const
 
 /**
@@ -109,7 +164,22 @@ export const business = {
  * Default is the production domain.
  */
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ?? 'https://uvitabodyshop.com'
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ??
+  'https://uvitabodyshop.com'
+
+/**
+ * UI-facing contact selector. One shape for every display consumer
+ * (navigation, contact section, mobile menu, footer).
+ */
+export function displayContact() {
+  return {
+    phone: business.contact.phone,
+    phoneDisplay: business.contact.phoneDisplay,
+    whatsapp: business.contact.whatsapp,
+    hoursDisplay: business.hours.display,
+    locationDisplay: business.address.locationDisplay,
+  }
+}
 
 /**
  * schema.org `AutoBodyShop` + `LocalBusiness` JSON-LD graph.
@@ -127,7 +197,8 @@ export function buildStructuredData() {
         url: siteUrl,
         telephone: business.contact.phone,
         priceRange: business.pricing.priceRange,
-        image: `${siteUrl}/og.jpg`,
+        image: `${siteUrl}/opengraph-image`,
+        logo: `${siteUrl}/logo.png`,
         address: {
           '@type': 'PostalAddress',
           addressLocality: business.address.locality,
@@ -157,12 +228,8 @@ export function buildStructuredData() {
             description: s.description,
           },
         })),
-        sameAs: [],
+        sameAs: business.socialLinks.map((s) => s.url),
       },
     ],
   }
 }
-
-// Sanity check so TS prunes unused but reminds us that display data
-// stays in content.ts:
-export const _displayServicesCount = displayServices.length

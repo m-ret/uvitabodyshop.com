@@ -3,6 +3,9 @@
 import { useState, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
+import { displayContact } from '@/data/business'
+
+const contact = displayContact()
 
 const navLinks = [
   { label: 'Services', href: '#services' },
@@ -168,28 +171,28 @@ export default function Navigation() {
                 Location
               </p>
               <p className="text-sm text-zinc-400">
-                Uvita, Puntarenas, Costa Rica
+                {contact.locationDisplay}
               </p>
             </div>
             <div className="nav-footer-item">
               <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-600 mb-2">
                 Hours
               </p>
-              <p className="text-sm text-zinc-400">Mon&ndash;Sat &bull; 8 AM &ndash; 5 PM</p>
+              <p className="text-sm text-zinc-400">{contact.hoursDisplay}</p>
             </div>
             <div className="nav-footer-item">
               <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-600 mb-2">
                 Contact
               </p>
               <a
-                href="tel:+5068769927"
+                href={`tel:${contact.phone}`}
                 className="text-sm text-zinc-400 hover:text-accent transition-colors"
               >
-                (506) 876-9927
+                {contact.phoneDisplay}
               </a>
             </div>
             <a
-              href="https://wa.me/5068769927"
+              href={contact.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="nav-footer-item inline-flex items-center gap-2 px-5 py-3 bg-accent text-white text-sm font-medium tracking-wide uppercase hover:bg-accent-hover transition-colors"

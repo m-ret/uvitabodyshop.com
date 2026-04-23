@@ -117,11 +117,3 @@ export const marqueeItems = [
   'Accessories',
   'Guaranteed',
 ]
-
-export const contactInfo = {
-  phone: '+5068769927',
-  phoneDisplay: '(506) 876-9927',
-  whatsapp: 'https://wa.me/5068769927',
-  location: 'Uvita, Puntarenas, Costa Rica',
-  hours: 'Mon–Sat • 8:00 AM – 5:00 PM',
-}
