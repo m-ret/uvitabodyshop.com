@@ -43,6 +43,12 @@ next-env.d.ts
 # exploration-phase artifacts (should not reappear)
 .gstack/
 
+# playwright artifacts
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
 # claude code runtime state
 .claude/scheduled_tasks.lock
 
