@@ -1,44 +1,41 @@
 'use client'
 
-import { Suspense, useRef, useMemo, useState, useEffect } from 'react'
+import { Suspense, useRef, useMemo, useSyncExternalStore } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import { mulberry32 } from '@/lib/random'
+
+const MIST_SEED = 0xbadf00d
+const HAZE_SEED = 0xfeed5ee
 
 /**
  * Paint spray mist particles that drift across the viewport.
  * Simulates the fine overspray inside a professional paint booth.
- * Two particle systems: fine white mist + colored paint particles.
  */
 function SprayMist({
   count = 120,
   color = '#cc0000',
+  seedOffset = 0,
 }: {
   count?: number
   color?: string
+  seedOffset?: number
 }) {
   const meshRef = useRef<THREE.InstancedMesh>(null)
   const tempObject = useMemo(() => new THREE.Object3D(), [])
 
   const data = useMemo(() => {
+    const rng = mulberry32(MIST_SEED + seedOffset)
     const offsets = Array.from({ length: count }, () => ({
-      x: (Math.random() - 0.5) * 16,
-      y: (Math.random() - 0.5) * 10,
-      z: (Math.random() - 0.5) * 6 - 3,
+      x: (rng() - 0.5) * 16,
+      y: (rng() - 0.5) * 10,
+      z: (rng() - 0.5) * 6 - 3,
     }))
-    const speeds = Array.from(
-      { length: count },
-      () => Math.random() * 0.15 + 0.05
-    )
-    const sizes = Array.from(
-      { length: count },
-      () => Math.random() * 0.06 + 0.025
-    )
-    const phases = Array.from(
-      { length: count },
-      () => Math.random() * Math.PI * 2
-    )
+    const speeds = Array.from({ length: count }, () => rng() * 0.15 + 0.05)
+    const sizes = Array.from({ length: count }, () => rng() * 0.06 + 0.025)
+    const phases = Array.from({ length: count }, () => rng() * Math.PI * 2)
     return { offsets, speeds, sizes, phases }
-  }, [count])
+  }, [count, seedOffset])
 
   useFrame(({ clock }) => {
     if (!meshRef.current) return
@@ -49,17 +46,14 @@ function SprayMist({
       const speed = data.speeds[i]
       const phase = data.phases[i]
 
-      // Gentle drift with slight directional wind
+      const driftX =
+        x + Math.sin(t * speed * 0.7 + phase) * 0.5 + t * speed * 0.3
+      const wrappedX = driftX > 10 ? -10 : driftX
       tempObject.position.set(
-        x + Math.sin(t * speed * 0.7 + phase) * 0.5 + t * speed * 0.3,
+        wrappedX,
         y + Math.cos(t * speed + phase) * 0.3,
         z + Math.sin(t * speed * 0.4 + phase * 2) * 0.2
       )
-
-      // Wrap particles that drift too far right
-      if (tempObject.position.x > 10) {
-        tempObject.position.x = -10
-      }
 
       const s = data.sizes[i] * (1 + Math.sin(t * speed * 2 + phase) * 0.3)
       tempObject.scale.setScalar(s)
@@ -77,27 +71,19 @@ function SprayMist({
   )
 }
 
-/**
- * Fine white haze particles — the ambient mist in a spray booth
- */
 function HazeParticles({ count = 60 }: { count?: number }) {
   const meshRef = useRef<THREE.InstancedMesh>(null)
   const tempObject = useMemo(() => new THREE.Object3D(), [])
 
   const data = useMemo(() => {
+    const rng = mulberry32(HAZE_SEED)
     const offsets = Array.from({ length: count }, () => ({
-      x: (Math.random() - 0.5) * 20,
-      y: (Math.random() - 0.5) * 12,
-      z: (Math.random() - 0.5) * 4 - 4,
+      x: (rng() - 0.5) * 20,
+      y: (rng() - 0.5) * 12,
+      z: (rng() - 0.5) * 4 - 4,
     }))
-    const speeds = Array.from(
-      { length: count },
-      () => Math.random() * 0.08 + 0.02
-    )
-    const phases = Array.from(
-      { length: count },
-      () => Math.random() * Math.PI * 2
-    )
+    const speeds = Array.from({ length: count }, () => rng() * 0.08 + 0.02)
+    const phases = Array.from({ length: count }, () => rng() * Math.PI * 2)
     return { offsets, speeds, phases }
   }, [count])
 
@@ -132,12 +118,30 @@ function HazeParticles({ count = 60 }: { count?: number }) {
   )
 }
 
-function useIsMobile() {
-  const [mobile, setMobile] = useState(false)
-  useEffect(() => {
-    setMobile(window.innerWidth < 768)
-  }, [])
-  return mobile
+const MOBILE_QUERY = '(max-width: 767px)'
+
+function subscribeMobile(callback: () => void): () => void {
+  if (typeof window === 'undefined') return () => {}
+  const mql = window.matchMedia(MOBILE_QUERY)
+  mql.addEventListener('change', callback)
+  return () => mql.removeEventListener('change', callback)
+}
+
+function getMobileSnapshot(): boolean {
+  if (typeof window === 'undefined') return false
+  return window.matchMedia(MOBILE_QUERY).matches
+}
+
+function getServerMobileSnapshot(): boolean {
+  return false
+}
+
+function useIsMobile(): boolean {
+  return useSyncExternalStore(
+    subscribeMobile,
+    getMobileSnapshot,
+    getServerMobileSnapshot
+  )
 }
 
 export default function SprayParticleScene() {
@@ -149,8 +153,16 @@ export default function SprayParticleScene() {
       dpr={[1, mobile ? 1 : 1.5]}
     >
       <Suspense fallback={null}>
-        <SprayMist count={mobile ? 80 : 200} color="#cc0000" />
-        <SprayMist count={mobile ? 40 : 100} color="#ff4444" />
+        <SprayMist
+          count={mobile ? 80 : 200}
+          color="#cc0000"
+          seedOffset={0}
+        />
+        <SprayMist
+          count={mobile ? 40 : 100}
+          color="#ff4444"
+          seedOffset={1}
+        />
         <HazeParticles count={mobile ? 50 : 120} />
       </Suspense>
     </Canvas>

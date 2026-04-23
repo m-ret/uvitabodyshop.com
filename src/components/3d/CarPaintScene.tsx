@@ -4,6 +4,9 @@ import { Suspense, useRef, useMemo, useEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
+import { mulberry32 } from '@/lib/random'
+
+const MIST_SEED = 0xc0ffee
 
 /**
  * Cursor-following inspection light.
@@ -42,7 +45,6 @@ function MouseTrackingLight() {
 
 /**
  * Nissan GTR loaded from GLB.
- * Auto-frames into the camera view based on actual model bounds.
  */
 function CarBody({ paintColor = '#aa1515' }: { paintColor?: string }) {
   const groupRef = useRef<THREE.Group>(null)
@@ -89,7 +91,6 @@ function CarBody({ paintColor = '#aa1515' }: { paintColor?: string }) {
     if (!groupRef.current) return
     smoothMouse.current.x += (mouse.current.x - smoothMouse.current.x) * 0.03
     smoothMouse.current.y += (mouse.current.y - smoothMouse.current.y) * 0.03
-    // Subtle tilt: max ~5 degrees in each direction
     groupRef.current.rotation.x = smoothMouse.current.y * 0.08
     groupRef.current.rotation.z = smoothMouse.current.x * 0.05
   })
@@ -101,30 +102,32 @@ function CarBody({ paintColor = '#aa1515' }: { paintColor?: string }) {
   )
 }
 
-// Preload the model
 useGLTF.preload('/models/car.glb')
 
 /**
- * Paint mist particles.
+ * Paint mist particles. Uses seeded PRNG for layout so particle positions
+ * are stable across SSR / Suspense retries and pass the React 19 compiler.
  */
-function PaintMist({ count = 20, mistColor = '#cc3333' }: { count?: number; mistColor?: string }) {
+function PaintMist({
+  count = 20,
+  mistColor = '#cc3333',
+}: {
+  count?: number
+  mistColor?: string
+}) {
   const meshRef = useRef<THREE.InstancedMesh>(null)
   const tempObject = useMemo(() => new THREE.Object3D(), [])
 
-  const data = useMemo(
-    () => ({
-      offsets: Array.from({ length: count }, () => ({
-        x: (Math.random() - 0.5) * 14,
-        y: (Math.random() - 0.5) * 10,
-        z: (Math.random() - 0.5) * 6 - 3,
-      })),
-      speeds: Array.from(
-        { length: count },
-        () => Math.random() * 0.25 + 0.08
-      ),
-    }),
-    [count]
-  )
+  const data = useMemo(() => {
+    const rng = mulberry32(MIST_SEED)
+    const offsets = Array.from({ length: count }, () => ({
+      x: (rng() - 0.5) * 14,
+      y: (rng() - 0.5) * 10,
+      z: (rng() - 0.5) * 6 - 3,
+    }))
+    const speeds = Array.from({ length: count }, () => rng() * 0.25 + 0.08)
+    return { offsets, speeds }
+  }, [count])
 
   useFrame(({ clock }) => {
     if (!meshRef.current) return
@@ -152,18 +155,24 @@ function PaintMist({ count = 20, mistColor = '#cc3333' }: { count?: number; mist
 }
 
 /**
- * Responsive camera that adjusts FOV for mobile.
+ * Responsive camera rig. Reads `size` from useThree and updates the
+ * camera imperatively inside useFrame — the React 19 compiler treats
+ * this as a side-effect boundary rather than a render-time mutation.
  */
-function ResponsiveCamera() {
-  const { camera, size } = useThree()
-  useEffect(() => {
+function CameraRig() {
+  const size = useThree((state) => state.size)
+
+  useFrame(({ camera }) => {
     const cam = camera as THREE.PerspectiveCamera
-    // Wider FOV on narrow screens to show more of the car
-    cam.fov = size.width < 640 ? 50 : size.width < 1024 ? 42 : 35
-    // Pull camera up a bit more on mobile
-    cam.position.y = size.width < 640 ? 4.2 : 3.5
-    cam.updateProjectionMatrix()
-  }, [camera, size])
+    const targetFov = size.width < 640 ? 50 : size.width < 1024 ? 42 : 35
+    const targetY = size.width < 640 ? 4.2 : 3.5
+    if (cam.fov !== targetFov || cam.position.y !== targetY) {
+      cam.fov = targetFov
+      cam.position.y = targetY
+      cam.updateProjectionMatrix()
+    }
+  })
+
   return null
 }
 
@@ -191,28 +200,23 @@ export default function CarPaintScene({
       <Suspense fallback={null}>
         <ambientLight intensity={0.15} />
 
-        {/* Cursor-following inspection lamp */}
         <MouseTrackingLight />
 
-        {/* Key light — warm from upper right */}
         <directionalLight
           position={[5, 8, 5]}
           intensity={2}
           color="#ffffff"
         />
 
-        {/* Fill from left */}
         <directionalLight
           position={[-4, 3, 3]}
           intensity={0.8}
           color="#ffffff"
         />
 
-        {/* Rim light — accent edge glow from behind */}
         <pointLight position={[-3, 1, -5]} intensity={4} color={rimColor} />
         <pointLight position={[4, 0, -3]} intensity={2} color={rimColor2} />
 
-        {/* Top spot */}
         <spotLight
           position={[0, 10, 3]}
           angle={0.3}
@@ -221,11 +225,10 @@ export default function CarPaintScene({
           color="#ffffff"
         />
 
-        <ResponsiveCamera />
+        <CameraRig />
         <CarBody paintColor={paintColor} />
         <PaintMist mistColor={mistColor} />
         <Environment preset="studio" />
-
       </Suspense>
     </Canvas>
   )

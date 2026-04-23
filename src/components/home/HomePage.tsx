@@ -14,6 +14,7 @@ import {
   marqueeItems,
 } from '@/data/content'
 import { displayContact } from '@/data/business'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 const contactInfo = displayContact()
 
@@ -74,6 +75,7 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 
 export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const reducedMotion = useReducedMotion()
 
   useGSAP(
     () => {
@@ -256,7 +258,18 @@ export default function HomePage() {
       {/* ===== HERO (fixed — content scrolls over it) ===== */}
       <section className="fixed inset-0 h-screen overflow-hidden bg-background z-0">
         <div className="absolute inset-0" aria-hidden="true">
-          <CarPaintScene />
+          {reducedMotion ? (
+            <Image
+              src="/car-hero.jpg"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center opacity-90"
+            />
+          ) : (
+            <CarPaintScene />
+          )}
         </div>
 
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent pointer-events-none" />
@@ -487,13 +500,15 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-background/50" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/30 to-transparent" />
 
-        {/* WebGL particle overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-70"
-          aria-hidden="true"
-        >
-          <SprayParticleScene />
-        </div>
+        {/* WebGL particle overlay — skipped under reduced-motion */}
+        {!reducedMotion && (
+          <div
+            className="absolute inset-0 pointer-events-none opacity-70"
+            aria-hidden="true"
+          >
+            <SprayParticleScene />
+          </div>
+        )}
 
         {/* Content */}
         <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-12 lg:px-24">
