@@ -45,26 +45,19 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    // images populated by src/app/opengraph-image.tsx (Next App Router convention)
     type: 'website',
     locale: 'es_CR',
     url: siteUrl,
     siteName: business.name,
     title: `${business.name} — Enderezado y Pintura Profesional`,
     description: business.meta.descriptionEs,
-    images: [
-      {
-        url: '/og.jpg',
-        width: 1200,
-        height: 630,
-        alt: `${business.name} — Taller de enderezado y pintura en Uvita, Costa Rica`,
-      },
-    ],
   },
   twitter: {
+    // images populated by src/app/twitter-image.tsx
     card: 'summary_large_image',
     title: `${business.name} — Enderezado y Pintura`,
     description: business.meta.descriptionEs,
-    images: ['/og.jpg'],
   },
   robots: {
     index: true,

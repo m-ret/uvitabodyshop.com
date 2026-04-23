@@ -7,6 +7,7 @@ import { gsap } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
 import Navigation from '@/components/ui/Navigation'
 import ReactiveGrid from '@/components/ui/ReactiveGrid'
+import SiteFooter from '@/components/ui/SiteFooter'
 import QuoteForm from '@/components/home/QuoteForm'
 import {
   services,
@@ -807,17 +808,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== FOOTER ===== */}
-      <footer className="py-8 px-6 sm:px-12 lg:px-24 border-t border-zinc-800/50">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-          <span className="font-display text-xl uppercase tracking-wider">
-            Uvita Body Shop
-          </span>
-          <span className="font-mono text-xs text-zinc-600">
-            &copy; 2026 Uvita Body Shop. Todos los derechos reservados.
-          </span>
-        </div>
-      </footer>
+      <SiteFooter />
 
       </div>{/* end scrolling content wrapper */}
     </div>
