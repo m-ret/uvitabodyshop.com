@@ -283,16 +283,15 @@ export default function HomePage() {
             </p>
 
             <h1 className="font-display text-[clamp(2.5rem,8vw,10rem)] leading-[0.85] tracking-tight uppercase drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
-              <span className="hero-line block">Precision</span>
-              <span className="hero-line block">Paint.</span>
-              <span className="hero-line block text-accent drop-shadow-[0_0_30px_rgba(204,0,0,0.4)]">Flawless</span>
-              <span className="hero-line block">Finish.</span>
+              <span className="hero-line block">Enderezado</span>
+              <span className="hero-line block">y Pintura.</span>
+              <span className="hero-line block text-accent drop-shadow-[0_0_30px_rgba(204,0,0,0.4)]">Acabado</span>
+              <span className="hero-line block">Perfecto.</span>
             </h1>
 
             <p className="hero-sub text-base sm:text-lg text-zinc-400 mt-8 max-w-md leading-relaxed">
-              Expert collision repair, paint restoration, and custom finishes.
-              Every vehicle leaves our booth looking factory-new&nbsp;&mdash; or
-              better.
+              Reparación de colisión, pintura completa y acabados personalizados.
+              Cada vehículo sale de nuestra cabina como nuevo &mdash; o mejor.
             </p>
 
             <div className="flex flex-wrap gap-4 mt-10 pointer-events-auto">
@@ -300,13 +299,13 @@ export default function HomePage() {
                 href="#contact"
                 className="hero-cta inline-flex px-8 py-4 bg-accent text-white text-sm font-medium tracking-wide uppercase hover:bg-accent-hover transition-colors duration-300"
               >
-                Get Your Estimate
+                Pedir cotización
               </a>
               <a
                 href="#services"
                 className="hero-cta inline-flex px-8 py-4 border border-zinc-700 text-zinc-300 text-sm font-medium tracking-wide uppercase hover:border-zinc-400 hover:text-white transition-all duration-300"
               >
-                View Services
+                Ver servicios
               </a>
             </div>
           </div>
@@ -355,30 +354,30 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <div className="craft-heading">
             <p className="craft-line gsap-reveal font-mono text-xs tracking-[0.25em] uppercase text-accent mb-6">
-              The Craft
+              El oficio
             </p>
             <h2 className="craft-line gsap-reveal font-display text-[clamp(3rem,8vw,7rem)] leading-[0.85] uppercase">
-              We Don&apos;t
+              No reparamos
               <br />
-              Fix Cars.
+              carros.
             </h2>
             <h2 className="craft-line gsap-reveal font-display text-[clamp(3rem,8vw,7rem)] leading-[0.85] uppercase text-accent mt-2">
-              We Restore
+              Los
               <br />
-              Them.
+              restauramos.
             </h2>
             <p className="craft-line gsap-reveal text-zinc-400 mt-8 max-w-lg leading-relaxed text-lg">
-              9 years of hands-on experience. A controlled spray booth with
-              infrared curing oven. Professional-grade materials from Roberlo,
-              BESA, 3M, and VICCO. Every repair is backed by our guarantee
-              &mdash; because we don&apos;t cut corners.
+              9 años de experiencia práctica. Cabina de pintura controlada con
+              horno de curado infrarrojo. Materiales profesionales Roberlo,
+              BESA, 3M y VICCO. Cada trabajo respaldado por garantía escrita
+              &mdash; porque no tomamos atajos.
             </p>
           </div>
 
           <div className="craft-image relative aspect-[4/5] overflow-hidden">
             <Image
               src="https://images.unsplash.com/photo-1620584898989-d39f7f9ed1b7?auto=format&fit=crop&w=2400&q=100"
-              alt="Technician spray painting a vehicle panel with professional equipment"
+              alt="Técnico pintando un panel de vehículo con equipo profesional"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
@@ -388,7 +387,7 @@ export default function HomePage() {
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                 <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-400">
-                  Fabricio R&iacute;os Ort&iacute;z &mdash; Founder
+                  Fabricio R&iacute;os Ort&iacute;z &mdash; Propietario
                 </span>
               </div>
             </div>
@@ -404,14 +403,14 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="s-reveal gsap-reveal mb-20">
             <p className="font-mono text-xs tracking-[0.25em] uppercase text-accent mb-4">
-              What We Do
+              Qué hacemos
             </p>
             <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] uppercase">
-              Every Service.
+              Cada servicio.
               <br />
-              One Standard:
+              Un solo estándar:
               <br />
-              <span className="text-accent">Perfect.</span>
+              <span className="text-accent">Perfecto.</span>
             </h2>
           </div>
 
@@ -538,7 +537,7 @@ export default function HomePage() {
         <div className="booth-bg absolute inset-0">
           <Image
             src="https://img.freepik.com/free-photo/front-view-worker-spraying-powder-paint-from-gum_52683-97009.jpg?w=1920"
-            alt="Worker spraying paint in a professional body shop booth"
+            alt="Trabajador pintando un vehículo en la cabina profesional"
             fill
             sizes="100vw"
             className="object-cover"
@@ -564,19 +563,19 @@ export default function HomePage() {
         <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-12 lg:px-24">
           <div className="max-w-2xl">
             <p className="booth-text gsap-reveal font-mono text-xs tracking-[0.25em] uppercase text-accent mb-6">
-              Quality &amp; Materials
+              Calidad y materiales
             </p>
             <h2 className="booth-text gsap-reveal font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.85] uppercase">
-              Oven-Cured.
+              Horno infrarrojo.
               <br />
-              Booth-Sprayed.
+              Cabina controlada.
               <br />
-              <span className="text-accent">Guaranteed.</span>
+              <span className="text-accent">Con garantía.</span>
             </h2>
             <p className="booth-text gsap-reveal text-zinc-400 mt-8 max-w-md leading-relaxed">
-              Professional-grade materials from Roberlo, BESA, 3M, and VICCO.
-              Infrared curing oven. Controlled spray booth. Every job backed
-              by our written guarantee &mdash; because we don&apos;t cut corners.
+              Materiales profesionales Roberlo, BESA, 3M y VICCO. Horno de
+              curado infrarrojo. Cabina de pintura controlada. Cada trabajo
+              con garantía escrita &mdash; porque no tomamos atajos.
             </p>
           </div>
         </div>
@@ -588,15 +587,15 @@ export default function HomePage() {
           {/* Heading — centered */}
           <div className="mat-item gsap-reveal text-center mb-20">
             <p className="font-mono text-xs tracking-[0.25em] uppercase text-accent mb-4">
-              Professional Grade
+              Calidad profesional
             </p>
             <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.85] uppercase mb-6">
-              The Materials Behind the <span className="text-accent">Finish.</span>
+              Los materiales detrás del <span className="text-accent">acabado.</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed max-w-xl mx-auto">
-              We only use products trusted by factory paint shops worldwide.
-              No shortcuts. No generic brands. Durability, color accuracy, and
-              a finish that lasts.
+              Solo usamos productos que las pintorerías de fábrica usan en todo
+              el mundo. Sin atajos. Sin marcas genéricas. Durabilidad, color
+              exacto y un acabado que dura.
             </p>
           </div>
 
@@ -618,16 +617,16 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-zinc-800/50">
             {[
               {
-                label: 'Spray Booth',
-                desc: 'Controlled environment with infrared curing oven for factory-grade results.',
+                label: 'Cabina con horno',
+                desc: 'Ambiente controlado con horno de curado infrarrojo para resultados de fábrica.',
               },
               {
-                label: 'Warranty',
-                desc: 'Every job backed by our written guarantee. Not perfect? We make it right.',
+                label: 'Garantía escrita',
+                desc: 'Cada trabajo con garantía escrita. ¿No quedó perfecto? Lo volvemos perfecto.',
               },
               {
-                label: 'All Vehicles',
-                desc: 'Every make and model — sedans, trucks, SUVs. No exceptions.',
+                label: 'Todo vehículo',
+                desc: 'Cualquier marca y modelo — sedanes, pickups, SUVs. Sin excepciones.',
               },
             ].map((item) => (
               <div
@@ -650,13 +649,13 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="s-reveal gsap-reveal mb-20 text-center">
             <p className="font-mono text-xs tracking-[0.25em] uppercase text-accent mb-4">
-              How We Work
+              Cómo trabajamos
             </p>
             <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.85] uppercase">
-              From Damage
+              Del daño
               <br />
-              To&nbsp;
-              <span className="text-accent">Perfection.</span>
+              a la&nbsp;
+              <span className="text-accent">perfección.</span>
             </h2>
           </div>
 
@@ -721,20 +720,20 @@ export default function HomePage() {
         <ReactiveGrid />
         <div className="relative max-w-5xl mx-auto text-center">
           <p className="guarantee-text gsap-reveal font-mono text-xs tracking-[0.25em] uppercase text-accent mb-8">
-            Our Promise
+            Nuestra promesa
           </p>
           <h2 className="guarantee-text gsap-reveal font-display text-[clamp(3rem,9vw,8rem)] leading-[0.85] uppercase">
-            If It&apos;s Not
+            Si no queda
             <br />
-            <span className="text-accent">Perfect,</span>
+            <span className="text-accent">perfecto,</span>
             <br />
-            It&apos;s Not Done.
+            no está terminado.
           </h2>
           <p className="guarantee-text gsap-reveal text-zinc-400 mt-10 max-w-xl mx-auto text-lg leading-relaxed">
-            Every repair comes with our written guarantee. We use
-            professional-grade materials, precision tools, and 9 years of
-            experience to deliver a finish that looks factory-new &mdash; or
-            better. If you&apos;re not satisfied, we make it right.
+            Cada reparación viene con nuestra garantía escrita. Usamos
+            materiales profesionales, herramientas de precisión y 9 años de
+            experiencia para entregar un acabado que se ve como de fábrica
+            &mdash; o mejor. Si no quedás satisfecho, lo arreglamos.
           </p>
         </div>
       </section>
@@ -747,16 +746,16 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16">
           <div className="cta-reveal gsap-reveal">
             <p className="font-mono text-xs tracking-[0.25em] uppercase text-accent mb-4">
-              Get Started
+              Empezá aquí
             </p>
             <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] uppercase mb-6">
-              Ready to Restore
+              ¿Listo para
               <br />
-              Your Vehicle?
+              recuperar tu vehículo?
             </h2>
             <p className="text-zinc-400 leading-relaxed mb-8 max-w-md">
-              Get a free estimate. Call, WhatsApp, or fill out the form. We
-              respond within 24 hours.
+              Cotización sin costo. Llamá, escribí por WhatsApp o completá el
+              formulario. Respondemos en menos de 24 horas.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -815,7 +814,7 @@ export default function HomePage() {
             Uvita Body Shop
           </span>
           <span className="font-mono text-xs text-zinc-600">
-            &copy; 2026 Uvita Body Shop. All rights reserved.
+            &copy; 2026 Uvita Body Shop. Todos los derechos reservados.
           </span>
         </div>
       </footer>

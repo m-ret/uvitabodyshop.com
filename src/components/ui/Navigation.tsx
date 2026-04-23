@@ -8,10 +8,10 @@ import { displayContact } from '@/data/business'
 const contact = displayContact()
 
 const navLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'Process', href: '#process' },
-  { label: 'Materials', href: '#materials' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Servicios', href: '#services' },
+  { label: 'Proceso', href: '#process' },
+  { label: 'Materiales', href: '#materials' },
+  { label: 'Contacto', href: '#contact' },
 ]
 
 export default function Navigation() {
@@ -101,7 +101,7 @@ export default function Navigation() {
         <button
           onClick={isOpen ? close : open}
           className="pointer-events-auto relative z-[60] w-12 h-12 flex flex-col items-center justify-center gap-1.5 group"
-          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
         >
           <span
             className={`block w-6 h-px bg-white transition-all duration-300 ${
@@ -168,7 +168,7 @@ export default function Navigation() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 pt-8 border-t border-zinc-800/50">
             <div className="nav-footer-item">
               <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-600 mb-2">
-                Location
+                Ubicación
               </p>
               <p className="text-sm text-zinc-400">
                 {contact.locationDisplay}
@@ -176,13 +176,13 @@ export default function Navigation() {
             </div>
             <div className="nav-footer-item">
               <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-600 mb-2">
-                Hours
+                Horario
               </p>
               <p className="text-sm text-zinc-400">{contact.hoursDisplay}</p>
             </div>
             <div className="nav-footer-item">
               <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-600 mb-2">
-                Contact
+                Contacto
               </p>
               <a
                 href={`tel:${contact.phone}`}
