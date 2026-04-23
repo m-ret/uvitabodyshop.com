@@ -7,6 +7,7 @@ import { gsap } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
 import Navigation from '@/components/ui/Navigation'
 import ReactiveGrid from '@/components/ui/ReactiveGrid'
+import QuoteForm from '@/components/home/QuoteForm'
 import {
   services,
   processSteps,
@@ -802,82 +803,7 @@ export default function HomePage() {
           </div>
 
           <div className="cta-reveal gsap-reveal">
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block font-mono text-xs tracking-[0.15em] uppercase text-zinc-500 mb-2"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 text-foreground text-sm placeholder:text-zinc-600 focus:border-accent focus:outline-none transition-colors"
-                  placeholder="Your name"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block font-mono text-xs tracking-[0.15em] uppercase text-zinc-500 mb-2"
-                >
-                  Phone / WhatsApp
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  required
-                  className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 text-foreground text-sm placeholder:text-zinc-600 focus:border-accent focus:outline-none transition-colors"
-                  placeholder="+506 8769 9927"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="service"
-                  className="block font-mono text-xs tracking-[0.15em] uppercase text-zinc-500 mb-2"
-                >
-                  Service Needed
-                </label>
-                <select
-                  id="service"
-                  name="service"
-                  className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 text-foreground text-sm focus:border-accent focus:outline-none transition-colors"
-                >
-                  <option value="">Select a service</option>
-                  <option value="collision">Collision &amp; Frame Repair</option>
-                  <option value="paint">Full Paint &amp; Color Match</option>
-                  <option value="touchup">Paint Touch-Up</option>
-                  <option value="dent">Dent &amp; Impact Repair</option>
-                  <option value="accessories">Accessories &amp; Custom</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block font-mono text-xs tracking-[0.15em] uppercase text-zinc-500 mb-2"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 text-foreground text-sm placeholder:text-zinc-600 focus:border-accent focus:outline-none transition-colors resize-none"
-                  placeholder="Describe the work you need..."
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full py-4 bg-accent text-white text-sm font-medium tracking-wide uppercase hover:bg-accent-hover transition-colors duration-300"
-              >
-                Send Request
-              </button>
-            </form>
+            <QuoteForm />
           </div>
         </div>
       </section>
