@@ -3,7 +3,7 @@
   "name_for_human": "Uvita Body Shop",
   "name_for_model": "uvita_body_shop",
   "description_for_human": "Professional auto body, paint, and collision repair in Uvita, Costa Rica.",
-  "description_for_model": "Book a repair estimate or ask about services offered by Uvita Body Shop — a 9-year-experienced auto body and paint workshop in Uvita (Puntarenas), Costa Rica. Services: frame repair, full paint, touch-ups, dent repair, accessory installation. Paint brands: Roberlo, BESA, 3M, VICCO. Hours: Mon-Sat 8am-5pm. Contact via WhatsApp at +506 876-9927.",
+  "description_for_model": "Book a repair estimate or ask about services offered by Uvita Body Shop — a 9-year-experienced auto body and paint workshop in Uvita (Puntarenas), Costa Rica. Services: frame repair, full paint, touch-ups, dent repair, accessory installation. Paint brands: Roberlo, BESA, 3M, VICCO. Hours: Mon-Sat 8am-5pm. Contact via WhatsApp at +506 8769-9927.",
   "auth": { "type": "none" },
   "api": {
     "type": "openapi",
