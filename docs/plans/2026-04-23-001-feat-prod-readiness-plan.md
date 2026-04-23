@@ -1,7 +1,7 @@
 ---
 title: "feat: Uvita Body Shop production readiness"
 type: feat
-status: active
+status: completed
 date: 2026-04-23
 origin: docs/brainstorms/2026-04-23-prod-readiness-requirements.md
 ---
@@ -171,7 +171,7 @@ CarPaintScene.tsx
 
 ### Phase A — Foundations and unblockers
 
-- [ ] **Unit 0: Install marketing-suite skills project-local**
+- [x] **Unit 0: Install marketing-suite skills project-local**
 
   **Goal:** Add the copywriting, marketing-psychology, conversion-optimization, and local-SEO skills needed for R2, R5, and R8.
 
@@ -201,7 +201,7 @@ CarPaintScene.tsx
   - `npm run skills -- list` enumerates `copywriting`, `marketing-psychology`, `social-content`, `conversion-optimization`, `seo-local-business` with agent `Claude Code` in the targets.
   - `git diff skills-lock.json` shows 5 new entries with `computedHash` values.
 
-- [ ] **Unit 1: Business data single source of truth**
+- [x] **Unit 1: Business data single source of truth**
 
   **Goal:** Eliminate drift between `content.ts` and `business.ts`. HomePage reads every business fact from `business.ts`; `content.ts` shrinks to display-only fields (service hero image, long-form copy).
 
@@ -232,7 +232,7 @@ CarPaintScene.tsx
   - `npm run build` clean.
   - Visual diff on `/`: contact block renders identically.
 
-- [ ] **Unit 2: Custom `not-found.tsx` and `error.tsx`**
+- [x] **Unit 2: Custom `not-found.tsx` and `error.tsx`**
 
   **Goal:** Replace Next.js defaults with DESIGN.md-compliant 404 and runtime-error pages.
 
@@ -262,7 +262,7 @@ CarPaintScene.tsx
 
 ### Phase B — Fix quality blockers
 
-- [ ] **Unit 3: 3D scene purity, immutability, and reduced-motion**
+- [x] **Unit 3: 3D scene purity, immutability, and reduced-motion**
 
   **Goal:** Fix all 19 lint errors in `CarPaintScene.tsx` and `SprayParticleScene.tsx`. Add `prefers-reduced-motion` fallback: if reduced, render a static poster image instead of the animated scene. Unblock `npm run verify` and CI green.
 
@@ -299,7 +299,7 @@ CarPaintScene.tsx
 
 ### Phase C — Proposal completion
 
-- [ ] **Unit 4: Photo swap plumbing and testimonials scaffold**
+- [x] **Unit 4: Photo swap plumbing and testimonials scaffold**
 
   **Goal:** Make real-photo replacement a one-edit-per-slot operation. Scaffold a testimonials / past-work gallery that hides when empty and renders when populated.
 
@@ -327,7 +327,7 @@ CarPaintScene.tsx
   - `npm run build` clean.
   - DOM inspection: `[data-section="trabajo"]` absent when empty, present when populated.
 
-- [ ] **Unit 5: Wire quote form to `/api/quote-request`**
+- [x] **Unit 5: Wire quote form to `/api/quote-request`**
 
   **Goal:** Make the existing `<form id="contact">` functional. Validate client-side, POST to the API, handle all three response classes (200, 400, 429/5xx), hand the user off to WhatsApp with the pre-filled message returned as `contactUrl`.
 
@@ -367,7 +367,7 @@ CarPaintScene.tsx
   - Manual smoke: fill form, submit, land in WhatsApp with the pre-filled message.
   - `npm run typecheck` + `npm run lint` clean.
 
-- [ ] **Unit 6: Spanish content pass**
+- [x] **Unit 6: Spanish content pass**
 
   **Goal:** Rewrite every user-facing string in Spanish, using the freshly-installed `copywriting` and `marketing-psychology` skills to avoid AI-slop phrasing. Preserve DESIGN.md-compliant English tickers only where §7 permits.
 
@@ -402,7 +402,7 @@ CarPaintScene.tsx
 
 ### Phase D — Brand and local SEO
 
-- [ ] **Unit 7: Brand assets — OG image, favicon, wordmark, social**
+- [x] **Unit 7: Brand assets — OG image, favicon, wordmark, social**
 
   **Goal:** Replace Next.js default favicon, generate a 1200×630 OG image, ship a wordmark SVG for the nav, and wire the client's Facebook / Instagram URLs into `business.sameAs` and the footer.
 
@@ -438,7 +438,7 @@ CarPaintScene.tsx
   - Social preview sanity: Twitter Card Validator + Facebook Sharing Debugger both render clean previews.
   - Manual: open `/` with devtools, confirm `<link rel="icon">` points to the new favicon.
 
-- [ ] **Unit 8: Local-SEO details — hours indicator, map, NAP audit**
+- [x] **Unit 8: Local-SEO details — hours indicator, map, NAP audit**
 
   **Goal:** Ship a live "Abierto / Cerrado" badge driven by business hours, a map section, and audit every NAP citation on the site for GBP alignment.
 
@@ -473,7 +473,7 @@ CarPaintScene.tsx
 
 ### Phase E — Performance
 
-- [ ] **Unit 9: Image optimization pass**
+- [x] **Unit 9: Image optimization pass**
 
   **Goal:** Every image served via `next/image` with `priority` on LCP image, explicit `sizes`, and modern formats (AVIF/WebP) via Next's built-in optimization.
 
@@ -502,7 +502,7 @@ CarPaintScene.tsx
   - `npm run build` output shows optimized image counts; no "unable to fetch remote image" warnings.
   - Lighthouse "Properly size images" passes in Unit 10.
 
-- [ ] **Unit 10: Core Web Vitals baseline and budget**
+- [x] **Unit 10: Core Web Vitals baseline and budget**
 
   **Goal:** Measure LCP/CLS/INP on the current build, fix regressions, enforce budgets so future changes can't silently tank performance.
 
@@ -533,7 +533,7 @@ CarPaintScene.tsx
 
 ### Phase F — Analytics and test coverage
 
-- [ ] **Unit 11: Vercel Web Analytics and conversion events**
+- [x] **Unit 11: Vercel Web Analytics and conversion events**
 
   **Goal:** Install analytics, emit five conversion events, document the taxonomy.
 
@@ -562,7 +562,7 @@ CarPaintScene.tsx
   - Vercel Analytics dashboard (after deploy) shows each event name within 2 minutes of a test click.
   - `docs/analytics-events.md` enumerates all five events.
 
-- [ ] **Unit 12: Playwright smoke tests and accessibility audit**
+- [x] **Unit 12: Playwright smoke tests and accessibility audit**
 
   **Goal:** One Playwright smoke test per critical path. One `accessibility` skill pass on `/` with documented fixes.
 
@@ -601,7 +601,7 @@ CarPaintScene.tsx
 
 ### Phase G — Launch
 
-- [ ] **Unit 13: Vercel deploy, production domain, env**
+- [x] **Unit 13: Vercel deploy, production domain, env**
 
   **Goal:** Site live at `https://uvitabodyshop.com` with working SSL, env vars configured, preview deploys enabled, production traffic flowing.
 
