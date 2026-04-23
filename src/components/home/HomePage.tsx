@@ -383,6 +383,7 @@ export default function HomePage() {
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
             <div className="absolute bottom-6 left-6 right-6">
@@ -535,7 +536,7 @@ export default function HomePage() {
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-30 pointer-events-none" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-30 pointer-events-none" />
 
-        {/* Background image with parallax */}
+        {/* Background image with parallax (mid-scroll; loads lazily) */}
         <div className="booth-bg absolute inset-0">
           <Image
             src="https://img.freepik.com/free-photo/front-view-worker-spraying-powder-paint-from-gum_52683-97009.jpg?w=1920"
@@ -543,7 +544,7 @@ export default function HomePage() {
             fill
             sizes="100vw"
             className="object-cover"
-            priority
+            loading="lazy"
           />
         </div>
 
