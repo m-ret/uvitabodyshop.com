@@ -18,6 +18,7 @@ import {
 } from '@/data/content'
 import { business, displayContact } from '@/data/business'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { track } from '@/lib/analytics'
 
 const contactInfo = displayContact()
 
@@ -79,6 +80,14 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
+  const sceneFallbackFired = useRef(false)
+
+  useEffect(() => {
+    if (reducedMotion && !sceneFallbackFired.current) {
+      sceneFallbackFired.current = true
+      track('scene_fallback', { reason: 'reduced_motion' })
+    }
+  }, [reducedMotion])
 
   useGSAP(
     () => {
@@ -808,6 +817,7 @@ export default function HomePage() {
                 href={contactInfo.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => track('contact_whatsapp')}
                 className="inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#25D366] text-white text-sm font-medium tracking-wide hover:bg-[#20BD5A] transition-colors"
               >
                 <svg
@@ -822,6 +832,7 @@ export default function HomePage() {
               </a>
               <a
                 href={`tel:${contactInfo.phone}`}
+                onClick={() => track('contact_phone')}
                 className="inline-flex items-center justify-center gap-3 px-6 py-4 border border-zinc-700 text-zinc-300 text-sm font-medium tracking-wide hover:border-zinc-400 hover:text-white transition-all"
               >
                 <svg
@@ -848,7 +859,18 @@ export default function HomePage() {
           </div>
 
           <div className="cta-reveal gsap-reveal">
-            <QuoteForm />
+            <QuoteForm
+              onEvent={(event, props) => {
+                if (event === 'quote_submit') {
+                  track('quote_submit', props as Record<string, string>)
+                } else if (event === 'quote_error') {
+                  track(
+                    'quote_error',
+                    props as Record<string, string | number>
+                  )
+                }
+              }}
+            />
           </div>
         </div>
       </section>

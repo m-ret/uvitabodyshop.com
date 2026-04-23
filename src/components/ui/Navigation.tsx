@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
 import { displayContact } from '@/data/business'
+import { track } from '@/lib/analytics'
 
 const contact = displayContact()
 
@@ -186,6 +187,7 @@ export default function Navigation() {
               </p>
               <a
                 href={`tel:${contact.phone}`}
+                onClick={() => track('contact_phone')}
                 className="text-sm text-zinc-400 hover:text-accent transition-colors"
               >
                 {contact.phoneDisplay}
@@ -195,6 +197,7 @@ export default function Navigation() {
               href={contact.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => track('contact_whatsapp')}
               className="nav-footer-item inline-flex items-center gap-2 px-5 py-3 bg-accent text-white text-sm font-medium tracking-wide uppercase hover:bg-accent-hover transition-colors"
             >
               WhatsApp

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Bebas_Neue, DM_Sans, JetBrains_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import { business, siteUrl, buildStructuredData } from '@/data/business'
 import './globals.css'
 
@@ -86,6 +87,7 @@ export default function RootLayout({
     >
       <body className="min-h-full">
         {children}
+        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
