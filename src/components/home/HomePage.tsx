@@ -13,7 +13,7 @@ import {
   materialBrands,
   marqueeItems,
 } from '@/data/content'
-import { displayContact } from '@/data/business'
+import { business, displayContact } from '@/data/business'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 const contactInfo = displayContact()
@@ -477,6 +477,55 @@ export default function HomePage() {
           <div className="h-[30vh]" />
         </div>
       </section>
+
+      {business.gallery.length > 0 && (
+        <section
+          id="trabajo"
+          data-section="trabajo"
+          className="relative bg-background py-16 sm:py-24 lg:py-32 px-6 sm:px-12 lg:px-24"
+        >
+          <div className="max-w-6xl mx-auto">
+            <div className="mb-12 sm:mb-16">
+              <p className="font-mono text-xs tracking-[0.25em] uppercase text-accent mb-4">
+                <span
+                  aria-hidden="true"
+                  className="inline-block size-1.5 bg-accent mr-3 align-middle"
+                />
+                Nuestro trabajo
+              </p>
+              <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] uppercase max-w-3xl">
+                Trabajos reales,
+                <br />
+                <span className="text-accent">acabado perfecto</span>
+              </h2>
+            </div>
+
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 list-none">
+              {business.gallery.map((item) => (
+                <li
+                  key={item.id}
+                  className="group relative aspect-[4/3] overflow-hidden border border-zinc-800 bg-zinc-950"
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  {item.caption && (
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/80 to-transparent p-4">
+                      <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-zinc-300">
+                        {item.caption}
+                      </p>
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* ===== SPRAY BOOTH — cinematic full bleed ===== */}
       <section className="booth-section relative h-[60vh] sm:h-[80vh] min-h-[400px] sm:min-h-[600px] overflow-hidden">
