@@ -40,11 +40,15 @@ export async function generateMetadata({ params }: Props) {
     pathname: `/zonas/${z.slug}`,
     title: `Taller de chapa y pintura cerca de ${z.name} · Zona Sur`,
     description: `${z.lede} Atención a ${z.name} y alrededores. ${business.hours.display}.`,
-    keywords: [
-      `body shop ${z.name.toLowerCase()}`,
-      'pintura automotriz zona sur',
-      'enderezado costa rica',
-    ],
+    ...(locale === 'es'
+      ? {
+          keywords: [
+            `body shop ${z.name.toLowerCase()}`,
+            'pintura automotriz zona sur',
+            'enderezado costa rica',
+          ],
+        }
+      : {}),
   })
 }
 

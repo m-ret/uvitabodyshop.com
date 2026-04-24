@@ -1,5 +1,6 @@
 {
   "Nav": {
+    "brandName": "Uvita Body Shop",
     "services": "Servicios",
     "about": "Nosotros",
     "warranty": "Garantía",
@@ -87,5 +88,12 @@
   "PageLayout": {
     "breadcrumbHome": "Inicio",
     "breadcrumbNavAria": "Ruta de navegación"
+  },
+  "Hours": {
+    "openNow": "Abierto ahora",
+    "closed": "Cerrado",
+    "opensToday": "Cerrado · Abre a las {time}",
+    "opensOtherDay": "Cerrado · Abre {day} {time}",
+    "dayShort": ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"]
   }
 }

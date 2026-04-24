@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import { Bebas_Neue, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { headers } from 'next/headers'
 import { business, siteUrl, buildStructuredData } from '@/data/business'
+import { routing } from '@/i18n/routing'
 import UtmCapture from '@/components/ui/UtmCapture'
 import './globals.css'
 
@@ -23,6 +25,9 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap',
 })
+
+/** Set by next-intl middleware on the request (see `HEADER_LOCALE_NAME`). */
+const NEXT_INTL_LOCALE_HEADER = 'X-NEXT-INTL-LOCALE'
 
 export const viewport: Viewport = {
   themeColor: '#050505',
@@ -74,15 +79,23 @@ export const metadata: Metadata = {
   category: 'automotive',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const structuredData = buildStructuredData()
+  const headerList = await headers()
+  const localeHeader = headerList.get(NEXT_INTL_LOCALE_HEADER)
+  const locale =
+    localeHeader === 'en' || localeHeader === 'es'
+      ? localeHeader
+      : routing.defaultLocale
+  const htmlLang = locale === 'en' ? 'en' : 'es'
+  const structuredData = buildStructuredData(locale)
+
   return (
     <html
-      lang="es"
+      lang={htmlLang}
       suppressHydrationWarning
       className={`${bebasNeue.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >

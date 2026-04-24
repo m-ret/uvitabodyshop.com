@@ -1,3 +1,5 @@
+import { routing } from '@/i18n/routing'
+
 /**
  * Business data — single source of truth for SEO, schema.org, llms.txt,
  * quote-request API, UI, and any place that needs a canonical fact about
@@ -135,22 +137,6 @@ export const business = {
     value: 4.3,
     count: 6,
     url: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
-  },
-
-  /**
-   * Editorial voice used by /sobre-nosotros. Paragraphs are rendered in
-   * order inside a max-w-3xl prose column.
-   */
-  story: {
-    eyebrow: 'Sobre nosotros',
-    title: 'Taller de precisión en Uvita.',
-    lede: 'Nueve años aprendiendo el oficio. Seis construyendo este taller. Una sola forma de trabajar.',
-    paragraphs: [
-      'Soy Fabricio Ríos Ortiz, fundador de Uvita Body Shop. Arranqué en la industria en 2017 después de años mirando a mi padre resolver problemas con las manos — y decidí que lo mío también iba a ser arreglar lo que otros daban por perdido.',
-      'En 2020 abrí el taller en Uvita con una idea simple: traer a la Costa Ballena el nivel de acabado que solo se ve en San José. Nada de trabajos apurados, nada de pintura en el patio, nada de "así queda bien". Si no queda perfecto, no sale del taller.',
-      'Hoy atendemos enderezado, pintura completa, retoques, reparación de golpes e instalación de accesorios para toda la Zona Sur — Uvita, Dominical, Ojochal, Bahía Ballena. Trabajamos con Roberlo, BESA, 3M y VICCO porque son los mismos materiales que usan las agencias, y porque nuestra garantía escrita depende de que duren.',
-      'El taller es mío, pero el acabado es de todos: del cliente que confía el carro, del equipo que lo prepara, de la cabina controlada y del horno infrarrojo que cura cada capa. No reparamos carros — los restauramos.',
-    ],
   },
 
   /**
@@ -876,11 +862,24 @@ export function getGuideBySlug(slug: string) {
   return business.guides.find((g) => g.slug === slug)
 }
 
+function pathWithLocale(locale: string, pathname: string): string {
+  const p = pathname.startsWith('/') ? pathname : `/${pathname}`
+  if (locale === routing.defaultLocale) return p
+  return `/${locale}${p}`
+}
+
+function absoluteSitePath(locale: string, pathname: string): string {
+  return new URL(pathWithLocale(locale, pathname), siteUrl).toString()
+}
+
 /**
  * schema.org `AutoBodyShop` + `LocalBusiness` JSON-LD graph.
  * Used in `app/layout.tsx` — do not duplicate this literal elsewhere.
+ *
+ * @param locale Active UI locale — drives `description`, public `url`, and
+ *   per-service offer URLs so `/en` HTML matches English canonicals.
  */
-export function buildStructuredData() {
+export function buildStructuredData(locale: 'es' | 'en' = 'es') {
   const { rating, testimonials } = business
   const ratingBlock =
     rating.count > 0
@@ -922,8 +921,11 @@ export function buildStructuredData() {
         '@type': ['AutoBodyShop', 'LocalBusiness'],
         '@id': `${siteUrl}#business`,
         name: business.name,
-        description: business.meta.descriptionEs,
-        url: siteUrl,
+        description:
+          locale === 'en'
+            ? business.meta.descriptionEn
+            : business.meta.descriptionEs,
+        url: absoluteSitePath(locale, '/'),
         telephone: business.contact.phone,
         priceRange: business.pricing.priceRange,
         image: `${siteUrl}/opengraph-image`,
@@ -952,10 +954,11 @@ export function buildStructuredData() {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: s.es,
-            alternateName: s.en,
-            description: s.description,
-            url: `${siteUrl}/servicios/${s.slug}`,
+            name: locale === 'en' ? s.en : s.es,
+            alternateName: locale === 'en' ? s.es : s.en,
+            // `s.description` is Spanish-only; omit on EN graph to avoid mixed-language schema.
+            ...(locale === 'es' ? { description: s.description } : {}),
+            url: absoluteSitePath(locale, `/servicios/${s.slug}`),
           },
         })),
         sameAs: business.socialLinks.map((s) => s.url),

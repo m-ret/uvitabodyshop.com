@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect, useCallback } from 'react'
+import { useRef, useEffect } from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { gsap } from '@/lib/gsap'
@@ -13,62 +13,53 @@ import QuoteForm from '@/components/home/QuoteForm'
 import TrustBar from '@/components/home/TrustBar'
 import HomeRatingBar from '@/components/home/HomeRatingBar'
 import TestimonialsSection from '@/components/home/TestimonialsSection'
-import { services, processSteps, materialBrands } from '@/data/content'
+import { materialBrands } from '@/data/content'
 import { business, displayContact } from '@/data/business'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { track } from '@/lib/analytics'
 import { useLocale, useTranslations } from 'next-intl'
 
+type HomeServiceItem = {
+  slug: string
+  number: string
+  title: string
+  subtitle: string
+  description: string
+  image: string
+  alt: string
+}
+
+type HomeProcessStep = {
+  number: string
+  title: string
+  description: string
+}
+
+type MatTrustItem = { label: string; desc: string }
+
+function HeroCarPoster() {
+  return (
+    <Image
+      src="/car-hero.jpg"
+      alt=""
+      fill
+      priority
+      sizes="100vw"
+      className="object-cover object-[72%_center] sm:object-[68%_center] opacity-95"
+    />
+  )
+}
+
 const CarPaintScene = dynamic(() => import('@/components/3d/CarPaintScene'), {
   ssr: false,
-  loading: () => null,
+  /** Avoid empty black hero while GLB / WebGL boot — matches layout: car on the right. */
+  loading: HeroCarPoster,
 })
 
 const SprayParticleScene = dynamic(
   () => import('@/components/3d/SprayParticleScene'),
   { ssr: false, loading: () => null }
 )
-
-/* ------------------------------------------------------------------ */
-/*  CountUp                                                            */
-/* ------------------------------------------------------------------ */
-
-function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const animated = useRef(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !animated.current) {
-          animated.current = true
-          const start = performance.now()
-          const duration = 2000
-
-          const tick = (now: number) => {
-            const t = Math.min((now - start) / duration, 1)
-            const eased = 1 - Math.pow(1 - t, 3)
-            el.textContent =
-              Math.round(eased * target).toLocaleString() + suffix
-            if (t < 1) requestAnimationFrame(tick)
-          }
-
-          requestAnimationFrame(tick)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.5 }
-    )
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [target, suffix])
-
-  return <span ref={ref}>0{suffix}</span>
-}
 
 /* ------------------------------------------------------------------ */
 /*  HomePage                                                           */
@@ -78,7 +69,11 @@ export default function HomePage() {
   const locale = useLocale() as 'es' | 'en'
   const contactInfo = displayContact(locale)
   const tHome = useTranslations('Home')
+  const tNav = useTranslations('Nav')
   const marqueeItems = tHome.raw('marqueeItems') as string[]
+  const services = tHome.raw('services') as HomeServiceItem[]
+  const processSteps = tHome.raw('processSteps') as HomeProcessStep[]
+  const materialTrust = tHome.raw('Materials.trust') as MatTrustItem[]
 
   const containerRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
@@ -273,38 +268,40 @@ export default function HomePage() {
       <section className="fixed inset-0 h-screen overflow-hidden bg-background z-0">
         <div className="absolute inset-0" aria-hidden="true">
           {reducedMotion ? (
-            <Image
-              src="/car-hero.jpg"
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center opacity-90"
-            />
+            <HeroCarPoster />
           ) : (
-            <CarPaintScene />
+            <div className="absolute inset-0 h-full w-full [&_canvas]:block [&_canvas]:h-full [&_canvas]:w-full">
+              <CarPaintScene />
+            </div>
           )}
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
+        {/* Softer sweep on the left so the red vehicle stays readable on the right (reference layout). */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background from-0% via-background/55 via-40% to-transparent to-78%" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
-        <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-12 lg:px-24 pt-[calc(env(safe-area-inset-top,0)+9rem)] sm:pt-[calc(env(safe-area-inset-top,0)+10rem)] lg:pt-[calc(env(safe-area-inset-top,0)+11rem)] pb-16 pointer-events-none">
+        {/*
+          Do not use justify-center here: it vertically centers the hero stack and
+          pulls the H1 under the fixed header. Start below header + safe-area +
+          buffer (header ≈ safe + 1rem + logo + py-4; PageLayout uses +5.5rem).
+        */}
+        <div className="relative z-10 flex h-full min-h-0 flex-col justify-start px-6 pt-[calc(env(safe-area-inset-top,0)+6.75rem)] pb-20 pointer-events-none sm:px-12 sm:pt-[calc(env(safe-area-inset-top,0)+7rem)] lg:px-24 lg:pt-[calc(env(safe-area-inset-top,0)+7.25rem)]">
           <div className="max-w-2xl">
             <p className="hero-label font-mono text-xs tracking-[0.25em] uppercase text-zinc-500 mb-8">
-              Uvita Body Shop &mdash; Puntarenas, Costa Rica
+              {tHome('Hero.label')}
             </p>
 
             <h1 className="font-display text-[clamp(2.5rem,8vw,10rem)] leading-[0.85] tracking-tight uppercase drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
-              <span className="hero-line block">Enderezado</span>
-              <span className="hero-line block">y Pintura.</span>
-              <span className="hero-line block text-accent drop-shadow-[0_0_30px_rgba(204,0,0,0.4)]">Acabado</span>
-              <span className="hero-line block">Perfecto.</span>
+              <span className="hero-line block">{tHome('Hero.line1')}</span>
+              <span className="hero-line block">{tHome('Hero.line2')}</span>
+              <span className="hero-line block text-accent drop-shadow-[0_0_30px_rgba(204,0,0,0.4)]">
+                {tHome('Hero.line3')}
+              </span>
+              <span className="hero-line block">{tHome('Hero.line4')}</span>
             </h1>
 
             <p className="hero-sub text-base sm:text-lg text-zinc-400 mt-8 max-w-md leading-relaxed">
-              Reparación de colisión, pintura completa y acabados personalizados.
-              Cada vehículo sale de nuestra cabina como nuevo &mdash; o mejor.
+              {tHome('Hero.sub')}
             </p>
 
             <div className="pointer-events-auto max-w-3xl">
@@ -317,13 +314,13 @@ export default function HomePage() {
                 href="#contact"
                 className="hero-cta inline-flex px-8 py-4 bg-accent text-white text-sm font-medium tracking-wide uppercase hover:bg-accent-hover transition-colors duration-300"
               >
-                Pedir cotización
+                {tHome('Hero.ctaQuote')}
               </a>
               <a
                 href="#services"
                 className="hero-cta inline-flex px-8 py-4 border border-zinc-700 text-zinc-300 text-sm font-medium tracking-wide uppercase hover:border-zinc-400 hover:text-white transition-all duration-300"
               >
-                Ver servicios
+                {tHome('Hero.ctaServices')}
               </a>
             </div>
           </div>
@@ -331,7 +328,7 @@ export default function HomePage() {
 
         <div className="hero-scroll hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-3">
           <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-600">
-            Scroll
+            {tHome('scrollLabel')}
           </span>
           <div className="w-px h-10 bg-gradient-to-b from-zinc-600 to-transparent animate-pulse" />
         </div>
@@ -348,9 +345,9 @@ export default function HomePage() {
         <div className="flex whitespace-nowrap animate-marquee">
           {Array.from({ length: 3 }).map((_, i) => (
             <div key={i} className="flex items-center shrink-0">
-              {marqueeItems.map((item) => (
+              {marqueeItems.map((item, j) => (
                 <div
-                  key={item}
+                  key={`${i}-${j}-${item}`}
                   className="flex items-center gap-4 px-4 font-mono text-sm tracking-[0.15em] uppercase text-zinc-500"
                 >
                   <span>{item}</span>
@@ -372,30 +369,27 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <div className="craft-heading">
             <p className="craft-line gsap-reveal font-mono text-xs tracking-[0.25em] uppercase text-accent mb-6">
-              El oficio
+              {tHome('Craft.eyebrow')}
             </p>
             <h2 className="craft-line gsap-reveal font-display text-[clamp(3rem,8vw,7rem)] leading-[0.85] uppercase">
-              No reparamos
+              {tHome('Craft.head1a')}
               <br />
-              carros.
+              {tHome('Craft.head1b')}
             </h2>
             <h2 className="craft-line gsap-reveal font-display text-[clamp(3rem,8vw,7rem)] leading-[0.85] uppercase text-accent mt-2">
-              Los
+              {tHome('Craft.head2a')}
               <br />
-              restauramos.
+              {tHome('Craft.head2b')}
             </h2>
             <p className="craft-line gsap-reveal text-zinc-400 mt-8 max-w-lg leading-relaxed text-lg">
-              9 años de experiencia práctica. Cabina de pintura controlada con
-              horno de curado infrarrojo. Materiales profesionales Roberlo,
-              BESA, 3M y VICCO. Cada trabajo respaldado por garantía escrita
-              &mdash; porque no tomamos atajos.
+              {tHome('Craft.body')}
             </p>
           </div>
 
           <div className="craft-image relative aspect-[4/5] overflow-hidden">
             <Image
               src="/images/craft.avif"
-              alt="Fabricio Ríos Ortíz — propietario de Uvita Body Shop pintando un panel con equipo profesional"
+              alt={tHome('Craft.imageAlt')}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
@@ -406,7 +400,7 @@ export default function HomePage() {
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                 <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-400">
-                  Fabricio R&iacute;os Ort&iacute;z &mdash; Propietario
+                  {tHome('Craft.ownerCaption')}
                 </span>
               </div>
             </div>
@@ -422,21 +416,21 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="s-reveal gsap-reveal mb-20">
             <p className="font-mono text-xs tracking-[0.25em] uppercase text-accent mb-4">
-              Qué hacemos
+              {tHome('Services.eyebrow')}
             </p>
             <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] uppercase">
-              Cada servicio.
+              {tHome('Services.title1')}
               <br />
-              Un solo estándar:
+              {tHome('Services.title2')}
               <br />
-              <span className="text-accent">Perfecto.</span>
+              <span className="text-accent">{tHome('Services.titleAccent')}</span>
             </h2>
           </div>
 
           <div className="svc-stack space-y-6">
             {services.map((s, i) => (
               <div
-                key={s.number}
+                key={s.slug}
                 className="svc-sticky-card sticky"
                 style={{ top: `${60 + i * 20}px`, zIndex: i + 1 }}
               >
@@ -510,12 +504,12 @@ export default function HomePage() {
                   aria-hidden="true"
                   className="inline-block size-1.5 bg-accent mr-3 align-middle"
                 />
-                Nuestro trabajo
+                {tHome('Gallery.eyebrow')}
               </p>
               <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] uppercase max-w-3xl">
-                Trabajos reales,
+                {tHome('Gallery.title1')}
                 <br />
-                <span className="text-accent">acabado perfecto</span>
+                <span className="text-accent">{tHome('Gallery.titleAccent')}</span>
               </h2>
             </div>
 
@@ -534,7 +528,7 @@ export default function HomePage() {
                   />
                   {item.placeholder && process.env.NODE_ENV !== 'production' && (
                     <span className="absolute top-2 right-2 z-10 font-mono text-[9px] tracking-wider uppercase bg-background/90 text-zinc-400 border border-zinc-700 px-2 py-1">
-                      Placeholder
+                      {tHome('Gallery.devPlaceholder')}
                     </span>
                   )}
                   {item.caption && (
@@ -565,7 +559,7 @@ export default function HomePage() {
         <div className="booth-bg absolute inset-0">
           <Image
             src="/images/quality-materials.webp"
-            alt="Técnico de Uvita Body Shop pintando un vehículo con pistola HVLP en la cabina controlada"
+            alt={tHome('Booth.imageAlt')}
             fill
             sizes="100vw"
             quality={90}
@@ -592,39 +586,39 @@ export default function HomePage() {
         <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-12 lg:px-24">
           <div className="max-w-2xl">
             <p className="booth-text gsap-reveal font-mono text-xs tracking-[0.25em] uppercase text-accent mb-6">
-              Calidad y materiales
+              {tHome('Booth.eyebrow')}
             </p>
             <h2 className="booth-text gsap-reveal font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.85] uppercase">
-              Horno infrarrojo.
+              {tHome('Booth.title1')}
               <br />
-              Cabina controlada.
+              {tHome('Booth.title2')}
               <br />
-              <span className="text-accent">Con garantía.</span>
+              <span className="text-accent">{tHome('Booth.titleAccent')}</span>
             </h2>
             <p className="booth-text gsap-reveal text-zinc-400 mt-8 max-w-md leading-relaxed">
-              Materiales profesionales Roberlo, BESA, 3M y VICCO. Horno de
-              curado infrarrojo. Cabina de pintura controlada. Cada trabajo
-              con garantía escrita &mdash; porque no tomamos atajos.
+              {tHome('Booth.body')}
             </p>
           </div>
         </div>
       </section>
 
       {/* ===== MATERIALS ===== */}
-      <section className="mat-section py-24 sm:py-32 px-6 sm:px-12 lg:px-24">
+      <section
+        id="materials"
+        className="mat-section py-24 sm:py-32 px-6 sm:px-12 lg:px-24"
+      >
         <div className="max-w-6xl mx-auto">
           {/* Heading — centered */}
           <div className="mat-item gsap-reveal text-center mb-20">
             <p className="font-mono text-xs tracking-[0.25em] uppercase text-accent mb-4">
-              Calidad profesional
+              {tHome('Materials.eyebrow')}
             </p>
             <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.85] uppercase mb-6">
-              Los materiales detrás del <span className="text-accent">acabado.</span>
+              {tHome('Materials.titleBefore')}
+              <span className="text-accent">{tHome('Materials.titleAccent')}</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed max-w-xl mx-auto">
-              Solo usamos productos que las pintorerías de fábrica usan en todo
-              el mundo. Sin atajos. Sin marcas genéricas. Durabilidad, color
-              exacto y un acabado que dura.
+              {tHome('Materials.body')}
             </p>
           </div>
 
@@ -644,20 +638,7 @@ export default function HomePage() {
 
           {/* Trust items — 3 columns with top accent line */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-zinc-800/50">
-            {[
-              {
-                label: 'Cabina con horno',
-                desc: 'Ambiente controlado con horno de curado infrarrojo para resultados de fábrica.',
-              },
-              {
-                label: 'Garantía escrita',
-                desc: 'Cada trabajo con garantía escrita. ¿No quedó perfecto? Lo volvemos perfecto.',
-              },
-              {
-                label: 'Todo vehículo',
-                desc: 'Cualquier marca y modelo — sedanes, pickups, SUVs. Sin excepciones.',
-              },
-            ].map((item) => (
+            {materialTrust.map((item) => (
               <div
                 key={item.label}
                 className="mat-item gsap-reveal group bg-background p-8 sm:p-10"
@@ -674,17 +655,17 @@ export default function HomePage() {
       </section>
 
       {/* ===== PROCESS ===== */}
-      <section className="py-32 sm:py-44 px-6 sm:px-12 lg:px-24">
+      <section id="process" className="py-32 sm:py-44 px-6 sm:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <div className="s-reveal gsap-reveal mb-20 text-center">
             <p className="font-mono text-xs tracking-[0.25em] uppercase text-accent mb-4">
-              Cómo trabajamos
+              {tHome('Process.eyebrow')}
             </p>
             <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.85] uppercase">
-              Del daño
+              {tHome('Process.title1')}
               <br />
-              a la&nbsp;
-              <span className="text-accent">perfección.</span>
+              {tHome('Process.title2')}{' '}
+              <span className="text-accent">{tHome('Process.titleAccent')}</span>
             </h2>
           </div>
 
@@ -749,20 +730,17 @@ export default function HomePage() {
         <ReactiveGrid />
         <div className="relative max-w-5xl mx-auto text-center">
           <p className="guarantee-text gsap-reveal font-mono text-xs tracking-[0.25em] uppercase text-accent mb-8">
-            Nuestra promesa
+            {tHome('Guarantee.eyebrow')}
           </p>
           <h2 className="guarantee-text gsap-reveal font-display text-[clamp(3rem,9vw,8rem)] leading-[0.85] uppercase">
-            Si no queda
+            {tHome('Guarantee.line1')}
             <br />
-            <span className="text-accent">perfecto,</span>
+            <span className="text-accent">{tHome('Guarantee.lineAccent')}</span>
             <br />
-            no está terminado.
+            {tHome('Guarantee.line2')}
           </h2>
           <p className="guarantee-text gsap-reveal text-zinc-400 mt-10 max-w-xl mx-auto text-lg leading-relaxed">
-            Cada reparación viene con nuestra garantía escrita. Usamos
-            materiales profesionales, herramientas de precisión y 9 años de
-            experiencia para entregar un acabado que se ve como de fábrica
-            &mdash; o mejor. Si no quedás satisfecho, lo arreglamos.
+            {tHome('Guarantee.body')}
           </p>
         </div>
       </section>
@@ -774,14 +752,14 @@ export default function HomePage() {
           className="relative border-t border-zinc-800/50 bg-background"
         >
           <h2 id="map-heading" className="sr-only">
-            Ubicación en Uvita, Puntarenas
+            {tHome('Map.srHeading')}
           </h2>
           <div className="relative h-[320px] sm:h-[420px] overflow-hidden">
             {/* Native Google Maps coloring — the red pin reads as the
                 site's accent against the dark background framing. */}
             <iframe
               src={business.map.embedUrl}
-              title="Mapa · Uvita Body Shop"
+              title={tHome('Map.iframeTitle')}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="absolute inset-0 h-full w-full"
@@ -795,7 +773,7 @@ export default function HomePage() {
           <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-12 lg:px-24">
             <div>
               <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-500">
-                Dónde estamos
+                {tHome('Map.stripEyebrow')}
               </p>
               <p className="mt-1 text-sm text-zinc-300">
                 {contactInfo.locationDisplay}
@@ -807,7 +785,7 @@ export default function HomePage() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border border-zinc-700 px-5 py-3 font-mono text-[11px] tracking-[0.25em] uppercase text-zinc-300 hover:border-zinc-400 hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
-              Abrir en Google Maps →
+              {tHome('Map.openGoogleMaps')}
             </a>
           </div>
         </section>
@@ -821,16 +799,15 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16">
           <div className="cta-reveal gsap-reveal">
             <p className="font-mono text-xs tracking-[0.25em] uppercase text-accent mb-4">
-              Empezá aquí
+              {tHome('Cta.eyebrow')}
             </p>
             <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] uppercase mb-6">
-              ¿Listo para
+              {tHome('Cta.title1')}
               <br />
-              recuperar tu vehículo?
+              {tHome('Cta.title2')}
             </h2>
             <p className="text-zinc-400 leading-relaxed mb-8 max-w-md">
-              Cotización sin costo. Llamá, escribí por WhatsApp o completá el
-              formulario. Respondemos en menos de 24 horas.
+              {tHome('Cta.body')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -849,7 +826,7 @@ export default function HomePage() {
                 >
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                 </svg>
-                WhatsApp
+                {tNav('whatsappCta')}
               </a>
               <a
                 href={`tel:${contactInfo.phone}`}

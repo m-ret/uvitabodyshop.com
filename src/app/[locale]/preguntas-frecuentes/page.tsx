@@ -15,16 +15,13 @@ export async function generateMetadata({ params }: Props) {
   if (!hasLocale(routing.locales, locale)) notFound()
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'FaqPage' })
+  const keywords = t.raw('metaKeywords') as string[]
   return buildPageMetadata({
     locale,
     pathname: '/preguntas-frecuentes',
     title: t('metaTitle'),
     description: t('metaDesc'),
-    keywords: [
-      'preguntas body shop costa rica',
-      'cotizar pintura carro uvita',
-      'uvita body shop faq',
-    ],
+    keywords,
   })
 }
 

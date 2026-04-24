@@ -17,16 +17,13 @@ export async function generateMetadata({ params }: Props) {
   if (!hasLocale(routing.locales, locale)) notFound()
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'ServicesIndexPage' })
+  const keywords = t.raw('metaKeywords') as string[]
   return buildPageMetadata({
     locale,
     pathname: '/servicios',
     title: t('metaTitle'),
     description: t('metaDesc'),
-    keywords: [
-      'servicios body shop uvita',
-      'pintura completa costa rica',
-      'enderezado zona sur',
-    ],
+    keywords,
   })
 }
 

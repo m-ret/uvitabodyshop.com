@@ -20,16 +20,14 @@ export interface HoursSpec {
   timeZone: string
 }
 
-export interface OpenNowResult {
-  /** True when the current moment falls inside today's hours range */
-  open: boolean
-  /** Current 0-based day index in the shop's tz */
-  dayIndex: number
-  /** Human label: "Abierto ahora" or "Cerrado · Abre [día] [hora]" */
-  label: string
-}
-
-const DAY_NAMES_ES = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
+/** Result of `computeOpenNow` — translate labels in the UI with `next-intl`. */
+export type OpenNowComputation =
+  | { status: 'open' }
+  | { status: 'closed'; next: null }
+  | {
+      status: 'closed'
+      next: { sameDay: boolean; dayIndex: number; openTime: string }
+    }
 
 /**
  * Parse "HH:MM" into minutes since midnight. Returns -1 for invalid input.
@@ -44,15 +42,25 @@ function parseHHMM(s: string | null): number {
   return h * 60 + m
 }
 
-function formatDisplayTime(hhmm: string): string {
+/**
+ * 12-hour display for opening times in badges and UI.
+ */
+export function formatDisplayTime(
+  hhmm: string,
+  locale: 'es' | 'en' = 'es'
+): string {
   const mins = parseHHMM(hhmm)
   if (mins < 0) return hhmm
   const h = Math.floor(mins / 60)
   const m = mins % 60
-  const suffix = h >= 12 ? 'p.m.' : 'a.m.'
   const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h
   const mm = m.toString().padStart(2, '0')
-  return m === 0 ? `${h12} ${suffix}` : `${h12}:${mm} ${suffix}`
+  if (locale === 'en') {
+    const suf = h >= 12 ? 'PM' : 'AM'
+    return m === 0 ? `${h12} ${suf}` : `${h12}:${mm} ${suf}`
+  }
+  const suf = h >= 12 ? 'p.m.' : 'a.m.'
+  return m === 0 ? `${h12} ${suf}` : `${h12}:${mm} ${suf}`
 }
 
 /**
@@ -88,36 +96,41 @@ export function nowInZone(
 }
 
 /**
- * Given a schedule and a moment in time, returns whether the business is
- * currently open and a human-readable label.
+ * Whether the shop is open at `date` and, if closed, when it opens next.
  */
-export function isOpenNow(hours: HoursSpec, date: Date = new Date()): OpenNowResult {
+export function computeOpenNow(
+  hours: HoursSpec,
+  date: Date = new Date()
+): OpenNowComputation {
   const { dayIndex, minutes } = nowInZone(date, hours.timeZone)
   const today = hours.days[dayIndex]
 
   const openMins = parseHHMM(today.open)
   const closeMins = parseHHMM(today.close)
 
-  if (openMins >= 0 && closeMins >= 0 && minutes >= openMins && minutes < closeMins) {
-    return {
-      open: true,
-      dayIndex,
-      label: 'Abierto ahora',
-    }
+  if (
+    openMins >= 0 &&
+    closeMins >= 0 &&
+    minutes >= openMins &&
+    minutes < closeMins
+  ) {
+    return { status: 'open' }
   }
 
-  // Find the next day (including later today before open) when we reopen.
   const nextOpen = findNextOpen(hours, dayIndex, minutes)
   if (!nextOpen) {
-    return { open: false, dayIndex, label: 'Cerrado' }
+    return { status: 'closed', next: null }
   }
 
   const sameDay = nextOpen.dayIndex === dayIndex
-  const label = sameDay
-    ? `Cerrado · Abre a las ${formatDisplayTime(nextOpen.openTime)}`
-    : `Cerrado · Abre ${DAY_NAMES_ES[nextOpen.dayIndex]} ${formatDisplayTime(nextOpen.openTime)}`
-
-  return { open: false, dayIndex, label }
+  return {
+    status: 'closed',
+    next: {
+      sameDay,
+      dayIndex: nextOpen.dayIndex,
+      openTime: nextOpen.openTime,
+    },
+  }
 }
 
 function findNextOpen(

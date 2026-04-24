@@ -17,12 +17,13 @@ export async function generateMetadata({ params }: Props) {
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'ContactPage' })
   const c = displayContact(locale as 'es' | 'en')
+  const keywords = t.raw('metaKeywords') as string[]
   return buildPageMetadata({
     locale,
     pathname: '/contacto',
     title: t('metaTitle'),
     description: `${t('metaDesc')} ${c.hoursDisplay}. ${business.address.locationDisplay}.`,
-    keywords: ['contacto body shop uvita', 'whatsapp taller pintura uvita'],
+    keywords,
   })
 }
 

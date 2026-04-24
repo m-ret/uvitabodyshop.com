@@ -17,13 +17,14 @@ export async function generateMetadata({ params }: Props) {
   if (!hasLocale(routing.locales, locale)) notFound()
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'GuaranteePage' })
+  const keywords = t.raw('metaKeywords') as string[]
   return buildPageMetadata({
     locale,
     pathname: '/garantia',
     title: t('metaTitle'),
     description: t('metaDesc'),
     ogImage: '/opengraph-image',
-    keywords: ['garantía pintura automotriz', 'garantía taller uvita'],
+    keywords,
   })
 }
 

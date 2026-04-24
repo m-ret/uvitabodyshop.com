@@ -12,6 +12,7 @@ export default function robots(): MetadataRoute.Robots {
       // Explicit opt-in for major AI crawlers — this is a public
       // business listing that WANTS to be found by LLM agents.
       { userAgent: 'GPTBot', allow: '/' },
+      { userAgent: 'ChatGPT-User', allow: '/' },
       { userAgent: 'ClaudeBot', allow: '/' },
       { userAgent: 'PerplexityBot', allow: '/' },
       { userAgent: 'Google-Extended', allow: '/' },

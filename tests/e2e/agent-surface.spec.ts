@@ -24,6 +24,9 @@ test.describe('agent surface', () => {
     expect(res.headers()['content-type']).toMatch(/xml/)
     const body = await res.text()
     expect(body).toMatch(/<url>/)
+    const locs = [...body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
+    expect(locs.some((u) => u.includes('/en'))).toBe(true)
+    expect(locs.some((u) => !u.includes('/en'))).toBe(true)
   })
 
   test('/llms.txt reachable and non-empty', async ({ request }) => {

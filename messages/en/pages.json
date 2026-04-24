@@ -2,6 +2,36 @@
   "AboutPage": {
     "metaTitle": "About",
     "metaDesc": "Precision collision and paint in Uvita, Costa Ballena.",
+    "metaKeywords": [
+      "uvita body shop",
+      "collision repair uvita costa rica",
+      "auto paint shop costa ballena",
+      "frame repair puntarenas"
+    ],
+    "heroEyebrow": "About us",
+    "heroTitle": "Precision collision and paint in Uvita.",
+    "heroLede": "Nine years in the trade. Six building this shop. One standard of work.",
+    "paragraphs": [
+      "I am Fabricio Ríos Ortiz, founder of Uvita Body Shop. I entered the industry in 2017 after years of watching my father fix problems with his hands — and I decided mine would be fixing what others wrote off.",
+      "In 2020 I opened the shop in Uvita with a simple idea: bring Costa Ballena the finish quality you usually only see in San José. No rushed jobs, no yard paint jobs, no \"good enough\". If it is not perfect, it does not leave the shop.",
+      "Today we handle frame repair, full resprays, touch-ups, dent repair and accessory installs for the entire South Zone — Uvita, Dominical, Ojochal, Bahía Ballena. We run Roberlo, BESA, 3M and VICCO because they are the same systems dealerships use — and our written warranty depends on materials that last.",
+      "The shop is mine, but the finish belongs to everyone: the customer who trusts us with the car, the team that preps it, the controlled booth and the infrared oven that cures every coat. We do not patch cars up — we restore them."
+    ],
+    "ownerImageAlt": "Fabricio Ríos Ortiz at work in the Uvita Body Shop booth",
+    "exploreNavAria": "Helpful shop links",
+    "exploreTitle": "Keep exploring",
+    "exploreLead": "Services, warranty, FAQs and guides on collision and paint work along the Costa Ballena.",
+    "exploreLinks": [
+      { "href": "/servicios", "label": "Services" },
+      { "href": "/garantia", "label": "Written warranty" },
+      { "href": "/preguntas-frecuentes", "label": "FAQ" },
+      { "href": "/contacto", "label": "Contact & map" },
+      { "href": "/zonas/uvita", "label": "Service area: Uvita" },
+      {
+        "href": "/guias/cuanto-cuesta-pintar-un-carro-en-costa-rica",
+        "label": "Guide: car paint costs in Costa Rica"
+      }
+    ],
     "contactLink": "Contact the shop"
   },
   "LeadCapture": {
@@ -11,6 +41,11 @@
   "ContactPage": {
     "metaTitle": "Contact",
     "metaDesc": "Quotes and appointments in Uvita.",
+    "metaKeywords": [
+      "uvita body shop contact",
+      "collision repair quote uvita",
+      "auto body shop whatsapp uvita"
+    ],
     "heroEyebrow": "Quote & appointment",
     "heroTitle": "Let’s talk about your car.",
     "heroLede": "Use the form or message us on WhatsApp. We reply during business hours and schedule a visit or drop-off.",
@@ -24,6 +59,11 @@
   "ServicesIndexPage": {
     "metaTitle": "Services",
     "metaDesc": "Frame repair, full paint, touch-ups, dent repair and accessory installs in Uvita.",
+    "metaKeywords": [
+      "uvita body shop services",
+      "collision repair costa ballena",
+      "auto paint shop uvita"
+    ],
     "heroEyebrow": "What we do",
     "heroTitle": "Collision & paint services",
     "heroLede": "Each URL targets a different search intent. Pick a service to read scope, typical pricing and our in-shop process."
@@ -31,6 +71,11 @@
   "FaqPage": {
     "metaTitle": "FAQ",
     "metaDesc": "Pricing, timelines, materials, insurance and service across the South Zone.",
+    "metaKeywords": [
+      "uvita body shop faq",
+      "collision repair quote costa rica",
+      "auto paint warranty uvita"
+    ],
     "heroEyebrow": "Help",
     "heroTitle": "Frequently asked questions",
     "heroLede": "Ranges, timelines, materials, insurance and coverage around Uvita. If your case is unusual, message us and we’ll walk through it.",
@@ -88,6 +133,10 @@
   "GuaranteePage": {
     "metaTitle": "Written warranty",
     "metaDesc": "Every job leaves with a signed written warranty. If something fails due to a defect in our workmanship, we fix it at no charge within the agreed warranty period.",
+    "metaKeywords": [
+      "uvita body shop warranty",
+      "auto paint guarantee costa rica"
+    ],
     "coversTitle": "What’s covered",
     "limitsTitle": "Limits",
     "claimTitle": "How to make a valid warranty claim"

@@ -4,7 +4,7 @@ Primary instructions for any coding agent (Claude Code, Cursor, Codex, etc.) wor
 
 ## Project identity
 
-Production website for **Uvita Body Shop**, a 6-year-old auto body, paint, and collision repair business in Uvita (Puntarenas, Costa Rica). Owner: Fabricio Ríos Ortiz. Phone: (506) 876-9927. Hours: 8am–5pm. The site is in Spanish (primary) with some English UI labels; copy assumes a Costa Rican audience (Zona Sur).
+Production website for **Uvita Body Shop**, a 6-year-old auto body, paint, and collision repair business in Uvita (Puntarenas, Costa Rica). Owner: Fabricio Ríos Ortiz. Phone: (506) 876-9927. Hours: 8am–5pm. The site is **Spanish-first** (`es`) with a full **`en` locale** via `next-intl` (`messages/en/*`); user-facing strings should come from messages, not hardcoded, so `/en/*` stays English end-to-end. Copy still assumes a Costa Rican audience (Zona Sur) where it mentions place and process.
 
 **Canonical aesthetic:** automotive-premium — dark cinematic surfaces, precision type, red-and-warmth accent. Reference lineage: Tesla, Ferrari, BMW. DO NOT drift toward generic "tropical business website" territory. The bar is Awwwards/SOTD-adjacent. The client is paying $90K-equivalent for this quality.
 
@@ -40,8 +40,9 @@ Skills:
 ```
 src/
   app/
-    layout.tsx          # root layout — fonts, metadata, JSON-LD
-    page.tsx            # root — renders HomePage (the site)
+    layout.tsx          # root layout — fonts, metadata, JSON-LD, html lang
+    [locale]/layout.tsx # next-intl provider + segment chrome
+    [locale]/page.tsx   # home at `/` (es) and `/en` — renders HomePage
     globals.css
   components/
     home/HomePage.tsx   # single canonical home page
@@ -65,7 +66,7 @@ There is only one design direction in this project. The exploration-phase direct
 
 ## Golden rules
 
-1. **Spanish-first copy.** All user-facing strings live in Spanish. Do not translate to English in code. If you need placeholder copy, use Spanish that makes sense for the Costa Rican market.
+1. **Spanish-first, bilingual UI.** Default locale is `es`; English is a first-class `en` route via `next-intl`. User-facing strings belong in `messages/es/*` and `messages/en/*` — not hardcoded in components. Placeholder or marketing copy should still read naturally for the Costa Rican market in Spanish, and read as professional shop English in `en`, not machine-translated filler.
 2. **Dark canvas, red signature.** Base `#050505` with `#cc0000` as the primary accent. See `DESIGN.md` for the full token set.
 3. **Motion has a reason.** Every animation must serve attention, emphasis, or continuity — not decoration. Respect `prefers-reduced-motion`.
 4. **GSAP reveal pattern (critical).** Never use `gsap.from()` with ScrollTrigger for opacity reveals — the initial style flashes visible before hydration. Use CSS initial state (`opacity: 0`) + `gsap.to({ opacity: 1 })`.

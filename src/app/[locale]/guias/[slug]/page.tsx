@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props) {
     title: g.title,
     description: g.summary,
     ogImage: g.heroImage,
-    keywords: [...g.keywords],
+    ...(locale === 'es' ? { keywords: [...g.keywords] } : {}),
   })
 }
 

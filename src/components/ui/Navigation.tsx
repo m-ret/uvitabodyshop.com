@@ -163,7 +163,7 @@ export default function Navigation() {
               className="h-10 sm:h-12 lg:h-14 w-auto"
             />
             <span className="hidden sm:inline font-display text-base lg:text-lg uppercase tracking-[0.18em] text-white">
-              Uvita Body Shop
+              {t('brandName')}
             </span>
           </Link>
           <Link

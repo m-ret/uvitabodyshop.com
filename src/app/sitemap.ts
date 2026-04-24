@@ -16,37 +16,62 @@ const staticPaths: {
   { path: '/garantia', priority: 0.6, change: 'yearly' },
 ]
 
-function withLocales(
+type ChangeFreq = MetadataRoute.Sitemap[0]['changeFrequency']
+
+/** Full alternates map shared by every `<url>` entry for one logical path. */
+function languageAlternates(path: string): Record<string, string> {
+  const languages: Record<string, string> = {}
+  for (const locale of routing.locales) {
+    languages[locale] = new URL(
+      pathnameWithLocale(locale, path),
+      siteUrl
+    ).toString()
+  }
+  languages['x-default'] = new URL(
+    pathnameWithLocale(routing.defaultLocale, path),
+    siteUrl
+  ).toString()
+  return languages
+}
+
+/**
+ * One sitemap row per locale so each language has its own `<loc>`, while
+ * every row repeats the same hreflang cluster (Codex review: English URLs
+ * must remain first-class discovery targets, not only alternates).
+ */
+function sitemapEntriesForPath(
   path: string,
   priority: number,
-  change: MetadataRoute.Sitemap[0]['changeFrequency'],
+  change: ChangeFreq,
   lastModified: Date
 ): MetadataRoute.Sitemap {
+  const alternates = languageAlternates(path)
   return routing.locales.map((locale) => ({
     url: new URL(pathnameWithLocale(locale, path), siteUrl).toString(),
     lastModified,
     changeFrequency: change,
     priority,
+    alternates: { languages: alternates },
   }))
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
   const base: MetadataRoute.Sitemap = staticPaths.flatMap(
-    ({ path, priority, change }) => withLocales(path, priority, change, now)
+    ({ path, priority, change }) =>
+      sitemapEntriesForPath(path, priority, change, now)
   )
 
   const serviceUrls: MetadataRoute.Sitemap = business.services.flatMap(
-    (s) =>
-      withLocales(`/servicios/${s.slug}`, 0.85, 'monthly', now)
+    (s) => sitemapEntriesForPath(`/servicios/${s.slug}`, 0.85, 'monthly', now)
   )
 
   const zoneUrls: MetadataRoute.Sitemap = business.zones.flatMap((z) =>
-    withLocales(`/zonas/${z.slug}`, 0.75, 'monthly', now)
+    sitemapEntriesForPath(`/zonas/${z.slug}`, 0.75, 'monthly', now)
   )
 
   const guideUrls: MetadataRoute.Sitemap = business.guides.flatMap((g) =>
-    withLocales(`/guias/${g.slug}`, 0.7, 'monthly', new Date(g.publishedIso))
+    sitemapEntriesForPath(`/guias/${g.slug}`, 0.7, 'monthly', new Date(g.publishedIso))
   )
 
   return [...base, ...serviceUrls, ...zoneUrls, ...guideUrls]

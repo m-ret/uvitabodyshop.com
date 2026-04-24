@@ -1,5 +1,24 @@
 {
   "Home": {
+    "metaTitle": "Enderezado y pintura profesional",
+    "metaDesc": "Taller de chapa y pintura en Uvita, Costa Ballena. Colisión, pintura completa, retoques y garantía escrita. Cotizá por WhatsApp o formulario.",
+    "metaKeywords": [
+      "taller de pintura uvita",
+      "enderezado uvita",
+      "chapa y pintura costa ballena",
+      "reparación de colisión puntarenas"
+    ],
+    "Hero": {
+      "label": "Uvita Body Shop — Puntarenas, Costa Rica",
+      "line1": "Enderezado",
+      "line2": "y Pintura.",
+      "line3": "Acabado",
+      "line4": "Perfecto.",
+      "sub": "Reparación de colisión, pintura completa y acabados personalizados. Cada vehículo sale de nuestra cabina como nuevo — o mejor.",
+      "ctaQuote": "Pedir cotización",
+      "ctaServices": "Ver servicios"
+    },
+    "scrollLabel": "Deslizá",
     "marqueeItems": [
       "Enderezado",
       "Pintura completa",
@@ -28,6 +47,150 @@
       "titleA": "Reseñas reales,",
       "titleB": "trabajo real",
       "starAria": "{rating} de 5"
+    },
+    "Craft": {
+      "eyebrow": "El oficio",
+      "head1a": "No reparamos",
+      "head1b": "carros.",
+      "head2a": "Los",
+      "head2b": "restauramos.",
+      "body": "9 años de experiencia práctica. Cabina de pintura controlada con horno de curado infrarrojo. Materiales profesionales Roberlo, BESA, 3M y VICCO. Cada trabajo respaldado por garantía escrita — porque no tomamos atajos.",
+      "imageAlt": "Fabricio Ríos Ortíz — propietario de Uvita Body Shop pintando un panel con equipo profesional",
+      "ownerCaption": "Fabricio Ríos Ortíz — Propietario"
+    },
+    "Services": {
+      "eyebrow": "Qué hacemos",
+      "title1": "Cada servicio.",
+      "title2": "Un solo estándar:",
+      "titleAccent": "Perfecto."
+    },
+    "services": [
+      {
+        "slug": "enderezado",
+        "number": "01",
+        "title": "Enderezado",
+        "subtitle": "Chasis y estructura",
+        "description": "Desde golpes leves hasta daños estructurales completos. Medición computarizada y corrección hidráulica para recuperar la geometría de fábrica.",
+        "image": "/images/services/enderezado.avif",
+        "alt": "Técnico realizando enderezado de chasis y reparación de colisión"
+      },
+      {
+        "slug": "pintura-completa",
+        "number": "02",
+        "title": "Pintura completa",
+        "subtitle": "Cabina y horno infrarrojo",
+        "description": "Aplicación en etapas dentro de nuestra cabina libre de polvo con horno de curado infrarrojo. Primer, base, color y laca — acabado perfecto.",
+        "image": "/images/services/pintura-completa.avif",
+        "alt": "Vehículo enmascarado y preparado para pintura completa en cabina profesional"
+      },
+      {
+        "slug": "retoques-pintura",
+        "number": "03",
+        "title": "Retoques de pintura",
+        "subtitle": "Rayones y mezcla de color",
+        "description": "Reparaciones puntuales invisibles, remoción de rayones y mezcla de color. Igualamos tu acabado original con tal precisión que no vas a notar dónde arreglamos.",
+        "image": "/images/services/retoques-pintura.avif",
+        "alt": "Técnico enmascarando un panel con cinta antes de retocar la pintura"
+      },
+      {
+        "slug": "reparacion-golpes",
+        "number": "04",
+        "title": "Reparación de golpes",
+        "subtitle": "Abolladuras e impactos",
+        "description": "Técnicas avanzadas para eliminar abolladuras y daños por impacto. Devolvemos los paneles a su forma original sin reemplazos innecesarios.",
+        "image": "/images/services/reparacion-golpes.avif",
+        "alt": "Técnico trabajando reparación de abolladura en un panel del vehículo"
+      },
+      {
+        "slug": "instalacion-accesorios",
+        "number": "05",
+        "title": "Accesorios",
+        "subtitle": "Instalación y pintura a juego",
+        "description": "Bumpers, spoilers, estribos y accesorios aftermarket. Instalación profesional con acabado pintado a tono con la carrocería.",
+        "image": "/images/services/instalacion-accesorios.avif",
+        "alt": "Instalación profesional de accesorios y acabado personalizado en vehículo"
+      }
+    ],
+    "Gallery": {
+      "eyebrow": "Nuestro trabajo",
+      "title1": "Trabajos reales,",
+      "titleAccent": "acabado perfecto",
+      "devPlaceholder": "Marcador"
+    },
+    "Booth": {
+      "eyebrow": "Calidad y materiales",
+      "title1": "Horno infrarrojo.",
+      "title2": "Cabina controlada.",
+      "titleAccent": "Con garantía.",
+      "body": "Materiales profesionales Roberlo, BESA, 3M y VICCO. Horno de curado infrarrojo. Cabina de pintura controlada. Cada trabajo con garantía escrita — porque no tomamos atajos.",
+      "imageAlt": "Técnico de Uvita Body Shop pintando un vehículo con pistola HVLP en la cabina controlada"
+    },
+    "Materials": {
+      "eyebrow": "Calidad profesional",
+      "titleBefore": "Los materiales detrás del ",
+      "titleAccent": "acabado.",
+      "body": "Solo usamos productos que las pintorerías de fábrica usan en todo el mundo. Sin atajos. Sin marcas genéricas. Durabilidad, color exacto y un acabado que dura.",
+      "trust": [
+        {
+          "label": "Cabina con horno",
+          "desc": "Ambiente controlado con horno de curado infrarrojo para resultados de fábrica."
+        },
+        {
+          "label": "Garantía escrita",
+          "desc": "Cada trabajo con garantía escrita. ¿No quedó perfecto? Lo volvemos perfecto."
+        },
+        {
+          "label": "Todo vehículo",
+          "desc": "Cualquier marca y modelo — sedanes, pickups, SUVs. Sin excepciones."
+        }
+      ]
+    },
+    "Process": {
+      "eyebrow": "Cómo trabajamos",
+      "title1": "Del daño",
+      "title2": "a la",
+      "titleAccent": "perfección."
+    },
+    "processSteps": [
+      {
+        "number": "01",
+        "title": "Evaluar",
+        "description": "Revisión completa del daño con documentación fotográfica. Cotización transparente — sin sorpresas."
+      },
+      {
+        "number": "02",
+        "title": "Reparar",
+        "description": "Trabajo estructural y de carrocería con materiales profesionales Roberlo, BESA, 3M y VICCO."
+      },
+      {
+        "number": "03",
+        "title": "Pintar",
+        "description": "Aplicación multicapa en cabina con horno de curado infrarrojo. Libre de polvo, color exacto."
+      },
+      {
+        "number": "04",
+        "title": "Entregar",
+        "description": "Inspección final de calidad. Cada ángulo, cada superficie. No liberamos el vehículo hasta que quede impecable."
+      }
+    ],
+    "Guarantee": {
+      "eyebrow": "Nuestra promesa",
+      "line1": "Si no queda",
+      "lineAccent": "perfecto,",
+      "line2": "no está terminado.",
+      "body": "Cada reparación viene con nuestra garantía escrita. Usamos materiales profesionales, herramientas de precisión y 9 años de experiencia para entregar un acabado que se ve como de fábrica — o mejor. Si no quedás satisfecho, lo arreglamos."
+    },
+    "Map": {
+      "srHeading": "Ubicación en Uvita, Puntarenas",
+      "iframeTitle": "Mapa · Uvita Body Shop",
+      "stripEyebrow": "Dónde estamos",
+      "openGoogleMaps": "Abrir en Google Maps →"
+    },
+    "Cta": {
+      "eyebrow": "Empezá aquí",
+      "title1": "¿Listo para",
+      "title2": "recuperar tu vehículo?",
+      "body": "Cotización sin costo. Llamá, escribí por WhatsApp o completá el formulario. Respondemos en menos de 24 horas."
     }
   }
 }

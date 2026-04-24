@@ -1,29 +1,56 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { isOpenNow, UVITA_BODY_SHOP_HOURS } from '@/lib/hours'
+import { useLocale, useTranslations } from 'next-intl'
+import {
+  computeOpenNow,
+  formatDisplayTime,
+  UVITA_BODY_SHOP_HOURS,
+  type OpenNowComputation,
+} from '@/lib/hours'
+
+function openNowLabel(
+  c: OpenNowComputation,
+  t: (key: string, values?: Record<string, string>) => string,
+  dayShort: string[],
+  locale: 'es' | 'en'
+): string {
+  if (c.status === 'open') return t('openNow')
+  if (!c.next) return t('closed')
+  const time = formatDisplayTime(c.next.openTime, locale)
+  if (c.next.sameDay) return t('opensToday', { time })
+  const day = dayShort[c.next.dayIndex] ?? ''
+  return t('opensOtherDay', { day, time })
+}
 
 /**
- * Live "Abierto ahora" / "Cerrado · Abre [día] [hora]" badge. Client-only to
- * avoid SSR/CSR drift — renders a neutral placeholder during hydration so
- * layout doesn't shift.
+ * Live open/closed badge for shop hours. Client-only to avoid SSR/CSR drift —
+ * renders a neutral placeholder during hydration so layout doesn't shift.
  *
  * Recomputes every minute. No network, no external dependencies.
  */
 export default function OpenNowBadge() {
-  const [state, setState] = useState<{ open: boolean; label: string } | null>(
-    null
-  )
+  const locale = useLocale() as 'es' | 'en'
+  const t = useTranslations('Hours')
+  const dayShort = t.raw('dayShort') as string[]
+
+  const [state, setState] = useState<{
+    open: boolean
+    label: string
+  } | null>(null)
 
   useEffect(() => {
     const tick = () => {
-      const result = isOpenNow(UVITA_BODY_SHOP_HOURS)
-      setState({ open: result.open, label: result.label })
+      const c = computeOpenNow(UVITA_BODY_SHOP_HOURS)
+      setState({
+        open: c.status === 'open',
+        label: openNowLabel(c, t, dayShort, locale),
+      })
     }
     tick()
     const id = window.setInterval(tick, 60_000)
     return () => window.clearInterval(id)
-  }, [])
+  }, [t, dayShort, locale])
 
   if (!state) {
     return (

@@ -2,6 +2,36 @@
   "AboutPage": {
     "metaTitle": "Sobre nosotros",
     "metaDesc": "Taller de precisión en Uvita.",
+    "metaKeywords": [
+      "taller de pintura uvita",
+      "chapa y pintura costa ballena",
+      "fabricio ríos uvita body shop",
+      "enderezado y pintura puntarenas"
+    ],
+    "heroEyebrow": "Sobre nosotros",
+    "heroTitle": "Taller de precisión en Uvita.",
+    "heroLede": "Nueve años aprendiendo el oficio. Seis construyendo este taller. Una sola forma de trabajar.",
+    "paragraphs": [
+      "Soy Fabricio Ríos Ortiz, fundador de Uvita Body Shop. Arranqué en la industria en 2017 después de años mirando a mi padre resolver problemas con las manos — y decidí que lo mío también iba a ser arreglar lo que otros daban por perdido.",
+      "En 2020 abrí el taller en Uvita con una idea simple: traer a la Costa Ballena el nivel de acabado que solo se ve en San José. Nada de trabajos apurados, nada de pintura en el patio, nada de \"así queda bien\". Si no queda perfecto, no sale del taller.",
+      "Hoy atendemos enderezado, pintura completa, retoques, reparación de golpes e instalación de accesorios para toda la Zona Sur — Uvita, Dominical, Ojochal, Bahía Ballena. Trabajamos con Roberlo, BESA, 3M y VICCO porque son los mismos materiales que usan las agencias, y porque nuestra garantía escrita depende de que duren.",
+      "El taller es mío, pero el acabado es de todos: del cliente que confía el carro, del equipo que lo prepara, de la cabina controlada y del horno infrarrojo que cura cada capa. No reparamos carros — los restauramos."
+    ],
+    "ownerImageAlt": "Fabricio Ríos Ortiz en el taller de Uvita Body Shop",
+    "exploreNavAria": "Enlaces útiles del taller",
+    "exploreTitle": "Seguí explorando",
+    "exploreLead": "Servicios, garantía, preguntas frecuentes y guías sobre pintura y colisión en la Costa Ballena.",
+    "exploreLinks": [
+      { "href": "/servicios", "label": "Servicios" },
+      { "href": "/garantia", "label": "Garantía escrita" },
+      { "href": "/preguntas-frecuentes", "label": "Preguntas frecuentes" },
+      { "href": "/contacto", "label": "Contacto y mapa" },
+      { "href": "/zonas/uvita", "label": "Zona: Uvita y alrededores" },
+      {
+        "href": "/guias/cuanto-cuesta-pintar-un-carro-en-costa-rica",
+        "label": "Guía: costo de pintura en Costa Rica"
+      }
+    ],
     "contactLink": "Contactar al taller"
   },
   "LeadCapture": {
@@ -11,6 +41,11 @@
   "ContactPage": {
     "metaTitle": "Contacto",
     "metaDesc": "Cotización y cita en Uvita.",
+    "metaKeywords": [
+      "contacto body shop uvita",
+      "whatsapp taller pintura uvita",
+      "cita taller chapa uvita"
+    ],
     "heroEyebrow": "Cotización y cita",
     "heroTitle": "Hablemos de tu carro.",
     "heroLede": "Completá el formulario o escribinos por WhatsApp. Respondemos en horario de atención y coordinamos cita o visita al taller.",
@@ -24,6 +59,11 @@
   "ServicesIndexPage": {
     "metaTitle": "Servicios",
     "metaDesc": "Enderezado, pintura completa, retoques, reparación de golpes e instalación de accesorios en Uvita.",
+    "metaKeywords": [
+      "servicios body shop uvita",
+      "pintura completa costa rica",
+      "enderezado zona sur"
+    ],
     "heroEyebrow": "Qué hacemos",
     "heroTitle": "Servicios de chapa y pintura",
     "heroLede": "Cada URL es una intención de búsqueda distinta. Elegí el servicio y leé el detalle, los precios orientativos y el proceso en el taller."
@@ -31,6 +71,11 @@
   "FaqPage": {
     "metaTitle": "Preguntas frecuentes",
     "metaDesc": "Cotizaciones, plazos, tintas, aseguradoras y servicio a la Zona Sur.",
+    "metaKeywords": [
+      "preguntas body shop costa rica",
+      "cotizar pintura carro uvita",
+      "uvita body shop faq"
+    ],
     "heroEyebrow": "Ayuda",
     "heroTitle": "Preguntas frecuentes",
     "heroLede": "Rangos, plazos, materiales, seguros y atención en Uvita y alrededores. Si su caso es particular, escríbanos y lo vemos con calma.",
@@ -88,6 +133,10 @@
   "GuaranteePage": {
     "metaTitle": "Garantía escrita",
     "metaDesc": "Cada trabajo sale con una garantía escrita firmada. Si algo falla por un defecto de nuestro trabajo, lo resolvemos sin costo dentro del plazo acordado.",
+    "metaKeywords": [
+      "garantía pintura automotriz",
+      "garantía taller uvita"
+    ],
     "coversTitle": "Qué cubre",
     "limitsTitle": "Límites",
     "claimTitle": "Cómo hacer válida la garantía"

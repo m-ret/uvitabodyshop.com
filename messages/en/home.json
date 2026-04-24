@@ -1,5 +1,24 @@
 {
   "Home": {
+    "metaTitle": "Collision repair & professional paint",
+    "metaDesc": "Auto body and paint shop in Uvita, Costa Ballena. Collision repair, full resprays, touch-ups, and a written warranty. Quote on WhatsApp or via the form.",
+    "metaKeywords": [
+      "uvita body shop",
+      "collision repair uvita",
+      "auto paint costa rica",
+      "body shop costa ballena"
+    ],
+    "Hero": {
+      "label": "Uvita Body Shop — Puntarenas, Costa Rica",
+      "line1": "Collision",
+      "line2": "& paint.",
+      "line3": "Flawless",
+      "line4": "finish.",
+      "sub": "Collision repair, full resprays, and custom finishes. Every vehicle leaves our booth like new — or better.",
+      "ctaQuote": "Get a quote",
+      "ctaServices": "View services"
+    },
+    "scrollLabel": "Scroll",
     "marqueeItems": [
       "Frame repair",
       "Full paint",
@@ -28,6 +47,150 @@
       "titleA": "Real reviews,",
       "titleB": "real work",
       "starAria": "{rating} out of 5"
+    },
+    "Craft": {
+      "eyebrow": "The craft",
+      "head1a": "We don't patch",
+      "head1b": "cars.",
+      "head2a": "We",
+      "head2b": "restore them.",
+      "body": "Nine years of hands-on experience. A controlled paint booth with infrared cure. Professional materials from Roberlo, BESA, 3M, and VICCO. Every job backed by a written warranty — because we don't cut corners.",
+      "imageAlt": "Fabricio Ríos Ortíz — owner of Uvita Body Shop spraying a panel with professional equipment",
+      "ownerCaption": "Fabricio Ríos Ortíz — Owner"
+    },
+    "Services": {
+      "eyebrow": "What we do",
+      "title1": "Every service.",
+      "title2": "One standard:",
+      "titleAccent": "Perfect."
+    },
+    "services": [
+      {
+        "slug": "enderezado",
+        "number": "01",
+        "title": "Frame repair",
+        "subtitle": "Chassis & structure",
+        "description": "From light hits to full structural damage. Computerized measuring and hydraulic correction to restore factory geometry.",
+        "image": "/images/services/enderezado.avif",
+        "alt": "Technician performing chassis straightening and collision repair"
+      },
+      {
+        "slug": "pintura-completa",
+        "number": "02",
+        "title": "Full respray",
+        "subtitle": "Booth & IR oven",
+        "description": "Stage-built application in our dust-controlled booth with infrared cure. Primer, base, color, and clear — a flawless finish.",
+        "image": "/images/services/pintura-completa.avif",
+        "alt": "Masked vehicle prepared for a full respray in a professional booth"
+      },
+      {
+        "slug": "retoques-pintura",
+        "number": "03",
+        "title": "Paint touch-ups",
+        "subtitle": "Scratches & color match",
+        "description": "Invisible spot repairs, scratch removal, and color blending. We match your factory finish so precisely you won’t see where we worked.",
+        "image": "/images/services/retoques-pintura.avif",
+        "alt": "Technician masking a panel with tape before a paint touch-up"
+      },
+      {
+        "slug": "reparacion-golpes",
+        "number": "04",
+        "title": "Dent & impact repair",
+        "subtitle": "Dents & impacts",
+        "description": "Advanced techniques to remove dents and impact damage. We return panels to original shape without unnecessary replacements.",
+        "image": "/images/services/reparacion-golpes.avif",
+        "alt": "Technician repairing a dent on a vehicle panel"
+      },
+      {
+        "slug": "instalacion-accesorios",
+        "number": "05",
+        "title": "Accessories",
+        "subtitle": "Install & matched paint",
+        "description": "Bumpers, spoilers, side steps, and aftermarket add-ons. Professional installation with paint matched to the body.",
+        "image": "/images/services/instalacion-accesorios.avif",
+        "alt": "Professional accessory installation and custom finish on a vehicle"
+      }
+    ],
+    "Gallery": {
+      "eyebrow": "Our work",
+      "title1": "Real jobs,",
+      "titleAccent": "flawless finish",
+      "devPlaceholder": "Placeholder"
+    },
+    "Booth": {
+      "eyebrow": "Quality & materials",
+      "title1": "Infrared cure.",
+      "title2": "Controlled booth.",
+      "titleAccent": "With a warranty.",
+      "body": "Professional materials from Roberlo, BESA, 3M, and VICCO. Infrared cure oven. Controlled paint environment. Every job with a written warranty — because we don't cut corners.",
+      "imageAlt": "Uvita Body Shop technician spraying a vehicle with an HVLP gun in the controlled booth"
+    },
+    "Materials": {
+      "eyebrow": "Professional-grade",
+      "titleBefore": "The materials behind the ",
+      "titleAccent": "finish.",
+      "body": "We only use what factory paint shops use worldwide. No shortcuts. No generic brands. Durability, accurate color, and a finish built to last.",
+      "trust": [
+        {
+          "label": "Booth + oven",
+          "desc": "Controlled environment with infrared cure for factory-level results."
+        },
+        {
+          "label": "Written warranty",
+          "desc": "Every job includes a written warranty. Not perfect? We make it perfect."
+        },
+        {
+          "label": "Any vehicle",
+          "desc": "Any make and model — sedans, pickups, SUVs. No exceptions."
+        }
+      ]
+    },
+    "Process": {
+      "eyebrow": "How we work",
+      "title1": "From damage",
+      "title2": "to",
+      "titleAccent": "perfection."
+    },
+    "processSteps": [
+      {
+        "number": "01",
+        "title": "Assess",
+        "description": "Full damage review with photo documentation. Transparent quoting — no surprises."
+      },
+      {
+        "number": "02",
+        "title": "Repair",
+        "description": "Structural and body work with professional materials from Roberlo, BESA, 3M, and VICCO."
+      },
+      {
+        "number": "03",
+        "title": "Paint",
+        "description": "Multi-layer application in the booth with infrared cure. Dust-free, exact color."
+      },
+      {
+        "number": "04",
+        "title": "Deliver",
+        "description": "Final quality inspection. Every angle, every surface. We don't release the vehicle until it’s immaculate."
+      }
+    ],
+    "Guarantee": {
+      "eyebrow": "Our promise",
+      "line1": "If it isn’t",
+      "lineAccent": "perfect,",
+      "line2": "it isn’t done.",
+      "body": "Every repair includes our written warranty. We use professional materials, precision tools, and nine years of experience to deliver a factory-looking finish — or better. If you’re not satisfied, we fix it."
+    },
+    "Map": {
+      "srHeading": "Uvita, Puntarenas location",
+      "iframeTitle": "Map · Uvita Body Shop",
+      "stripEyebrow": "Where we are",
+      "openGoogleMaps": "Open in Google Maps →"
+    },
+    "Cta": {
+      "eyebrow": "Start here",
+      "title1": "Ready to",
+      "title2": "get your vehicle back?",
+      "body": "Free estimates. Call, message on WhatsApp, or complete the form. We respond within 24 hours."
     }
   }
 }

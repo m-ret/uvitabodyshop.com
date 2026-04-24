@@ -44,10 +44,17 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
   }
   languages['x-default'] = pathnameWithLocale(routing.defaultLocale, pathname)
 
+  const resolvedKeywords =
+    keywords !== undefined
+      ? keywords
+      : locale === 'en'
+        ? undefined
+        : [...business.meta.keywords]
+
   return {
     title,
     description,
-    keywords: keywords ?? [...business.meta.keywords],
+    ...(resolvedKeywords !== undefined ? { keywords: resolvedKeywords } : {}),
     alternates: {
       canonical: canonicalPath,
       languages,
