@@ -1,0 +1,230 @@
+{
+  "ServiceDetail": {
+    "enderezado": {
+      "metaTitle": "Frame straightening & collision repair in Uvita",
+      "metaDescription": "Computer-measured structural repair, hydraulic bench, written warranty. South Zone Puntarenas.",
+      "longDescription": "Structural pulls for frame rails and panels after a collision. We measure the chassis against factory data and correct it on a hydraulic bench before touching cosmetics. If the frame is not straight, paint will not save the job.",
+      "included": [
+        "Structural diagnosis with computer measurement against factory reference points.",
+        "Straightening of rails, frame and panels on a hydraulic bench.",
+        "Repair or replacement of outer panels depending on damage.",
+        "Review of suspension and alignment systems tied to the impact.",
+        "Written structural report before paint work begins."
+      ],
+      "process": [
+        {
+          "title": "01 · Structural diagnosis",
+          "body": "We measure chassis geometry and document every deviation. No real estimate without a complete diagnosis."
+        },
+        {
+          "title": "02 · Hydraulic correction",
+          "body": "We pull and reposition until factory tolerances return. Each reference point is brought back to spec."
+        },
+        {
+          "title": "03 · Body & prep",
+          "body": "We repair or replace panels, even door/hood/trunk gaps, and leave surfaces ready for the booth."
+        },
+        {
+          "title": "04 · Delivery with report",
+          "body": "You receive the vehicle with a signed structural report and written warranty on corrected geometry."
+        }
+      ],
+      "priceGuidance": "From ₡250,000 depending on damage extent. Front, side and rear impacts quote differently — send WhatsApp photos for an estimate before you book the bay.",
+      "faqs": [
+        {
+          "q": "How do you know if my frame is bent?",
+          "a": "We use computer measurement: chassis reference points are compared to manufacturer data. Anything out of tolerance is flagged so we know exactly how much to pull."
+        },
+        {
+          "q": "How long does a typical collision repair take?",
+          "a": "A light side or front impact often runs 5–10 business days. Heavy structural work can take 15–25 days. Real timelines come from diagnosis."
+        },
+        {
+          "q": "Do you work with insurers?",
+          "a": "We do not collect payment from insurers, but we prepare the detailed estimate and photo report you need for your claim. You handle the payout; we do the repair properly."
+        },
+        {
+          "q": "Can you repair after the airbag fired?",
+          "a": "We repair body and structure. Airbag replacement itself is coordinated with a trusted specialist so it is certified correctly."
+        }
+      ]
+    },
+    "pintura-completa": {
+      "metaTitle": "Full automotive paint in Uvita, Costa Rica",
+      "metaDescription": "Complete respray in a booth with infrared cure. Roberlo, BESA, 3M systems. 12-month written warranty. South Zone.",
+      "longDescription": "Full body respray inside a controlled booth with infrared cure. We apply primer, base, colour and clear in controlled layers for a uniform, deep finish without defects. We match the factory colour or change the entire tone if you want a fresh look.",
+      "included": [
+        "Controlled removal of trim, emblems and visible accessories.",
+        "Panel prep and filler work with fine surface levelling.",
+        "Dust-free booth application: primer, base, colour and clear.",
+        "Multi-layer cure with infrared oven.",
+        "Final polish and full reassembly."
+      ],
+      "process": [
+        {
+          "title": "01 · Prep",
+          "body": "Strip, sand and filler. ~70% of the finish is decided here — if the surface is not right, paint will show it."
+        },
+        {
+          "title": "02 · Controlled booth",
+          "body": "Primer, base and colour in timed layers inside a dust-free booth. Each car enters clean and leaves intact."
+        },
+        {
+          "title": "03 · Infrared oven",
+          "body": "We cure each layer with infrared — fully and evenly, not half-dry and half-wet."
+        },
+        {
+          "title": "04 · Polish & assembly",
+          "body": "Final polish, trim reinstallation and delivery with written warranty on application."
+        }
+      ],
+      "priceGuidance": "From ₡450,000 for compact cars in factory colour. Colour changes, pearls and larger SUVs/pickups scale with area and materials. Exact quote before we start.",
+      "faqs": [
+        {
+          "q": "How long does a full respray take?",
+          "a": "Typically 7–14 business days depending on body condition, Uvita weather and colour complexity. We do not release the car until cure is complete."
+        },
+        {
+          "q": "Can you match the factory colour exactly?",
+          "a": "Yes. We work with Roberlo and BESA formulas from the factory code or a physical sample. New tones are fine too."
+        },
+        {
+          "q": "Booth vs outdoor paint?",
+          "a": "The booth removes dust, bugs and particles that stick in fresh clear. We also control temperature and humidity — critical in Costa Rica."
+        },
+        {
+          "q": "What materials do you use?",
+          "a": "Roberlo for colour and clear, BESA for special bases, 3M abrasives and VICCO prep — the same system stack agencies specify."
+        }
+      ]
+    },
+    "retoques-pintura": {
+      "metaTitle": "Paint touch-ups & scratch repair in Uvita",
+      "metaDescription": "Invisible local repairs, colour blending, WhatsApp quotes with photos. Costa Ballena.",
+      "longDescription": "Spot repairs for scratches, bad wash marks and small imperfections without respraying the whole car. We mix the exact colour, apply in the booth and polish so the repair disappears against the rest of the body.",
+      "included": [
+        "Scratch/imperfection diagnosis under controlled light.",
+        "Colour mix from factory code or physical sample.",
+        "Masking and local application in the booth.",
+        "Cure and polish to match gloss on neighbouring panels."
+      ],
+      "process": [
+        {
+          "title": "01 · Colour read",
+          "body": "We identify the original code or read from a sample. We match solids, metallics and pearls."
+        },
+        {
+          "title": "02 · Localised prep",
+          "body": "Fine sanding, masking and protection — we only touch what is necessary."
+        },
+        {
+          "title": "03 · Application & cure",
+          "body": "Booth application with the same recipe we would use on a full job. Controlled cure."
+        },
+        {
+          "title": "04 · Final polish",
+          "body": "Polish and gloss until the touched area is invisible under normal viewing."
+        }
+      ],
+      "priceGuidance": "From ₡35,000 per scratch or small zone. Multiple zones get a combined price. WhatsApp photos for a quote without bringing the car.",
+      "faqs": [
+        {
+          "q": "Will I see where it was touched up?",
+          "a": "If colour match and polish are right, no. Our rule: if you can find the spot under normal light, we do not hand it over."
+        },
+        {
+          "q": "Quote by WhatsApp with photos?",
+          "a": "Yes, preferred. Send good light — one wide shot, one close on the scratch. Same-business-day estimate."
+        },
+        {
+          "q": "How long for a touch-up?",
+          "a": "About 2–4 business days for small spots. Most of the time is correct layer cure."
+        }
+      ]
+    },
+    "reparacion-golpes": {
+      "metaTitle": "Dent & bumper repair in Uvita",
+      "metaDescription": "Dents and impacts without unnecessary panel replacement. PDR when it fits. South Zone.",
+      "longDescription": "Repair for dents, dings and impacts where the original panel can still be saved. When it makes sense we repair instead of replace — lower cost, OEM panels stay, warranty stays firm.",
+      "included": [
+        "Honest assessment: repair vs replace.",
+        "Dent repair with PDR or conventional filler depending on access and paint.",
+        "Local prep, paint and polish.",
+        "Written warranty on the repaired zone."
+      ],
+      "process": [
+        {
+          "title": "01 · Evaluation",
+          "body": "We check if the panel can be saved. If replacement is better for you, we say so — no paid repairs that are not worth it."
+        },
+        {
+          "title": "02 · Repair",
+          "body": "PDR when paint is intact, or hammer/filler when needed. We restore shape without weakening the panel."
+        },
+        {
+          "title": "03 · Local paint",
+          "body": "Colour match, booth application and polish so the repair blends away."
+        },
+        {
+          "title": "04 · Delivery",
+          "body": "Final inspection, written report and warranty on the repair."
+        }
+      ],
+      "priceGuidance": "From ₡80,000 for small dents with local paint. Larger hits or multiple panels are quoted case by case. Send photos first.",
+      "faqs": [
+        {
+          "q": "When to repair vs replace?",
+          "a": "Repair if metal is not torn or overstretched. Replace with prior rust, cuts, or when a new panel is cheaper. We give an honest recommendation."
+        },
+        {
+          "q": "What is PDR?",
+          "a": "Paintless dent repair when the clear coat is intact. Special rods push the dent from behind — faster and cheaper when it applies."
+        },
+        {
+          "q": "Plastic bumpers?",
+          "a": "Yes. We weld cracks, fix deformation and repaint. Most cracked bumpers do not need replacement."
+        }
+      ]
+    },
+    "instalacion-accesorios": {
+      "metaTitle": "Accessory install & colour-matched paint — Uvita",
+      "metaDescription": "Bumpers, spoilers, steps and aftermarket parts painted to match. Clean install, no rattles.",
+      "longDescription": "Installation and colour-matched paint for bumpers, spoilers, side steps, trim and aftermarket parts. Each piece is painted to the exact body tone, mounted correctly and without DIY drill marks.",
+      "included": [
+        "Fit check of the part against the factory body.",
+        "Prep and paint of the accessory to exact vehicle colour.",
+        "Mechanical fastening with correct hardware and structural adhesive where needed.",
+        "Final polish and alignment inspection."
+      ],
+      "process": [
+        {
+          "title": "01 · Fit check",
+          "body": "We trial-fit before paint. If the part is off from the supplier, we fix that first."
+        },
+        {
+          "title": "02 · Colour-matched paint",
+          "body": "We match in the booth — same finish as the car, not a quick rattle-can job."
+        },
+        {
+          "title": "03 · Installation",
+          "body": "Structural fastening where required, correct torque and sealing — no gaps, no movement."
+        },
+        {
+          "title": "04 · Final check",
+          "body": "Alignment, lights, sensors and gaps. Delivery with warranty on installation."
+        }
+      ],
+      "priceGuidance": "From ₡60,000 depending on part and whether paint is needed. Painting a new bumper to match and install is often around ₡180,000. Exact quote with photos and vehicle model.",
+      "faqs": [
+        {
+          "q": "Can you paint parts I bought elsewhere?",
+          "a": "Yes. Bring the part and the car — we match colour, paint and install. We also verify fit before mounting."
+        },
+        {
+          "q": "Bars, spoilers, side steps?",
+          "a": "Yes — front/rear bumpers, spoilers, side steps, chrome trim and roof bars. Every job includes fit verification."
+        }
+      ]
+    }
+  }
+}

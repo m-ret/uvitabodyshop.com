@@ -1,0 +1,33 @@
+{
+  "Home": {
+    "marqueeItems": [
+      "Enderezado",
+      "Pintura completa",
+      "Retoques",
+      "Abolladuras",
+      "Accesorios",
+      "Garantía escrita",
+      "Hecho en Costa Rica",
+      "Desde 2020"
+    ],
+    "Trust": {
+      "eyebrow": "Confiá en el proceso",
+      "yearsLabel": "{years} años",
+      "yearsSub": "de experiencia en el oficio",
+      "booth": "Cabina infrarroja",
+      "boothSub": "Curado controlado y acabado de agencia",
+      "boothSubFallback": "Acabado controlado",
+      "warranty": "Garantía escrita",
+      "warrantySub": "Cada trabajo documentado",
+      "warrantySubFallback": "Trabajo documentado",
+      "googleReviews": "{count} reseñas verificadas en Google",
+      "reviewsLink": "Ver reseñas"
+    },
+    "Testimonials": {
+      "eyebrow": "Clientes",
+      "titleA": "Reseñas reales,",
+      "titleB": "trabajo real",
+      "starAria": "{rating} de 5"
+    }
+  }
+}

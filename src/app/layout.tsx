@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Bebas_Neue, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { business, siteUrl, buildStructuredData } from '@/data/business'
+import UtmCapture from '@/components/ui/UtmCapture'
 import './globals.css'
 
 const bebasNeue = Bebas_Neue({
@@ -42,11 +43,11 @@ export const metadata: Metadata = {
     canonical: '/',
     languages: {
       es: '/',
+      en: '/en',
       'x-default': '/',
     },
   },
   openGraph: {
-    // images populated by src/app/opengraph-image.tsx (Next App Router convention)
     type: 'website',
     locale: 'es_CR',
     url: siteUrl,
@@ -55,7 +56,6 @@ export const metadata: Metadata = {
     description: business.meta.descriptionEs,
   },
   twitter: {
-    // images populated by src/app/twitter-image.tsx
     card: 'summary_large_image',
     title: `${business.name} — Enderezado y Pintura`,
     description: business.meta.descriptionEs,
@@ -83,10 +83,12 @@ export default function RootLayout({
   return (
     <html
       lang="es"
+      suppressHydrationWarning
       className={`${bebasNeue.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
         {children}
+        <UtmCapture />
         <Analytics />
         <script
           type="application/ld+json"

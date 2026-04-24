@@ -1,7 +1,9 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { business, displayContact } from '@/data/business'
+import { useLocale, useTranslations } from 'next-intl'
+import { displayContact } from '@/data/business'
+import { readUtmCookieClient } from '@/lib/utm'
 
 type ServiceSlug =
   | 'enderezado'
@@ -33,38 +35,41 @@ const INITIAL: FormState = {
   description: '',
 }
 
-const SERVICE_OPTIONS: { value: ServiceSlug; label: string }[] = [
-  { value: 'enderezado', label: 'Enderezado y colisión' },
-  { value: 'pintura-completa', label: 'Pintura completa' },
-  { value: 'retoques-pintura', label: 'Retoques de pintura' },
-  { value: 'reparacion-golpes', label: 'Reparación de golpes' },
-  { value: 'instalacion-accesorios', label: 'Instalación de accesorios' },
-  { value: 'otro', label: 'Otro / consulta' },
+const SERVICE_VALUES: ServiceSlug[] = [
+  'enderezado',
+  'pintura-completa',
+  'retoques-pintura',
+  'reparacion-golpes',
+  'instalacion-accesorios',
+  'otro',
 ]
 
-function validate(state: FormState): FieldError {
+function validate(
+  state: FormState,
+  errorsT: (key: string) => string
+): FieldError {
   const errors: FieldError = {}
   if (state.name.trim().length < 2) {
-    errors.name = 'Ingresá tu nombre.'
+    errors.name = errorsT('name')
   } else if (state.name.length > 80) {
-    errors.name = 'El nombre es demasiado largo.'
+    errors.name = errorsT('nameLong')
   }
   if (state.phone.replace(/\D/g, '').length < 6) {
-    errors.phone = 'Teléfono inválido.'
+    errors.phone = errorsT('phone')
   }
   if (state.email && !/.+@.+\..+/.test(state.email)) {
-    errors.email = 'Correo inválido.'
+    errors.email = errorsT('email')
   }
   if (!state.service) {
-    errors.service = 'Elegí un servicio.'
+    errors.service = errorsT('service')
   }
   if (state.description.trim().length < 10) {
-    errors.description = 'Contanos un poco más (mínimo 10 caracteres).'
+    errors.description = errorsT('descriptionShort')
   } else if (state.description.length > 2000) {
-    errors.description = 'Descripción demasiado larga.'
+    errors.description = errorsT('descriptionLong')
   }
   if (state.vehicle && state.vehicle.length > 120) {
-    errors.vehicle = 'Vehículo demasiado largo.'
+    errors.vehicle = errorsT('vehicleLong')
   }
   return errors
 }
@@ -72,17 +77,41 @@ function validate(state: FormState): FieldError {
 interface QuoteFormProps {
   /** Optional hook — Unit 11 wires analytics here. */
   onEvent?: (event: string, props?: Record<string, unknown>) => void
+  /** When present (e.g. from `/contacto?servicio=…`), preselects the service. */
+  initialService?: ServiceSlug | ''
 }
 
-export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
-  const { whatsapp } = displayContact()
-  const [state, setState] = useState<FormState>(INITIAL)
+export default function QuoteForm({
+  onEvent,
+  initialService = '',
+}: QuoteFormProps = {}) {
+  const locale = useLocale() as 'es' | 'en'
+  const t = useTranslations('QuoteForm')
+  const errorsT = useTranslations('QuoteForm.errors')
+  const { whatsapp } = displayContact(locale)
+
+  const [state, setState] = useState<FormState>(() => ({
+    ...INITIAL,
+    service:
+      initialService && SERVICE_VALUES.includes(initialService)
+        ? initialService
+        : '',
+  }))
   const [errors, setErrors] = useState<FieldError>({})
   const [status, setStatus] = useState<SubmitStatus>('idle')
   const nameRef = useRef<HTMLInputElement>(null)
   const phoneRef = useRef<HTMLInputElement>(null)
   const serviceRef = useRef<HTMLSelectElement>(null)
   const descriptionRef = useRef<HTMLTextAreaElement>(null)
+
+  const serviceLabels: Record<ServiceSlug, string> = {
+    enderezado: t('optEnderezado'),
+    'pintura-completa': t('optPintura'),
+    'retoques-pintura': t('optRetoques'),
+    'reparacion-golpes': t('optGolpes'),
+    'instalacion-accesorios': t('optAccesorios'),
+    otro: t('optOtro'),
+  }
 
   const update =
     <K extends keyof FormState>(key: K) =>
@@ -104,7 +133,7 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
     e.preventDefault()
     if (status === 'submitting') return
 
-    const fieldErrors = validate(state)
+    const fieldErrors = validate(state, errorsT)
     if (Object.keys(fieldErrors).length > 0) {
       setErrors(fieldErrors)
       focusFirstInvalid(fieldErrors)
@@ -117,6 +146,10 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
     setStatus('submitting')
     onEvent?.('quote_submit', { service: state.service })
 
+    const utmRaw = readUtmCookieClient()
+    const utm =
+      utmRaw && Object.values(utmRaw).some(Boolean) ? utmRaw : undefined
+
     try {
       const res = await fetch('/api/quote-request', {
         method: 'POST',
@@ -128,14 +161,15 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
           service: state.service,
           vehicle: state.vehicle.trim() || undefined,
           description: state.description.trim(),
-          preferredLanguage: 'es',
+          preferredLanguage: locale === 'en' ? 'en' : 'es',
+          ...(utm ? { utm } : {}),
         }),
       })
 
       if (res.status === 429) {
         setStatus('error')
         setErrors({
-          form: 'Recibimos muchas solicitudes. Probá de nuevo en un momento o escribinos por WhatsApp.',
+          form: errorsT('rateLimit'),
         })
         onEvent?.('quote_error', { reason: 'rate_limit', status: 429 })
         return
@@ -147,9 +181,7 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
       if (!res.ok || !data.ok) {
         setStatus('error')
         setErrors({
-          form:
-            data.message ??
-            'No pudimos enviar la solicitud. Probá de nuevo o escribinos por WhatsApp.',
+          form: data.message ?? errorsT('server'),
         })
         onEvent?.('quote_error', { reason: 'server', status: res.status })
         return
@@ -165,13 +197,14 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
     } catch {
       setStatus('error')
       setErrors({
-        form: 'No pudimos enviar la solicitud. Revisá tu conexión o escribinos por WhatsApp.',
+        form: errorsT('network'),
       })
       onEvent?.('quote_error', { reason: 'network' })
     }
   }
 
   const isSubmitting = status === 'submitting'
+  const hoursLine = displayContact(locale).hoursDisplay
 
   return (
     <form
@@ -182,7 +215,7 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
     >
       <Field
         id="quote-name"
-        label="Nombre"
+        label={t('name')}
         error={errors.name}
         required
       >
@@ -197,14 +230,14 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
           aria-invalid={Boolean(errors.name)}
           aria-describedby={errors.name ? 'quote-name-error' : undefined}
           className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 text-foreground text-sm placeholder:text-zinc-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus:border-accent transition-colors"
-          placeholder="Tu nombre"
+          placeholder={t('placeholderName')}
           disabled={isSubmitting}
         />
       </Field>
 
       <Field
         id="quote-phone"
-        label="Teléfono / WhatsApp"
+        label={t('phone')}
         error={errors.phone}
         required
       >
@@ -219,16 +252,12 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
           aria-invalid={Boolean(errors.phone)}
           aria-describedby={errors.phone ? 'quote-phone-error' : undefined}
           className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 text-foreground text-sm placeholder:text-zinc-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus:border-accent transition-colors"
-          placeholder="+506 8769 9927"
+          placeholder={t('placeholderPhone')}
           disabled={isSubmitting}
         />
       </Field>
 
-      <Field
-        id="quote-email"
-        label="Correo (opcional)"
-        error={errors.email}
-      >
+      <Field id="quote-email" label={t('email')} error={errors.email}>
         <input
           type="email"
           id="quote-email"
@@ -239,14 +268,14 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
           aria-invalid={Boolean(errors.email)}
           aria-describedby={errors.email ? 'quote-email-error' : undefined}
           className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 text-foreground text-sm placeholder:text-zinc-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus:border-accent transition-colors"
-          placeholder="tucorreo@ejemplo.com"
+          placeholder={t('placeholderEmail')}
           disabled={isSubmitting}
         />
       </Field>
 
       <Field
         id="quote-service"
-        label="Servicio"
+        label={t('service')}
         error={errors.service}
         required
       >
@@ -261,16 +290,16 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
           className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 text-foreground text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus:border-accent transition-colors"
           disabled={isSubmitting}
         >
-          <option value="">Elegí un servicio</option>
-          {SERVICE_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
+          <option value="">{t('pickService')}</option>
+          {SERVICE_VALUES.map((value) => (
+            <option key={value} value={value}>
+              {serviceLabels[value]}
             </option>
           ))}
         </select>
       </Field>
 
-      <Field id="quote-vehicle" label="Vehículo (opcional)" error={errors.vehicle}>
+      <Field id="quote-vehicle" label={t('vehicle')} error={errors.vehicle}>
         <input
           type="text"
           id="quote-vehicle"
@@ -278,14 +307,14 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
           value={state.vehicle}
           onChange={update('vehicle')}
           className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 text-foreground text-sm placeholder:text-zinc-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus:border-accent transition-colors"
-          placeholder="Marca, modelo, año"
+          placeholder={t('placeholderVehicle')}
           disabled={isSubmitting}
         />
       </Field>
 
       <Field
         id="quote-description"
-        label="Descripción del trabajo"
+        label={t('description')}
         error={errors.description}
         required
       >
@@ -301,7 +330,7 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
             errors.description ? 'quote-description-error' : undefined
           }
           className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 text-foreground text-sm placeholder:text-zinc-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus:border-accent transition-colors resize-none"
-          placeholder="Contanos qué necesitás arreglar o pintar."
+          placeholder={t('placeholderDescription')}
           disabled={isSubmitting}
         />
       </Field>
@@ -318,7 +347,7 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
             rel="noopener noreferrer"
             className="mt-2 inline-block font-mono text-[11px] tracking-[0.25em] uppercase text-accent hover:text-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
-            Escribir directo por WhatsApp →
+            {t('whatsappFallback')}
           </a>
         </div>
       )}
@@ -328,11 +357,11 @@ export default function QuoteForm({ onEvent }: QuoteFormProps = {}) {
         disabled={isSubmitting}
         className="w-full py-4 bg-accent text-white text-sm font-medium tracking-wide uppercase hover:bg-accent-hover transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {isSubmitting ? 'Enviando…' : 'Enviar solicitud'}
+        {isSubmitting ? t('submitting') : t('submit')}
       </button>
 
       <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-zinc-600">
-        Atendemos en horario {business.hours.display.toLowerCase()}
+        {t('hoursNote', { hours: hoursLine })}
       </p>
     </form>
   )
@@ -358,7 +387,11 @@ function Field({
         className="block font-mono text-xs tracking-[0.15em] uppercase text-zinc-500 mb-2"
       >
         {label}
-        {required && <span className="text-accent ml-1" aria-hidden="true">*</span>}
+        {required && (
+          <span className="text-accent ml-1" aria-hidden="true">
+            *
+          </span>
+        )}
       </label>
       {children}
       {error && (

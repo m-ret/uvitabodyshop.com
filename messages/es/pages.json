@@ -1,0 +1,109 @@
+{
+  "AboutPage": {
+    "metaTitle": "Sobre nosotros",
+    "metaDesc": "Taller de precisión en Uvita.",
+    "contactLink": "Contactar al taller"
+  },
+  "LeadCapture": {
+    "title": "Solicitá cotización",
+    "description": "Nombre, teléfono, servicio y una breve descripción del trabajo. Respondemos en horario hábil; también podés escribirnos por WhatsApp desde Contacto."
+  },
+  "ContactPage": {
+    "metaTitle": "Contacto",
+    "metaDesc": "Cotización y cita en Uvita.",
+    "heroEyebrow": "Cotización y cita",
+    "heroTitle": "Hablemos de tu carro.",
+    "heroLede": "Completá el formulario o escribinos por WhatsApp. Respondemos en horario de atención y coordinamos cita o visita al taller.",
+    "whatsapp": "WhatsApp",
+    "hours": "Horario",
+    "location": "Ubicación",
+    "mapTitle": "Mapa — Uvita Body Shop Uvita",
+    "mapsLink": "Abrir en Google Maps",
+    "formLoading": "Cargando formulario…"
+  },
+  "ServicesIndexPage": {
+    "metaTitle": "Servicios",
+    "metaDesc": "Enderezado, pintura completa, retoques, reparación de golpes e instalación de accesorios en Uvita.",
+    "heroEyebrow": "Qué hacemos",
+    "heroTitle": "Servicios de chapa y pintura",
+    "heroLede": "Cada URL es una intención de búsqueda distinta. Elegí el servicio y leé el detalle, los precios orientativos y el proceso en el taller."
+  },
+  "FaqPage": {
+    "metaTitle": "Preguntas frecuentes",
+    "metaDesc": "Cotizaciones, plazos, tintas, aseguradoras y servicio a la Zona Sur.",
+    "heroEyebrow": "Ayuda",
+    "heroTitle": "Preguntas frecuentes",
+    "heroLede": "Rangos, plazos, materiales, seguros y atención en Uvita y alrededores. Si su caso es particular, escríbanos y lo vemos con calma.",
+    "items": [
+      {
+        "q": "¿En qué rango andan las cotizaciones de pintura completa?",
+        "a": "Una pintura completa en cabina, con curado adecuado, suele ir desde aprox. ₡450.000 en carros compactos con el color de fábrica, hasta cifras mayores para SUV, cambios de color o perladas. El rango final sale de fotos, inspección y extensión real del trabajo — nunca al aire."
+      },
+      {
+        "q": "¿Cuánto se demora una pintura completa o un enderezado estructural?",
+        "a": "Pintura completa: comúnmente 7 a 14 días hábiles según preparación, color y clima. Enderezado con afectación de chasis: 5 a 20 días según el daño. Te damos rango y fecha orientativa después del diagnóstico — no prometemos plazos a ojo."
+      },
+      {
+        "q": "¿Cómo funciona la cotización con fotos por WhatsApp?",
+        "a": "Mandá una foto general, un detalle del daño y, si podés, el modelo y año. Revisamos el encuadre y, si hace falta, pedimos otro ángulo. Con eso te damos un estimado claro. Si el trabajo requiere ver estructura o alineación, el siguiente paso es una revisión en taller."
+      },
+      {
+        "q": "¿Qué marcas y clases de vehículos atienden?",
+        "a": "Cualquier marca: sedanes, pickup, SUV y vehículos ligeros comerciales, siempre en el rango de lo que nuestro equipo e infraestructura reparan con garantía. Si es algo que no tocamos, te lo decimos al tiro en vez de “meterlo al taller”."
+      },
+      {
+        "q": "¿Manejan trámites o coordinación con aseguradoras?",
+        "a": "No coordinamos cobro directo con aseguradoras. Sí le armamos a usted el detalle de mano de obra, materiales y reporte fotográfico — lo que pide un perito o su agente. Usted hace su reclamo; nosotros hacemos el taller bien hecho y documentado."
+      },
+      {
+        "q": "¿Qué diferencia su taller de un concesionario “autorizado” solo de pintura?",
+        "a": "La diferencia no es un sello, es el proceso: cabina controlada, curado, materiales de sistema y mano de obra con medición estructural cuando aplica. Muchos talleres híbridos tiran pintura; nosotros medimos, enderezamos y pintamos cuando hace falta, con garantía escrita y sin apuros."
+      },
+      {
+        "q": "Qué marcas de pintura y químicos usan, y por qué importa.",
+        "a": "Roberlo, BESA, 3M y VICCO en el mix que corresponde al sustrato y al color. Importa porque el sistema completo (primer, base, laca, mezcla) condiciona duración, emparejamiento y reparo en garantía. Nada de “cualquier lata que tengamos”."
+      },
+      {
+        "q": "¿Cómo pido cita o turno, y dónde están ubicados en Uvita?",
+        "a": "Coordina por WhatsApp. Los horarios publicados (Lun–Sáb, 8–5) son el marco; concretamos día a día según carga y tipo de trabajo. Quedamos en Uvita, Puntarenas, Costa Ballena: la ubicación pública vive en nuestro mapa de Google; sin calle exacta en la web (privacidad) pero con área y referencia al coordinar cita."
+      },
+      {
+        "q": "¿A qué zona sirven: Dominical, Ojochal, Uvita y alrededores?",
+        "a": "Atendemos a quienes circulan o viven en la Zona Sur de Puntarenas, incluidos Uvita, Dominical, Ojochal, Bahía Ballena y pueblos vecinos, con coordinación y tiempos realistas. Si el traslado es límite, lo charlamos antes de comprometer cita."
+      },
+      {
+        "q": "¿Con qué métodos de pago y condiciones de cancelación trabajan?",
+        "a": "Comúnmente efectivo y transferencia SINPE. Para trabajos prolongados, acordamos abonos según hitos, siempre acordado por escrito antes de arrancar. Si usted no puede presentar el carro luego de confirmar, avise a tiempo: reprogramar es normal; dejar al taller con espacio reservado sin aviso afecta la cola y puede generar ajuste de cita según reglas que acordemos al confirmar el trabajo."
+      },
+      {
+        "q": "¿Qué necesito en el día de dejar o retirar el vehículo?",
+        "a": "Documento del vehículo, llave completa y, si aplica, piezas o accesorios que vayan con el arreglo. A la entrega, revisión visual bajo luz, reporte o checklist firmado, y cuidado post-entrega (p. ej. no apilar carga sobre repintes recién curados) — se lo explicamos en mano o por mensaje claro según el trabajo."
+      },
+      {
+        "q": "¿Cómo es la garantía, y qué no entra nunca?",
+        "a": "Cada servicio conlleva una garantía escrita sobre el trabajo nuestro (preparación, corrección, aplicación) según el plan del trabajo. No cubre golpes nuevos, reparos de terceros sobre nuestro trabajo, cloro en tapicería que salpique pintura, ni abuso. Los límites exactos viven en /garantia y se repiten en su orden de trabajo; si algo falla bajo términos, lo documentamos y lo reparamos bajo el alcance de la póliza interna de garantía acordada."
+      }
+    ]
+  },
+  "GuaranteePage": {
+    "metaTitle": "Garantía escrita",
+    "metaDesc": "Cada trabajo sale con una garantía escrita firmada. Si algo falla por un defecto de nuestro trabajo, lo resolvemos sin costo dentro del plazo acordado.",
+    "coversTitle": "Qué cubre",
+    "limitsTitle": "Límites",
+    "claimTitle": "Cómo hacer válida la garantía"
+  },
+  "ZonePage": {
+    "relatedServices": "Servicios relacionados",
+    "contactLink": "Ir a contacto"
+  },
+  "GuidePage": {
+    "toc": "Contenido",
+    "related": "Servicios relacionados",
+    "cta": "Pedir cotización",
+    "minRead": "{minutes} min de lectura · {date}"
+  },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "back": "Volver al inicio"
+  }
+}

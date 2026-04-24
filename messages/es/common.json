@@ -1,0 +1,91 @@
+{
+  "Nav": {
+    "services": "Servicios",
+    "about": "Nosotros",
+    "warranty": "Garantía",
+    "faq": "Preguntas frecuentes",
+    "process": "Proceso",
+    "materials": "Materiales",
+    "contact": "Contacto",
+    "brandAria": "Uvita Body Shop — ir al inicio",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "location": "Ubicación",
+    "hours": "Horario",
+    "contactLabel": "Contacto",
+    "whatsappCta": "WhatsApp"
+  },
+  "Footer": {
+    "pages": "Páginas",
+    "zones": "Zona",
+    "guides": "Guías",
+    "about": "Sobre nosotros",
+    "services": "Servicios",
+    "contact": "Contacto",
+    "warranty": "Garantía",
+    "faq": "Preguntas",
+    "quoteHome": "Cotizar (inicio)",
+    "copyright": "© 2026 Uvita Body Shop. Todos los derechos reservados.",
+    "locationLine": "Uvita · Puntarenas · Costa Rica"
+  },
+  "Locale": {
+    "switchTo": "English",
+    "currentEs": "ES",
+    "currentEn": "EN"
+  },
+  "StickyWhatsapp": {
+    "aria": "WhatsApp a Uvita Body Shop — abrir en nueva ventana"
+  },
+  "QuoteForm": {
+    "name": "Nombre",
+    "phone": "Teléfono / WhatsApp",
+    "email": "Correo (opcional)",
+    "service": "Servicio",
+    "vehicle": "Vehículo (opcional)",
+    "description": "Descripción del trabajo",
+    "submit": "Enviar solicitud",
+    "submitting": "Enviando…",
+    "pickService": "Elegí un servicio",
+    "placeholderName": "Tu nombre",
+    "placeholderPhone": "+506 8769 9927",
+    "placeholderEmail": "tucorreo@ejemplo.com",
+    "placeholderVehicle": "Marca, modelo, año",
+    "placeholderDescription": "Contanos qué necesitás arreglar o pintar.",
+    "hoursNote": "Atendemos en horario {hours}",
+    "whatsappFallback": "Escribir directo por WhatsApp →",
+    "optEnderezado": "Enderezado y colisión",
+    "optPintura": "Pintura completa",
+    "optRetoques": "Retoques de pintura",
+    "optGolpes": "Reparación de golpes",
+    "optAccesorios": "Instalación de accesorios",
+    "optOtro": "Otro / consulta",
+    "errors": {
+      "name": "Ingresá tu nombre.",
+      "nameLong": "El nombre es demasiado largo.",
+      "phone": "Teléfono inválido.",
+      "email": "Correo inválido.",
+      "service": "Elegí un servicio.",
+      "descriptionShort": "Contanos un poco más (mínimo 10 caracteres).",
+      "descriptionLong": "Descripción demasiado larga.",
+      "vehicleLong": "Vehículo demasiado largo.",
+      "rateLimit": "Recibimos muchas solicitudes. Probá de nuevo en un momento o escribinos por WhatsApp.",
+      "server": "No pudimos enviar la solicitud. Probá de nuevo o escribinos por WhatsApp.",
+      "network": "No pudimos enviar la solicitud. Revisá tu conexión o escribinos por WhatsApp."
+    }
+  },
+  "ServicePage": {
+    "breadcrumbServices": "Servicios",
+    "included": "Qué incluye",
+    "process": "Proceso",
+    "price": "Precio orientativo",
+    "faqs": "Preguntas frecuentes",
+    "ctaQuote": "Pedir cotización",
+    "detailLink": "Ver detalle",
+    "subtitleEn": "In English",
+    "notFoundTitle": "Servicio no encontrado"
+  },
+  "PageLayout": {
+    "breadcrumbHome": "Inicio",
+    "breadcrumbNavAria": "Ruta de navegación"
+  }
+}

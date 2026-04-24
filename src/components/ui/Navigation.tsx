@@ -1,21 +1,46 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
+import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { gsap } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
 import { displayContact } from '@/data/business'
 import { track } from '@/lib/analytics'
+import Wordmark from './Wordmark'
 
-const contact = displayContact()
-
-const navLinks = [
-  { label: 'Servicios', href: '#services' },
-  { label: 'Proceso', href: '#process' },
-  { label: 'Materiales', href: '#materials' },
-  { label: 'Contacto', href: '#contact' },
-]
+function buildNavLinks(
+  isHome: boolean,
+  t: (key: string) => string,
+  withPrefix: (href: string) => string
+) {
+  return [
+    { label: t('services'), href: '/servicios' },
+    { label: t('about'), href: '/sobre-nosotros' },
+    { label: t('warranty'), href: '/garantia' },
+    { label: t('faq'), href: '/preguntas-frecuentes' },
+    { label: t('process'), href: withPrefix('#process') },
+    { label: t('materials'), href: withPrefix('#materials') },
+    { label: t('contact'), href: isHome ? '#contact' : '/contacto' },
+  ]
+}
 
 export default function Navigation() {
+  const pathname = usePathname()
+  const router = useRouter()
+  const locale = useLocale() as 'es' | 'en'
+  const t = useTranslations('Nav')
+  const tLoc = useTranslations('Locale')
+  const contact = displayContact(locale)
+
+  const isHome = pathname === '/'
+  const withPrefix = (href: string) => {
+    if (href.startsWith('/')) return href
+    if (isHome) return href
+    return `/${href}`
+  }
+  const navLinks = buildNavLinks(isHome, t, withPrefix)
+
   const [isOpen, setIsOpen] = useState(false)
   const overlayRef = useRef<HTMLDivElement>(null)
   const tlRef = useRef<gsap.core.Timeline | null>(null)
@@ -77,32 +102,83 @@ export default function Navigation() {
   const handleLinkClick = (href: string) => {
     close()
     setTimeout(() => {
-      const el = document.querySelector(href)
-      el?.scrollIntoView({ behavior: 'smooth' })
+      if (
+        href.startsWith('/sobre-') ||
+        href.startsWith('/servicios') ||
+        href.startsWith('/contacto') ||
+        href.startsWith('/garantia') ||
+        href.startsWith('/preguntas-') ||
+        href.startsWith('/zonas/') ||
+        href.startsWith('/guias/')
+      ) {
+        router.push(href)
+        return
+      }
+      if (href === '/contacto' || (href === '#contact' && !isHome)) {
+        router.push('/contacto')
+        return
+      }
+      if (href.startsWith('/#')) {
+        if (isHome) {
+          const el = document.querySelector(href.slice(1))
+          el?.scrollIntoView({ behavior: 'smooth' })
+        } else {
+          window.location.assign(href)
+        }
+        return
+      }
+      if (href.startsWith('#')) {
+        if (isHome) {
+          const el = document.querySelector(href)
+          el?.scrollIntoView({ behavior: 'smooth' })
+        } else {
+          window.location.assign(`/${href}`)
+        }
+      }
     }, 700)
   }
 
+  const otherLocale = locale === 'es' ? 'en' : 'es'
+
   return (
     <>
-      {/* Fixed top bar */}
-      <header className="fixed top-0 left-0 right-0 z-[60] px-6 sm:px-12 lg:px-24 py-5 flex items-center justify-between pointer-events-none mix-blend-difference">
-        {/* Logo */}
-        <a
-          href="#"
-          className="pointer-events-auto font-display text-xl uppercase tracking-wider hover:text-accent transition-colors duration-300"
-          onClick={(e) => {
-            e.preventDefault()
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-          }}
-        >
-          Uvita Body Shop
-        </a>
+      <header className="fixed top-0 left-0 right-0 z-[60] px-6 sm:px-12 lg:px-24 py-4 flex items-center justify-between pointer-events-none [padding-top:calc(env(safe-area-inset-top,0)+1rem)] before:content-[''] before:absolute before:inset-0 before:-z-10 before:bg-gradient-to-b before:from-background/90 before:via-background/50 before:to-transparent before:pointer-events-none">
+        <div className="pointer-events-auto flex items-center gap-3 sm:gap-4">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-3 hover:opacity-80 transition-opacity duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+            onClick={(e) => {
+              if (pathname === '/') {
+                e.preventDefault()
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }
+            }}
+            aria-label={t('brandAria')}
+          >
+            <Wordmark
+              variant="mark"
+              theme="dark"
+              size={64}
+              priority
+              className="h-10 sm:h-12 lg:h-14 w-auto"
+            />
+            <span className="hidden sm:inline font-display text-base lg:text-lg uppercase tracking-[0.18em] text-white">
+              Uvita Body Shop
+            </span>
+          </Link>
+          <Link
+            href={pathname}
+            locale={otherLocale}
+            className="font-mono text-[10px] tracking-[0.2em] uppercase text-zinc-500 border border-zinc-800 px-2 py-1 hover:border-accent/60 hover:text-accent transition-colors"
+          >
+            {tLoc('switchTo')}
+          </Link>
+        </div>
 
-        {/* Hamburger */}
         <button
           onClick={isOpen ? close : open}
           className="pointer-events-auto relative z-[60] w-12 h-12 flex flex-col items-center justify-center gap-1.5 group"
-          aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-label={isOpen ? t('closeMenu') : t('openMenu')}
         >
           <span
             className={`block w-6 h-px bg-white transition-all duration-300 ${
@@ -117,14 +193,12 @@ export default function Navigation() {
         </button>
       </header>
 
-      {/* Fullscreen overlay */}
       <div
         ref={overlayRef}
-        className="fixed inset-0 z-[55] bg-background"
+        className="fixed inset-0 z-[55] bg-background overflow-y-auto overscroll-contain"
         style={{ clipPath: 'inset(0% 0% 100% 0%)' }}
         aria-hidden={!isOpen}
       >
-        {/* Subtle grid texture */}
         <div
           className="absolute inset-0 opacity-[0.03] pointer-events-none"
           style={{
@@ -134,11 +208,9 @@ export default function Navigation() {
           }}
         />
 
-        {/* Accent vertical line */}
         <div className="absolute top-0 left-12 sm:left-24 w-px h-full bg-gradient-to-b from-transparent via-accent/20 to-transparent" />
 
-        <div className="h-full flex flex-col justify-between px-6 sm:px-12 lg:px-24 py-24">
-          {/* Nav links — massive */}
+        <div className="relative min-h-full flex flex-col justify-between gap-12 px-6 sm:px-12 lg:px-24 pt-[calc(env(safe-area-inset-top,0)+5.5rem)] pb-[calc(env(safe-area-inset-bottom,0)+3rem)]">
           <nav className="flex-1 flex flex-col justify-center">
             {navLinks.map((link, i) => (
               <div key={link.label} className="overflow-hidden">
@@ -165,11 +237,10 @@ export default function Navigation() {
             ))}
           </nav>
 
-          {/* Footer info */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 pt-8 border-t border-zinc-800/50">
             <div className="nav-footer-item">
               <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-600 mb-2">
-                Ubicación
+                {t('location')}
               </p>
               <p className="text-sm text-zinc-400">
                 {contact.locationDisplay}
@@ -177,13 +248,13 @@ export default function Navigation() {
             </div>
             <div className="nav-footer-item">
               <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-600 mb-2">
-                Horario
+                {t('hours')}
               </p>
               <p className="text-sm text-zinc-400">{contact.hoursDisplay}</p>
             </div>
             <div className="nav-footer-item">
               <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-600 mb-2">
-                Contacto
+                {t('contactLabel')}
               </p>
               <a
                 href={`tel:${contact.phone}`}
@@ -200,7 +271,7 @@ export default function Navigation() {
               onClick={() => track('contact_whatsapp')}
               className="nav-footer-item inline-flex items-center gap-2 px-5 py-3 bg-accent text-white text-sm font-medium tracking-wide uppercase hover:bg-accent-hover transition-colors"
             >
-              WhatsApp
+              {t('whatsappCta')}
             </a>
           </div>
         </div>

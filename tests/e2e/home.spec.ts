@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
+import { prepareHomeContactSection } from './test-helpers'
 
 test.describe('home', () => {
   test('renders primary heading and hero CTA', async ({ page }) => {
@@ -15,7 +16,8 @@ test.describe('home', () => {
   })
 
   test('contact section exposes phone, whatsapp, and form', async ({ page }) => {
-    await page.goto('/#contact')
+    await page.goto('/es#contact')
+    await prepareHomeContactSection(page)
     await expect(page.locator('#contact')).toBeVisible()
     await expect(
       page.getByRole('link', { name: /WhatsApp/i }).first()

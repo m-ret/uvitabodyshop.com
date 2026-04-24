@@ -1,0 +1,109 @@
+{
+  "AboutPage": {
+    "metaTitle": "About",
+    "metaDesc": "Precision collision and paint in Uvita, Costa Ballena.",
+    "contactLink": "Contact the shop"
+  },
+  "LeadCapture": {
+    "title": "Request a quote",
+    "description": "Send your name, phone, service, and a short description of the work. We reply during business hours — or message us on WhatsApp from the Contact page."
+  },
+  "ContactPage": {
+    "metaTitle": "Contact",
+    "metaDesc": "Quotes and appointments in Uvita.",
+    "heroEyebrow": "Quote & appointment",
+    "heroTitle": "Let’s talk about your car.",
+    "heroLede": "Use the form or message us on WhatsApp. We reply during business hours and schedule a visit or drop-off.",
+    "whatsapp": "WhatsApp",
+    "hours": "Hours",
+    "location": "Location",
+    "mapTitle": "Map — Uvita Body Shop",
+    "mapsLink": "Open in Google Maps",
+    "formLoading": "Loading form…"
+  },
+  "ServicesIndexPage": {
+    "metaTitle": "Services",
+    "metaDesc": "Frame repair, full paint, touch-ups, dent repair and accessory installs in Uvita.",
+    "heroEyebrow": "What we do",
+    "heroTitle": "Collision & paint services",
+    "heroLede": "Each URL targets a different search intent. Pick a service to read scope, typical pricing and our in-shop process."
+  },
+  "FaqPage": {
+    "metaTitle": "FAQ",
+    "metaDesc": "Pricing, timelines, materials, insurance and service across the South Zone.",
+    "heroEyebrow": "Help",
+    "heroTitle": "Frequently asked questions",
+    "heroLede": "Ranges, timelines, materials, insurance and coverage around Uvita. If your case is unusual, message us and we’ll walk through it.",
+    "items": [
+      {
+        "q": "What does a full respray typically cost?",
+        "a": "A professional booth respray in Costa Rica often starts around ₡450,000 for a compact car in factory colour and can go higher for SUVs, colour changes or pearls. The real number comes from photos, inspection and actual panel scope — never a guess."
+      },
+      {
+        "q": "How long does full paint or structural frame work take?",
+        "a": "Full paint: commonly 7–14 business days depending on prep, colour and weather. Structural work: 5–20 days depending on damage. We give a range after diagnosis — we don’t promise dates by eyeball."
+      },
+      {
+        "q": "How do photo quotes over WhatsApp work?",
+        "a": "Send one wide shot, a close-up of the damage and, if you can, year/make/model. We check framing and may ask for another angle. That gives a clear estimate. If we need to see structure or alignment, the next step is an in-shop inspection."
+      },
+      {
+        "q": "What vehicle brands and classes do you work on?",
+        "a": "Any brand: sedans, pickups, SUVs and light commercial vehicles, within what our team and equipment can warranty. If it’s outside our scope, we say so up front instead of taking the job anyway."
+      },
+      {
+        "q": "Do you handle insurance paperwork?",
+        "a": "We don’t collect payment directly from insurers. We do prepare labour, materials and photo documentation for your adjuster or agent. You run the claim; we do the repair properly and document it."
+      },
+      {
+        "q": "What makes your shop different from a “dealer-authorised” paint-only shop?",
+        "a": "The difference is process: controlled booth, cure cycles, branded systems and structural measurement when it matters. Many shops “spray paint”; we measure, pull structure when needed, then paint — with a written warranty and no rushing."
+      },
+      {
+        "q": "Which paint brands and chemicals do you use — and why does it matter?",
+        "a": "Roberlo, BESA, 3M and VICCO in the right stack for substrate and colour. The full system (primer, base, clear, mixing) drives durability, colour match and warranty work. No random cans off the shelf."
+      },
+      {
+        "q": "How do I book, and where are you in Uvita?",
+        "a": "Coordinate by WhatsApp. Posted hours (Mon–Sat, 8–5) are the frame; we confirm day-to-day based on load and job type. We’re in Uvita, Puntarenas, Costa Ballena — the public pin is on Google Maps; we share street-level detail when we lock a drop-off."
+      },
+      {
+        "q": "Which areas do you serve — Dominical, Ojochal, Uvita?",
+        "a": "Drivers and residents across the South Zone of Puntarenas, including Uvita, Dominical, Ojochal, Bahía Ballena and nearby towns, with realistic timing. If distance is borderline, we discuss it before booking."
+      },
+      {
+        "q": "Payment methods and cancellation policy?",
+        "a": "Usually cash and SINPE transfer. For longer jobs we agree milestone deposits in writing before we start. If you can’t make a confirmed drop-off, tell us early: rescheduling is normal; a reserved bay left empty without notice affects the queue and may change the next slot per rules we agree when confirming."
+      },
+      {
+        "q": "What should I bring on drop-off or pick-up day?",
+        "a": "Vehicle paperwork, full key set and, if relevant, parts or accessories tied to the repair. At delivery we do a visual check under light, a signed checklist, and aftercare notes (e.g. don’t stack cargo on fresh clear) — explained in person or in a clear message."
+      },
+      {
+        "q": "How does the warranty work — and what is never covered?",
+        "a": "Each job carries a written warranty on our workmanship (prep, correction, application) per the agreed scope. It doesn’t cover new impacts, third-party rework on top of ours, harsh chemicals splashed on upholstery, or abuse. Exact limits also live on the warranty page and your work order; if something qualifies, we document it and fix it under the agreed warranty terms."
+      }
+    ]
+  },
+  "GuaranteePage": {
+    "metaTitle": "Written warranty",
+    "metaDesc": "Every job leaves with a signed written warranty. If something fails due to a defect in our workmanship, we fix it at no charge within the agreed warranty period.",
+    "coversTitle": "What’s covered",
+    "limitsTitle": "Limits",
+    "claimTitle": "How to make a valid warranty claim"
+  },
+  "ZonePage": {
+    "relatedServices": "Related services",
+    "contactLink": "Go to contact"
+  },
+  "GuidePage": {
+    "toc": "Contents",
+    "related": "Related services",
+    "cta": "Request a quote",
+    "minRead": "{minutes} min read · {date}"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "back": "Back to home"
+  }
+}

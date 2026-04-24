@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'
 import { business } from '@/data/business'
+import { sendQuoteLeadEmail } from '@/lib/email'
+import { postLeadToSheet } from '@/lib/sheet'
+import { formatUtmForMessage, type UtmPayload } from '@/lib/utm'
 
 export const runtime = 'edge'
 
@@ -20,6 +23,7 @@ interface QuoteRequestBody {
   description: string
   photoUrls?: string[]
   preferredLanguage?: 'es' | 'en'
+  utm?: UtmPayload
 }
 
 const VALID_SERVICES: readonly QuoteService[] = [
@@ -30,6 +34,26 @@ const VALID_SERVICES: readonly QuoteService[] = [
   'instalacion-accesorios',
   'otro',
 ] as const
+
+function isUtmValue(v: unknown): v is UtmPayload | undefined {
+  if (v === undefined) return true
+  if (v === null) return true
+  if (typeof v !== 'object' || v === null) return false
+  const o = v as Record<string, unknown>
+  const keys: (keyof UtmPayload)[] = [
+    'source',
+    'medium',
+    'campaign',
+    'content',
+    'term',
+  ]
+  for (const k of keys) {
+    const x = o[k as string]
+    if (x === undefined) continue
+    if (typeof x !== 'string' || x.length > 200) return false
+  }
+  return true
+}
 
 function validate(body: unknown): body is QuoteRequestBody {
   if (!body || typeof body !== 'object') return false
@@ -49,6 +73,7 @@ function validate(body: unknown): body is QuoteRequestBody {
   }
   if (b.preferredLanguage !== undefined && b.preferredLanguage !== 'es' && b.preferredLanguage !== 'en')
     return false
+  if (!isUtmValue(b.utm)) return false
   return true
 }
 
@@ -70,7 +95,10 @@ export async function POST(request: Request) {
   const quote = body
   const serviceLabel =
     business.services.find((s) => s.slug === quote.service)?.es ?? 'Consulta general'
+
+  const utmLine = formatUtmForMessage(quote.utm)
   const msg = [
+    utmLine,
     `Hola! Soy ${quote.name}.`,
     `Servicio: ${serviceLabel}.`,
     quote.vehicle ? `Vehículo: ${quote.vehicle}.` : null,
@@ -81,6 +109,31 @@ export async function POST(request: Request) {
     .join('\n')
 
   const contactUrl = `${business.contact.whatsapp}?text=${encodeURIComponent(msg)}`
+
+  const emailPayload = {
+    name: quote.name,
+    phone: quote.phone,
+    email: quote.email,
+    serviceLabel,
+    vehicle: quote.vehicle,
+    description: quote.description,
+    photoUrls: quote.photoUrls,
+    utm: quote.utm,
+  }
+
+  const sheetPayload = {
+    ...emailPayload,
+    service: quote.service,
+    receivedAt: new Date().toISOString(),
+  }
+
+  const [emailRes, sheetRes] = await Promise.all([
+    sendQuoteLeadEmail(emailPayload),
+    postLeadToSheet(sheetPayload),
+  ])
+
+  void emailRes
+  void sheetRes
 
   return NextResponse.json({
     ok: true,

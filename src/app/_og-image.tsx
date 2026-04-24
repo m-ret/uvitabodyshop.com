@@ -9,8 +9,10 @@ import { join } from 'node:path'
  * `runtime`/`size`/`alt` fields) while sharing rendering.
  */
 export async function renderOgImage(): Promise<ImageResponse> {
+  // Dark-bg sticker variant — red jeep + white sticker outline over
+  // transparent. Composites cleanly on the #050505 canvas below.
   const mark = await readFile(
-    join(process.cwd(), 'public/brand/mark-square.png')
+    join(process.cwd(), 'public/brand/mark-dark.png')
   )
   const markSrc = `data:image/png;base64,${mark.toString('base64')}`
 
@@ -94,8 +96,8 @@ export async function renderOgImage(): Promise<ImageResponse> {
         >
           <img
             src={markSrc}
-            width={340}
-            height={340}
+            width={420}
+            height={305}
             alt=""
             style={{ objectFit: 'contain' }}
           />

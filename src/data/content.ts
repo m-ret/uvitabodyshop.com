@@ -39,9 +39,7 @@ export const services: Service[] = [
     subtitle: 'Chasis y estructura',
     description:
       'Desde golpes leves hasta daños estructurales completos. Medición computarizada y corrección hidráulica para recuperar la geometría de fábrica.',
-    // TODO(photo): swap for /images/services/enderezado.jpg (real shop photo)
-    image:
-      'https://images.unsplash.com/photo-1769021955466-ed4372792114?auto=format&fit=crop&w=2069&q=100',
+    image: '/images/services/enderezado.avif',
     alt: 'Técnico realizando enderezado de chasis y reparación de colisión',
   },
   {
@@ -51,9 +49,7 @@ export const services: Service[] = [
     subtitle: 'Cabina y horno infrarrojo',
     description:
       'Aplicación en etapas dentro de nuestra cabina libre de polvo con horno de curado infrarrojo. Primer, base, color y laca — acabado perfecto.',
-    // TODO(photo): swap for /images/services/pintura-completa.jpg
-    image:
-      'https://img.freepik.com/free-photo/vehicle-covered-with-white-sheet-yellow-tape-car-service-garage_181624-3084.jpg?w=1480',
+    image: '/images/services/pintura-completa.avif',
     alt: 'Vehículo enmascarado y preparado para pintura completa en cabina profesional',
   },
   {
@@ -63,10 +59,8 @@ export const services: Service[] = [
     subtitle: 'Rayones y mezcla de color',
     description:
       'Reparaciones puntuales invisibles, remoción de rayones y mezcla de color. Igualamos tu acabado original con tal precisión que no vas a notar dónde arreglamos.',
-    // TODO(photo): swap for /images/services/retoques-pintura.jpg
-    image:
-      'https://img.freepik.com/free-photo/preparing-car-before-spray-painting_1157-36582.jpg?w=1480',
-    alt: 'Técnico preparando y enmascarando un panel antes de retocar la pintura',
+    image: '/images/services/retoques-pintura.avif',
+    alt: 'Técnico enmascarando un panel con cinta antes de retocar la pintura',
   },
   {
     slug: 'reparacion-golpes',
@@ -75,9 +69,7 @@ export const services: Service[] = [
     subtitle: 'Abolladuras e impactos',
     description:
       'Técnicas avanzadas para eliminar abolladuras y daños por impacto. Devolvemos los paneles a su forma original sin reemplazos innecesarios.',
-    // TODO(photo): swap for /images/services/reparacion-golpes.jpg
-    image:
-      'https://img.freepik.com/free-photo/person-working-car-wrapping_23-2149342610.jpg?w=1480',
+    image: '/images/services/reparacion-golpes.avif',
     alt: 'Técnico trabajando reparación de abolladura en un panel del vehículo',
   },
   {
@@ -87,9 +79,7 @@ export const services: Service[] = [
     subtitle: 'Instalación y pintura a juego',
     description:
       'Bumpers, spoilers, estribos y accesorios aftermarket. Instalación profesional con acabado pintado a tono con la carrocería.',
-    // TODO(photo): swap for /images/services/instalacion-accesorios.jpg
-    image:
-      'https://img.freepik.com/free-photo/medium-shot-man-wrapping-car_23-2149385726.jpg?w=1480',
+    image: '/images/services/instalacion-accesorios.avif',
     alt: 'Instalación profesional de accesorios y acabado personalizado en vehículo',
   },
 ]

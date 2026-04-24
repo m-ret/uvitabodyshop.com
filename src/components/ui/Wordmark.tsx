@@ -1,47 +1,53 @@
 import Image from 'next/image'
 
+type Variant = 'mark' | 'full'
+type Theme = 'light' | 'dark'
+
 interface WordmarkProps {
-  /** `mark` renders just the jeep icon; `full` renders the icon + wordmark */
-  variant?: 'mark' | 'full'
-  /** Square size in px (mark only). For full, this is the height. */
+  /** `mark` = jeep icon only; `full` = jeep + "UVITA BODY SHOP" wordmark */
+  variant?: Variant
+  /**
+   * `light` = solid red-on-white variant (for light/neutral backgrounds).
+   * `dark` = sticker-outlined variant (for dark backgrounds).
+   * Defaults to `dark` because this site's canvas is `#050505`.
+   */
+  theme?: Theme
+  /** Rendered height in pixels. Width scales to preserve aspect ratio. */
   size?: number
   className?: string
+  priority?: boolean
 }
 
-/**
- * UVITA BODY SHOP wordmark — extracted from the client's brand guidelines
- * PDF. Two variants:
- *
- *   - mark:  jeep-only icon (ideal for nav, favicon-adjacent contexts)
- *   - full:  jeep + "UVITA BODY SHOP" wordmark (for hero/footer/OG)
- *
- * Sources: /public/brand/mark.png, /public/brand/logo-primary.png
- */
+const SOURCES: Record<Variant, Record<Theme, { src: string; width: number; height: number }>> = {
+  mark: {
+    light: { src: '/brand/mark.png', width: 1225, height: 1091 },
+    dark: { src: '/brand/mark-dark.png', width: 605, height: 538 },
+  },
+  full: {
+    light: { src: '/brand/logo-primary.png', width: 870, height: 1289 },
+    dark: { src: '/brand/logo-primary-dark.png', width: 1000, height: 1280 },
+  },
+}
+
 export default function Wordmark({
   variant = 'mark',
-  size = 32,
+  theme = 'dark',
+  size = 48,
   className,
+  priority,
 }: WordmarkProps) {
-  if (variant === 'full') {
-    return (
-      <Image
-        src="/brand/logo-primary.png"
-        alt="Uvita Body Shop"
-        width={Math.round(size * (870 / 1289))}
-        height={size}
-        priority
-        className={className}
-      />
-    )
-  }
+  const src = SOURCES[variant][theme]
+  const ratio = src.width / src.height
+  const height = size
+  const width = Math.round(size * ratio)
 
   return (
     <Image
-      src="/brand/mark.png"
+      src={src.src}
       alt="Uvita Body Shop"
-      width={size}
-      height={Math.round(size * (1091 / 1225))}
-      priority
+      width={width}
+      height={height}
+      priority={priority}
       className={className}
     />
   )

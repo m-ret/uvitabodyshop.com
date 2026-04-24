@@ -10,17 +10,14 @@ import ReactiveGrid from '@/components/ui/ReactiveGrid'
 import SiteFooter from '@/components/ui/SiteFooter'
 import OpenNowBadge from '@/components/ui/OpenNowBadge'
 import QuoteForm from '@/components/home/QuoteForm'
-import {
-  services,
-  processSteps,
-  materialBrands,
-  marqueeItems,
-} from '@/data/content'
+import TrustBar from '@/components/home/TrustBar'
+import HomeRatingBar from '@/components/home/HomeRatingBar'
+import TestimonialsSection from '@/components/home/TestimonialsSection'
+import { services, processSteps, materialBrands } from '@/data/content'
 import { business, displayContact } from '@/data/business'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { track } from '@/lib/analytics'
-
-const contactInfo = displayContact()
+import { useLocale, useTranslations } from 'next-intl'
 
 const CarPaintScene = dynamic(() => import('@/components/3d/CarPaintScene'), {
   ssr: false,
@@ -78,6 +75,11 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 /* ------------------------------------------------------------------ */
 
 export default function HomePage() {
+  const locale = useLocale() as 'es' | 'en'
+  const contactInfo = displayContact(locale)
+  const tHome = useTranslations('Home')
+  const marqueeItems = tHome.raw('marqueeItems') as string[]
+
   const containerRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
   const sceneFallbackFired = useRef(false)
@@ -287,7 +289,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
 
-        <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-12 lg:px-24 pointer-events-none">
+        <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-12 lg:px-24 pt-[calc(env(safe-area-inset-top,0)+9rem)] sm:pt-[calc(env(safe-area-inset-top,0)+10rem)] lg:pt-[calc(env(safe-area-inset-top,0)+11rem)] pb-16 pointer-events-none">
           <div className="max-w-2xl">
             <p className="hero-label font-mono text-xs tracking-[0.25em] uppercase text-zinc-500 mb-8">
               Uvita Body Shop &mdash; Puntarenas, Costa Rica
@@ -304,6 +306,11 @@ export default function HomePage() {
               Reparación de colisión, pintura completa y acabados personalizados.
               Cada vehículo sale de nuestra cabina como nuevo &mdash; o mejor.
             </p>
+
+            <div className="pointer-events-auto max-w-3xl">
+              <TrustBar />
+              <HomeRatingBar />
+            </div>
 
             <div className="flex flex-wrap gap-4 mt-10 pointer-events-auto">
               <a
@@ -387,8 +394,8 @@ export default function HomePage() {
 
           <div className="craft-image relative aspect-[4/5] overflow-hidden">
             <Image
-              src="https://images.unsplash.com/photo-1620584898989-d39f7f9ed1b7?auto=format&fit=crop&w=2400&q=100"
-              alt="Técnico pintando un panel de vehículo con equipo profesional"
+              src="/images/craft.avif"
+              alt="Fabricio Ríos Ortíz — propietario de Uvita Body Shop pintando un panel con equipo profesional"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
@@ -525,6 +532,11 @@ export default function HomePage() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
+                  {item.placeholder && process.env.NODE_ENV !== 'production' && (
+                    <span className="absolute top-2 right-2 z-10 font-mono text-[9px] tracking-wider uppercase bg-background/90 text-zinc-400 border border-zinc-700 px-2 py-1">
+                      Placeholder
+                    </span>
+                  )}
                   {item.caption && (
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/80 to-transparent p-4">
                       <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-zinc-300">
@@ -539,19 +551,24 @@ export default function HomePage() {
         </section>
       )}
 
+      <TestimonialsSection />
+
       {/* ===== SPRAY BOOTH — cinematic full bleed ===== */}
       <section className="booth-section relative h-[60vh] sm:h-[80vh] min-h-[400px] sm:min-h-[600px] overflow-hidden">
         {/* Top/bottom fade into dark background */}
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-30 pointer-events-none" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-30 pointer-events-none" />
 
-        {/* Background image with parallax (mid-scroll; loads lazily) */}
+        {/* Background image with parallax (mid-scroll; loads lazily).
+            Source is a WebP (q=92, visually lossless); Next serves AVIF/WebP
+            variants at the widths declared in next.config.ts -> deviceSizes. */}
         <div className="booth-bg absolute inset-0">
           <Image
-            src="https://img.freepik.com/free-photo/front-view-worker-spraying-powder-paint-from-gum_52683-97009.jpg?w=1920"
-            alt="Trabajador pintando un vehículo en la cabina profesional"
+            src="/images/quality-materials.webp"
+            alt="Técnico de Uvita Body Shop pintando un vehículo con pistola HVLP en la cabina controlada"
             fill
             sizes="100vw"
+            quality={90}
             className="object-cover"
             loading="lazy"
           />
@@ -760,16 +777,20 @@ export default function HomePage() {
             Ubicación en Uvita, Puntarenas
           </h2>
           <div className="relative h-[320px] sm:h-[420px] overflow-hidden">
+            {/* Native Google Maps coloring — the red pin reads as the
+                site's accent against the dark background framing. */}
             <iframe
               src={business.map.embedUrl}
               title="Mapa · Uvita Body Shop"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="absolute inset-0 h-full w-full grayscale-[0.6] contrast-110 brightness-75"
+              className="absolute inset-0 h-full w-full"
               style={{ border: 0 }}
             />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" />
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-background to-transparent" />
+            {/* Single, short bottom fade to blend into the location strip
+                below. No top fade — the section's border-t already does that
+                job, and a second overlay just eats map content. */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-background to-transparent" />
           </div>
           <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-12 lg:px-24">
             <div>

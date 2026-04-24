@@ -1,0 +1,33 @@
+{
+  "Home": {
+    "marqueeItems": [
+      "Frame repair",
+      "Full paint",
+      "Touch-ups",
+      "Dent repair",
+      "Accessories",
+      "Written warranty",
+      "Made in Costa Rica",
+      "Since 2020"
+    ],
+    "Trust": {
+      "eyebrow": "Trust the process",
+      "yearsLabel": "{years} years",
+      "yearsSub": "in the trade",
+      "booth": "Infrared booth",
+      "boothSub": "Controlled cure, OEM-level finish",
+      "boothSubFallback": "Controlled finish",
+      "warranty": "Written warranty",
+      "warrantySub": "Every job documented",
+      "warrantySubFallback": "Documented work",
+      "googleReviews": "{count} verified Google reviews",
+      "reviewsLink": "Read reviews"
+    },
+    "Testimonials": {
+      "eyebrow": "Clients",
+      "titleA": "Real reviews,",
+      "titleB": "real work",
+      "starAria": "{rating} out of 5"
+    }
+  }
+}

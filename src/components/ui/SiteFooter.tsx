@@ -1,4 +1,8 @@
+'use client'
+
 import type { ReactElement } from 'react'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { business } from '@/data/business'
 import Wordmark from './Wordmark'
 
@@ -35,44 +39,108 @@ const PLATFORM_LABELS: Record<string, string> = {
 }
 
 export default function SiteFooter() {
+  const t = useTranslations('Footer')
   const { socialLinks } = business
+
+  const footerPageLinks = [
+    { href: '/sobre-nosotros', labelKey: 'about' as const },
+    { href: '/servicios', labelKey: 'services' as const },
+    { href: '/contacto', labelKey: 'contact' as const },
+    { href: '/garantia', labelKey: 'warranty' as const },
+    { href: '/preguntas-frecuentes', labelKey: 'faq' as const },
+    { href: '/#contact', labelKey: 'quoteHome' as const },
+  ]
 
   return (
     <footer className="py-12 px-6 sm:px-12 lg:px-24 border-t border-zinc-800/50">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-        <div className="flex items-center gap-4">
-          <Wordmark variant="mark" size={40} />
-          <div className="flex flex-col">
-            <span className="font-display text-xl uppercase tracking-wider leading-none">
-              Uvita Body Shop
-            </span>
-            <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-500 mt-1">
-              Uvita · Puntarenas · Costa Rica
-            </span>
+      <div className="max-w-6xl mx-auto flex flex-col gap-10">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8">
+          <div className="flex items-center gap-5">
+            <Wordmark variant="mark" theme="dark" size={64} />
+            <div className="flex flex-col">
+              <span className="font-display text-xl uppercase tracking-wider leading-none">
+                Uvita Body Shop
+              </span>
+              <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-500 mt-1">
+                {t('locationLine')}
+              </span>
+            </div>
+          </div>
+
+          {socialLinks.length > 0 && (
+            <ul className="flex items-center gap-3 list-none">
+              {socialLinks.map((link) => (
+                <li key={link.platform}>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${PLATFORM_LABELS[link.platform] ?? link.platform} — ${link.handle}`}
+                    className="inline-flex size-10 items-center justify-center border border-zinc-800 text-zinc-400 hover:text-accent hover:border-zinc-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >
+                    {ICONS[link.platform]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-sm text-zinc-500 border-t border-zinc-800/30 pt-8">
+          <div>
+            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-600 mb-3">
+              {t('pages')}
+            </p>
+            <ul className="space-y-2 list-none p-0 m-0">
+              {footerPageLinks.map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className="text-zinc-500 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >
+                    {t(l.labelKey)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-600 mb-3">
+              {t('zones')}
+            </p>
+            <ul className="space-y-2 list-none p-0 m-0">
+              {business.zones.map((z) => (
+                <li key={z.slug}>
+                  <Link
+                    href={`/zonas/${z.slug}`}
+                    className="text-zinc-500 hover:text-accent"
+                  >
+                    {z.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-600 mb-3">
+              {t('guides')}
+            </p>
+            <ul className="space-y-2 list-none p-0 m-0">
+              {business.guides.map((g) => (
+                <li key={g.slug}>
+                  <Link
+                    href={`/guias/${g.slug}`}
+                    className="text-zinc-500 hover:text-accent"
+                  >
+                    {g.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        {socialLinks.length > 0 && (
-          <ul className="flex items-center gap-3 list-none">
-            {socialLinks.map((link) => (
-              <li key={link.platform}>
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${PLATFORM_LABELS[link.platform] ?? link.platform} — ${link.handle}`}
-                  className="inline-flex size-10 items-center justify-center border border-zinc-800 text-zinc-400 hover:text-accent hover:border-zinc-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                >
-                  {ICONS[link.platform]}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <span className="font-mono text-xs text-zinc-600">
-          &copy; 2026 Uvita Body Shop. Todos los derechos reservados.
-        </span>
+        <span className="font-mono text-xs text-zinc-600">{t('copyright')}</span>
       </div>
     </footer>
   )

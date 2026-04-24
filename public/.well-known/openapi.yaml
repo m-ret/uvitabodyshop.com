@@ -83,6 +83,15 @@ components:
           type: string
           enum: [es, en]
           default: es
+        utm:
+          type: object
+          description: Optional first-party attribution (from ubs_utm cookie / landing URL).
+          properties:
+            source: { type: string, maxLength: 200 }
+            medium: { type: string, maxLength: 200 }
+            campaign: { type: string, maxLength: 200 }
+            content: { type: string, maxLength: 200 }
+            term: { type: string, maxLength: 200 }
     QuoteRequestResponse:
       type: object
       required: [ok, message]

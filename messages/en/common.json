@@ -1,0 +1,91 @@
+{
+  "Nav": {
+    "services": "Services",
+    "about": "About",
+    "warranty": "Warranty",
+    "faq": "FAQ",
+    "process": "Process",
+    "materials": "Materials",
+    "contact": "Contact",
+    "brandAria": "Uvita Body Shop — go to home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "location": "Location",
+    "hours": "Hours",
+    "contactLabel": "Contact",
+    "whatsappCta": "WhatsApp"
+  },
+  "Footer": {
+    "pages": "Pages",
+    "zones": "Areas",
+    "guides": "Guides",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact",
+    "warranty": "Warranty",
+    "faq": "FAQ",
+    "quoteHome": "Get a quote (home)",
+    "copyright": "© 2026 Uvita Body Shop. All rights reserved.",
+    "locationLine": "Uvita · Puntarenas · Costa Rica"
+  },
+  "Locale": {
+    "switchTo": "Español",
+    "currentEs": "ES",
+    "currentEn": "EN"
+  },
+  "StickyWhatsapp": {
+    "aria": "WhatsApp Uvita Body Shop — opens in a new tab"
+  },
+  "QuoteForm": {
+    "name": "Name",
+    "phone": "Phone / WhatsApp",
+    "email": "Email (optional)",
+    "service": "Service",
+    "vehicle": "Vehicle (optional)",
+    "description": "Job description",
+    "submit": "Send request",
+    "submitting": "Sending…",
+    "pickService": "Choose a service",
+    "placeholderName": "Your name",
+    "placeholderPhone": "+506 8769 9927",
+    "placeholderEmail": "you@example.com",
+    "placeholderVehicle": "Make, model, year",
+    "placeholderDescription": "Tell us what needs repair or paint.",
+    "hoursNote": "We answer during {hours}",
+    "whatsappFallback": "Message us on WhatsApp →",
+    "optEnderezado": "Frame & collision",
+    "optPintura": "Full paint",
+    "optRetoques": "Paint touch-ups",
+    "optGolpes": "Dent & impact repair",
+    "optAccesorios": "Accessory install",
+    "optOtro": "Other / inquiry",
+    "errors": {
+      "name": "Please enter your name.",
+      "nameLong": "Name is too long.",
+      "phone": "Invalid phone number.",
+      "email": "Invalid email.",
+      "service": "Choose a service.",
+      "descriptionShort": "Tell us a bit more (minimum 10 characters).",
+      "descriptionLong": "Description is too long.",
+      "vehicleLong": "Vehicle field is too long.",
+      "rateLimit": "Too many requests. Try again shortly or message us on WhatsApp.",
+      "server": "We could not send the request. Try again or message us on WhatsApp.",
+      "network": "We could not send the request. Check your connection or message us on WhatsApp."
+    }
+  },
+  "ServicePage": {
+    "breadcrumbServices": "Services",
+    "included": "What’s included",
+    "process": "Process",
+    "price": "Typical pricing",
+    "faqs": "FAQ",
+    "ctaQuote": "Request a quote",
+    "detailLink": "View details",
+    "subtitleEn": "In English",
+    "notFoundTitle": "Service not found"
+  },
+  "PageLayout": {
+    "breadcrumbHome": "Home",
+    "breadcrumbNavAria": "Breadcrumb"
+  }
+}
