@@ -18,6 +18,7 @@ import { business, displayContact } from '@/data/business'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { track } from '@/lib/analytics'
 import { useLocale, useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 
 type HomeServiceItem = {
   slug: string
@@ -520,8 +521,10 @@ export default function HomePage({
                 className="svc-sticky-card sticky"
                 style={{ top: `${60 + i * 20}px`, zIndex: i + 1 }}
               >
-                <div
-                  className="group relative overflow-hidden border border-zinc-800/50 bg-zinc-950 hover:border-accent/30 transition-all duration-500 shadow-2xl shadow-black/50"
+                <Link
+                  href={`/servicios/${s.slug}`}
+                  aria-label={s.title}
+                  className="group relative block overflow-hidden border border-zinc-800/50 bg-zinc-950 hover:border-accent/30 transition-all duration-500 shadow-2xl shadow-black/50"
                   onMouseMove={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect()
                     const x = e.clientX - rect.left
@@ -568,7 +571,7 @@ export default function HomePage({
                       </p>
                     </div>
                   </div>
-                </div>
+                </Link>
               </div>
             ))}
           </div>
