@@ -93,12 +93,15 @@ export default async function ZonaPage({ params }: Props) {
       extraJsonLd={extraJsonLd}
       breadcrumb={[
         { href: '/', label: tLayout('breadcrumbHome') },
-        { href: '', label: `Zona: ${z.name}` },
+        {
+          href: '',
+          label: `${locale === 'en' ? 'Area' : 'Zona'}: ${zoneName}`,
+        },
       ]}
       hero={
         <PageHero
           eyebrow={z.eyebrow}
-          title={`${business.name} · ${z.name}`}
+          title={`${business.name} · ${zoneName}`}
           lede={z.lede}
         />
       }

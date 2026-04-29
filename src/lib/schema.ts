@@ -6,12 +6,14 @@ import {
 } from '@/data/business'
 import { pathnameWithLocale } from '@/lib/metadata'
 
-/** Pull the lowest CRC figure from a Spanish "a partir de" price string. */
+/** Pull the lowest CRC figure from a price string. Handles both Spanish
+ * (`₡250.000` — `.` as thousands separator) and English (`₡250,000` — `,`
+ * as thousands separator) number formatting. */
 function extractMinPrice(text: string | undefined): number | null {
   if (!text) return null
-  const m = text.match(/₡\s*([\d.]+)/)
+  const m = text.match(/₡\s*([\d.,]+)/)
   if (!m) return null
-  const n = parseInt(m[1].replace(/\./g, ''), 10)
+  const n = parseInt(m[1].replace(/[.,]/g, ''), 10)
   return Number.isFinite(n) ? n : null
 }
 
