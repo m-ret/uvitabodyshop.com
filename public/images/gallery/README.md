@@ -1,6 +1,8 @@
-# Work gallery
+# Work gallery (asset staging)
 
-Before/after and past-work photography for the `#trabajo` section lives here.
+Past-work photography assets linked from `business.gallery` in `src/data/business.ts`.
+The homepage no longer renders a dedicated gallery section; keep images here if you
+reuse them elsewhere or restore a portfolio block later.
 
 ## Naming convention
 
@@ -26,8 +28,7 @@ Each gallery slot has a stable ID in `src/data/business.ts` → `business.galler
      height: 1200,
    }
    ```
-3. The gallery section on the homepage renders automatically.
-4. When the array is empty, the section is hidden from the DOM entirely.
+3. Wire images into whichever route or component should display them.
 
 ## Image requirements
 
