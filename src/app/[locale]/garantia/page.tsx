@@ -5,7 +5,7 @@ import { business } from '@/data/business'
 import { buildPageMetadata } from '@/lib/metadata'
 import PageLayout from '@/components/layout/PageLayout'
 import PageHero from '@/components/layout/PageHero'
-import LeadCaptureSection from '@/components/lead/LeadCaptureSection'
+import PageEndModule from '@/components/layout/PageEndModule'
 import { routing } from '@/i18n/routing'
 
 const g = business.guarantee
@@ -34,7 +34,6 @@ export default async function GarantiaPage({ params }: Props) {
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'GuaranteePage' })
   const tLayout = await getTranslations({ locale, namespace: 'PageLayout' })
-  const tLead = await getTranslations({ locale, namespace: 'LeadCapture' })
 
   return (
     <PageLayout
@@ -43,9 +42,10 @@ export default async function GarantiaPage({ params }: Props) {
         { href: '/', label: tLayout('breadcrumbHome') },
         { href: '', label: t('metaTitle') },
       ]}
+      hero={<PageHero eyebrow={g.eyebrow} title={g.title} lede={g.summary} />}
     >
-      <PageHero eyebrow={g.eyebrow} title={g.title} lede={g.summary} />
-      <div className="px-6 sm:px-12 lg:px-24 pb-20 sm:pb-28 max-w-3xl">
+      <div className="px-6 sm:px-12 lg:px-24 pb-20 sm:pb-28">
+        <div className="max-w-6xl mx-auto w-full">
         <section className="mb-12" aria-labelledby="cobertura">
           <h2
             id="cobertura"
@@ -86,10 +86,8 @@ export default async function GarantiaPage({ params }: Props) {
           </ol>
         </section>
 
-        <LeadCaptureSection
-          title={tLead('title')}
-          description={tLead('description')}
-        />
+        <PageEndModule locale={locale} currentHref="/garantia" />
+        </div>
       </div>
     </PageLayout>
   )

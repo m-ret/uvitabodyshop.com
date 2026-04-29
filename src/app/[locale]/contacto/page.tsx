@@ -42,16 +42,19 @@ export default async function ContactoPage({ params }: Props) {
   return (
     <PageLayout
       locale={locale}
+      showContactCta={false}
       breadcrumb={[
         { href: '/', label: tLayout('breadcrumbHome') },
         { href: '', label: t('metaTitle') },
       ]}
+      hero={
+        <PageHero
+          eyebrow={t('heroEyebrow')}
+          title={t('heroTitle')}
+          lede={t('heroLede')}
+        />
+      }
     >
-      <PageHero
-        eyebrow={t('heroEyebrow')}
-        title={t('heroTitle')}
-        lede={t('heroLede')}
-      />
       <div className="px-6 sm:px-12 lg:px-24 pb-20 sm:pb-28">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           <div className="order-2 lg:order-1">

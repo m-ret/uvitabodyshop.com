@@ -16,8 +16,8 @@ export default function PageHero({
   children?: ReactNode
 }) {
   return (
-    <div className="px-6 sm:px-12 lg:px-24 pb-12 sm:pb-16 pt-2">
-      <div className="max-w-4xl">
+    <div className="px-6 sm:px-12 lg:px-24 pb-10 sm:pb-12 pt-2">
+      <div className="max-w-6xl mx-auto w-full">
         {eyebrow && (
           <p className="font-mono text-xs tracking-[0.25em] uppercase text-zinc-500 mb-4">
             {eyebrow}
@@ -27,7 +27,7 @@ export default function PageHero({
           {title}
         </h1>
         {lede && (
-          <p className="mt-6 text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl">
+          <p className="mt-6 text-base sm:text-lg text-zinc-400 leading-relaxed max-w-5xl text-pretty">
             {lede}
           </p>
         )}

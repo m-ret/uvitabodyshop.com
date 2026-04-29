@@ -8,10 +8,10 @@ test.describe('home', () => {
     await expect(page).toHaveTitle(/Uvita Body Shop/i)
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     await expect(
-      page.getByRole('link', { name: /Pedir cotización/i })
+      page.getByRole('link', { name: /WhatsApp/i }).first()
     ).toBeVisible()
     await expect(
-      page.getByRole('link', { name: /Ver servicios/i })
+      page.getByRole('link', { name: /8769-9927/i }).first()
     ).toBeVisible()
   })
 

@@ -15,8 +15,8 @@
       "line3": "Acabado",
       "line4": "Perfecto.",
       "sub": "Reparación de colisión, pintura completa y acabados personalizados. Cada vehículo sale de nuestra cabina como nuevo — o mejor.",
-      "ctaQuote": "Pedir cotización",
-      "ctaServices": "Ver servicios"
+      "ctaGroupAria": "Contacto con Uvita Body Shop por WhatsApp o teléfono",
+      "phoneLinkAria": "Teléfono {phone}"
     },
     "scrollLabel": "Deslizá",
     "marqueeItems": [
@@ -38,9 +38,7 @@
       "boothSubFallback": "Acabado controlado",
       "warranty": "Garantía escrita",
       "warrantySub": "Cada trabajo documentado",
-      "warrantySubFallback": "Trabajo documentado",
-      "googleReviews": "{count} reseñas verificadas en Google",
-      "reviewsLink": "Ver reseñas"
+      "warrantySubFallback": "Trabajo documentado"
     },
     "Testimonials": {
       "eyebrow": "Clientes",
@@ -55,7 +53,7 @@
       "head2a": "Los",
       "head2b": "restauramos.",
       "body": "9 años de experiencia práctica. Cabina de pintura controlada con horno de curado infrarrojo. Materiales profesionales Roberlo, BESA, 3M y VICCO. Cada trabajo respaldado por garantía escrita — porque no tomamos atajos.",
-      "imageAlt": "Fabricio Ríos Ortíz — propietario de Uvita Body Shop pintando un panel con equipo profesional",
+      "imageAlt": "Fabricio Ríos Ortíz — propietario de Uvita Body Shop, en la cabina",
       "ownerCaption": "Fabricio Ríos Ortíz — Propietario"
     },
     "Services": {

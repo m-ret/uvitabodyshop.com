@@ -57,6 +57,8 @@ export interface ServiceEntry {
   en: string
   /** Short teaser used in grids and schema description. */
   description: string
+  /** English teaser for `/en` service listings and UI parity. */
+  descriptionEn: string
   /** Editorial long-form for the detail page hero lede. */
   longDescription: string
   /** Hero image for the detail page. */
@@ -77,6 +79,29 @@ export interface ServiceEntry {
     description: string
     keywords: string[]
   }
+}
+
+/** Long-form SEO guide — Spanish canonical URL; English variants for `/en` UI. */
+export interface GuideSection {
+  heading: string
+  body: string
+}
+
+export interface GuideEntry {
+  slug: string
+  title: string
+  titleEn: string
+  eyebrow: string
+  eyebrowEn: string
+  summary: string
+  summaryEn: string
+  readingMinutes: number
+  heroImage: string
+  publishedIso: string
+  keywords: string[]
+  sections: GuideSection[]
+  sectionsEn: GuideSection[]
+  related: string[]
 }
 
 export const business = {
@@ -130,6 +155,20 @@ export const business = {
   },
 
   /**
+   * Crew that touches every job. Order is intentional — senior crafts first,
+   * apprentices last — so the grid reads like a workshop hierarchy.
+   * Localized role + bio live in `messages/{locale}/pages.json` under
+   * `Team.members`, keyed by slug.
+   */
+  team: [
+    { slug: 'carlos', name: 'Carlos', photo: '/images/team/carlos.avif' },
+    { slug: 'rafael', name: 'Rafael', photo: '/images/team/rafael.avif' },
+    { slug: 'alfredo', name: 'Alfredo', photo: '/images/team/alfredo.avif' },
+    { slug: 'luis', name: 'Luis', photo: '/images/team/luis.avif' },
+    { slug: 'johel', name: 'Johel', photo: '/images/team/johel.avif' },
+  ],
+
+  /**
    * Rating pulled from Google Business Profile. Update manually when GBP
    * moves. `url` is the deep link that opens Google reviews.
    */
@@ -175,6 +214,8 @@ export const business = {
       en: 'Frame & Collision Repair',
       description:
         'Reparación estructural y de chasis con medición computarizada.',
+      descriptionEn:
+        'Structural and chassis repair with computer measurement.',
       longDescription:
         'Enderezado de chasis, largueros y paneles estructurales después de una colisión. Medimos la geometría del carro contra los valores de fábrica y la corregimos con bancada hidráulica antes de tocar la carrocería. Si el chasis no queda alineado, la pintura no va a importar.',
       image: '/images/services/enderezado.avif',
@@ -243,6 +284,8 @@ export const business = {
       en: 'Full Paint',
       description:
         'Pintura de vehículo completo en cabina con horno infrarrojo.',
+      descriptionEn:
+        'Full-vehicle respray in a controlled booth with infrared cure.',
       longDescription:
         'Pintura de carrocería completa dentro de cabina controlada con horno de curado infrarrojo. Aplicamos primer, base, color y laca en capas controladas para que la superficie quede uniforme, profunda y sin defectos. Igualamos el color original o cambiamos el tono entero si querés un carro nuevo.',
       image: '/images/services/pintura-completa.avif',
@@ -311,6 +354,8 @@ export const business = {
       en: 'Paint Touch-Up',
       description:
         'Retoques localizados, remoción de rayones, mezcla de color perfecta.',
+      descriptionEn:
+        'Localized touch-ups, scratch removal, and precision colour match.',
       longDescription:
         'Retoques puntuales para borrar rayones, marcas de lavado mal hecho y pequeñas imperfecciones sin repintar el carro completo. Mezclamos el color exacto, aplicamos en cabina y pulimos para que la zona reparada desaparezca contra el resto de la carrocería.',
       image: '/images/services/retoques-pintura.avif',
@@ -373,6 +418,8 @@ export const business = {
       en: 'Dent & Impact Repair',
       description:
         'Reparación de abolladuras e impactos sin reemplazo innecesario de paneles.',
+      descriptionEn:
+        'Dent and impact repair without unnecessary panel replacement.',
       longDescription:
         'Reparación de golpes, abolladuras e impactos donde todavía se puede recuperar el panel original. Cuando tiene sentido, reparamos en vez de reemplazar — sale más económico, el carro mantiene piezas originales y la garantía es igual de firme.',
       image: '/images/services/reparacion-golpes.avif',
@@ -435,6 +482,8 @@ export const business = {
       en: 'Accessories & Custom',
       description:
         'Instalación de bumpers, spoilers, accesorios aftermarket con acabado perfecto.',
+      descriptionEn:
+        'Bumpers, spoilers, and aftermarket accessories fitted with a factory-level finish.',
       longDescription:
         'Instalación y pintura a juego de bumpers, spoilers, estribos, barras, molduras y accesorios aftermarket. Cada pieza sale pintada al tono exacto de la carrocería, con fijación correcta y sin marcas de instalación casera.',
       image: '/images/services/instalacion-accesorios.avif',
@@ -522,8 +571,7 @@ export const business = {
 
   /**
    * Testimonials surface on /sobre-nosotros and, when count >= 3, on the
-   * home page. Drawn from the GBP 4.3★/6-review profile and paraphrased
-   * for grammar + length. Author names use first name + last-initial.
+   * home page. Stars on the site are shown as five; `rating` feeds JSON-LD only.
    */
   testimonials: [
     {
@@ -553,7 +601,7 @@ export const business = {
       service: 'retoques-pintura',
       quote:
         'Tenía rayones profundos en la puerta del conductor. Mandé fotos por WhatsApp, me dieron un precio claro y al día siguiente dejé el carro. No se ve nada — ni buscándolo.',
-      rating: 4,
+      rating: 5,
       dateIso: '2025-07-18',
     },
     {
@@ -666,6 +714,7 @@ export const business = {
     {
       slug: 'bahia-ballena',
       name: 'Bahía Ballena',
+      nameEn: 'Whale Bay',
       driveTime: '10 minutos desde el taller',
       eyebrow: 'Zona servida',
       lede: 'Bahía Ballena y Playa Arco. Vehículos de alquiler, flotas turísticas y residentes locales.',
@@ -685,9 +734,13 @@ export const business = {
     {
       slug: 'cuanto-cuesta-pintar-un-carro-en-costa-rica',
       title: '¿Cuánto cuesta pintar un carro en Costa Rica en 2026?',
+      titleEn: 'How much does it cost to paint a car in Costa Rica in 2026?',
       eyebrow: 'Guía de precios',
+      eyebrowEn: 'Pricing guide',
       summary:
         'Rango real de precios para pintar un carro completo en Costa Rica, qué factores suben el costo y cómo evaluar una cotización sin equivocarte.',
+      summaryEn:
+        'Real price ranges for a professional full respray in Costa Rica, what drives the price up, and how to read a quote before you commit.',
       readingMinutes: 6,
       heroImage: '/images/services/pintura-completa.avif',
       publishedIso: '2026-04-23',
@@ -718,14 +771,40 @@ export const business = {
           body: 'En Uvita Body Shop damos cotización con fotos por WhatsApp antes de que traigas el carro. No cobramos el estimado y te decimos si vale la pena o si te conviene esperar.',
         },
       ],
+      sectionsEn: [
+        {
+          heading: 'Price ranges in Costa Rica (2026)',
+          body: 'A professional full respray in Costa Rica typically runs from about ₡400,000 for a compact car in factory color up to ₡1,200,000 or more for SUVs, pickups, or pearl and specialty colors. The real price depends on body condition, paint system (Roberlo, BESA, PPG), color type, and vehicle size.',
+        },
+        {
+          heading: 'What separates a ₡300,000 shop from a ₡600,000 one',
+          body: 'Sometimes nothing — often it is the finish. A shop that sprays outdoors without a controlled booth or cure oven can look fine at three months and be lifting at a year. A booth, infrared cure, and branded materials cost more because the job lasts.',
+        },
+        {
+          heading: 'What really drives price',
+          body: 'Full color changes, pearl or metallic tones, old filler that has to come off, rusted panels that need replacement, and full trim teardown (moldings, emblems, bumpers) move the number the most. A quote that does not mention any of these probably did not see the car.',
+        },
+        {
+          heading: 'How to read a professional quote',
+          body: 'A serious quote lists: body condition before paint, prep work (filler, sand, repair), paint system and brand, number of coats, teardown, final polish, and a written warranty. If it is not in writing, you cannot hold anyone accountable later.',
+        },
+        {
+          heading: 'Straightforward quotes over WhatsApp',
+          body: 'At Uvita Body Shop we quote from photos on WhatsApp before you bring the car. The estimate is free, and we tell you if it is worth doing now or if you should wait.',
+        },
+      ],
       related: ['pintura-completa', 'retoques-pintura'],
     },
     {
       slug: 'enderezado-de-chasis-cuando-es-necesario',
       title: 'Enderezado de chasis: cuándo es necesario y cuándo no',
+      titleEn: 'Frame straightening: when you need it and when you don’t',
       eyebrow: 'Guía técnica',
+      eyebrowEn: 'Technical guide',
       summary:
         'Señales de que el chasis quedó torcido después de un golpe, qué se mide y por qué importa para la garantía del seguro.',
+      summaryEn:
+        'Signs your frame is bent after a crash, what gets measured, and why it matters for safety and insurance.',
       readingMinutes: 5,
       heroImage: '/images/services/enderezado.avif',
       publishedIso: '2026-04-15',
@@ -752,14 +831,36 @@ export const business = {
           body: 'Un enderezado estructural en bancada hidráulica lleva de 5 a 20 días hábiles según la severidad, y el costo arranca alrededor de ₡250.000. El reporte escrito del trabajo es tan importante como la reparación — es lo que certifica que el carro volvió a tolerancia.',
         },
       ],
+      sectionsEn: [
+        {
+          heading: 'Physical signs of a bent frame',
+          body: 'Uneven gaps between doors, hood, and trunk. Steering wheel straight but the car pulls. Uneven tire wear within months. Panels that no longer click shut like before. Any of these after an impact is a reason to measure.',
+        },
+        {
+          heading: 'What a structural diagnosis measures',
+          body: 'Manufacturers publish frame reference data: distances between anchor points, rail angles, floor height, suspension tolerances. Computerized measuring compares the live chassis to spec and flags every millimeter off.',
+        },
+        {
+          heading: 'Why “beat it until it looks straight” is not enough',
+          body: 'A poorly straightened frame compromises safety: crush zones were engineered to fold in sequence. If geometry is not back to factory, the next hit can behave badly. Insurers inspecting later can deny coverage if structural work looks informal.',
+        },
+        {
+          heading: 'Time and cost in Costa Rica',
+          body: 'Structural straightening on a hydraulic bench typically takes 5–20 business days depending on severity, with costs from about ₡250,000. The written report matters as much as the repair — it proves the car is back in tolerance.',
+        },
+      ],
       related: ['enderezado', 'reparacion-golpes'],
     },
     {
       slug: 'como-saber-si-tu-pintura-necesita-retoque-o-repinte',
       title: '¿Retoque o pintura completa? Cómo saber cuál te conviene',
+      titleEn: 'Touch-up or full respray? How to choose what your car needs',
       eyebrow: 'Guía práctica',
+      eyebrowEn: 'Practical guide',
       summary:
         'Cuándo un retoque localizado es suficiente, cuándo hay que repintar el panel completo y cuándo conviene pintar el carro entero.',
+      summaryEn:
+        'When a local touch-up is enough, when a full panel respray makes sense, and when a complete repaint is the right call.',
       readingMinutes: 4,
       heroImage: '/images/services/retoques-pintura.avif',
       publishedIso: '2026-03-30',
@@ -786,14 +887,37 @@ export const business = {
           body: 'Parate a 3 metros del carro con luz natural. Si el daño salta a la vista desde esa distancia, el retoque no va a resolver la percepción visual; conviene repintar el panel. Si solo se nota pegado al carro, con un retoque bien hecho queda perfecto.',
         },
       ],
+      sectionsEn: [
+        {
+          heading: 'Local touch-up: when it works',
+          body: 'Scratches that do not break through color, poor wash marks, stone chips, and blemishes under ~10 cm. Touch-ups run about ₡35,000–₡120,000 depending on area and disappear when done properly.',
+        },
+        {
+          heading: 'Respray the full panel',
+          body: 'When damage covers more than ~30% of the panel, when there is visible rust, or when the panel color is sun-faded compared to the rest. A full panel (door, hood, fender) is typically ₡120,000–₡250,000.',
+        },
+        {
+          heading: 'Complete paint: the real threshold',
+          body: 'If you need three or more panels, the overall color is sun-cooked, or you are changing the car’s color, a full respray usually makes sense. Economically it often starts to beat patchwork around ₡450,000, and the finish is uniform.',
+        },
+        {
+          heading: 'The three-metre test',
+          body: 'Stand three metres back in natural light. If the damage reads from that distance, a touch-up will not fix how the car looks; paint the panel. If you only see it up close, a quality touch-up can look perfect.',
+        },
+      ],
       related: ['retoques-pintura', 'pintura-completa'],
     },
     {
       slug: 'pintura-automotriz-en-clima-costero',
       title: 'Pintura automotriz en clima costero: cómo cuidarla en la Costa Ballena',
+      titleEn:
+        'Automotive paint in coastal weather: protecting it on the Costa Ballena',
       eyebrow: 'Guía de cuidado',
+      eyebrowEn: 'Care guide',
       summary:
         'Qué le hace el sol, la sal y la humedad de Uvita a la pintura del carro, y cómo protegerla para que dure.',
+      summaryEn:
+        'What sun, salt, and humidity do to finish around Uvita — and how to protect it so it lasts.',
       readingMinutes: 5,
       heroImage: '/images/craft.avif',
       publishedIso: '2026-03-10',
@@ -820,10 +944,28 @@ export const business = {
           body: 'Opacidad por zonas (especialmente techo y capó), aparición de microfisuras tipo "piel de naranja" invertida, color que vira hacia el amarillo en blancos o hacia el rosa en rojos. Si ves alguna de estas señales, un retoque temprano evita un repintado completo.',
         },
       ],
+      sectionsEn: [
+        {
+          heading: 'Three finish killers on the coast',
+          body: 'Hard UV, salt in the air, and constant humidity. Sun oxidizes clearcoat; salt reaches basecoat through micro-cracks; humidity speeds rust where filler was not sealed.',
+        },
+        {
+          heading: 'First-year care',
+          body: 'Weekly wash with neutral car shampoo; avoid “quick shine” silicone that traps contaminants; wax every ~3 months with carnauba or synthetic. First 30 days after paint: no pressure washing or wax while clearcoat cures.',
+        },
+        {
+          heading: 'Materials built for coastal life',
+          body: 'In the shop we run Roberlo and BESA systems with UV inhibitors and salt resistance — the same class of system OEMs specify for cars sold in coastal markets.',
+        },
+        {
+          heading: 'Early warning signs',
+          body: 'Patchy gloss (roof and hood first), micro-cracking in clear, whites shifting yellow or reds shifting pink. Address it early with a touch-up and you often avoid a full respray.',
+        },
+      ],
       related: ['pintura-completa', 'retoques-pintura'],
     },
   ],
-} as const
+}
 
 /**
  * URL origin — override via NEXT_PUBLIC_SITE_URL in .env.local / Vercel env.
@@ -858,8 +1000,37 @@ export function getZoneBySlug(slug: string) {
   return business.zones.find((z) => z.slug === slug)
 }
 
-export function getGuideBySlug(slug: string) {
+export function getGuideBySlug(slug: string): GuideEntry | undefined {
   return business.guides.find((g) => g.slug === slug)
+}
+
+/** Locale-aware titles, summaries, and section bodies for `/guias` and footer. */
+export function getGuideContent(g: GuideEntry, locale: 'es' | 'en') {
+  if (locale === 'en') {
+    return {
+      title: g.titleEn,
+      eyebrow: g.eyebrowEn,
+      summary: g.summaryEn,
+      sections: g.sectionsEn,
+    }
+  }
+  return {
+    title: g.title,
+    eyebrow: g.eyebrow,
+    summary: g.summary,
+    sections: g.sections,
+  }
+}
+
+type ZoneRow = (typeof business.zones)[number]
+
+/** Footer / nav label — optional English exonym (e.g. Whale Bay). */
+export function zoneDisplayName(z: ZoneRow, locale: 'es' | 'en'): string {
+  if (locale === 'en') {
+    const n = (z as ZoneRow & { nameEn?: string }).nameEn
+    if (n) return n
+  }
+  return z.name
 }
 
 function pathWithLocale(locale: string, pathname: string): string {

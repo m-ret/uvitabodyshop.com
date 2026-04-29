@@ -18,10 +18,45 @@
       "El taller es mío, pero el acabado es de todos: del cliente que confía el carro, del equipo que lo prepara, de la cabina controlada y del horno infrarrojo que cura cada capa. No reparamos carros — los restauramos."
     ],
     "ownerImageAlt": "Fabricio Ríos Ortiz en el taller de Uvita Body Shop",
-    "exploreNavAria": "Enlaces útiles del taller",
-    "exploreTitle": "Seguí explorando",
-    "exploreLead": "Servicios, garantía, preguntas frecuentes y guías sobre pintura y colisión en la Costa Ballena.",
-    "exploreLinks": [
+    "contactLink": "Contactar al taller"
+  },
+  "Team": {
+    "eyebrow": "El equipo",
+    "title": "Las manos detrás de cada acabado",
+    "lede": "Cinco artesanos que enderezan, preparan, pintan y revisan cada carro que entra. Años de oficio entre ellos, un solo estándar entre nosotros.",
+    "members": {
+      "carlos": {
+        "role": "Chapa y enderezado",
+        "bio": "Lee el daño primero con las manos, después con los ojos. No hala un panel sin medirlo antes.",
+        "alt": "Carlos, técnico de chapa y enderezado en Uvita Body Shop"
+      },
+      "rafael": {
+        "role": "Pintura y mezcla de color",
+        "bio": "Mezcla el color hasta que desaparece contra el panel original. Lo más difícil de pintar es que no se note.",
+        "alt": "Rafael, pintor y especialista en mezcla de color en Uvita Body Shop"
+      },
+      "alfredo": {
+        "role": "Pintor sénior",
+        "bio": "Los años en cabina se notan en cada capa que cura limpia. Nos enseña lo que el manual no dice.",
+        "alt": "Alfredo, pintor sénior en Uvita Body Shop"
+      },
+      "luis": {
+        "role": "Preparación y superficie",
+        "bio": "Donde se decide el acabado. Lija, enmascara, imprima — deja el sustrato listo para que la pintura trabaje.",
+        "alt": "Luis, técnico de preparación y superficie en Uvita Body Shop"
+      },
+      "johel": {
+        "role": "Detallado e inspección final",
+        "bio": "Últimos ojos antes de que el carro salga. Encuentra lo que nadie quiere encontrar después.",
+        "alt": "Johel, técnico de detallado e inspección final en Uvita Body Shop"
+      }
+    }
+  },
+  "Explore": {
+    "navAria": "Enlaces útiles del taller",
+    "title": "Seguí explorando",
+    "lead": "Servicios, garantía, preguntas frecuentes y guías sobre pintura y colisión en la Costa Ballena.",
+    "links": [
       { "href": "/servicios", "label": "Servicios" },
       { "href": "/garantia", "label": "Garantía escrita" },
       { "href": "/preguntas-frecuentes", "label": "Preguntas frecuentes" },
@@ -31,8 +66,7 @@
         "href": "/guias/cuanto-cuesta-pintar-un-carro-en-costa-rica",
         "label": "Guía: costo de pintura en Costa Rica"
       }
-    ],
-    "contactLink": "Contactar al taller"
+    ]
   },
   "LeadCapture": {
     "title": "Solicitá cotización",
@@ -142,13 +176,11 @@
     "claimTitle": "Cómo hacer válida la garantía"
   },
   "ZonePage": {
-    "relatedServices": "Servicios relacionados",
-    "contactLink": "Ir a contacto"
+    "relatedServices": "Servicios relacionados"
   },
   "GuidePage": {
     "toc": "Contenido",
     "related": "Servicios relacionados",
-    "cta": "Pedir cotización",
     "minRead": "{minutes} min de lectura · {date}"
   },
   "NotFound": {

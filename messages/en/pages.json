@@ -18,10 +18,45 @@
       "The shop is mine, but the finish belongs to everyone: the customer who trusts us with the car, the team that preps it, the controlled booth and the infrared oven that cures every coat. We do not patch cars up — we restore them."
     ],
     "ownerImageAlt": "Fabricio Ríos Ortiz at work in the Uvita Body Shop booth",
-    "exploreNavAria": "Helpful shop links",
-    "exploreTitle": "Keep exploring",
-    "exploreLead": "Services, warranty, FAQs and guides on collision and paint work along the Costa Ballena.",
-    "exploreLinks": [
+    "contactLink": "Contact the shop"
+  },
+  "Team": {
+    "eyebrow": "The crew",
+    "title": "Hands behind every finish",
+    "lede": "Five craftsmen who pull, prep, paint and check every car that comes through. Years of trade between them, one standard between us.",
+    "members": {
+      "carlos": {
+        "role": "Body & frame",
+        "bio": "Reads damage with his hands first, his eyes second. Won’t pull a panel until he’s measured it.",
+        "alt": "Carlos, body and frame technician at Uvita Body Shop"
+      },
+      "rafael": {
+        "role": "Paint & color match",
+        "bio": "Mixes color until it disappears against the original panel. The hardest part of paint is making it look like nothing happened.",
+        "alt": "Rafael, paint and color-match specialist at Uvita Body Shop"
+      },
+      "alfredo": {
+        "role": "Senior paint",
+        "bio": "Years in the booth show in every coat that cures clean. Trains the rest of us on what the manual leaves out.",
+        "alt": "Alfredo, senior painter at Uvita Body Shop"
+      },
+      "luis": {
+        "role": "Prep & surface",
+        "bio": "Where the finish is decided. Sands, masks, primes — gets the substrate right so the paint can do its job.",
+        "alt": "Luis, prep and surface technician at Uvita Body Shop"
+      },
+      "johel": {
+        "role": "Detail & final inspection",
+        "bio": "Last set of eyes before the car leaves. Catches what nobody wants to find later.",
+        "alt": "Johel, detail and final-inspection technician at Uvita Body Shop"
+      }
+    }
+  },
+  "Explore": {
+    "navAria": "Helpful shop links",
+    "title": "Keep exploring",
+    "lead": "Services, warranty, FAQs and guides on collision and paint work along the Costa Ballena.",
+    "links": [
       { "href": "/servicios", "label": "Services" },
       { "href": "/garantia", "label": "Written warranty" },
       { "href": "/preguntas-frecuentes", "label": "FAQ" },
@@ -31,8 +66,7 @@
         "href": "/guias/cuanto-cuesta-pintar-un-carro-en-costa-rica",
         "label": "Guide: car paint costs in Costa Rica"
       }
-    ],
-    "contactLink": "Contact the shop"
+    ]
   },
   "LeadCapture": {
     "title": "Request a quote",
@@ -142,13 +176,11 @@
     "claimTitle": "How to make a valid warranty claim"
   },
   "ZonePage": {
-    "relatedServices": "Related services",
-    "contactLink": "Go to contact"
+    "relatedServices": "Related services"
   },
   "GuidePage": {
     "toc": "Contents",
     "related": "Related services",
-    "cta": "Request a quote",
     "minRead": "{minutes} min read · {date}"
   },
   "NotFound": {

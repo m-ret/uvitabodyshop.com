@@ -2,16 +2,23 @@ import type { ReactNode } from 'react'
 import Navigation from '@/components/ui/Navigation'
 import SiteFooter from '@/components/ui/SiteFooter'
 import PageBreadcrumb from '@/components/layout/PageBreadcrumb'
+import PageContactCta from '@/components/layout/PageContactCta'
 import { buildBreadcrumbSchema, type BreadcrumbNode, jsonLd } from '@/lib/schema'
 
 export default function PageLayout({
   breadcrumb,
+  showContactCta = true,
+  hero,
   children,
   extraJsonLd,
   locale = 'es',
 }: {
   /** Trail from Inicio; last node usually has empty `href` for the current page. */
   breadcrumb: BreadcrumbNode[]
+  /** Set false on routes where a duplicate call-to-call strip would clutter the flow. */
+  showContactCta?: boolean
+  /** Optional hero band (e.g. `PageHero`) rendered after breadcrumbs and before the contact strip. */
+  hero?: ReactNode
   children: ReactNode
   /** Colocated schema.org graph fragments (e.g. FAQPage, Service, Article). */
   extraJsonLd?: unknown | unknown[]
@@ -42,6 +49,8 @@ export default function PageLayout({
       <Navigation />
       <div className="pt-[calc(env(safe-area-inset-top,0)+5.5rem)]" />
       <PageBreadcrumb trail={breadcrumb} />
+      {hero ?? null}
+      {showContactCta ? <PageContactCta /> : null}
       <div>{children}</div>
       <SiteFooter />
     </div>

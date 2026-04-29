@@ -5,7 +5,7 @@ import { buildPageMetadata } from '@/lib/metadata'
 import { buildFaqSchema } from '@/lib/schema'
 import PageLayout from '@/components/layout/PageLayout'
 import PageHero from '@/components/layout/PageHero'
-import LeadCaptureSection from '@/components/lead/LeadCaptureSection'
+import PageEndModule from '@/components/layout/PageEndModule'
 import { routing } from '@/i18n/routing'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -31,7 +31,6 @@ export default async function PreguntasFrecuentesPage({ params }: Props) {
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'FaqPage' })
   const tLayout = await getTranslations({ locale, namespace: 'PageLayout' })
-  const tLead = await getTranslations({ locale, namespace: 'LeadCapture' })
   const items = t.raw('items') as { q: string; a: string }[]
 
   return (
@@ -42,13 +41,16 @@ export default async function PreguntasFrecuentesPage({ params }: Props) {
         { href: '', label: t('metaTitle') },
       ]}
       extraJsonLd={buildFaqSchema(items)}
+      hero={
+        <PageHero
+          eyebrow={t('heroEyebrow')}
+          title={t('heroTitle')}
+          lede={t('heroLede')}
+        />
+      }
     >
-      <PageHero
-        eyebrow={t('heroEyebrow')}
-        title={t('heroTitle')}
-        lede={t('heroLede')}
-      />
-      <div className="px-6 sm:px-12 lg:px-24 pb-20 sm:pb-28 max-w-3xl">
+      <div className="px-6 sm:px-12 lg:px-24 pb-20 sm:pb-28">
+        <div className="max-w-6xl mx-auto w-full">
         {items.map((f) => (
           <div key={f.q} className="border-b border-zinc-800/80">
             <details className="group">
@@ -62,10 +64,8 @@ export default async function PreguntasFrecuentesPage({ params }: Props) {
           </div>
         ))}
 
-        <LeadCaptureSection
-          title={tLead('title')}
-          description={tLead('description')}
-        />
+        <PageEndModule locale={locale} currentHref="/preguntas-frecuentes" />
+        </div>
       </div>
     </PageLayout>
   )

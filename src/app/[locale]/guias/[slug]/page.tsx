@@ -3,11 +3,12 @@ import { hasLocale } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Link } from '@/i18n/navigation'
-import { business, getGuideBySlug, getServiceBySlug } from '@/data/business'
+import { business, getGuideBySlug, getGuideContent, getServiceBySlug } from '@/data/business'
 import { buildPageMetadata } from '@/lib/metadata'
 import { buildArticleSchema, jsonLd } from '@/lib/schema'
 import PageLayout from '@/components/layout/PageLayout'
-import LeadCaptureSection from '@/components/lead/LeadCaptureSection'
+import PageEndModule from '@/components/layout/PageEndModule'
+import type { ExploreLink } from '@/components/layout/ExploreNav'
 import { routing } from '@/i18n/routing'
 
 type Props = { params: Promise<{ locale: string; slug: string }> }
@@ -31,16 +32,17 @@ export async function generateMetadata({ params }: Props) {
     return buildPageMetadata({
       locale,
       pathname: '/',
-      title: 'Guía no encontrada',
+      title: locale === 'en' ? 'Guide not found' : 'Guía no encontrada',
       description: business.meta.descriptionEs,
       index: false,
     })
   }
+  const gc = getGuideContent(g, locale as 'es' | 'en')
   return buildPageMetadata({
     locale,
     pathname: `/guias/${g.slug}`,
-    title: g.title,
-    description: g.summary,
+    title: gc.title,
+    description: gc.summary,
     ogImage: g.heroImage,
     ...(locale === 'es' ? { keywords: [...g.keywords] } : {}),
   })
@@ -51,18 +53,19 @@ function ArticleJsonLd({
   locale,
 }: {
   slug: string
-  locale: string
+  locale: 'es' | 'en'
 }) {
   const g = getGuideBySlug(slug)
   if (!g) return null
+  const gc = getGuideContent(g, locale)
   return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={jsonLd(
         buildArticleSchema({
           slug: g.slug,
-          title: g.title,
-          description: g.summary,
+          title: gc.title,
+          description: gc.summary,
           image: g.heroImage,
           datePublished: g.publishedIso,
           locale,
@@ -79,56 +82,66 @@ export default async function GuiaPage({ params }: Props) {
   const g = getGuideBySlug(slug)
   if (!g) notFound()
 
+  const localeUi = locale as 'es' | 'en'
+  const gc = getGuideContent(g, localeUi)
+
   const tGuide = await getTranslations({ locale, namespace: 'GuidePage' })
   const tLayout = await getTranslations({ locale, namespace: 'PageLayout' })
   const tSvc = await getTranslations({ locale, namespace: 'ServicePage' })
-  const tLead = await getTranslations({ locale, namespace: 'LeadCapture' })
 
   const related = g.related
     .map((s) => getServiceBySlug(s))
     .filter((s): s is NonNullable<typeof s> => s != null)
 
+  const prependLinks: ExploreLink[] = related.map((s) => ({
+    href: `/servicios/${s.slug}`,
+    label: localeUi === 'en' ? s.en : s.es,
+  }))
+
   return (
     <>
-      <ArticleJsonLd slug={g.slug} locale={locale} />
+      <ArticleJsonLd slug={g.slug} locale={localeUi} />
       <PageLayout
         locale={locale}
         breadcrumb={[
           { href: '/', label: tLayout('breadcrumbHome') },
           { href: '/servicios', label: tSvc('breadcrumbServices') },
-          { href: '', label: g.eyebrow },
+          { href: '', label: gc.eyebrow },
         ]}
-      >
-        <div className="px-6 sm:px-12 lg:px-24 pt-2 pb-8">
-          <p className="max-w-6xl mx-auto font-mono text-xs text-accent/90 tracking-widest uppercase">
-            {g.eyebrow}
-          </p>
-          <div className="max-w-6xl mx-auto mt-4 relative w-full aspect-[21/9] min-h-[180px] border border-zinc-800/80">
-            <Image
-              src={g.heroImage}
-              alt={g.title}
-              fill
-              className="object-cover"
-              priority
-              sizes="100vw"
-            />
+        hero={
+          <div className="px-6 sm:px-12 lg:px-24 pt-2 pb-8 sm:pb-10">
+            <div className="max-w-6xl mx-auto w-full">
+              <p className="font-mono text-xs text-accent/90 tracking-widest uppercase">
+                {gc.eyebrow}
+              </p>
+              <div className="mt-4 relative w-full aspect-[21/9] min-h-[180px] border border-zinc-800/80">
+                <Image
+                  src={g.heroImage}
+                  alt={gc.title}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 1152px) 100vw, 1152px"
+                />
+              </div>
+              <h1 className="font-display text-[clamp(1.75rem,4vw,3rem)] leading-tight uppercase text-white mt-8">
+                {gc.title}
+              </h1>
+              <p className="mt-4 text-zinc-500 font-mono text-xs">
+                {tGuide('minRead', {
+                  minutes: g.readingMinutes,
+                  date: g.publishedIso,
+                })}
+              </p>
+              <p className="mt-6 text-zinc-400 text-base leading-relaxed">
+                {gc.summary}
+              </p>
+            </div>
           </div>
-        </div>
-
-        <div className="px-6 sm:px-12 lg:px-24 pb-20 max-w-3xl">
-          <h1 className="font-display text-[clamp(1.75rem,4vw,3rem)] leading-tight uppercase text-white">
-            {g.title}
-          </h1>
-          <p className="mt-4 text-zinc-500 font-mono text-xs">
-            {tGuide('minRead', {
-              minutes: g.readingMinutes,
-              date: g.publishedIso,
-            })}
-          </p>
-          <p className="mt-6 text-zinc-400 text-base leading-relaxed">
-            {g.summary}
-          </p>
-
+        }
+      >
+        <div className="px-6 sm:px-12 lg:px-24 pb-20 sm:pb-28">
+          <div className="max-w-6xl mx-auto w-full">
           <nav
             className="mt-10 p-4 border border-zinc-800/60 bg-zinc-950/40"
             aria-label={tGuide('toc')}
@@ -137,7 +150,7 @@ export default async function GuiaPage({ params }: Props) {
               {tGuide('toc')}
             </p>
             <ol className="list-decimal pl-5 space-y-1 text-sm text-zinc-400">
-              {g.sections.map((sec, i) => (
+              {gc.sections.map((sec, i) => (
                 <li key={sec.heading}>
                   <a
                     href={`#g-${i}`}
@@ -150,7 +163,7 @@ export default async function GuiaPage({ params }: Props) {
             </ol>
           </nav>
 
-          {g.sections.map((sec, i) => (
+          {gc.sections.map((sec, i) => (
             <section
               key={sec.heading}
               id={`g-${i}`}
@@ -185,20 +198,13 @@ export default async function GuiaPage({ params }: Props) {
             </div>
           )}
 
-          <p className="mt-10">
-            <Link
-              href="/contacto"
-              className="inline-flex px-6 py-3 bg-accent text-white text-xs font-medium tracking-wide uppercase hover:bg-accent-hover"
-            >
-              {tGuide('cta')}
-            </Link>
-          </p>
-
-          <LeadCaptureSection
-            title={tLead('title')}
-            description={tLead('description')}
+          <PageEndModule
+            locale={locale}
+            currentHref={`/guias/${g.slug}`}
+            prependLinks={prependLinks}
             initialServiceSlug={related[0]?.slug ?? ''}
           />
+          </div>
         </div>
       </PageLayout>
     </>

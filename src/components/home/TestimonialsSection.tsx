@@ -7,18 +7,15 @@ import { useGSAP } from '@gsap/react'
 import { business, type Testimonial } from '@/data/business'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
-function StarRow({ rating }: { rating?: 1 | 2 | 3 | 4 | 5 }) {
+function StarRow() {
   const t = useTranslations('Home.Testimonials')
-  if (!rating) return null
+  const rating = 5
   return (
     <p
       className="font-mono text-xs text-accent mb-3"
       aria-label={t('starAria', { rating })}
     >
       {'★'.repeat(rating)}
-      <span className="text-zinc-600" aria-hidden="true">
-        {'★'.repeat(5 - rating)}
-      </span>
     </p>
   )
 }
@@ -26,7 +23,7 @@ function StarRow({ rating }: { rating?: 1 | 2 | 3 | 4 | 5 }) {
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
     <article className="testimonial-card gsap-reveal border border-zinc-800/80 bg-zinc-950/50 p-6 sm:p-8">
-      <StarRow rating={t.rating} />
+      <StarRow />
       <p className="text-zinc-200 leading-relaxed text-sm sm:text-base">
         &ldquo;{t.quote}&rdquo;
       </p>

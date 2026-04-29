@@ -122,7 +122,7 @@ Almost none. This is a flat, precision-engineered system. The only sanctioned el
 | Currency | ₡ (Costa Rican colón) with dot thousands separator: `₡447.000`. |
 | Date format | Spanish long-form: "12 de marzo, 2026". |
 | Phone format | `(506) 876-9927` on page; `+5068769927` in `tel:` / `wa.me`. |
-| Max content width | `max-w-6xl` for grid sections, `max-w-3xl` for prose, `max-w-5xl` for proposal blocks. |
+| Max content width | Primary marketing rail: **`max-w-6xl`** (`PageHero`, contact grid, servicios, guías, FAQ, garantía, zonas). Use narrower measure only inside that rail when needed. **`PageHero` lede:** **`max-w-5xl`** (aligned with long-form columns — avoid a “narrow band” under a full-width display head). **`max-w-xl`** for the embedded quote form. **About (`/sobre-nosotros`) main column in the 12-col grid:** **`max-w-5xl`**. `max-w-5xl` for proposal-scale blocks elsewhere when specified. |
 | Media ratio | Hero `16/9` or `21/9`; cards `4/3` or `1/1`; avoid free-form crops. |
 | Corner radius | **0**. No rounded corners on cards, buttons, or inputs. Square is the system. |
 | Border width | `1px` for hairlines, `2px` for focus rings. No thicker. |

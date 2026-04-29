@@ -15,8 +15,8 @@
       "line3": "Flawless",
       "line4": "finish.",
       "sub": "Collision repair, full resprays, and custom finishes. Every vehicle leaves our booth like new — or better.",
-      "ctaQuote": "Get a quote",
-      "ctaServices": "View services"
+      "ctaGroupAria": "Contact Uvita Body Shop by WhatsApp or phone",
+      "phoneLinkAria": "Phone {phone}"
     },
     "scrollLabel": "Scroll",
     "marqueeItems": [
@@ -38,9 +38,7 @@
       "boothSubFallback": "Controlled finish",
       "warranty": "Written warranty",
       "warrantySub": "Every job documented",
-      "warrantySubFallback": "Documented work",
-      "googleReviews": "{count} verified Google reviews",
-      "reviewsLink": "Read reviews"
+      "warrantySubFallback": "Documented work"
     },
     "Testimonials": {
       "eyebrow": "Clients",
@@ -55,7 +53,7 @@
       "head2a": "We",
       "head2b": "restore them.",
       "body": "Nine years of hands-on experience. A controlled paint booth with infrared cure. Professional materials from Roberlo, BESA, 3M, and VICCO. Every job backed by a written warranty — because we don't cut corners.",
-      "imageAlt": "Fabricio Ríos Ortíz — owner of Uvita Body Shop spraying a panel with professional equipment",
+      "imageAlt": "Fabricio Ríos Ortíz — owner of Uvita Body Shop, in the booth",
       "ownerCaption": "Fabricio Ríos Ortíz — Owner"
     },
     "Services": {

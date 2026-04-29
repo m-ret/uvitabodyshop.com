@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { hasLocale } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { Link } from '@/i18n/navigation'
 import { routing } from '@/i18n/routing'
 import {
   business,
@@ -13,6 +12,7 @@ import { buildPageMetadata } from '@/lib/metadata'
 import { buildFaqSchema, buildServiceSchema, jsonLd } from '@/lib/schema'
 import PageLayout from '@/components/layout/PageLayout'
 import PageHero from '@/components/layout/PageHero'
+import PageEndModule from '@/components/layout/PageEndModule'
 
 type ServiceDetailMsg = {
   metaTitle: string
@@ -139,23 +139,26 @@ export default async function ServiceDetailPage({ params }: Props) {
           { href: '', label: title },
         ]}
         extraJsonLd={faqs.length > 0 ? buildFaqSchema(faqs) : undefined}
-      >
-        <div className="px-6 sm:px-12 lg:px-24 pb-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="relative w-full aspect-[21/9] min-h-[200px] border border-zinc-800/80">
-              <Image
-                src={s.image}
-                alt={s.alt}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 100vw"
-              />
+        hero={
+          <>
+            <div className="px-6 sm:px-12 lg:px-24 pb-8">
+              <div className="max-w-6xl mx-auto">
+                <div className="relative w-full aspect-[21/9] min-h-[200px] border border-zinc-800/80">
+                  <Image
+                    src={s.image}
+                    alt={s.alt}
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 100vw"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <PageHero title={title} lede={longDescription} />
-
+            <PageHero title={title} lede={longDescription} />
+          </>
+        }
+      >
         <div className="px-6 sm:px-12 lg:px-24 pb-20 max-w-6xl mx-auto space-y-16">
           <section aria-labelledby="incluye">
             <h2
@@ -223,14 +226,11 @@ export default async function ServiceDetailPage({ params }: Props) {
             </div>
           </section>
 
-          <div>
-            <Link
-              href={`/contacto?servicio=${encodeURIComponent(s.slug)}`}
-              className="inline-flex px-8 py-4 bg-accent text-white text-sm font-medium tracking-wide uppercase hover:bg-accent-hover"
-            >
-              {t('ctaQuote')}
-            </Link>
-          </div>
+          <PageEndModule
+            locale={locale}
+            currentHref={`/servicios/${s.slug}`}
+            initialServiceSlug={s.slug}
+          />
         </div>
       </PageLayout>
     </>

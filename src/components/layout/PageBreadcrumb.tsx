@@ -10,6 +10,7 @@ function joinClasses(...parts: (string | false | undefined)[]) {
 
 /**
  * Renders a hairline BreadcrumbList trail; last item is plain text.
+ * Rail matches `max-w-6xl` inner pages (contact, servicios, guías, etc.).
  */
 export default function PageBreadcrumb({ trail }: { trail: BreadcrumbNode[] }) {
   const t = useTranslations('PageLayout')
@@ -17,10 +18,10 @@ export default function PageBreadcrumb({ trail }: { trail: BreadcrumbNode[] }) {
 
   return (
     <nav
-      className="max-w-6xl mx-auto px-6 sm:px-12 lg:px-24 py-4"
+      className="px-6 sm:px-12 lg:px-24 py-4 text-left"
       aria-label={t('breadcrumbNavAria')}
     >
-      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] tracking-[0.12em] uppercase text-zinc-500 list-none p-0 m-0">
+      <ol className="max-w-6xl mx-auto w-full flex flex-wrap items-center justify-start gap-x-2 gap-y-1 font-mono text-[11px] tracking-[0.12em] uppercase text-zinc-500 list-none p-0 m-0">
         {trail.map((node, i) => {
           const isLast = i === trail.length - 1
           return (
@@ -33,7 +34,8 @@ export default function PageBreadcrumb({ trail }: { trail: BreadcrumbNode[] }) {
               {isLast || !node.href ? (
                 <span
                   className={joinClasses(
-                    isLast && 'text-zinc-300 max-w-[min(100%,14rem)] truncate sm:max-w-none'
+                    isLast &&
+                      'text-zinc-300 max-w-[min(100%,14rem)] truncate sm:max-w-none'
                   )}
                 >
                   {node.label}

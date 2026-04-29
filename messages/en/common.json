@@ -80,14 +80,17 @@
     "process": "Process",
     "price": "Typical pricing",
     "faqs": "FAQ",
-    "ctaQuote": "Request a quote",
     "detailLink": "View details",
     "subtitleEn": "In English",
     "notFoundTitle": "Service not found"
   },
   "PageLayout": {
     "breadcrumbHome": "Home",
-    "breadcrumbNavAria": "Breadcrumb"
+    "breadcrumbNavAria": "Breadcrumb",
+    "contactCta": {
+      "groupAria": "Contact Uvita Body Shop by WhatsApp or phone",
+      "phoneLinkAria": "Phone {phone}"
+    }
   },
   "Hours": {
     "openNow": "Open now",

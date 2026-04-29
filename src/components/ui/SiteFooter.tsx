@@ -3,7 +3,8 @@
 import type { ReactElement } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
-import { business } from '@/data/business'
+import { business, zoneDisplayName, getGuideContent } from '@/data/business'
+import { useLocale } from 'next-intl'
 import Wordmark from './Wordmark'
 
 const ICONS: Record<string, ReactElement> = {
@@ -40,6 +41,7 @@ const PLATFORM_LABELS: Record<string, string> = {
 
 export default function SiteFooter() {
   const t = useTranslations('Footer')
+  const locale = useLocale() as 'es' | 'en'
   const { socialLinks } = business
 
   const footerPageLinks = [
@@ -115,7 +117,7 @@ export default function SiteFooter() {
                     href={`/zonas/${z.slug}`}
                     className="text-zinc-500 hover:text-accent"
                   >
-                    {z.name}
+                    {zoneDisplayName(z, locale)}
                   </Link>
                 </li>
               ))}
@@ -132,7 +134,7 @@ export default function SiteFooter() {
                     href={`/guias/${g.slug}`}
                     className="text-zinc-500 hover:text-accent"
                   >
-                    {g.title}
+                    {getGuideContent(g, locale).title}
                   </Link>
                 </li>
               ))}

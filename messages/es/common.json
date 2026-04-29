@@ -80,14 +80,17 @@
     "process": "Proceso",
     "price": "Precio orientativo",
     "faqs": "Preguntas frecuentes",
-    "ctaQuote": "Pedir cotización",
     "detailLink": "Ver detalle",
     "subtitleEn": "In English",
     "notFoundTitle": "Servicio no encontrado"
   },
   "PageLayout": {
     "breadcrumbHome": "Inicio",
-    "breadcrumbNavAria": "Ruta de navegación"
+    "breadcrumbNavAria": "Ruta de navegación",
+    "contactCta": {
+      "groupAria": "Contacto con Uvita Body Shop por WhatsApp o teléfono",
+      "phoneLinkAria": "Teléfono {phone}"
+    }
   },
   "Hours": {
     "openNow": "Abierto ahora",

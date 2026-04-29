@@ -7,7 +7,7 @@ import { business } from '@/data/business'
 import { buildPageMetadata } from '@/lib/metadata'
 import PageLayout from '@/components/layout/PageLayout'
 import PageHero from '@/components/layout/PageHero'
-import LeadCaptureSection from '@/components/lead/LeadCaptureSection'
+import PageEndModule from '@/components/layout/PageEndModule'
 import { routing } from '@/i18n/routing'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -31,10 +31,10 @@ export default async function ServiciosIndexPage({ params }: Props) {
   const { locale } = await params
   if (!hasLocale(routing.locales, locale)) notFound()
   setRequestLocale(locale)
+  const localeUi = locale as 'es' | 'en'
   const t = await getTranslations({ locale, namespace: 'ServicesIndexPage' })
   const tSvc = await getTranslations({ locale, namespace: 'ServicePage' })
   const tLayout = await getTranslations({ locale, namespace: 'PageLayout' })
-  const tLead = await getTranslations({ locale, namespace: 'LeadCapture' })
 
   return (
     <PageLayout
@@ -43,15 +43,17 @@ export default async function ServiciosIndexPage({ params }: Props) {
         { href: '/', label: tLayout('breadcrumbHome') },
         { href: '', label: t('metaTitle') },
       ]}
+      hero={
+        <PageHero
+          eyebrow={t('heroEyebrow')}
+          title={t('heroTitle')}
+          lede={t('heroLede')}
+        />
+      }
     >
-      <PageHero
-        eyebrow={t('heroEyebrow')}
-        title={t('heroTitle')}
-        lede={t('heroLede')}
-      />
       <div className="px-6 sm:px-12 lg:px-24 pb-20 sm:pb-28">
         <ul className="max-w-6xl mx-auto grid grid-cols-1 gap-6 list-none p-0 m-0">
-          {business.services.map((s) => (
+          {business.services.map((s, i) => (
             <li key={s.slug}>
               <Link
                 href={`/servicios/${s.slug}`}
@@ -67,14 +69,14 @@ export default async function ServiciosIndexPage({ params }: Props) {
                   />
                 </div>
                 <div className="flex-1 p-6 sm:p-10">
-                  <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-600 mb-2">
-                    {locale === 'en' ? s.es : s.en}
+                  <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-600 mb-2 tabular-nums">
+                    {String(i + 1).padStart(2, '0')}
                   </p>
                   <h2 className="font-display text-2xl sm:text-3xl uppercase text-white group-hover:text-accent transition-colors">
-                    {locale === 'en' ? s.en : s.es}
+                    {localeUi === 'en' ? s.en : s.es}
                   </h2>
                   <p className="text-zinc-500 text-sm mt-3 max-w-2xl leading-relaxed">
-                    {s.description}
+                    {localeUi === 'en' ? s.descriptionEn : s.description}
                   </p>
                   <span className="mt-4 inline-block font-mono text-[10px] tracking-[0.2em] uppercase text-accent">
                     {tSvc('detailLink')}
@@ -86,10 +88,7 @@ export default async function ServiciosIndexPage({ params }: Props) {
         </ul>
 
         <div className="max-w-6xl mx-auto">
-          <LeadCaptureSection
-            title={tLead('title')}
-            description={tLead('description')}
-          />
+          <PageEndModule locale={locale} currentHref="/servicios" />
         </div>
       </div>
     </PageLayout>

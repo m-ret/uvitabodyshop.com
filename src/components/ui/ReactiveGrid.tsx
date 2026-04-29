@@ -15,6 +15,8 @@ export default function ReactiveGrid() {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
+    const parent = canvas.parentElement
+    if (!parent) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
@@ -22,8 +24,7 @@ export default function ReactiveGrid() {
     const INFLUENCE = 180 // how far the glow reaches in px
 
     const resize = () => {
-      const rect = canvas.parentElement?.getBoundingClientRect()
-      if (!rect) return
+      const rect = parent.getBoundingClientRect()
       canvas.width = rect.width * window.devicePixelRatio
       canvas.height = rect.height * window.devicePixelRatio
       canvas.style.width = `${rect.width}px`
@@ -31,6 +32,8 @@ export default function ReactiveGrid() {
       ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0)
     }
 
+    /* Listen on the parent (not the canvas) so children stay interactive
+       while the grid still tracks the cursor across the whole section. */
     const onMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect()
       mouse.current.x = e.clientX - rect.left
@@ -113,14 +116,14 @@ export default function ReactiveGrid() {
 
     resize()
     window.addEventListener('resize', resize)
-    canvas.addEventListener('mousemove', onMove)
-    canvas.addEventListener('mouseleave', onLeave)
+    parent.addEventListener('mousemove', onMove)
+    parent.addEventListener('mouseleave', onLeave)
     animRef.current = requestAnimationFrame(draw)
 
     return () => {
       window.removeEventListener('resize', resize)
-      canvas.removeEventListener('mousemove', onMove)
-      canvas.removeEventListener('mouseleave', onLeave)
+      parent.removeEventListener('mousemove', onMove)
+      parent.removeEventListener('mouseleave', onLeave)
       cancelAnimationFrame(animRef.current)
     }
   }, [])
@@ -128,7 +131,7 @@ export default function ReactiveGrid() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-auto"
+      className="absolute inset-0 pointer-events-none"
       style={{ opacity: 1 }}
     />
   )

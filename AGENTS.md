@@ -62,6 +62,24 @@ public/
   robots.txt            # (served via app/robots.ts)
 ```
 
+## App routes
+
+All marketing pages use **`PageLayout`**: breadcrumbs → optional **`hero`** band (e.g. `PageHero` or guide title block) → **WhatsApp/phone strip** (`PageContactCta`, omit on `/contacto`) → **`max-w-6xl`** body. Home omits `PageLayout` (custom `Navigation` + full-bleed hero).
+
+| `app/` route | URLs (locale) | Notes |
+|----------------|---------------|--------|
+| `[locale]/page.tsx` | `/` (`es`), `/en` | `HomePage`; hero max width `max-w-2xl` / `xl:max-w-3xl` for type block only. |
+| `[locale]/contacto/page.tsx` | `/contacto`, `/en/contacto` | Two-column grid inside `max-w-6xl`. |
+| `[locale]/servicios/page.tsx` | `/servicios`, `/en/servicios` | Service index cards. |
+| `[locale]/servicios/[slug]/page.tsx` | `/servicios/…`, `/en/servicios/…` | Hero image + `PageHero` + body `max-w-6xl`. |
+| `[locale]/guias/[slug]/page.tsx` | `/guias/…`, `/en/guias/…` | Long-form guide. |
+| `[locale]/preguntas-frecuentes/page.tsx` | `/preguntas-frecuentes`, `/en/preguntas-frecuentes` | FAQ. |
+| `[locale]/garantia/page.tsx` | `/garantia`, `/en/garantia` | Warranty copy. |
+| `[locale]/zonas/[zona]/page.tsx` | `/zonas/…`, `/en/zonas/…` | Zone landing. |
+| `[locale]/sobre-nosotros/page.tsx` | `/sobre-nosotros`, `/en/sobre-nosotros` | About; `max-w-6xl` editorial grid. |
+| `api/quote-request/route.ts` | `/api/quote-request` | Lead form POST. |
+| `robots.ts`, `sitemap.ts` | `/robots.txt`, `/sitemap.xml` | SEO. |
+
 There is only one design direction in this project. The exploration-phase directions 2-6 live at `/home/marcelo/Work/proposal-base/uvita-bodyshop/` as a read-only reference.
 
 ## Golden rules

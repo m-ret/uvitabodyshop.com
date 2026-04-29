@@ -6,7 +6,8 @@ import { business, getZoneBySlug } from '@/data/business'
 import { buildPageMetadata } from '@/lib/metadata'
 import PageLayout from '@/components/layout/PageLayout'
 import PageHero from '@/components/layout/PageHero'
-import LeadCaptureSection from '@/components/lead/LeadCaptureSection'
+import PageEndModule from '@/components/layout/PageEndModule'
+import type { ExploreLink } from '@/components/layout/ExploreNav'
 import { routing } from '@/i18n/routing'
 
 type Props = { params: Promise<{ locale: string; zona: string }> }
@@ -62,7 +63,11 @@ export default async function ZonaPage({ params }: Props) {
   const related = business.services.slice(0, 3)
   const tZone = await getTranslations({ locale, namespace: 'ZonePage' })
   const tLayout = await getTranslations({ locale, namespace: 'PageLayout' })
-  const tLead = await getTranslations({ locale, namespace: 'LeadCapture' })
+
+  const prependLinks: ExploreLink[] = related.map((s) => ({
+    href: `/servicios/${s.slug}`,
+    label: locale === 'en' ? s.en : s.es,
+  }))
 
   return (
     <PageLayout
@@ -71,13 +76,16 @@ export default async function ZonaPage({ params }: Props) {
         { href: '/', label: tLayout('breadcrumbHome') },
         { href: '', label: `Zona: ${z.name}` },
       ]}
+      hero={
+        <PageHero
+          eyebrow={z.eyebrow}
+          title={`${business.name} · ${z.name}`}
+          lede={z.lede}
+        />
+      }
     >
-      <PageHero
-        eyebrow={z.eyebrow}
-        title={`${business.name} · ${z.name}`}
-        lede={z.lede}
-      />
-      <div className="px-6 sm:px-12 lg:px-24 pb-20 sm:pb-28 max-w-3xl">
+      <div className="px-6 sm:px-12 lg:px-24 pb-20 sm:pb-28">
+        <div className="max-w-6xl mx-auto w-full">
         <p className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider mb-6">
           {z.driveTime}
         </p>
@@ -108,19 +116,12 @@ export default async function ZonaPage({ params }: Props) {
             ))}
           </ul>
         </div>
-        <p className="mt-8">
-          <Link
-            href="/contacto"
-            className="font-mono text-xs tracking-[0.2em] uppercase text-zinc-400 border-b border-zinc-600 hover:text-accent"
-          >
-            {tZone('contactLink')}
-          </Link>
-        </p>
-
-        <LeadCaptureSection
-          title={tLead('title')}
-          description={tLead('description')}
+        <PageEndModule
+          locale={locale}
+          currentHref={`/zonas/${z.slug}`}
+          prependLinks={prependLinks}
         />
+        </div>
       </div>
     </PageLayout>
   )
