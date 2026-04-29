@@ -221,7 +221,8 @@
   "GuidePage": {
     "toc": "Contenido",
     "related": "Servicios relacionados",
-    "minRead": "{minutes} min de lectura · {date}"
+    "minRead": "{minutes} min de lectura · {date}",
+    "byline": "Por {author} · Actualizado {date}"
   },
   "NotFound": {
     "title": "Página no encontrada",

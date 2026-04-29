@@ -139,6 +139,12 @@ export default async function GuiaPage({ params }: Props) {
                   date: g.publishedIso,
                 })}
               </p>
+              <p className="mt-1 text-zinc-500 font-mono text-xs">
+                {tGuide('byline', {
+                  author: business.owner,
+                  date: g.dateModified ?? g.publishedIso,
+                })}
+              </p>
               <p className="mt-6 text-zinc-400 text-base leading-relaxed">
                 {gc.summary}
               </p>
