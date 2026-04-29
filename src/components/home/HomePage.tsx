@@ -41,8 +41,9 @@ type MatTrustItem = { label: string; desc: string }
 function HeroCarPoster() {
   return (
     <Image
-      src="/car-hero.jpg"
+      src="/car-hero.avif"
       alt=""
+      aria-hidden="true"
       fill
       priority
       sizes="100vw"
