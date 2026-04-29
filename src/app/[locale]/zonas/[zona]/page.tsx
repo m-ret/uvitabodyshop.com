@@ -28,15 +28,7 @@ export async function generateMetadata({ params }: Props) {
   if (!hasLocale(routing.locales, locale)) notFound()
   setRequestLocale(locale)
   const z = getZoneBySlug(zona)
-  if (!z) {
-    return buildPageMetadata({
-      locale,
-      pathname: '/',
-      title: 'Zona no encontrada',
-      description: business.meta.descriptionEs,
-      index: false,
-    })
-  }
+  if (!z) notFound()
   const zoneName = zoneDisplayName(z, locale as 'es' | 'en')
   const title =
     locale === 'en'

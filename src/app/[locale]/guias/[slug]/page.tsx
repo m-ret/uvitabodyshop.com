@@ -34,15 +34,7 @@ export async function generateMetadata({ params }: Props) {
   if (!hasLocale(routing.locales, locale)) notFound()
   setRequestLocale(locale)
   const g = getGuideBySlug(slug)
-  if (!g) {
-    return buildPageMetadata({
-      locale,
-      pathname: '/',
-      title: locale === 'en' ? 'Guide not found' : 'Guía no encontrada',
-      description: business.meta.descriptionEs,
-      index: false,
-    })
-  }
+  if (!g) notFound()
   const gc = getGuideContent(g, locale as 'es' | 'en')
   return buildPageMetadata({
     locale,

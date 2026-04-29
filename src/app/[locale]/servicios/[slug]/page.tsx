@@ -43,16 +43,7 @@ export async function generateMetadata({ params }: Props) {
   const { locale, slug } = await params
   setRequestLocale(locale)
   const s = getServiceBySlug(slug)
-  const tSvc = await getTranslations({ locale, namespace: 'ServicePage' })
-  if (!s) {
-    return buildPageMetadata({
-      locale,
-      pathname: '/servicios',
-      title: tSvc('notFoundTitle'),
-      description: business.meta.descriptionEs,
-      index: false,
-    })
-  }
+  if (!s) notFound()
 
   let metaTitle = s.meta.title
   let metaDescription = s.meta.description
