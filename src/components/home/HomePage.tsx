@@ -291,8 +291,8 @@ export default function HomePage() {
             primary CTAs below the fold. Headline + sub stay left; CTAs anchor right on lg.
             Trust strip lives below the marquee (see scrolling section).
           */}
-          <div className="w-full max-w-[1600px] mx-auto flex flex-col gap-6 lg:grid lg:grid-cols-12 lg:gap-x-10 lg:items-start lg:gap-y-0">
-            <div className="lg:col-span-7 max-w-2xl">
+          <div className="w-full max-w-[1600px] mx-auto flex flex-col gap-6 md:grid md:grid-cols-12 md:gap-x-8 md:items-start md:gap-y-0 lg:gap-x-10">
+            <div className="md:col-span-7 max-w-2xl">
               <p className="hero-label font-mono text-xs tracking-[0.25em] uppercase text-zinc-500 mb-4 sm:mb-6">
                 {tHome('Hero.label')}
               </p>
@@ -311,8 +311,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="lg:col-span-5 flex flex-col gap-4 pointer-events-auto lg:items-end lg:pt-1 xl:pt-2">
-              <div className="flex flex-col sm:flex-row lg:flex-col gap-3 sm:gap-4 w-full sm:w-auto lg:w-full lg:max-w-md lg:ml-auto">
+            <div className="md:col-span-5 flex flex-col gap-4 pointer-events-auto md:items-end md:border-l md:border-zinc-800/90 md:pl-6 lg:pl-8 md:pt-1 xl:pt-2">
+              <div className="flex flex-col sm:flex-row md:flex-col gap-3 sm:gap-4 w-full sm:w-auto md:w-full md:max-w-md md:ml-auto">
                 <a
                   href="#contact"
                   className="hero-cta inline-flex justify-center px-8 py-4 bg-accent text-white text-sm font-medium tracking-wide uppercase hover:bg-accent-hover transition-colors duration-300"
