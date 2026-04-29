@@ -39,8 +39,8 @@ export async function generateMetadata({ params }: Props) {
   const zoneName = zoneDisplayName(z, locale as 'es' | 'en')
   const title =
     locale === 'en'
-      ? `Auto body & paint near ${zoneName} · South Zone`
-      : `Chapa y pintura cerca de ${zoneName} · Zona Sur`
+      ? `Auto body & paint · ${zoneName}`
+      : `Chapa y pintura · ${zoneName} CR`
   const hours =
     locale === 'en' ? business.hours.displayEn : business.hours.display
   const description =
