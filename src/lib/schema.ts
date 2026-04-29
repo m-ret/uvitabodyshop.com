@@ -6,6 +6,15 @@ import {
 } from '@/data/business'
 import { pathnameWithLocale } from '@/lib/metadata'
 
+/** Pull the lowest CRC figure from a Spanish "a partir de" price string. */
+function extractMinPrice(text: string | undefined): number | null {
+  if (!text) return null
+  const m = text.match(/₡\s*([\d.]+)/)
+  if (!m) return null
+  const n = parseInt(m[1].replace(/\./g, ''), 10)
+  return Number.isFinite(n) ? n : null
+}
+
 export interface BreadcrumbNode {
   /** Absolute or site-relative path; empty string for the current page. */
   href: string
@@ -75,6 +84,10 @@ export function buildServiceSchema(
       priceCurrency: business.pricing.currency,
       priceSpecification: {
         '@type': 'PriceSpecification',
+        priceCurrency: business.pricing.currency,
+        ...(extractMinPrice(priceGuidance) !== null
+          ? { minPrice: extractMinPrice(priceGuidance) as number }
+          : {}),
         description: priceGuidance,
       },
       availability: 'https://schema.org/InStock',
@@ -136,9 +149,9 @@ export function buildReviewSchema(testimonial: Testimonial) {
 }
 
 /**
- * schema.org `Article` for the editorial guides at /guias/[slug]. Keeps
- * the provider pinned to the business so Google associates the guide
- * with the LocalBusiness node.
+ * schema.org `BlogPosting` for the editorial guides at /guias/[slug].
+ * Pins the publisher to the business node and includes inLanguage so
+ * multilingual graphs are unambiguous.
  */
 export function buildArticleSchema(args: {
   slug: string
@@ -146,6 +159,7 @@ export function buildArticleSchema(args: {
   description: string
   image: string
   datePublished: string
+  dateModified?: string
   /** Matches page canonical (`/guias/...` vs `/en/guias/...`). */
   locale?: string
 }) {
@@ -153,16 +167,14 @@ export function buildArticleSchema(args: {
   const pagePath = pathnameWithLocale(locale, `/guias/${args.slug}`)
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: args.title,
     description: args.description,
     image: new URL(args.image, siteUrl).toString(),
     datePublished: args.datePublished,
-    dateModified: args.datePublished,
-    author: {
-      '@type': 'Person',
-      name: business.owner,
-    },
+    dateModified: args.dateModified ?? args.datePublished,
+    inLanguage: locale === 'en' ? 'en' : 'es',
+    author: { '@type': 'Person', name: business.owner },
     publisher: {
       '@type': 'AutoBodyShop',
       '@id': `${siteUrl}#business`,
@@ -172,6 +184,73 @@ export function buildArticleSchema(args: {
       '@type': 'WebPage',
       '@id': new URL(pagePath, siteUrl).toString(),
     },
+  }
+}
+
+/**
+ * schema.org `Person` for a crew member. References the business node
+ * via `worksFor` so Google links the person to the LocalBusiness.
+ */
+export function buildPersonSchema(args: {
+  name: string
+  /** Site-relative path to the portrait. */
+  photo: string
+  /** Localized job title (e.g. "Frame & sheet metal"). */
+  role: string
+  locale?: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: args.name,
+    image: new URL(args.photo, siteUrl).toString(),
+    jobTitle: args.role,
+    worksFor: { '@type': 'AutoBodyShop', '@id': `${siteUrl}#business` },
+    inLanguage: args.locale === 'en' ? 'en' : 'es',
+  }
+}
+
+/**
+ * schema.org `WebSite` for the home page. Pinned to the LocalBusiness
+ * publisher so Google recognizes the site as the business's web presence.
+ */
+export function buildWebsiteSchema(locale: 'es' | 'en' = 'es') {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${siteUrl}#website`,
+    url: locale === 'en' ? `${siteUrl}/en` : siteUrl.replace(/\/$/, ''),
+    name: business.name,
+    inLanguage: locale === 'en' ? 'en' : 'es',
+    publisher: { '@type': 'AutoBodyShop', '@id': `${siteUrl}#business` },
+  }
+}
+
+/**
+ * schema.org `Service` narrowed to a single zone — surfaces "body shop {town}"
+ * intent without diluting the canonical Service-per-service-detail schemas.
+ */
+export function buildZoneServiceSchema(args: {
+  zoneName: string
+  zoneSlug: string
+  description: string
+  locale?: string
+}) {
+  const locale = args.locale ?? 'es'
+  const pagePath = pathnameWithLocale(locale, `/zonas/${args.zoneSlug}`)
+  const serviceName =
+    locale === 'en'
+      ? `Auto body & paint near ${args.zoneName}`
+      : `Chapa y pintura cerca de ${args.zoneName}`
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: serviceName,
+    description: args.description,
+    url: new URL(pagePath, siteUrl).toString(),
+    provider: { '@type': 'AutoBodyShop', '@id': `${siteUrl}#business` },
+    areaServed: { '@type': 'City', name: args.zoneName },
+    inLanguage: locale === 'en' ? 'en' : 'es',
   }
 }
 
