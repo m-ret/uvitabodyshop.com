@@ -76,10 +76,11 @@
   },
   "ServicePage": {
     "breadcrumbServices": "Servicios",
-    "included": "Qué incluye",
-    "process": "Proceso",
-    "price": "Precio orientativo",
-    "faqs": "Preguntas frecuentes",
+    "h1Template": "{service} en Uvita",
+    "includedTitle": "Qué incluye un servicio profesional de {service}",
+    "processTitle": "Proceso de {service} paso a paso",
+    "priceTitle": "Precio orientativo de {service}",
+    "faqsTitle": "Preguntas frecuentes sobre {service}",
     "detailLink": "Ver detalle",
     "subtitleEn": "In English",
     "notFoundTitle": "Servicio no encontrado"

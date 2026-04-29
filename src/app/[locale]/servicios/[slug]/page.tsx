@@ -154,7 +154,10 @@ export default async function ServiceDetailPage({ params }: Props) {
                 </div>
               </div>
             </div>
-            <PageHero title={title} lede={longDescription} />
+            <PageHero
+              title={t('h1Template', { service: title })}
+              lede={longDescription}
+            />
           </>
         }
       >
@@ -164,7 +167,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               id="incluye"
               className="font-display text-xl sm:text-2xl uppercase text-white mb-6"
             >
-              {t('included')}
+              {t('includedTitle', { service: title })}
             </h2>
             <ul className="list-disc list-outside pl-5 space-y-2 text-zinc-400 text-sm sm:text-base">
               {included.map((line) => (
@@ -178,7 +181,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               id="proceso"
               className="font-display text-xl sm:text-2xl uppercase text-white mb-6"
             >
-              {t('process')}
+              {t('processTitle', { service: title })}
             </h2>
             <ol className="space-y-6 list-none p-0 m-0">
               {process.map((step) => (
@@ -199,7 +202,7 @@ export default async function ServiceDetailPage({ params }: Props) {
 
           <section>
             <h2 className="font-display text-xl sm:text-2xl uppercase text-white mb-4">
-              {t('price')}
+              {t('priceTitle', { service: title })}
             </h2>
             <p className="text-zinc-400 text-sm sm:text-base max-w-2xl">
               {priceGuidance}
@@ -208,7 +211,7 @@ export default async function ServiceDetailPage({ params }: Props) {
 
           <section>
             <h2 className="font-display text-xl sm:text-2xl uppercase text-white mb-4">
-              {t('faqs')}
+              {t('faqsTitle', { service: title })}
             </h2>
             <div className="space-y-0 border-t border-zinc-800/80">
               {faqs.map((f) => (
