@@ -234,7 +234,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 id="related-guides"
                 className="font-mono text-xs text-zinc-500 uppercase tracking-widest mb-4"
               >
-                {locale === 'en' ? 'Related guides' : 'Guías relacionadas'}
+                {t('relatedGuides')}
               </h2>
               <ul className="flex flex-wrap gap-3 list-none p-0 m-0">
                 {relatedGuides.map((g) => (
@@ -259,7 +259,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               id="related-zones"
               className="font-mono text-xs text-zinc-500 uppercase tracking-widest mb-4"
             >
-              {locale === 'en' ? 'We serve' : 'Atendemos en'}
+              {t('zonesHeading')}
             </h2>
             <ul className="flex flex-wrap gap-3 list-none p-0 m-0">
               {business.zones.map((z) => (

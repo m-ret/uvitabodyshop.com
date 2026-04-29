@@ -82,10 +82,7 @@ export default async function ZonaPage({ params }: Props) {
   if (z.localFaqs && z.localFaqs.length > 0) {
     extraJsonLd.push(buildFaqSchema(z.localFaqs))
   }
-  const faqHeading =
-    locale === 'en'
-      ? `FAQs from ${zoneName}`
-      : `Preguntas frecuentes desde ${zoneName}`
+  const faqHeading = tZone('faqHeading', { zone: zoneName })
 
   return (
     <PageLayout
@@ -95,7 +92,7 @@ export default async function ZonaPage({ params }: Props) {
         { href: '/', label: tLayout('breadcrumbHome') },
         {
           href: '',
-          label: `${locale === 'en' ? 'Area' : 'Zona'}: ${zoneName}`,
+          label: `${tZone('breadcrumbZone')}: ${zoneName}`,
         },
       ]}
       hero={

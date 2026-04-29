@@ -46,7 +46,6 @@ export default async function SobreNosotrosPage({ params }: Props) {
       name: m.name,
       photo: m.photo,
       role: teamMembers[m.slug]?.role ?? '',
-      locale,
     })
   )
 

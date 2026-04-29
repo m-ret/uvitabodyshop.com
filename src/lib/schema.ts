@@ -199,7 +199,6 @@ export function buildPersonSchema(args: {
   photo: string
   /** Localized job title (e.g. "Frame & sheet metal"). */
   role: string
-  locale?: string
 }) {
   return {
     '@context': 'https://schema.org',
@@ -208,7 +207,6 @@ export function buildPersonSchema(args: {
     image: new URL(args.photo, siteUrl).toString(),
     jobTitle: args.role,
     worksFor: { '@type': 'AutoBodyShop', '@id': `${siteUrl}#business` },
-    inLanguage: args.locale === 'en' ? 'en' : 'es',
   }
 }
 

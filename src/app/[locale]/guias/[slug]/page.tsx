@@ -210,7 +210,7 @@ export default async function GuiaPage({ params }: Props) {
               id="guide-zones"
               className="font-mono text-xs text-zinc-500 uppercase tracking-widest mb-4"
             >
-              {locale === 'en' ? 'We serve' : 'Atendemos en'}
+              {tGuide('zonesHeading')}
             </h2>
             <ul className="flex flex-wrap gap-3 list-none p-0 m-0">
               {business.zones.map((z) => (

@@ -216,11 +216,15 @@
     "claimTitle": "Cómo hacer válida la garantía"
   },
   "ZonePage": {
-    "relatedServices": "Servicios relacionados"
+    "relatedServices": "Servicios relacionados",
+    "breadcrumbZone": "Zona",
+    "faqHeading": "Preguntas frecuentes desde {zone}",
+    "zonesHeadingOnGuide": "Atendemos en"
   },
   "GuidePage": {
     "toc": "Contenido",
     "related": "Servicios relacionados",
+    "zonesHeading": "Atendemos en",
     "minRead": "{minutes} min de lectura · {date}",
     "byline": "Por {author} · Actualizado {date}"
   },

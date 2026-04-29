@@ -86,6 +86,8 @@
     "processTitle": "Proceso de {service} paso a paso",
     "priceTitle": "Precio orientativo de {service}",
     "faqsTitle": "Preguntas frecuentes sobre {service}",
+    "relatedGuides": "Guías relacionadas",
+    "zonesHeading": "Atendemos en",
     "detailLink": "Ver detalle",
     "subtitleEn": "In English",
     "notFoundTitle": "Servicio no encontrado"

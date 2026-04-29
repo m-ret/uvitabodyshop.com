@@ -66,7 +66,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   )
 
   const guideUrls: MetadataRoute.Sitemap = business.guides.flatMap((g) =>
-    sitemapEntriesForPath(`/guias/${g.slug}`, 0.7, 'monthly', new Date(g.publishedIso))
+    sitemapEntriesForPath(
+      `/guias/${g.slug}`,
+      0.7,
+      'monthly',
+      new Date(g.dateModified ?? g.publishedIso)
+    )
   )
 
   return [...base, ...serviceUrls, ...zoneUrls, ...guideUrls]

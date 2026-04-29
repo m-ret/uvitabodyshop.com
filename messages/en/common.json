@@ -86,6 +86,8 @@
     "processTitle": "{service}: step-by-step process",
     "priceTitle": "Typical pricing for {service}",
     "faqsTitle": "FAQs about {service}",
+    "relatedGuides": "Related guides",
+    "zonesHeading": "We serve",
     "detailLink": "View details",
     "subtitleEn": "In English",
     "notFoundTitle": "Service not found"

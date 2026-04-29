@@ -211,11 +211,15 @@
     "claimTitle": "How to make a valid warranty claim"
   },
   "ZonePage": {
-    "relatedServices": "Related services"
+    "relatedServices": "Related services",
+    "breadcrumbZone": "Area",
+    "faqHeading": "FAQs from {zone}",
+    "zonesHeadingOnGuide": "We serve"
   },
   "GuidePage": {
     "toc": "Contents",
     "related": "Related services",
+    "zonesHeading": "We serve",
     "minRead": "{minutes} min read · {date}",
     "byline": "By {author} · Updated {date}"
   },
