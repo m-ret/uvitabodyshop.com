@@ -70,7 +70,7 @@ export default async function ZonaPage({ params }: Props) {
   const z = getZoneBySlug(zonaSlug)
   if (!z) notFound()
 
-  const related = business.services.slice(0, 3)
+  const related = business.services
   const tZone = await getTranslations({ locale, namespace: 'ZonePage' })
   const tLayout = await getTranslations({ locale, namespace: 'PageLayout' })
 

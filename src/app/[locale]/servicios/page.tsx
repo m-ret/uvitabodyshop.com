@@ -79,7 +79,9 @@ export default async function ServiciosIndexPage({ params }: Props) {
                     {localeUi === 'en' ? s.descriptionEn : s.description}
                   </p>
                   <span className="mt-4 inline-block font-mono text-[10px] tracking-[0.2em] uppercase text-accent">
-                    {tSvc('detailLink')}
+                    {localeUi === 'en'
+                      ? `View ${s.en} details`
+                      : `Ver detalle de ${s.es}`}
                   </span>
                 </div>
               </Link>
