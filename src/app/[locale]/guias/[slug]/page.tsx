@@ -3,7 +3,13 @@ import { hasLocale } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Link } from '@/i18n/navigation'
-import { business, getGuideBySlug, getGuideContent, getServiceBySlug } from '@/data/business'
+import {
+  business,
+  getGuideBySlug,
+  getGuideContent,
+  getServiceBySlug,
+  zoneDisplayName,
+} from '@/data/business'
 import { buildPageMetadata } from '@/lib/metadata'
 import { buildArticleSchema, jsonLd } from '@/lib/schema'
 import PageLayout from '@/components/layout/PageLayout'
@@ -197,6 +203,30 @@ export default async function GuiaPage({ params }: Props) {
               </ul>
             </div>
           )}
+
+          <section
+            aria-labelledby="guide-zones"
+            className="mt-12 pt-10 border-t border-zinc-800/50"
+          >
+            <h2
+              id="guide-zones"
+              className="font-mono text-xs text-zinc-500 uppercase tracking-widest mb-4"
+            >
+              {locale === 'en' ? 'We serve' : 'Atendemos en'}
+            </h2>
+            <ul className="flex flex-wrap gap-3 list-none p-0 m-0">
+              {business.zones.map((z) => (
+                <li key={z.slug}>
+                  <Link
+                    href={`/zonas/${z.slug}`}
+                    className="font-mono text-[10px] uppercase text-accent border border-zinc-700 px-3 py-2 hover:border-accent/60"
+                  >
+                    {zoneDisplayName(z, localeUi)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
 
           <PageEndModule
             locale={locale}

@@ -6,10 +6,13 @@ import { routing } from '@/i18n/routing'
 import {
   business,
   getServiceBySlug,
+  getGuideContent,
+  zoneDisplayName,
   type ServiceEntry,
 } from '@/data/business'
 import { buildPageMetadata } from '@/lib/metadata'
 import { buildFaqSchema, buildServiceSchema, jsonLd } from '@/lib/schema'
+import { Link } from '@/i18n/navigation'
 import PageLayout from '@/components/layout/PageLayout'
 import PageHero from '@/components/layout/PageHero'
 import PageEndModule from '@/components/layout/PageEndModule'
@@ -121,6 +124,9 @@ export default async function ServiceDetailPage({ params }: Props) {
   const process = d?.process ?? s.process
   const priceGuidance = d?.priceGuidance ?? s.priceGuidance
   const faqs = d?.faqs ?? s.faqs
+  const relatedGuides = business.guides.filter((g) =>
+    g.related.includes(s.slug)
+  )
 
   return (
     <>
@@ -226,6 +232,56 @@ export default async function ServiceDetailPage({ params }: Props) {
                 </details>
               ))}
             </div>
+          </section>
+
+          {relatedGuides.length > 0 && (
+            <section
+              aria-labelledby="related-guides"
+              className="mt-12 pt-10 border-t border-zinc-800/50"
+            >
+              <h2
+                id="related-guides"
+                className="font-mono text-xs text-zinc-500 uppercase tracking-widest mb-4"
+              >
+                {locale === 'en' ? 'Related guides' : 'Guías relacionadas'}
+              </h2>
+              <ul className="flex flex-wrap gap-3 list-none p-0 m-0">
+                {relatedGuides.map((g) => (
+                  <li key={g.slug}>
+                    <Link
+                      href={`/guias/${g.slug}`}
+                      className="font-mono text-[10px] uppercase text-accent border border-zinc-700 px-3 py-2 hover:border-accent/60"
+                    >
+                      {getGuideContent(g, locale as 'es' | 'en').title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          <section
+            aria-labelledby="related-zones"
+            className="mt-12 pt-10 border-t border-zinc-800/50"
+          >
+            <h2
+              id="related-zones"
+              className="font-mono text-xs text-zinc-500 uppercase tracking-widest mb-4"
+            >
+              {locale === 'en' ? 'We serve' : 'Atendemos en'}
+            </h2>
+            <ul className="flex flex-wrap gap-3 list-none p-0 m-0">
+              {business.zones.map((z) => (
+                <li key={z.slug}>
+                  <Link
+                    href={`/zonas/${z.slug}`}
+                    className="font-mono text-[10px] uppercase text-accent border border-zinc-700 px-3 py-2 hover:border-accent/60"
+                  >
+                    {zoneDisplayName(z, locale as 'es' | 'en')}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </section>
 
           <PageEndModule
