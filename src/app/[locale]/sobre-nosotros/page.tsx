@@ -23,7 +23,6 @@ export async function generateMetadata({ params }: Props) {
     pathname: '/sobre-nosotros',
     title: t('metaTitle'),
     description: t('metaDesc'),
-    ogImage: '/images/craft.avif',
     keywords,
   })
 }
