@@ -99,6 +99,8 @@ export default function QuoteForm({
   }))
   const [errors, setErrors] = useState<FieldError>({})
   const [status, setStatus] = useState<SubmitStatus>('idle')
+  const [honeypot, setHoneypot] = useState('')
+  const [mountTime] = useState<number>(() => Date.now())
   const nameRef = useRef<HTMLInputElement>(null)
   const phoneRef = useRef<HTMLInputElement>(null)
   const serviceRef = useRef<HTMLSelectElement>(null)
@@ -162,6 +164,8 @@ export default function QuoteForm({
           vehicle: state.vehicle.trim() || undefined,
           description: state.description.trim(),
           preferredLanguage: locale === 'en' ? 'en' : 'es',
+          website: honeypot,
+          formDwellMs: Date.now() - mountTime,
           ...(utm ? { utm } : {}),
         }),
       })
@@ -213,6 +217,32 @@ export default function QuoteForm({
       onSubmit={handleSubmit}
       aria-busy={isSubmitting}
     >
+      {/* Honeypot: real users won't see or fill this. Bots that auto-fill
+          every input will trip the server-side spam guard. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          left: '-9999px',
+          width: 1,
+          height: 1,
+          overflow: 'hidden',
+          pointerEvents: 'none',
+          opacity: 0,
+        }}
+      >
+        <label htmlFor="quote-website">Website</label>
+        <input
+          type="text"
+          id="quote-website"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+        />
+      </div>
+
       <Field
         id="quote-name"
         label={t('name')}

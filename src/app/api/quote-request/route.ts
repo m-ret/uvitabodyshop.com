@@ -2,6 +2,14 @@ import { NextResponse } from 'next/server'
 import { business } from '@/data/business'
 import { sendQuoteLeadEmail } from '@/lib/email'
 import { postLeadToSheet } from '@/lib/sheet'
+import {
+  checkRateLimit,
+  getClientIp,
+  isAllowedOrigin,
+  isDwellTooShort,
+  isHoneypotTriggered,
+  smellsLikeSpam,
+} from '@/lib/spam-guard'
 import { formatUtmForMessage, type UtmPayload } from '@/lib/utm'
 
 export const runtime = 'edge'
@@ -24,6 +32,10 @@ interface QuoteRequestBody {
   photoUrls?: string[]
   preferredLanguage?: 'es' | 'en'
   utm?: UtmPayload
+  /** Honeypot — must be empty/missing for real users. */
+  website?: string
+  /** Milliseconds between form mount and submit; bots submit instantly. */
+  formDwellMs?: number
 }
 
 const VALID_SERVICES: readonly QuoteService[] = [
@@ -74,10 +86,45 @@ function validate(body: unknown): body is QuoteRequestBody {
   if (b.preferredLanguage !== undefined && b.preferredLanguage !== 'es' && b.preferredLanguage !== 'en')
     return false
   if (!isUtmValue(b.utm)) return false
+  if (b.website !== undefined && (typeof b.website !== 'string' || b.website.length > 200))
+    return false
+  if (b.formDwellMs !== undefined && typeof b.formDwellMs !== 'number') return false
   return true
 }
 
+/** Localized fake-success body — used for silent rejects so bots can't probe. */
+function fakeSuccess(language: 'es' | 'en' | undefined) {
+  return {
+    ok: true,
+    message:
+      language === 'en'
+        ? 'Quote request received. The shop will contact you via WhatsApp during business hours (Mon–Sat 8–5 CST).'
+        : 'Solicitud recibida. El taller le contactará por WhatsApp en horario de atención (Lun–Sáb 8–5).',
+  }
+}
+
 export async function POST(request: Request) {
+  if (!isAllowedOrigin(request)) {
+    return NextResponse.json(
+      { ok: false, message: 'Forbidden.' },
+      { status: 403 }
+    )
+  }
+
+  const ip = getClientIp(request)
+  const rl = checkRateLimit(ip)
+  if (!rl.ok) {
+    return NextResponse.json(
+      { ok: false, message: 'Too many requests.' },
+      {
+        status: 429,
+        headers: {
+          'Retry-After': String(Math.max(1, Math.ceil((rl.resetAt - Date.now()) / 1000))),
+        },
+      }
+    )
+  }
+
   let body: unknown
   try {
     body = await request.json()
@@ -93,6 +140,14 @@ export async function POST(request: Request) {
   }
 
   const quote = body
+
+  if (
+    isHoneypotTriggered(quote.website) ||
+    isDwellTooShort(quote.formDwellMs) ||
+    smellsLikeSpam(quote.description, quote.name, quote.vehicle)
+  ) {
+    return NextResponse.json(fakeSuccess(quote.preferredLanguage))
+  }
   const serviceLabel =
     business.services.find((s) => s.slug === quote.service)?.es ?? 'Consulta general'
 
