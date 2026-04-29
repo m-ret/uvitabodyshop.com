@@ -82,6 +82,14 @@ All marketing pages use **`PageLayout`**: breadcrumbs → optional **`hero`** ba
 
 There is only one design direction in this project. The exploration-phase directions 2-6 live at `/home/marcelo/Work/proposal-base/uvita-bodyshop/` as a read-only reference.
 
+## Operations runbooks
+
+Read these before touching the corresponding system; they capture the gotchas (DNS quirks, suppression lists, the apex-SPF trap) that aren't visible from the code.
+
+- [`docs/deploy-runbook.md`](docs/deploy-runbook.md) — Vercel cutover, smoke checks, rollback.
+- [`docs/ops/email-and-spam.md`](docs/ops/email-and-spam.md) — Unosend integration (DNS, env vars, suppression handling) + spam-guard layers on `/api/quote-request`.
+- [`docs/ops/google-sheet-webhook.md`](docs/ops/google-sheet-webhook.md) — optional lead-mirroring sink.
+
 ## Golden rules
 
 1. **Spanish-first, bilingual UI.** Default locale is `es`; English is a first-class `en` route via `next-intl`. User-facing strings belong in `messages/es/*` and `messages/en/*` — not hardcoded in components. Placeholder or marketing copy should still read naturally for the Costa Rican market in Spanish, and read as professional shop English in `en`, not machine-translated filler.
