@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
-import { business, siteUrl } from '@/data/business'
-import { pathnameWithLocale } from '@/lib/metadata'
+import { business } from '@/data/business'
+import { absoluteUrlForPath } from '@/lib/metadata'
 import { routing } from '@/i18n/routing'
 
 const staticPaths: {
@@ -22,15 +22,9 @@ type ChangeFreq = MetadataRoute.Sitemap[0]['changeFrequency']
 function languageAlternates(path: string): Record<string, string> {
   const languages: Record<string, string> = {}
   for (const locale of routing.locales) {
-    languages[locale] = new URL(
-      pathnameWithLocale(locale, path),
-      siteUrl
-    ).toString()
+    languages[locale] = absoluteUrlForPath(locale, path)
   }
-  languages['x-default'] = new URL(
-    pathnameWithLocale(routing.defaultLocale, path),
-    siteUrl
-  ).toString()
+  languages['x-default'] = absoluteUrlForPath(routing.defaultLocale, path)
   return languages
 }
 
@@ -47,7 +41,7 @@ function sitemapEntriesForPath(
 ): MetadataRoute.Sitemap {
   const alternates = languageAlternates(path)
   return routing.locales.map((locale) => ({
-    url: new URL(pathnameWithLocale(locale, path), siteUrl).toString(),
+    url: absoluteUrlForPath(locale, path),
     lastModified,
     changeFrequency: change,
     priority,
