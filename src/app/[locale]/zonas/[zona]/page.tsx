@@ -2,7 +2,7 @@ import { hasLocale } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Link } from '@/i18n/navigation'
-import { business, getZoneBySlug } from '@/data/business'
+import { business, getZoneBySlug, zoneDisplayName } from '@/data/business'
 import { buildPageMetadata } from '@/lib/metadata'
 import PageLayout from '@/components/layout/PageLayout'
 import PageHero from '@/components/layout/PageHero'
@@ -36,11 +36,20 @@ export async function generateMetadata({ params }: Props) {
       index: false,
     })
   }
+  const zoneName = zoneDisplayName(z, locale as 'es' | 'en')
+  const title =
+    locale === 'en'
+      ? `Auto body & paint near ${zoneName} · South Zone`
+      : `Chapa y pintura cerca de ${zoneName} · Zona Sur`
+  const hours =
+    locale === 'en' ? business.hours.displayEn : business.hours.display
+  const description =
+    `${z.lede} ${zoneName} y alrededores · ${hours}`.replace(/\.\.+/g, '.')
   return buildPageMetadata({
     locale,
     pathname: `/zonas/${z.slug}`,
-    title: `Taller de chapa y pintura cerca de ${z.name} · Zona Sur`,
-    description: `${z.lede} Atención a ${z.name} y alrededores. ${business.hours.display}.`,
+    title,
+    description,
     ...(locale === 'es'
       ? {
           keywords: [
