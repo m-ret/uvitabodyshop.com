@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { Link } from '@/i18n/navigation'
 import { business, getZoneBySlug, zoneDisplayName } from '@/data/business'
 import { buildPageMetadata } from '@/lib/metadata'
-import { buildZoneServiceSchema } from '@/lib/schema'
+import { buildZoneServiceSchema, buildFaqSchema } from '@/lib/schema'
 import PageLayout from '@/components/layout/PageLayout'
 import PageHero from '@/components/layout/PageHero'
 import PageEndModule from '@/components/layout/PageEndModule'
@@ -86,11 +86,19 @@ export default async function ZonaPage({ params }: Props) {
     description: z.lede,
     locale,
   })
+  const extraJsonLd: unknown[] = [zoneService]
+  if (z.localFaqs && z.localFaqs.length > 0) {
+    extraJsonLd.push(buildFaqSchema(z.localFaqs))
+  }
+  const faqHeading =
+    locale === 'en'
+      ? `FAQs from ${zoneName}`
+      : `Preguntas frecuentes desde ${zoneName}`
 
   return (
     <PageLayout
       locale={locale}
-      extraJsonLd={[zoneService]}
+      extraJsonLd={extraJsonLd}
       breadcrumb={[
         { href: '/', label: tLayout('breadcrumbHome') },
         { href: '', label: `Zona: ${z.name}` },
@@ -135,6 +143,36 @@ export default async function ZonaPage({ params }: Props) {
             ))}
           </ul>
         </div>
+        {z.localFaqs && z.localFaqs.length > 0 && (
+          <section
+            aria-labelledby="zone-faq"
+            className="mt-12 pt-10 border-t border-zinc-800/50"
+          >
+            <h2
+              id="zone-faq"
+              className="font-display text-xl uppercase mb-6 text-white"
+            >
+              {faqHeading}
+            </h2>
+            <div className="space-y-0 border-t border-zinc-800/80">
+              {z.localFaqs.map((f) => (
+                <details
+                  key={f.q}
+                  className="group border-b border-zinc-800/80"
+                >
+                  <summary className="cursor-pointer py-4 pr-2 list-none [&::-webkit-details-marker]:hidden">
+                    <h3 className="inline font-mono text-sm text-zinc-200 font-normal">
+                      {f.q}
+                    </h3>
+                  </summary>
+                  <p className="text-zinc-500 text-sm pb-4 leading-relaxed">
+                    {f.a}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
         <PageEndModule
           locale={locale}
           currentHref={`/zonas/${z.slug}`}

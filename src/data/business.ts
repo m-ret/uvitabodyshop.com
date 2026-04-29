@@ -691,9 +691,28 @@ export const business = {
       eyebrow: 'Taller local',
       lede: 'Uvita es nuestra casa. Atendemos desde calle principal, con retiro coordinado por WhatsApp dentro del cantón.',
       localCues: [
-        'Trabajos coordinados en horario de marea y clima húmedo de la Costa Ballena.',
-        'Retiro y entrega dentro de Uvita sin costo para trabajos mayores a 3 días.',
-        'Turnos prioritarios para flotas locales de turismo y tours.',
+        'A 2 minutos del centro de Uvita; entrada por la calle frente a la Costanera Sur, junto al cruce a Bahía.',
+        'Espacio techado para hasta 4 vehículos en proceso, más bahía de pintura cerrada con horno infrarrojo.',
+        'Atendemos pickups, sedanes y SUV familiares — el parque vehicular típico de Uvita centro y residencias en Bahía.',
+        'Recogemos en hospedaje o mecánico aliado dentro de Uvita centro sin costo adicional para trabajos mayores a ₡300.000.',
+        'Aire salino y humedad del 80% requieren limpieza de masilla y curado controlado — protocolo distinto al de un taller del Valle Central.',
+        'Coordinamos por WhatsApp para fijar día y hora; los lunes y martes suelen tener mayor disponibilidad de bahía.',
+        'Diagnóstico estructural con bancada en taller; no medimos en parqueo público ni en garaje del cliente.',
+        'Documentamos con fotos antes/durante/después y entregamos PDF para tu aseguradora si lo necesitás.',
+      ],
+      localFaqs: [
+        {
+          q: '¿Cuánto demora un trabajo si vivo en Uvita?',
+          a: 'Para clientes de Uvita centro coordinamos retiro y entrega el mismo día cuando el trabajo cabe en jornada (retoques, abolladuras menores, accesorios). Pintura completa o enderezado siguen el plazo normal; te avisamos por WhatsApp cuando podés recoger.',
+        },
+        {
+          q: '¿Coordinan retiro o entrega en Uvita?',
+          a: 'Sí, sin costo adicional para trabajos mayores a ₡300.000 dentro de Uvita centro y Bahía. Pasamos a recoger en hospedaje, casa o tu mecánico aliado y devolvemos el carro al mismo punto al final.',
+        },
+        {
+          q: '¿Hay precio diferente para clientes de Uvita?',
+          a: 'No hay descuento por dirección, pero sí ahorrás en transporte porque el retiro entra incluido. La cotización siempre va por WhatsApp antes del traslado.',
+        },
       ],
     },
     {
@@ -703,9 +722,28 @@ export const business = {
       eyebrow: 'Zona servida',
       lede: 'Atendemos clientes de Dominical, Dominicalito y Escaleras. Retiro coordinado y cotización por WhatsApp antes de bajar el carro.',
       localCues: [
-        'Especialistas en reparación de golpes por caminos de acceso a Escaleras y Hatillo.',
-        'Cotización a distancia con fotos — te ahorramos la vuelta si el trabajo no vale la pena.',
-        'Horario flexible para operadores de surf y tours en la zona.',
+        '15 minutos por la Costanera Sur desde Dominical centro; cruce indicado en el supermercado El Pueblo.',
+        'Recibimos clientes de Dominicalito, Escaleras, Pozo Azul y Hatillo — la mayoría sube a Uvita el mismo día de la cotización.',
+        'Caminos de acceso a Escaleras y Hatillo son lastre y rajan paneles inferiores; cotizamos abolladuras y rayones específicos a este uso.',
+        'Aire salino y polvo del verano marca cuál es el mejor momento para pintar — te lo decimos antes de fijar fecha.',
+        'Operadores de tours, surf camps y rentadoras locales tienen prioridad cuando el carro queda fuera de servicio en alta temporada.',
+        'Vehículos de alquiler con cobertura privada: preparamos reporte fotográfico para tu seguro o rent-a-car en formato PDF.',
+        'Cotización por WhatsApp con fotos antes de mover el carro — si el trabajo no justifica el viaje a Uvita, te lo decimos sin pena.',
+        'Atendemos sábados con cita previa para choferes que no pueden bajar entre semana.',
+      ],
+      localFaqs: [
+        {
+          q: '¿Cuánto demora un trabajo si vivo en Dominical?',
+          a: 'Retoques y abolladuras menores los entregamos el mismo día o al siguiente. Pintura completa va de 7 a 14 días hábiles; coordinamos para que solo bajés a Uvita una vez (entrega y recogida).',
+        },
+        {
+          q: '¿Coordinan retiro o entrega en Dominical?',
+          a: 'Sí, contra cita previa cuando el trabajo lo amerita. Para servicios menores a ₡300.000 te invitamos a bajar el carro porque el costo logístico desbalancea el presupuesto; la decisión queda clara antes en WhatsApp.',
+        },
+        {
+          q: '¿Hay precio diferente para clientes de Dominical?',
+          a: 'Mismo presupuesto que cualquier cliente de la Zona Sur. La diferencia real es el tiempo de coordinación: con fotos por WhatsApp evitás un viaje innecesario si el trabajo no cabe en nuestro estándar.',
+        },
       ],
     },
     {
@@ -715,9 +753,28 @@ export const business = {
       eyebrow: 'Zona servida',
       lede: 'Clientes de Ojochal, Tortuga Abajo y Tres Ríos. Entregamos trabajos con curado completo para el clima costero.',
       localCues: [
-        'Pintura con protección extra contra salinidad y humedad costera.',
-        'Coordinación con residentes extranjeros en inglés funcional cuando es necesario.',
-        'Cotización por WhatsApp con traducción a inglés si se pide.',
+        '20 minutos al sur por la Costanera; señalización clara en el ingreso a Ojochal centro y vuelta a Tres Ríos.',
+        'Atendemos residentes y propietarios de Ojochal, Tortuga Abajo, Tres Ríos y Cinco Ventanas — en su mayoría comunidad expat con SUV y pickups 4x4.',
+        'Acceso a propiedades de altura por caminos lastreados sube el riesgo de impactos contra rocas; cotizamos recurrencias antes de pintar el panel completo.',
+        'Aire de costa más humedad de selva: usamos primer epóxico anti-corrosión en chapa expuesta, no solo en zonas con óxido visible.',
+        'Coordinación bilingüe ES/EN por WhatsApp y correo cuando se requiere — clientes extranjeros reciben cotización en inglés si lo piden.',
+        'Documentación lista para aseguradoras de Estados Unidos y Europa que cubren residentes en Costa Rica con vehículo registrado acá.',
+        'Vehículos de alquiler entregados a residentes: preparamos reporte para que la rentadora confirme inspección antes de devolución.',
+        'Pintura completa y cambios de color quedan en agenda con 1–2 semanas de antelación durante la temporada alta de turismo.',
+      ],
+      localFaqs: [
+        {
+          q: '¿Cuánto demora un trabajo si vivo en Ojochal?',
+          a: 'Retoques en 2–4 días hábiles; pintura completa de 8 a 15 días según condición de chapa y cambio de color. Te damos rango después del diagnóstico, no antes — y siempre coordinamos un solo viaje a Uvita.',
+        },
+        {
+          q: '¿Coordinan retiro o entrega en Ojochal?',
+          a: 'Sí, con cita previa para trabajos mayores a ₡400.000. Para servicios menores te recibimos en taller; el viaje a Uvita es de 20 minutos y no justifica el costo logístico de subir y bajar dos veces.',
+        },
+        {
+          q: '¿Atienden en inglés a residentes extranjeros de Ojochal?',
+          a: 'Sí. WhatsApp, correo y entrega van en inglés cuando el cliente lo prefiere. La cotización formal sale en español por requisito de Hacienda, pero la conversación operativa es bilingüe.',
+        },
       ],
     },
     {
@@ -728,9 +785,28 @@ export const business = {
       eyebrow: 'Zona servida',
       lede: 'Bahía Ballena y Playa Arco. Vehículos de alquiler, flotas turísticas y residentes locales.',
       localCues: [
-        'Reparaciones rápidas para vehículos de alquiler y tours que no pueden detenerse más de un día.',
-        'Retoques express para entregas en menos de 48 horas cuando aplica.',
-        'Servicio para flotas pequeñas con factura formal.',
+        '10 minutos del taller hacia el norte; entrada por el cruce de Playa Hermosa o por Bahía Ballena directo.',
+        'Vehículos de alquiler de corto plazo, flotas turísticas y residentes con segunda casa son nuestra clientela típica acá.',
+        'El acceso de playa expone la pintura a arena y aire salino constante — recomendamos primer epóxico y curado completo antes de devolver el carro al uso costero.',
+        'Coordinamos retiros con propietarios de hospedajes, rent-a-cars y operadores que necesitan el carro de vuelta antes del fin de semana siguiente.',
+        'Reparaciones express para vehículos turísticos: retoques en 24–48 horas cuando la condición y el presupuesto lo permiten.',
+        'Trabajamos con factura formal para hospedajes, tours y rentadoras — IVA y declaración para deducción contable.',
+        'Cotización por WhatsApp con fotos para evitar el traslado innecesario si el trabajo se puede atender más adelante.',
+        'Documentación visual de cada paso para flotas que rotan vehículos cada temporada y necesitan registro de mantenimiento estético.',
+      ],
+      localFaqs: [
+        {
+          q: '¿Cuánto demora un trabajo si vivo en Bahía?',
+          a: 'Retoques los entregamos en 24–48 horas cuando la cita está confirmada. Pintura completa entra al ciclo normal de 7–14 días; para flotas grandes negociamos una segunda bahía si el calendario lo permite.',
+        },
+        {
+          q: '¿Coordinan retiro o entrega en Bahía Ballena?',
+          a: 'Sí, sin costo adicional para clientes con varios vehículos en flota o trabajos sobre ₡300.000. Para residentes con un solo carro coordinamos según ruta del día — funciona bien si la cita encaja con otros retiros de la zona.',
+        },
+        {
+          q: '¿Tienen factura electrónica para hospedajes y rent-a-cars?',
+          a: 'Sí. Generamos factura electrónica con IVA y desglose de mano de obra y materiales para deducción contable. Coordinamos por correo o WhatsApp con la persona encargada de pagos.',
+        },
       ],
     },
   ],
