@@ -27,7 +27,7 @@
     "members": {
       "carlos": {
         "role": "Body & frame",
-        "bio": "Reads damage with his hands first, his eyes second. Won’t pull a panel until he’s measured it.",
+        "bio": "Reads damage by feel before sight. He measures every panel before he pulls it.",
         "alt": "Carlos, body and frame technician at Uvita Body Shop"
       },
       "rafael": {
@@ -116,11 +116,11 @@
     "items": [
       {
         "q": "What does a full respray typically cost?",
-        "a": "A professional booth respray in Costa Rica often starts around ₡450,000 for a compact car in factory colour and can go higher for SUVs, colour changes or pearls. The real number comes from photos, inspection and actual panel scope — never a guess."
+        "a": "A professional booth respray in Costa Rica often starts around ₡450,000 for a compact car in factory color and can go higher for SUVs, color changes or pearls. The real number comes from photos, inspection and actual panel scope — never a guess."
       },
       {
         "q": "How long does full paint or structural frame work take?",
-        "a": "Full paint: commonly 7–14 business days depending on prep, colour and weather. Structural work: 5–20 days depending on damage. We give a range after diagnosis — we don’t promise dates by eyeball."
+        "a": "Full paint: commonly 7–14 business days depending on prep, color and weather. Structural work: 5–20 days depending on damage. We give a range after diagnosis — we don’t promise dates by eyeball."
       },
       {
         "q": "How do photo quotes over WhatsApp work?",
@@ -128,7 +128,7 @@
       },
       {
         "q": "What vehicle brands and classes do you work on?",
-        "a": "Any brand: sedans, pickups, SUVs and light commercial vehicles, within what our team and equipment can warranty. If it’s outside our scope, we say so up front instead of taking the job anyway."
+        "a": "Any brand: sedans, pickups, SUVs and light commercial vehicles — within what our team and equipment can stand behind. If it’s outside our scope, we say so up front instead of taking the job anyway."
       },
       {
         "q": "Do you handle insurance paperwork?",
@@ -140,7 +140,7 @@
       },
       {
         "q": "Which paint brands and chemicals do you use — and why does it matter?",
-        "a": "Roberlo, BESA, 3M and VICCO in the right stack for substrate and colour. The full system (primer, base, clear, mixing) drives durability, colour match and warranty work. No random cans off the shelf."
+        "a": "Roberlo, BESA, 3M and VICCO in the right stack for substrate and color. The full system (primer, base, clear, mixing) drives durability, color match and warranty work. No random cans off the shelf."
       },
       {
         "q": "How do I book, and where are you in Uvita?",
@@ -152,7 +152,7 @@
       },
       {
         "q": "Payment methods and cancellation policy?",
-        "a": "Usually cash and SINPE transfer. For longer jobs we agree milestone deposits in writing before we start. If you can’t make a confirmed drop-off, tell us early: rescheduling is normal; a reserved bay left empty without notice affects the queue and may change the next slot per rules we agree when confirming."
+        "a": "Usually cash and SINPE transfer. For longer jobs we agree milestone deposits in writing before we start. If you can’t make a confirmed drop-off, tell us early: rescheduling is normal; if you no-show a reserved bay, the next available slot will reflect the rules we agree on when we confirm."
       },
       {
         "q": "What should I bring on drop-off or pick-up day?",
