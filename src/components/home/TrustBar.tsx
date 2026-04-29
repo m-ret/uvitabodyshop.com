@@ -33,7 +33,7 @@ export default function TrustBar() {
   ]
 
   return (
-    <div className="mt-8 max-w-3xl">
+    <div className="max-w-3xl">
       <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-600 mb-3">
         {t('eyebrow')}
       </p>

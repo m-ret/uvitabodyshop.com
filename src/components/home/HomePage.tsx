@@ -286,42 +286,46 @@ export default function HomePage() {
           buffer (header ≈ safe + 1rem + logo + py-4; PageLayout uses +5.5rem).
         */}
         <div className="relative z-10 flex h-full min-h-0 flex-col justify-start px-6 pt-[calc(env(safe-area-inset-top,0)+6.75rem)] pb-20 pointer-events-none sm:px-12 sm:pt-[calc(env(safe-area-inset-top,0)+7rem)] lg:px-24 lg:pt-[calc(env(safe-area-inset-top,0)+7.25rem)]">
-          <div className="max-w-2xl">
-            <p className="hero-label font-mono text-xs tracking-[0.25em] uppercase text-zinc-500 mb-8">
-              {tHome('Hero.label')}
-            </p>
+          {/*
+            Hero is fixed + overflow-hidden: stacking TrustBar + huge H1 + CTAs clipped the
+            primary CTAs below the fold. Headline + sub stay left; CTAs anchor right on lg.
+            Trust strip lives below the marquee (see scrolling section).
+          */}
+          <div className="w-full max-w-[1600px] mx-auto flex flex-col gap-6 lg:grid lg:grid-cols-12 lg:gap-x-10 lg:items-start lg:gap-y-0">
+            <div className="lg:col-span-7 max-w-2xl">
+              <p className="hero-label font-mono text-xs tracking-[0.25em] uppercase text-zinc-500 mb-4 sm:mb-6">
+                {tHome('Hero.label')}
+              </p>
 
-            <h1 className="font-display text-[clamp(2.5rem,8vw,10rem)] leading-[0.85] tracking-tight uppercase drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
-              <span className="hero-line block">{tHome('Hero.line1')}</span>
-              <span className="hero-line block">{tHome('Hero.line2')}</span>
-              <span className="hero-line block text-accent drop-shadow-[0_0_30px_rgba(204,0,0,0.4)]">
-                {tHome('Hero.line3')}
-              </span>
-              <span className="hero-line block">{tHome('Hero.line4')}</span>
-            </h1>
+              <h1 className="font-display text-[clamp(2.25rem,7.25vw,8.75rem)] leading-[0.85] tracking-tight uppercase drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
+                <span className="hero-line block">{tHome('Hero.line1')}</span>
+                <span className="hero-line block">{tHome('Hero.line2')}</span>
+                <span className="hero-line block text-accent drop-shadow-[0_0_30px_rgba(204,0,0,0.4)]">
+                  {tHome('Hero.line3')}
+                </span>
+                <span className="hero-line block">{tHome('Hero.line4')}</span>
+              </h1>
 
-            <p className="hero-sub text-base sm:text-lg text-zinc-400 mt-8 max-w-md leading-relaxed">
-              {tHome('Hero.sub')}
-            </p>
-
-            <div className="pointer-events-auto max-w-3xl">
-              <TrustBar />
-              <HomeRatingBar />
+              <p className="hero-sub text-base sm:text-lg text-zinc-400 mt-5 sm:mt-6 max-w-md leading-relaxed">
+                {tHome('Hero.sub')}
+              </p>
             </div>
 
-            <div className="flex flex-wrap gap-4 mt-10 pointer-events-auto">
-              <a
-                href="#contact"
-                className="hero-cta inline-flex px-8 py-4 bg-accent text-white text-sm font-medium tracking-wide uppercase hover:bg-accent-hover transition-colors duration-300"
-              >
-                {tHome('Hero.ctaQuote')}
-              </a>
-              <a
-                href="#services"
-                className="hero-cta inline-flex px-8 py-4 border border-zinc-700 text-zinc-300 text-sm font-medium tracking-wide uppercase hover:border-zinc-400 hover:text-white transition-all duration-300"
-              >
-                {tHome('Hero.ctaServices')}
-              </a>
+            <div className="lg:col-span-5 flex flex-col gap-4 pointer-events-auto lg:items-end lg:pt-1 xl:pt-2">
+              <div className="flex flex-col sm:flex-row lg:flex-col gap-3 sm:gap-4 w-full sm:w-auto lg:w-full lg:max-w-md lg:ml-auto">
+                <a
+                  href="#contact"
+                  className="hero-cta inline-flex justify-center px-8 py-4 bg-accent text-white text-sm font-medium tracking-wide uppercase hover:bg-accent-hover transition-colors duration-300"
+                >
+                  {tHome('Hero.ctaQuote')}
+                </a>
+                <a
+                  href="#services"
+                  className="hero-cta inline-flex justify-center px-8 py-4 border border-zinc-700 text-zinc-300 text-sm font-medium tracking-wide uppercase hover:border-zinc-400 hover:text-white transition-all duration-300"
+                >
+                  {tHome('Hero.ctaServices')}
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -360,6 +364,19 @@ export default function HomePage() {
           ))}
         </div>
       </div>
+
+      {/* ===== TRUST — below marquee (was crowding fixed hero; keeps CTAs above fold) ===== */}
+      <section
+        id="trust"
+        data-section="trust"
+        className="border-b border-zinc-800/50 bg-background px-6 py-10 sm:px-12 sm:py-12 lg:px-24"
+        aria-label={tHome('Trust.eyebrow')}
+      >
+        <div className="max-w-6xl mx-auto pointer-events-auto">
+          <TrustBar />
+          <HomeRatingBar />
+        </div>
+      </section>
 
       {/* ===== THE CRAFT — massive typographic section ===== */}
       <section className="craft-section relative py-32 sm:py-44 px-6 sm:px-12 lg:px-24 overflow-hidden">
