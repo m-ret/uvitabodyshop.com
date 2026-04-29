@@ -3,10 +3,9 @@ import Link from 'next/link'
 import { displayContact } from '@/data/business'
 
 export const metadata: Metadata = {
-  title: '404 — Página no encontrada · Uvita Body Shop',
+  title: '404 — Página no encontrada',
   description:
     'La página que buscás no existe. Volvé al inicio o escribinos por WhatsApp.',
-  robots: { index: false, follow: false },
 }
 
 export default function NotFound() {
