@@ -14,7 +14,7 @@
       "line2": "y Pintura.",
       "line3": "Acabado",
       "line4": "Perfecto.",
-      "sub": "Reparación de colisión, pintura completa y acabados personalizados. Cada vehículo sale de nuestra cabina como nuevo — o mejor.",
+      "sub": "Reparación de colisión, pintura completa y acabados personalizados. Cada vehículo sale de nuestra cabina como nuevo. A veces mejor.",
       "ctaGroupAria": "Contacto con Uvita Body Shop por WhatsApp o teléfono",
       "phoneLinkAria": "Teléfono {phone}"
     },
@@ -52,7 +52,7 @@
       "head1b": "carros.",
       "head2a": "Los",
       "head2b": "restauramos.",
-      "body": "9 años de experiencia práctica. Cabina de pintura controlada con horno de curado infrarrojo. Materiales profesionales Roberlo, BESA, 3M y VICCO. Cada trabajo respaldado por garantía escrita — porque no tomamos atajos.",
+      "body": "9 años en la cabina. Roberlo, BESA, 3M y VICCO son los que usamos porque son los que aguantan la humedad salina de Uvita. Garantía escrita en cada trabajo.",
       "imageAlt": "Fabricio Ríos Ortíz — propietario de Uvita Body Shop, en la cabina",
       "ownerCaption": "Fabricio Ríos Ortíz — Propietario"
     },
@@ -114,14 +114,14 @@
       "title1": "Horno infrarrojo.",
       "title2": "Cabina controlada.",
       "titleAccent": "Con garantía.",
-      "body": "Materiales profesionales Roberlo, BESA, 3M y VICCO. Horno de curado infrarrojo. Cabina de pintura controlada. Cada trabajo con garantía escrita — porque no tomamos atajos.",
+      "body": "Roberlo y BESA para color y laca, 3M para preparación, VICCO para primer. Curado infrarrojo dentro de cabina controlada. Garantía escrita por trabajo.",
       "imageAlt": "Técnico de Uvita Body Shop pintando un vehículo con pistola HVLP en la cabina controlada"
     },
     "Materials": {
       "eyebrow": "Calidad profesional",
       "titleBefore": "Los materiales detrás del ",
       "titleAccent": "acabado.",
-      "body": "Solo usamos productos que las pintorerías de fábrica usan en todo el mundo. Sin atajos. Sin marcas genéricas. Durabilidad, color exacto y un acabado que dura.",
+      "body": "Lo que usan las pintorerías de fábrica en todo el mundo es lo que usamos acá. Sin atajos y sin latas de marca rara. El acabado dura porque los materiales duran.",
       "trust": [
         {
           "label": "Cabina con horno",
@@ -182,7 +182,7 @@
       "eyebrow": "Empezá aquí",
       "title1": "¿Listo para",
       "title2": "recuperar tu vehículo?",
-      "body": "Cotización sin costo. Llamá, escribí por WhatsApp o completá el formulario. Respondemos en menos de 24 horas."
+      "body": "Mandá una foto por WhatsApp — la mayoría de cotizaciones salen el mismo día."
     }
   }
 }
