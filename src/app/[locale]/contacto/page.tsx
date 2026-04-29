@@ -22,7 +22,11 @@ export async function generateMetadata({ params }: Props) {
     locale,
     pathname: '/contacto',
     title: t('metaTitle'),
-    description: `${t('metaDesc')} ${c.hoursDisplay}. ${business.address.locationDisplay}.`,
+    description:
+      `${t('metaDesc')} ${c.hoursDisplay} · ${business.address.locationDisplay}`.replace(
+        /\.\.+/g,
+        '.'
+      ),
     keywords,
   })
 }
