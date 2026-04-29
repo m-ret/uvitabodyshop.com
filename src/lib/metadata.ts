@@ -14,11 +14,22 @@ export interface PageMetaInput {
   locale: string
 }
 
-/** Public URL path including optional `/en` prefix. */
+/** Public URL path including optional `/en` prefix. Root-aware: `/en/` is
+ * normalized to `/en` so canonical and sitemap agree on a single shape. */
 export function pathnameWithLocale(locale: string, pathname: string): string {
   const p = pathname.startsWith('/') ? pathname : `/${pathname}`
   if (locale === routing.defaultLocale) return p
+  if (p === '/') return `/${locale}`
   return `/${locale}${p}`
+}
+
+/** Absolute URL for a localized path, stripping any trailing slash except
+ * on the default-locale root (which stays as the bare site URL). */
+export function absoluteUrlForPath(locale: string, pathname: string): string {
+  const path = pathnameWithLocale(locale, pathname)
+  if (path === '/') return siteUrl.replace(/\/$/, '')
+  const u = new URL(path, siteUrl).toString()
+  return u.replace(/\/$/, '')
 }
 
 export function buildPageMetadata(input: PageMetaInput): Metadata {
@@ -32,17 +43,16 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
     locale,
   } = input
 
-  const canonicalPath = pathnameWithLocale(locale, pathname)
-  const absoluteCanonical = new URL(canonicalPath, siteUrl).toString()
+  const absoluteCanonical = absoluteUrlForPath(locale, pathname)
   const ogImageUrl = ogImage
     ? new URL(ogImage, siteUrl).toString()
     : new URL('/opengraph-image', siteUrl).toString()
 
   const languages: Record<string, string> = {}
   for (const l of routing.locales) {
-    languages[l] = pathnameWithLocale(l, pathname)
+    languages[l] = absoluteUrlForPath(l, pathname)
   }
-  languages['x-default'] = pathnameWithLocale(routing.defaultLocale, pathname)
+  languages['x-default'] = absoluteUrlForPath(routing.defaultLocale, pathname)
 
   const resolvedKeywords =
     keywords !== undefined
@@ -56,7 +66,7 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
     description,
     ...(resolvedKeywords !== undefined ? { keywords: resolvedKeywords } : {}),
     alternates: {
-      canonical: canonicalPath,
+      canonical: absoluteCanonical,
       languages,
     },
     openGraph: {
