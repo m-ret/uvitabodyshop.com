@@ -54,8 +54,10 @@ export default async function PreguntasFrecuentesPage({ params }: Props) {
         {items.map((f) => (
           <div key={f.q} className="border-b border-zinc-800/80">
             <details className="group">
-              <summary className="cursor-pointer font-mono text-sm text-zinc-200 py-4 pr-2 list-none [&::-webkit-details-marker]:hidden">
-                {f.q}
+              <summary className="cursor-pointer py-4 pr-2 list-none [&::-webkit-details-marker]:hidden">
+                <h3 className="inline font-mono text-sm text-zinc-200 font-normal">
+                  {f.q}
+                </h3>
               </summary>
               <p className="text-zinc-500 text-sm pb-4 pl-0 leading-relaxed">
                 {f.a}
