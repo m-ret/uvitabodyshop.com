@@ -98,6 +98,8 @@ export interface GuideEntry {
   readingMinutes: number
   heroImage: string
   publishedIso: string
+  /** Last meaningful edit (ISO date). Falls back to publishedIso. */
+  dateModified?: string
   keywords: string[]
   sections: GuideSection[]
   sectionsEn: GuideSection[]
@@ -125,7 +127,7 @@ export const business = {
     region: 'Puntarenas',
     countryCode: 'CR',
     country: 'Costa Rica',
-    areaServed: ['Uvita', 'Dominical', 'Ojochal', 'Bahía Ballena', 'Zona Sur'],
+    areaServed: ['Uvita', 'Dominical', 'Ojochal', 'Bahía Ballena'],
     locationDisplay: 'Uvita, Puntarenas, Costa Rica',
   },
 
@@ -561,7 +563,14 @@ export const business = {
     ],
   },
 
-  socialLinks: [] as SocialLink[],
+  socialLinks: [
+    // TODO: replace url with verified Google Business Profile short link once GBP is claimed.
+    {
+      platform: 'google',
+      url: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
+      handle: 'uvita-body-shop',
+    },
+  ] as SocialLink[],
 
   map: {
     embedUrl:
@@ -744,6 +753,7 @@ export const business = {
       readingMinutes: 6,
       heroImage: '/images/services/pintura-completa.avif',
       publishedIso: '2026-04-23',
+      dateModified: '2026-04-29',
       keywords: [
         'cuanto cuesta pintar un carro costa rica',
         'precio pintura carro costa rica',
@@ -808,6 +818,7 @@ export const business = {
       readingMinutes: 5,
       heroImage: '/images/services/enderezado.avif',
       publishedIso: '2026-04-15',
+      dateModified: '2026-04-29',
       keywords: [
         'enderezado de chasis costa rica',
         'como saber si mi chasis esta torcido',
@@ -864,6 +875,7 @@ export const business = {
       readingMinutes: 4,
       heroImage: '/images/services/retoques-pintura.avif',
       publishedIso: '2026-03-30',
+      dateModified: '2026-04-29',
       keywords: [
         'retoque pintura vs pintura completa',
         'cuando pintar carro completo',
@@ -920,6 +932,7 @@ export const business = {
       readingMinutes: 5,
       heroImage: '/images/craft.avif',
       publishedIso: '2026-03-10',
+      dateModified: '2026-04-29',
       keywords: [
         'cuidar pintura carro costa rica',
         'pintura automotriz clima tropical',
@@ -1057,7 +1070,8 @@ export function buildStructuredData(locale: 'es' | 'en' = 'es') {
           aggregateRating: {
             '@type': 'AggregateRating',
             ratingValue: rating.value,
-            reviewCount: rating.count,
+            ratingCount: rating.count,
+            reviewCount: testimonials.length,
             bestRating: 5,
             worstRating: 1,
           },
@@ -1100,6 +1114,14 @@ export function buildStructuredData(locale: 'es' | 'en' = 'es') {
         priceRange: business.pricing.priceRange,
         image: `${siteUrl}/opengraph-image`,
         logo: `${siteUrl}/logo.png`,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 9.1572,
+          longitude: -83.7383,
+        },
+        hasMap: business.map.linkUrl,
+        paymentAccepted: 'Cash, Bank Transfer, SINPE Móvil',
+        currenciesAccepted: 'CRC',
         address: {
           '@type': 'PostalAddress',
           addressLocality: business.address.locality,
