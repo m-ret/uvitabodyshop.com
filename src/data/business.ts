@@ -733,8 +733,8 @@ export const business = {
   guides: [
     {
       slug: 'cuanto-cuesta-pintar-un-carro-en-costa-rica',
-      title: '¿Cuánto cuesta pintar un carro en Costa Rica en 2026?',
-      titleEn: 'How much does it cost to paint a car in Costa Rica in 2026?',
+      title: 'Cuánto cuesta pintar un carro en CR',
+      titleEn: 'Cost to paint a car in Costa Rica',
       eyebrow: 'Guía de precios',
       eyebrowEn: 'Pricing guide',
       summary:
@@ -797,8 +797,8 @@ export const business = {
     },
     {
       slug: 'enderezado-de-chasis-cuando-es-necesario',
-      title: 'Enderezado de chasis: cuándo es necesario y cuándo no',
-      titleEn: 'Frame straightening: when you need it and when you don’t',
+      title: 'Enderezado de chasis: cuándo aplica',
+      titleEn: 'Frame straightening: when needed',
       eyebrow: 'Guía técnica',
       eyebrowEn: 'Technical guide',
       summary:
@@ -853,8 +853,8 @@ export const business = {
     },
     {
       slug: 'como-saber-si-tu-pintura-necesita-retoque-o-repinte',
-      title: '¿Retoque o pintura completa? Cómo saber cuál te conviene',
-      titleEn: 'Touch-up or full respray? How to choose what your car needs',
+      title: 'Retoque o repinte: cómo elegir',
+      titleEn: 'Touch-up vs respray: how to choose',
       eyebrow: 'Guía práctica',
       eyebrowEn: 'Practical guide',
       summary:
@@ -909,9 +909,8 @@ export const business = {
     },
     {
       slug: 'pintura-automotriz-en-clima-costero',
-      title: 'Pintura automotriz en clima costero: cómo cuidarla en la Costa Ballena',
-      titleEn:
-        'Automotive paint in coastal weather: protecting it on the Costa Ballena',
+      title: 'Pintura en clima costero · Costa Ballena',
+      titleEn: 'Coastal-weather auto paint care',
       eyebrow: 'Guía de cuidado',
       eyebrowEn: 'Care guide',
       summary:
