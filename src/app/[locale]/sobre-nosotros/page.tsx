@@ -4,6 +4,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Link } from '@/i18n/navigation'
 import { buildPageMetadata } from '@/lib/metadata'
+import { buildPersonSchema } from '@/lib/schema'
+import { business } from '@/data/business'
 import PageLayout from '@/components/layout/PageLayout'
 import PageHero from '@/components/layout/PageHero'
 import PageEndModule from '@/components/layout/PageEndModule'
@@ -33,11 +35,25 @@ export default async function SobreNosotrosPage({ params }: Props) {
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'AboutPage' })
   const tLayout = await getTranslations({ locale, namespace: 'PageLayout' })
+  const tTeam = await getTranslations({ locale, namespace: 'Team' })
   const paragraphs = t.raw('paragraphs') as string[]
+  const teamMembers = tTeam.raw('members') as Record<
+    string,
+    { role: string; bio: string; alt: string }
+  >
+  const personGraph = business.team.map((m) =>
+    buildPersonSchema({
+      name: m.name,
+      photo: m.photo,
+      role: teamMembers[m.slug]?.role ?? '',
+      locale,
+    })
+  )
 
   return (
     <PageLayout
       locale={locale}
+      extraJsonLd={personGraph}
       breadcrumb={[
         { href: '/', label: tLayout('breadcrumbHome') },
         { href: '', label: t('metaTitle') },

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { Link } from '@/i18n/navigation'
 import { business, getZoneBySlug, zoneDisplayName } from '@/data/business'
 import { buildPageMetadata } from '@/lib/metadata'
+import { buildZoneServiceSchema } from '@/lib/schema'
 import PageLayout from '@/components/layout/PageLayout'
 import PageHero from '@/components/layout/PageHero'
 import PageEndModule from '@/components/layout/PageEndModule'
@@ -78,9 +79,18 @@ export default async function ZonaPage({ params }: Props) {
     label: locale === 'en' ? s.en : s.es,
   }))
 
+  const zoneName = zoneDisplayName(z, locale as 'es' | 'en')
+  const zoneService = buildZoneServiceSchema({
+    zoneName,
+    zoneSlug: z.slug,
+    description: z.lede,
+    locale,
+  })
+
   return (
     <PageLayout
       locale={locale}
+      extraJsonLd={[zoneService]}
       breadcrumb={[
         { href: '/', label: tLayout('breadcrumbHome') },
         { href: '', label: `Zona: ${z.name}` },

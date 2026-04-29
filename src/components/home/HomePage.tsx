@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, type ReactNode } from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { gsap } from '@/lib/gsap'
@@ -65,7 +65,9 @@ const SprayParticleScene = dynamic(
 /*  HomePage                                                           */
 /* ------------------------------------------------------------------ */
 
-export default function HomePage() {
+export default function HomePage({
+  extraJsonLd,
+}: { extraJsonLd?: ReactNode } = {}) {
   const locale = useLocale() as 'es' | 'en'
   const contactInfo = displayContact(locale)
   const tHome = useTranslations('Home')
@@ -282,6 +284,7 @@ export default function HomePage() {
 
   return (
     <div ref={containerRef}>
+      {extraJsonLd}
       <Navigation />
 
       {/* ===== HERO (fixed — content scrolls over it) ===== */}

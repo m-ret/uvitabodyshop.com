@@ -67,6 +67,7 @@ function ArticleJsonLd({
           description: gc.summary,
           image: g.heroImage,
           datePublished: g.publishedIso,
+          dateModified: g.dateModified ?? g.publishedIso,
           locale,
         })
       )}
