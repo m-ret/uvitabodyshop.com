@@ -6,6 +6,8 @@ const UNOSEND_URL = 'https://api.unosend.co/emails'
 /**
  * UnoSend (https://unosend.co) — edge-safe `fetch`. No-op without
  * `UNOSEND_API_KEY` + `UNOSEND_FROM` (verified domain in dashboard).
+ * Recipient resolved from `CONTACT_INBOX` env var, falling back to
+ * `business.contact.leadEmail` so the inbox can be rotated without redeploy.
  */
 export async function sendQuoteLeadEmail(
   payload: QuoteEmailPayload
@@ -15,6 +17,7 @@ export async function sendQuoteLeadEmail(
   if (!key || !from) {
     return { ok: true, skipped: true }
   }
+  const to = process.env.CONTACT_INBOX || business.contact.leadEmail
 
   const { html, text, subject } = buildQuoteEmail(payload)
   const res = await fetch(UNOSEND_URL, {
@@ -25,7 +28,7 @@ export async function sendQuoteLeadEmail(
     },
     body: JSON.stringify({
       from,
-      to: [business.contact.leadEmail],
+      to: [to],
       subject,
       html,
       text,
