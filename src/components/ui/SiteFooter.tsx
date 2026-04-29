@@ -51,7 +51,10 @@ export default function SiteFooter() {
     { href: '/garantia', labelKey: 'warranty' as const },
     { href: '/preguntas-frecuentes', labelKey: 'faq' as const },
     { href: '/#contact', labelKey: 'quoteHome' as const },
+    { href: '/privacidad', labelKey: 'privacy' as const },
   ]
+  const hoursLine =
+    locale === 'en' ? business.hours.displayEn : business.hours.display
 
   return (
     <footer className="py-12 px-6 sm:px-12 lg:px-24 border-t border-zinc-800/50">
@@ -88,7 +91,7 @@ export default function SiteFooter() {
           )}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-sm text-zinc-500 border-t border-zinc-800/30 pt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-zinc-500 border-t border-zinc-800/30 pt-8">
           <div>
             <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-600 mb-3">
               {t('pages')}
@@ -138,6 +141,25 @@ export default function SiteFooter() {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+          <div>
+            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-600 mb-3">
+              {t('contactBlock')}
+            </p>
+            <ul className="space-y-2 list-none p-0 m-0">
+              <li>
+                <a
+                  href={`tel:${business.contact.phone}`}
+                  className="text-zinc-500 hover:text-accent"
+                >
+                  {business.contact.phoneDisplay}
+                </a>
+              </li>
+              <li className="text-zinc-500">{hoursLine}</li>
+              <li className="text-zinc-500">
+                {business.address.locationDisplay}
+              </li>
             </ul>
           </div>
         </div>
