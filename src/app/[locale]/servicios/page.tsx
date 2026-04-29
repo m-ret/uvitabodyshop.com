@@ -33,7 +33,6 @@ export default async function ServiciosIndexPage({ params }: Props) {
   setRequestLocale(locale)
   const localeUi = locale as 'es' | 'en'
   const t = await getTranslations({ locale, namespace: 'ServicesIndexPage' })
-  const tSvc = await getTranslations({ locale, namespace: 'ServicePage' })
   const tLayout = await getTranslations({ locale, namespace: 'PageLayout' })
 
   return (
