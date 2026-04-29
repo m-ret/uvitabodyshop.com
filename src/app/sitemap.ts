@@ -14,6 +14,7 @@ const staticPaths: {
   { path: '/servicios', priority: 0.9, change: 'weekly' },
   { path: '/preguntas-frecuentes', priority: 0.7, change: 'monthly' },
   { path: '/garantia', priority: 0.6, change: 'yearly' },
+  { path: '/privacidad', priority: 0.3, change: 'yearly' },
 ]
 
 type ChangeFreq = MetadataRoute.Sitemap[0]['changeFrequency']

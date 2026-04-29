@@ -65,6 +65,41 @@
       {
         "href": "/guias/cuanto-cuesta-pintar-un-carro-en-costa-rica",
         "label": "Guide: car paint costs in Costa Rica"
+      },
+      { "href": "/privacidad", "label": "Privacy policy" }
+    ]
+  },
+  "PrivacyPage": {
+    "metaTitle": "Privacy policy",
+    "metaDesc": "How Uvita Body Shop collects, uses, and protects the personal data you share when requesting a quote or booking a service.",
+    "heroEyebrow": "Privacy",
+    "heroTitle": "Privacy policy",
+    "heroLede": "We handle the personal data you share with the care Costa Rica's Ley 8968 (Personal Data Protection Act) requires.",
+    "lastUpdated": "Last updated: April 29, 2026",
+    "sections": [
+      {
+        "title": "Data we collect",
+        "body": "When you request a quote or appointment we collect: name, phone or WhatsApp number, optional email, vehicle make and model, and a short description of the work. If you send damage photos, we use them only to scope the repair. We do not collect ID numbers or card details online — those are handled in person or with your insurer."
+      },
+      {
+        "title": "How we use it",
+        "body": "We use this data only to respond to your inquiry, schedule an appointment, prepare a written quote, and follow up on the job once it enters the shop. We never sell, rent, or share your data with third parties for advertising purposes."
+      },
+      {
+        "title": "How long we keep it",
+        "body": "Inquiries that don't proceed are discarded after 12 months. Active work orders, accepted quotes, and warranty records are kept for the warranty period plus two years to support accounting and warranty obligations."
+      },
+      {
+        "title": "Your rights",
+        "body": "You may request access, correction, deletion, or portability of your personal data at any time. Email fabricio@uvitabodyshop.com or message us on WhatsApp at +506 8769-9927. We respond within the 10 business days required by Ley 8968."
+      },
+      {
+        "title": "Security",
+        "body": "Data is stored on systems with access restricted to shop staff. Data does not leave Costa Rica except where messages are processed by WhatsApp/Meta servers or by the email server hosting our contact mailbox."
+      },
+      {
+        "title": "Changes to this policy",
+        "body": "If we modify this policy we will publish the new version on this page with a new \"Last updated\" date. Please review it from time to time."
       }
     ]
   },

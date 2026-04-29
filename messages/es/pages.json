@@ -65,6 +65,46 @@
       {
         "href": "/guias/cuanto-cuesta-pintar-un-carro-en-costa-rica",
         "label": "Guía: costo de pintura en Costa Rica"
+      },
+      { "href": "/privacidad", "label": "Política de privacidad" }
+    ]
+  },
+  "PrivacyPage": {
+    "metaTitle": "Política de privacidad",
+    "metaDesc": "Cómo Uvita Body Shop recolecta, usa y protege los datos personales que usted comparte cuando solicita una cotización o cita en el taller.",
+    "metaKeywords": [
+      "política de privacidad uvita body shop",
+      "ley 8968",
+      "protección datos costa rica"
+    ],
+    "heroEyebrow": "Privacidad",
+    "heroTitle": "Política de privacidad",
+    "heroLede": "Tratamos los datos personales que usted nos comparte con el cuidado que exige la Ley 8968 de Costa Rica.",
+    "lastUpdated": "Última actualización: 29 de abril de 2026",
+    "sections": [
+      {
+        "title": "Datos que recolectamos",
+        "body": "Cuando usted solicita una cotización o cita usamos los siguientes datos: nombre, número de teléfono o WhatsApp, correo electrónico opcional, marca y modelo del vehículo, y la descripción del trabajo a cotizar. Si nos comparte fotos del daño, las usamos solo para evaluar la reparación. No solicitamos cédula, números de tarjeta ni placas en línea — esos datos se manejan en persona o con su aseguradora."
+      },
+      {
+        "title": "Para qué los usamos",
+        "body": "Los datos se usan exclusivamente para responder su consulta, agendar una cita, preparar la cotización por escrito y dar seguimiento al trabajo cuando entra al taller. Nunca vendemos, alquilamos ni compartimos sus datos con terceros con fines publicitarios."
+      },
+      {
+        "title": "Cuánto tiempo los guardamos",
+        "body": "Las consultas no concretadas se descartan a los 12 meses. Las órdenes de trabajo, cotizaciones aceptadas y registros de garantía se conservan por el plazo de la garantía escrita más dos años, conforme a obligaciones contables y de respaldo de garantía."
+      },
+      {
+        "title": "Sus derechos",
+        "body": "Usted tiene derecho a solicitar acceso, rectificación, eliminación o portabilidad de sus datos personales en cualquier momento. Para ejercerlos escriba a fabricio@uvitabodyshop.com o por WhatsApp al (506) 8769-9927. Respondemos dentro de los 10 días hábiles que establece la Ley 8968."
+      },
+      {
+        "title": "Seguridad",
+        "body": "Los datos se almacenan en sistemas con acceso restringido al equipo del taller. No transferimos datos fuera de Costa Rica salvo que el procesamiento de un mensaje pase por servidores de WhatsApp / Meta o por el servidor de correo donde aloja Uvita Body Shop su correo de contacto."
+      },
+      {
+        "title": "Cambios a esta política",
+        "body": "Si modificamos esta política publicaremos la nueva versión en esta misma página con una nueva fecha de actualización. Le recomendamos revisarla periódicamente."
       }
     ]
   },
