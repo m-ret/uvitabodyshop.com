@@ -762,7 +762,7 @@ export const business = {
       sections: [
         {
           heading: 'Rango de precios en Costa Rica (2026)',
-          body: 'Una pintura completa profesional en Costa Rica va desde ₡400.000 para un carro compacto con color original, hasta ₡1.200.000 o más para SUV, pickup o cambios de color perlados. El precio real depende del estado de la carrocería, del sistema de pintura (Roberlo, BESA, PPG), del tipo de color y del tamaño del vehículo.',
+          body: 'Una pintura completa profesional en Costa Rica va desde ₡400.000 para un carro compacto con color original, hasta ₡1.200.000 o más para SUV, pickup o cambios de color perlados. El precio real depende del estado de la carrocería, del sistema de pintura (Roberlo y BESA con preparación 3M), del tipo de color y del tamaño del vehículo.',
         },
         {
           heading: '¿Qué diferencia un taller de ₡300.000 de uno de ₡600.000?',
@@ -784,7 +784,7 @@ export const business = {
       sectionsEn: [
         {
           heading: 'Price ranges in Costa Rica (2026)',
-          body: 'A professional full respray in Costa Rica typically runs from about ₡400,000 for a compact car in factory color up to ₡1,200,000 or more for SUVs, pickups, or pearl and specialty colors. The real price depends on body condition, paint system (Roberlo, BESA, PPG), color type, and vehicle size.',
+          body: 'A professional full respray in Costa Rica typically runs from about ₡400,000 for a compact car in factory color up to ₡1,200,000 or more for SUVs, pickups, or pearl and specialty colors. The real price depends on body condition, paint system (Roberlo and BESA with 3M prep), color type, and vehicle size.',
         },
         {
           heading: 'What separates a ₡300,000 shop from a ₡600,000 one',
