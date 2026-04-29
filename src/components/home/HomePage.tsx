@@ -38,16 +38,21 @@ type HomeProcessStep = {
 
 type MatTrustItem = { label: string; desc: string }
 
+/**
+ * Loading state for the 3D hero. Renders only the dark canvas + a soft
+ * radial accent glow on the right side (where the 3D car will appear),
+ * so the first paint is consistent with the rest of the page chrome
+ * instead of flashing a full-bleed brand silhouette.
+ */
 function HeroCarPoster() {
   return (
-    <Image
-      src="/car-hero.avif"
-      alt=""
+    <div
       aria-hidden="true"
-      fill
-      priority
-      sizes="100vw"
-      className="object-cover object-[72%_center] sm:object-[68%_center] opacity-95"
+      className="absolute inset-0 bg-background"
+      style={{
+        backgroundImage:
+          'radial-gradient(ellipse 60% 70% at 78% 55%, rgba(204,0,0,0.22), transparent 60%), radial-gradient(ellipse 80% 60% at 50% 100%, rgba(204,0,0,0.08), transparent 70%)',
+      }}
     />
   )
 }
