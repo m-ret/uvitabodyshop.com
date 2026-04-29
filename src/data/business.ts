@@ -266,7 +266,7 @@ export const business = {
         },
       ],
       meta: {
-        title: 'Enderezado de chasis y reparación de colisión en Uvita',
+        title: 'Enderezado de chasis y colisión · Uvita',
         description:
           'Enderezado estructural con medición computarizada, bancada hidráulica y garantía escrita. Uvita, Dominical, Ojochal y toda la Zona Sur.',
         keywords: [
@@ -336,7 +336,7 @@ export const business = {
         },
       ],
       meta: {
-        title: 'Pintura completa automotriz en Uvita, Costa Rica',
+        title: 'Pintura completa de carro · Uvita CR',
         description:
           'Pintura de carrocería completa en cabina con horno infrarrojo. Materiales Roberlo, BESA, 3M. Garantía escrita de 12 meses. Uvita, Zona Sur.',
         keywords: [
@@ -401,7 +401,7 @@ export const business = {
         },
       ],
       meta: {
-        title: 'Retoques de pintura y remoción de rayones en Uvita',
+        title: 'Retoques de pintura y rayones · Uvita',
         description:
           'Retoques de pintura invisibles, remoción de rayones y mezcla de color profesional. Cotización por WhatsApp con fotos. Uvita, Costa Ballena.',
         keywords: [
@@ -465,7 +465,7 @@ export const business = {
         },
       ],
       meta: {
-        title: 'Reparación de abolladuras y golpes de carrocería en Uvita',
+        title: 'Reparación de abolladuras · Uvita',
         description:
           'Reparación de golpes, abolladuras y bumpers sin reemplazo innecesario. Técnica PDR cuando aplica. Uvita, Dominical, Zona Sur.',
         keywords: [
@@ -525,7 +525,7 @@ export const business = {
         },
       ],
       meta: {
-        title: 'Instalación de accesorios automotrices pintados al tono — Uvita',
+        title: 'Accesorios pintados al tono · Uvita',
         description:
           'Instalación de bumpers, spoilers, estribos y accesorios aftermarket con pintura a juego. Acabado de agencia. Uvita, Costa Rica.',
         keywords: [
