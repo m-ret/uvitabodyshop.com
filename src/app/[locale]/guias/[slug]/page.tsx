@@ -43,7 +43,6 @@ export async function generateMetadata({ params }: Props) {
     pathname: `/guias/${g.slug}`,
     title: gc.title,
     description: gc.summary,
-    ogImage: g.heroImage,
     ...(locale === 'es' ? { keywords: [...g.keywords] } : {}),
   })
 }
