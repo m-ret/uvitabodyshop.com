@@ -61,7 +61,9 @@ export function buildServiceSchema(
     options?.longDescription ?? service.longDescription
   const priceGuidance = options?.priceGuidance ?? service.priceGuidance
   const servicePath = `/servicios/${service.slug}`
-  const offerPath = `/contacto?servicio=${encodeURIComponent(service.slug)}`
+  // Hash anchor (not query param) so search engines don't index parameterized
+  // /contacto variants as duplicates of the canonical /contacto.
+  const offerPath = `/contacto#servicio-${encodeURIComponent(service.slug)}`
 
   return {
     '@context': 'https://schema.org',

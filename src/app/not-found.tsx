@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: '404 — Página no encontrada',
   description:
     'La página que buscás no existe. Volvé al inicio o escribinos por WhatsApp.',
+  // 404s must not advertise themselves as canonical to anything else, and must
+  // not inherit the root layout's `canonical: '/'` or hreflang cluster.
+  alternates: { canonical: null, languages: {} },
+  robots: { index: false, follow: false },
 }
 
 export default function NotFound() {

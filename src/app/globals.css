@@ -75,6 +75,30 @@ body::before {
   transform: translateY(60px) scale(0.97);
 }
 
+/* Hero entrance initial state (CSS-driven, animated by GSAP).
+   Reveal text via opacity/transform — never gsap.from() on the LCP element. */
+.hero-label,
+.hero-sub,
+.hero-cta,
+.hero-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.hero-line {
+  opacity: 0;
+  transform: translateY(60px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-label,
+  .hero-line,
+  .hero-sub,
+  .hero-cta,
+  .hero-scroll {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 4px;

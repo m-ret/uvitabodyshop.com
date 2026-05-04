@@ -3,18 +3,24 @@ import { business } from '@/data/business'
 import { absoluteUrlForPath } from '@/lib/metadata'
 import { routing } from '@/i18n/routing'
 
+/**
+ * Hand-curated lastmod per static path. Bump when you make a meaningful
+ * content change. Keeping it stable across deploys is critical — Google
+ * distrusts and ignores `<lastmod>` when it jitters every build.
+ */
 const staticPaths: {
   path: string
   priority: number
   change: MetadataRoute.Sitemap[0]['changeFrequency']
+  lastModified: string
 }[] = [
-  { path: '/', priority: 1, change: 'weekly' },
-  { path: '/sobre-nosotros', priority: 0.8, change: 'monthly' },
-  { path: '/contacto', priority: 0.9, change: 'weekly' },
-  { path: '/servicios', priority: 0.9, change: 'weekly' },
-  { path: '/preguntas-frecuentes', priority: 0.7, change: 'monthly' },
-  { path: '/garantia', priority: 0.6, change: 'yearly' },
-  { path: '/privacidad', priority: 0.3, change: 'yearly' },
+  { path: '/', priority: 1, change: 'weekly', lastModified: '2026-04-29' },
+  { path: '/sobre-nosotros', priority: 0.8, change: 'monthly', lastModified: '2026-04-23' },
+  { path: '/contacto', priority: 0.9, change: 'weekly', lastModified: '2026-04-29' },
+  { path: '/servicios', priority: 0.9, change: 'weekly', lastModified: '2026-04-23' },
+  { path: '/preguntas-frecuentes', priority: 0.7, change: 'monthly', lastModified: '2026-04-15' },
+  { path: '/garantia', priority: 0.6, change: 'yearly', lastModified: '2026-05-04' },
+  { path: '/privacidad', priority: 0.3, change: 'yearly', lastModified: '2026-04-15' },
 ]
 
 type ChangeFreq = MetadataRoute.Sitemap[0]['changeFrequency']
@@ -51,18 +57,27 @@ function sitemapEntriesForPath(
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date()
   const base: MetadataRoute.Sitemap = staticPaths.flatMap(
-    ({ path, priority, change }) =>
-      sitemapEntriesForPath(path, priority, change, now)
+    ({ path, priority, change, lastModified }) =>
+      sitemapEntriesForPath(path, priority, change, new Date(lastModified))
   )
 
-  const serviceUrls: MetadataRoute.Sitemap = business.services.flatMap(
-    (s) => sitemapEntriesForPath(`/servicios/${s.slug}`, 0.85, 'monthly', now)
+  const serviceUrls: MetadataRoute.Sitemap = business.services.flatMap((s) =>
+    sitemapEntriesForPath(
+      `/servicios/${s.slug}`,
+      0.85,
+      'monthly',
+      new Date(s.dateModified ?? '2026-04-23')
+    )
   )
 
   const zoneUrls: MetadataRoute.Sitemap = business.zones.flatMap((z) =>
-    sitemapEntriesForPath(`/zonas/${z.slug}`, 0.75, 'monthly', now)
+    sitemapEntriesForPath(
+      `/zonas/${z.slug}`,
+      0.75,
+      'monthly',
+      new Date(z.dateModified ?? '2026-04-23')
+    )
   )
 
   const guideUrls: MetadataRoute.Sitemap = business.guides.flatMap((g) =>
