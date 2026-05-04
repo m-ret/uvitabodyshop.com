@@ -175,11 +175,15 @@ export const business = {
   /**
    * Rating pulled from Google Business Profile. Update manually when GBP
    * moves. `url` is the deep link that opens Google reviews.
+   *
+   * NOTE: rating value/count are not emitted in JSON-LD — Google's reviews-
+   * snippet policy forbids self-serving aggregateRating on LocalBusiness.
+   * Kept here for UI use only (e.g. a future on-page "see reviews" link).
    */
   rating: {
     value: 4.3,
     count: 6,
-    url: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
+    url: 'https://maps.app.goo.gl/fyMXxbk5daJXw4Qu7',
   },
 
   /**
@@ -593,10 +597,9 @@ export const business = {
   },
 
   socialLinks: [
-    // TODO: replace url with verified Google Business Profile short link once GBP is claimed.
     {
       platform: 'google',
-      url: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
+      url: 'https://maps.app.goo.gl/fyMXxbk5daJXw4Qu7',
       handle: 'uvita-body-shop',
     },
   ] as SocialLink[],
@@ -604,7 +607,7 @@ export const business = {
   map: {
     embedUrl:
       'https://www.google.com/maps?q=Uvita+Body+Shop+Uvita+Puntarenas+Costa+Rica&output=embed',
-    linkUrl: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
+    linkUrl: 'https://maps.app.goo.gl/fyMXxbk5daJXw4Qu7',
   },
 
   /**
@@ -1350,8 +1353,8 @@ export function buildStructuredData(locale: 'es' | 'en' = 'es') {
         logo: `${siteUrl}/logo.png`,
         geo: {
           '@type': 'GeoCoordinates',
-          latitude: 9.1572,
-          longitude: -83.7383,
+          latitude: 9.1598222,
+          longitude: -83.7378068,
         },
         hasMap: business.map.linkUrl,
         paymentAccepted: ['Cash', 'Bank Transfer', 'SINPE Móvil'],
