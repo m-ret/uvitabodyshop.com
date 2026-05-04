@@ -51,6 +51,8 @@ export interface ServiceProcessStep {
 
 export interface ServiceEntry {
   slug: string
+  /** ISO date of last meaningful content edit — feeds sitemap.xml lastmod. */
+  dateModified?: string
   /** Primary Spanish label. */
   es: string
   /** English alternate — used in schema alternateName only. */
@@ -173,11 +175,15 @@ export const business = {
   /**
    * Rating pulled from Google Business Profile. Update manually when GBP
    * moves. `url` is the deep link that opens Google reviews.
+   *
+   * NOTE: rating value/count are not emitted in JSON-LD — Google's reviews-
+   * snippet policy forbids self-serving aggregateRating on LocalBusiness.
+   * Kept here for UI use only (e.g. a future on-page "see reviews" link).
    */
   rating: {
     value: 4.3,
     count: 6,
-    url: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
+    url: 'https://maps.app.goo.gl/fyMXxbk5daJXw4Qu7',
   },
 
   /**
@@ -186,14 +192,24 @@ export const business = {
    */
   guarantee: {
     eyebrow: 'Garantía escrita',
+    eyebrowEn: 'Written warranty',
     title: 'Si no queda perfecto, lo volvemos a hacer.',
+    titleEn: "If it's not perfect, we do it again.",
     summary:
       'Cada trabajo sale con una garantía escrita firmada. Si algo falla por un defecto de nuestro trabajo — preparación, pintura o acabado — lo resolvemos sin costo dentro del plazo de garantía.',
+    summaryEn:
+      'Every job ships with a signed written warranty. If anything fails due to a defect in our work — prep, paint or finish — we fix it at no cost within the warranty period.',
     terms: [
       'Pintura completa y repintado: 12 meses por defectos de aplicación (pelado, opacidad, diferencias de tono).',
       'Reparación estructural y enderezado: 6 meses sobre la geometría corregida en medición computarizada.',
       'Retoques y reparación de golpes: 6 meses sobre la zona tratada.',
       'Instalación de accesorios: 3 meses sobre la fijación y el acabado.',
+    ],
+    termsEn: [
+      'Full paint and respray: 12 months on application defects (peeling, dullness, tone mismatch).',
+      'Structural and frame repair: 6 months on geometry corrected via computer measurement.',
+      'Touch-ups and dent repair: 6 months on the treated area.',
+      'Accessory installation: 3 months on fixing and finish.',
     ],
     limitations: [
       'No cubre daños nuevos por golpes, rayones o contacto posteriores a la entrega.',
@@ -201,17 +217,30 @@ export const business = {
       'No cubre deterioro por químicos agresivos, solventes o lavados abrasivos.',
       'No cubre óxido o corrosión que se origine en zonas no reparadas por el taller.',
     ],
+    limitationsEn: [
+      'Does not cover new damage from impacts, scratches or contact after delivery.',
+      'Does not cover paint applied by third parties over the original work.',
+      'Does not cover deterioration from harsh chemicals, solvents or abrasive washing.',
+      'Does not cover rust or corrosion originating in areas the shop did not repair.',
+    ],
     claimProcess: [
       'Escribinos por WhatsApp al (506) 8769-9927 con fotos del problema.',
       'Coordinamos una revisión presencial en el taller sin costo.',
       'Si la garantía aplica, reparamos en un plazo de 3 a 10 días hábiles según el trabajo.',
       'Te entregamos un reporte escrito de lo que se hizo y la fecha de resolución.',
     ],
+    claimProcessEn: [
+      'Message us on WhatsApp at (506) 8769-9927 with photos of the issue.',
+      'We schedule an in-person review at the workshop at no cost.',
+      'If the warranty applies, we repair within 3 to 10 business days depending on the work.',
+      'You receive a written report of what was done and the resolution date.',
+    ],
   },
 
   services: [
     {
       slug: 'enderezado',
+      dateModified: '2026-05-04',
       es: 'Enderezado',
       en: 'Frame & Collision Repair',
       description:
@@ -268,7 +297,7 @@ export const business = {
         },
       ],
       meta: {
-        title: 'Enderezado de chasis y colisión · Uvita',
+        title: 'Enderezado de chasis y colisión',
         description:
           'Enderezado estructural con medición computarizada, bancada hidráulica y garantía escrita. Uvita, Dominical, Ojochal y toda la Zona Sur.',
         keywords: [
@@ -282,6 +311,7 @@ export const business = {
     },
     {
       slug: 'pintura-completa',
+      dateModified: '2026-05-04',
       es: 'Pintura completa',
       en: 'Full Paint',
       description:
@@ -338,7 +368,7 @@ export const business = {
         },
       ],
       meta: {
-        title: 'Pintura completa de carro · Uvita CR',
+        title: 'Pintura completa de carro',
         description:
           'Pintura de carrocería completa en cabina con horno infrarrojo. Materiales Roberlo, BESA, 3M. Garantía escrita de 12 meses. Uvita, Zona Sur.',
         keywords: [
@@ -352,6 +382,7 @@ export const business = {
     },
     {
       slug: 'retoques-pintura',
+      dateModified: '2026-05-04',
       es: 'Retoques de pintura',
       en: 'Paint Touch-Up',
       description:
@@ -403,7 +434,7 @@ export const business = {
         },
       ],
       meta: {
-        title: 'Retoques de pintura y rayones · Uvita',
+        title: 'Retoques de pintura y rayones',
         description:
           'Retoques de pintura invisibles, remoción de rayones y mezcla de color profesional. Cotización por WhatsApp con fotos. Uvita, Costa Ballena.',
         keywords: [
@@ -416,6 +447,7 @@ export const business = {
     },
     {
       slug: 'reparacion-golpes',
+      dateModified: '2026-05-04',
       es: 'Reparación de golpes',
       en: 'Dent & Impact Repair',
       description:
@@ -467,7 +499,7 @@ export const business = {
         },
       ],
       meta: {
-        title: 'Reparación de abolladuras · Uvita',
+        title: 'Reparación de abolladuras',
         description:
           'Reparación de golpes, abolladuras y bumpers sin reemplazo innecesario. Técnica PDR cuando aplica. Uvita, Dominical, Zona Sur.',
         keywords: [
@@ -480,6 +512,7 @@ export const business = {
     },
     {
       slug: 'instalacion-accesorios',
+      dateModified: '2026-05-04',
       es: 'Instalación de accesorios',
       en: 'Accessories & Custom',
       description:
@@ -527,7 +560,7 @@ export const business = {
         },
       ],
       meta: {
-        title: 'Accesorios pintados al tono · Uvita',
+        title: 'Accesorios pintados al tono',
         description:
           'Instalación de bumpers, spoilers, estribos y accesorios aftermarket con pintura a juego. Acabado de agencia. Uvita, Costa Rica.',
         keywords: [
@@ -564,18 +597,22 @@ export const business = {
   },
 
   socialLinks: [
-    // TODO: replace url with verified Google Business Profile short link once GBP is claimed.
     {
       platform: 'google',
-      url: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
+      url: 'https://maps.app.goo.gl/fyMXxbk5daJXw4Qu7',
       handle: 'uvita-body-shop',
+    },
+    {
+      platform: 'facebook',
+      url: 'https://www.facebook.com/Uvitabodyshop/',
+      handle: 'Uvitabodyshop',
     },
   ] as SocialLink[],
 
   map: {
     embedUrl:
       'https://www.google.com/maps?q=Uvita+Body+Shop+Uvita+Puntarenas+Costa+Rica&output=embed',
-    linkUrl: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
+    linkUrl: 'https://maps.app.goo.gl/fyMXxbk5daJXw4Qu7',
   },
 
   /**
@@ -686,10 +723,15 @@ export const business = {
   zones: [
     {
       slug: 'uvita',
+      dateModified: '2026-05-04',
       name: 'Uvita',
       driveTime: 'Taller ubicado en Uvita',
+      driveTimeEn: 'Workshop located in Uvita',
       eyebrow: 'Taller local',
+      eyebrowEn: 'Local workshop',
       lede: 'Uvita es nuestra casa. Atendemos desde calle principal, con retiro coordinado por WhatsApp dentro del cantón.',
+      ledeEn:
+        'Uvita is home. We work off the main road and coordinate pickup over WhatsApp anywhere in the canton.',
       localCues: [
         'A 2 minutos del centro de Uvita; entrada por la calle frente a la Costanera Sur, junto al cruce a Bahía.',
         'Espacio techado para hasta 4 vehículos en proceso, más bahía de pintura cerrada con horno infrarrojo.',
@@ -699,6 +741,16 @@ export const business = {
         'Coordinamos por WhatsApp para fijar día y hora; los lunes y martes suelen tener mayor disponibilidad de bahía.',
         'Diagnóstico estructural con bancada en taller; no medimos en parqueo público ni en garaje del cliente.',
         'Documentamos con fotos antes/durante/después y entregamos PDF para tu aseguradora si lo necesitás.',
+      ],
+      localCuesEn: [
+        '2 minutes from central Uvita; entrance off the road facing the Costanera Sur, next to the Bahía turn-off.',
+        'Covered space for up to 4 vehicles in process, plus a closed paint bay with infrared cure oven.',
+        'We handle pickups, sedans and family SUVs — the typical fleet around Uvita centre and Bahía residences.',
+        'Free pickup at lodging or a trusted mechanic within Uvita centre for jobs over ₡300,000.',
+        'Salt air and 80% humidity require filler clean-up and controlled cure — a different protocol than a Central Valley shop.',
+        'We lock day and time over WhatsApp; Mondays and Tuesdays usually have the most bay availability.',
+        'Structural diagnosis on the bench at the shop; we do not measure in public parking or in a customer\'s garage.',
+        'Documentation with before/during/after photos and a PDF for your insurer if you need one.',
       ],
       localFaqs: [
         {
@@ -714,13 +766,32 @@ export const business = {
           a: 'No hay descuento por dirección, pero sí ahorrás en transporte porque el retiro entra incluido. La cotización siempre va por WhatsApp antes del traslado.',
         },
       ],
+      localFaqsEn: [
+        {
+          q: 'How long does a job take if I live in Uvita?',
+          a: 'For Uvita-centre customers we coordinate same-day pickup and drop-off when the work fits in one shift (touch-ups, minor dents, accessories). Full paint or frame work follows the normal timeline; we tell you over WhatsApp when it is ready.',
+        },
+        {
+          q: 'Do you coordinate pickup or delivery in Uvita?',
+          a: 'Yes, no extra charge for jobs over ₡300,000 within Uvita centre and Bahía. We collect from your lodging, home, or trusted mechanic and return the car to the same point at the end.',
+        },
+        {
+          q: 'Is there a different price for Uvita customers?',
+          a: 'No address-based discount, but you save on transport since pickup is included. The quote always goes over WhatsApp before any move.',
+        },
+      ],
     },
     {
       slug: 'dominical',
+      dateModified: '2026-05-04',
       name: 'Dominical',
       driveTime: '15 minutos desde el taller',
+      driveTimeEn: '15 minutes from the workshop',
       eyebrow: 'Zona servida',
+      eyebrowEn: 'Service area',
       lede: 'Atendemos clientes de Dominical, Dominicalito y Escaleras. Retiro coordinado y cotización por WhatsApp antes de bajar el carro.',
+      ledeEn:
+        'We serve customers from Dominical, Dominicalito and Escaleras. Pickup coordinated and quote sent over WhatsApp before bringing the car down.',
       localCues: [
         '15 minutos por la Costanera Sur desde Dominical centro; cruce indicado en el supermercado El Pueblo.',
         'Recibimos clientes de Dominicalito, Escaleras, Pozo Azul y Hatillo — la mayoría sube a Uvita el mismo día de la cotización.',
@@ -730,6 +801,16 @@ export const business = {
         'Vehículos de alquiler con cobertura privada: preparamos reporte fotográfico para tu seguro o rent-a-car en formato PDF.',
         'Cotización por WhatsApp con fotos antes de mover el carro — si el trabajo no justifica el viaje a Uvita, te lo decimos sin pena.',
         'Atendemos sábados con cita previa para choferes que no pueden bajar entre semana.',
+      ],
+      localCuesEn: [
+        '15 minutes via the Costanera Sur from central Dominical; turn marked at the El Pueblo supermarket.',
+        'We receive customers from Dominicalito, Escaleras, Pozo Azul and Hatillo — most drive up to Uvita the same day as the quote.',
+        'Access roads to Escaleras and Hatillo are gravel and crack lower panels; we quote dents and scratches specific to that wear.',
+        'Salt air and summer dust set the right time to paint — we tell you before locking a date.',
+        'Tour operators, surf camps and local rental fleets get priority when a car is out of service in high season.',
+        'Rental vehicles with private coverage: we prepare a photo report for your insurer or rent-a-car as a PDF.',
+        'WhatsApp quote with photos before moving the car — if the work does not justify the trip to Uvita, we say so plainly.',
+        'We open Saturdays by appointment for drivers who cannot make it during the week.',
       ],
       localFaqs: [
         {
@@ -745,13 +826,32 @@ export const business = {
           a: 'Mismo presupuesto que cualquier cliente de la Zona Sur. La diferencia real es el tiempo de coordinación: con fotos por WhatsApp evitás un viaje innecesario si el trabajo no cabe en nuestro estándar.',
         },
       ],
+      localFaqsEn: [
+        {
+          q: 'How long does a job take if I live in Dominical?',
+          a: 'Touch-ups and minor dents are delivered same day or the next. Full paint runs 7 to 14 business days; we coordinate so you only drive to Uvita once (drop-off and pickup).',
+        },
+        {
+          q: 'Do you coordinate pickup or delivery in Dominical?',
+          a: 'Yes, by appointment when the work warrants it. For services under ₡300,000 we ask you to bring the car since the logistics cost would tip the budget; the call is clear over WhatsApp first.',
+        },
+        {
+          q: 'Is there a different price for Dominical customers?',
+          a: 'Same estimate as any South Zone customer. The real difference is coordination time — WhatsApp photos avoid an unnecessary trip if the work does not fit our standard.',
+        },
+      ],
     },
     {
       slug: 'ojochal',
+      dateModified: '2026-05-04',
       name: 'Ojochal',
       driveTime: '20 minutos desde el taller',
+      driveTimeEn: '20 minutes from the workshop',
       eyebrow: 'Zona servida',
+      eyebrowEn: 'Service area',
       lede: 'Clientes de Ojochal, Tortuga Abajo y Tres Ríos. Entregamos trabajos con curado completo para el clima costero.',
+      ledeEn:
+        'Customers from Ojochal, Tortuga Abajo and Tres Ríos. We deliver work fully cured for coastal climate.',
       localCues: [
         '20 minutos al sur por la Costanera; señalización clara en el ingreso a Ojochal centro y vuelta a Tres Ríos.',
         'Atendemos residentes y propietarios de Ojochal, Tortuga Abajo, Tres Ríos y Cinco Ventanas — en su mayoría comunidad expat con SUV y pickups 4x4.',
@@ -761,6 +861,16 @@ export const business = {
         'Documentación lista para aseguradoras de Estados Unidos y Europa que cubren residentes en Costa Rica con vehículo registrado acá.',
         'Vehículos de alquiler entregados a residentes: preparamos reporte para que la rentadora confirme inspección antes de devolución.',
         'Pintura completa y cambios de color quedan en agenda con 1–2 semanas de antelación durante la temporada alta de turismo.',
+      ],
+      localCuesEn: [
+        '20 minutes south on the Costanera; clear signage at the Ojochal turn-off and the Tres Ríos junction.',
+        'We serve residents and property owners in Ojochal, Tortuga Abajo, Tres Ríos and Cinco Ventanas — mostly an expat community with SUVs and 4x4 pickups.',
+        'Hillside access via gravel roads raises the risk of rock impacts; we quote recurring damage before painting the full panel.',
+        'Coastal air plus jungle humidity: we use anti-corrosion epoxy primer on exposed sheet metal, not just on visibly rusted areas.',
+        'Bilingual ES/EN coordination via WhatsApp and email when needed — foreign customers get an English quote on request.',
+        'Documentation ready for US and European insurers covering Costa Rica residents with locally registered vehicles.',
+        'Rental vehicles handed back to residents: we prepare a report so the rental company confirms inspection before return.',
+        'Full paint and colour changes book 1–2 weeks ahead during tourism high season.',
       ],
       localFaqs: [
         {
@@ -776,14 +886,33 @@ export const business = {
           a: 'Sí. WhatsApp, correo y entrega van en inglés cuando el cliente lo prefiere. La cotización formal sale en español por requisito de Hacienda, pero la conversación operativa es bilingüe.',
         },
       ],
+      localFaqsEn: [
+        {
+          q: 'How long does a job take if I live in Ojochal?',
+          a: 'Touch-ups in 2–4 business days; full paint 8 to 15 days depending on sheet-metal condition and colour change. We give you a range after diagnosis, not before — and always coordinate one trip to Uvita.',
+        },
+        {
+          q: 'Do you coordinate pickup or delivery in Ojochal?',
+          a: 'Yes, by appointment for jobs over ₡400,000. For smaller services we receive you at the shop; the 20-minute drive to Uvita does not justify running the car up and down twice.',
+        },
+        {
+          q: 'Do you serve English-speaking residents of Ojochal in English?',
+          a: 'Yes. WhatsApp, email and delivery happen in English when the customer prefers. The formal quote stays in Spanish per Hacienda requirement, but operational conversation is bilingual.',
+        },
+      ],
     },
     {
       slug: 'bahia-ballena',
+      dateModified: '2026-05-04',
       name: 'Bahía Ballena',
       nameEn: 'Whale Bay',
       driveTime: '10 minutos desde el taller',
+      driveTimeEn: '10 minutes from the workshop',
       eyebrow: 'Zona servida',
+      eyebrowEn: 'Service area',
       lede: 'Bahía Ballena y Playa Arco. Vehículos de alquiler, flotas turísticas y residentes locales.',
+      ledeEn:
+        'Whale Bay and Playa Arco. Rental vehicles, tour fleets and local residents.',
       localCues: [
         '10 minutos del taller hacia el norte; entrada por el cruce de Playa Hermosa o por Bahía Ballena directo.',
         'Vehículos de alquiler de corto plazo, flotas turísticas y residentes con segunda casa son nuestra clientela típica acá.',
@@ -793,6 +922,16 @@ export const business = {
         'Trabajamos con factura formal para hospedajes, tours y rentadoras — IVA y declaración para deducción contable.',
         'Cotización por WhatsApp con fotos para evitar el traslado innecesario si el trabajo se puede atender más adelante.',
         'Documentación visual de cada paso para flotas que rotan vehículos cada temporada y necesitan registro de mantenimiento estético.',
+      ],
+      localCuesEn: [
+        '10 minutes north of the workshop; entrance via the Playa Hermosa junction or directly through Bahía Ballena.',
+        'Short-term rental vehicles, tour fleets and second-home residents are our typical clientele here.',
+        'Beach access exposes paint to constant sand and salt air — we recommend epoxy primer and full cure before returning the car to coastal use.',
+        'We coordinate pickups with lodging owners, rent-a-cars and operators who need the car back before the following weekend.',
+        'Express repairs for tourist vehicles: touch-ups in 24–48 hours when condition and budget allow.',
+        'We invoice formally for lodging, tours and rental companies — VAT and breakdown for accounting deduction.',
+        'WhatsApp quote with photos to skip an unnecessary trip if the work can wait.',
+        'Visual documentation of every step for fleets that rotate vehicles each season and need cosmetic maintenance records.',
       ],
       localFaqs: [
         {
@@ -806,6 +945,20 @@ export const business = {
         {
           q: '¿Tienen factura electrónica para hospedajes y rent-a-cars?',
           a: 'Sí. Generamos factura electrónica con IVA y desglose de mano de obra y materiales para deducción contable. Coordinamos por correo o WhatsApp con la persona encargada de pagos.',
+        },
+      ],
+      localFaqsEn: [
+        {
+          q: 'How long does a job take if I live in Whale Bay?',
+          a: 'Touch-ups delivered in 24–48 hours when the appointment is confirmed. Full paint enters the normal 7–14 day cycle; for large fleets we negotiate a second bay if the calendar allows.',
+        },
+        {
+          q: 'Do you coordinate pickup or delivery in Whale Bay?',
+          a: 'Yes, no extra charge for customers with multiple fleet vehicles or jobs over ₡300,000. For residents with a single car we coordinate by route of the day — works well when the appointment fits with other pickups in the zone.',
+        },
+        {
+          q: 'Do you provide electronic invoicing for lodging and rent-a-cars?',
+          a: 'Yes. We generate electronic invoices with VAT and a labour/materials breakdown for accounting deduction. We coordinate over email or WhatsApp with whoever handles payments.',
         },
       ],
     },
@@ -1121,6 +1274,49 @@ export function zoneDisplayName(z: ZoneRow, locale: 'es' | 'en'): string {
   return z.name
 }
 
+/** Locale-aware lede / driveTime / eyebrow / cues / faqs for /zonas/[zona]. */
+export function getZoneContent(z: ZoneRow, locale: 'es' | 'en') {
+  if (locale === 'en') {
+    return {
+      eyebrow: z.eyebrowEn,
+      driveTime: z.driveTimeEn,
+      lede: z.ledeEn,
+      localCues: z.localCuesEn,
+      localFaqs: z.localFaqsEn,
+    }
+  }
+  return {
+    eyebrow: z.eyebrow,
+    driveTime: z.driveTime,
+    lede: z.lede,
+    localCues: z.localCues,
+    localFaqs: z.localFaqs,
+  }
+}
+
+/** Locale-aware copy for /garantia. */
+export function getGuaranteeContent(locale: 'es' | 'en') {
+  const g = business.guarantee
+  if (locale === 'en') {
+    return {
+      eyebrow: g.eyebrowEn,
+      title: g.titleEn,
+      summary: g.summaryEn,
+      terms: g.termsEn,
+      limitations: g.limitationsEn,
+      claimProcess: g.claimProcessEn,
+    }
+  }
+  return {
+    eyebrow: g.eyebrow,
+    title: g.title,
+    summary: g.summary,
+    terms: g.terms,
+    limitations: g.limitations,
+    claimProcess: g.claimProcess,
+  }
+}
+
 function pathWithLocale(locale: string, pathname: string): string {
   const p = pathname.startsWith('/') ? pathname : `/${pathname}`
   if (locale === routing.defaultLocale) return p
@@ -1132,53 +1328,23 @@ function absoluteSitePath(locale: string, pathname: string): string {
 }
 
 /**
- * schema.org `AutoBodyShop` + `LocalBusiness` JSON-LD graph.
+ * schema.org `AutoBodyShop` JSON-LD graph.
  * Used in `app/layout.tsx` — do not duplicate this literal elsewhere.
+ *
+ * Intentionally omits `aggregateRating` and `review`: Google's reviews-snippet
+ * policy (2019) forbids self-serving review markup on LocalBusiness. Re-add
+ * only when ratings come from a verified third party (e.g. Google Business
+ * Profile API), not from on-site testimonials.
  *
  * @param locale Active UI locale — drives `description`, public `url`, and
  *   per-service offer URLs so `/en` HTML matches English canonicals.
  */
 export function buildStructuredData(locale: 'es' | 'en' = 'es') {
-  const { rating, testimonials } = business
-  const ratingBlock =
-    rating.count > 0
-      ? {
-          aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue: rating.value,
-            ratingCount: rating.count,
-            reviewCount: testimonials.length,
-            bestRating: 5,
-            worstRating: 1,
-          },
-        }
-      : {}
-
-  const reviewBlock =
-    testimonials.length > 0
-      ? {
-          review: testimonials.map((t) => ({
-            '@type': 'Review',
-            author: { '@type': 'Person', name: t.author },
-            reviewBody: t.quote,
-            datePublished: t.dateIso,
-            reviewRating: t.rating
-              ? {
-                  '@type': 'Rating',
-                  ratingValue: t.rating,
-                  bestRating: 5,
-                  worstRating: 1,
-                }
-              : undefined,
-          })),
-        }
-      : {}
-
   return {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': ['AutoBodyShop', 'LocalBusiness'],
+        '@type': 'AutoBodyShop',
         '@id': `${siteUrl}#business`,
         name: business.name,
         description:
@@ -1192,11 +1358,11 @@ export function buildStructuredData(locale: 'es' | 'en' = 'es') {
         logo: `${siteUrl}/logo.png`,
         geo: {
           '@type': 'GeoCoordinates',
-          latitude: 9.1572,
-          longitude: -83.7383,
+          latitude: 9.1598222,
+          longitude: -83.7378068,
         },
         hasMap: business.map.linkUrl,
-        paymentAccepted: 'Cash, Bank Transfer, SINPE Móvil',
+        paymentAccepted: ['Cash', 'Bank Transfer', 'SINPE Móvil'],
         currenciesAccepted: 'CRC',
         address: {
           '@type': 'PostalAddress',
@@ -1230,8 +1396,6 @@ export function buildStructuredData(locale: 'es' | 'en' = 'es') {
           },
         })),
         sameAs: business.socialLinks.map((s) => s.url),
-        ...ratingBlock,
-        ...reviewBlock,
       },
     ],
   }

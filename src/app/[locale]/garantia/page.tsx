@@ -1,14 +1,12 @@
 import { hasLocale } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { business } from '@/data/business'
+import { getGuaranteeContent } from '@/data/business'
 import { buildPageMetadata } from '@/lib/metadata'
 import PageLayout from '@/components/layout/PageLayout'
 import PageHero from '@/components/layout/PageHero'
 import PageEndModule from '@/components/layout/PageEndModule'
 import { routing } from '@/i18n/routing'
-
-const g = business.guarantee
 
 type Props = { params: Promise<{ locale: string }> }
 
@@ -34,6 +32,7 @@ export default async function GarantiaPage({ params }: Props) {
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'GuaranteePage' })
   const tLayout = await getTranslations({ locale, namespace: 'PageLayout' })
+  const g = getGuaranteeContent(locale as 'es' | 'en')
 
   return (
     <PageLayout

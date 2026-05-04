@@ -100,26 +100,26 @@ export default function HomePage({
     () => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-      /* --- Hero entrance --- */
+      /* Hero entrance — initial state in globals.css; animate TO the rest. */
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-      tl.from('.hero-label', {
-        opacity: 0,
-        y: 20,
+      tl.to('.hero-label', {
+        opacity: 1,
+        y: 0,
         duration: 0.6,
         delay: 0.3,
       })
-        .from(
+        .to(
           '.hero-line',
-          { opacity: 0, y: 60, duration: 0.8, stagger: 0.12 },
+          { opacity: 1, y: 0, duration: 0.8, stagger: 0.12 },
           '-=0.3'
         )
-        .from('.hero-sub', { opacity: 0, y: 20, duration: 0.6 }, '-=0.4')
-        .from(
+        .to('.hero-sub', { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
+        .to(
           '.hero-cta',
-          { opacity: 0, y: 20, duration: 0.5, stagger: 0.1 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 },
           '-=0.25'
         )
-        .from('.hero-scroll', { opacity: 0, duration: 1 }, '-=0.2')
+        .to('.hero-scroll', { opacity: 1, y: 0, duration: 1 }, '-=0.2')
 
       /* --- Service sticky cards — parallax on images as they scroll --- */
       gsap.utils.toArray<HTMLElement>('.svc-card-img').forEach((img) => {

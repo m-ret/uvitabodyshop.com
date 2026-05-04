@@ -2,7 +2,12 @@ import { hasLocale } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Link } from '@/i18n/navigation'
-import { business, getZoneBySlug, zoneDisplayName } from '@/data/business'
+import {
+  business,
+  getZoneBySlug,
+  getZoneContent,
+  zoneDisplayName,
+} from '@/data/business'
 import { buildPageMetadata } from '@/lib/metadata'
 import { buildZoneServiceSchema, buildFaqSchema } from '@/lib/schema'
 import PageLayout from '@/components/layout/PageLayout'
@@ -30,14 +35,15 @@ export async function generateMetadata({ params }: Props) {
   const z = getZoneBySlug(zona)
   if (!z) notFound()
   const zoneName = zoneDisplayName(z, locale as 'es' | 'en')
+  const c = getZoneContent(z, locale as 'es' | 'en')
   const title =
     locale === 'en'
       ? `Auto body & paint · ${zoneName}`
       : `Chapa y pintura · ${zoneName} CR`
-  const hours =
-    locale === 'en' ? business.hours.displayEn : business.hours.display
   const description =
-    `${z.lede} ${zoneName} y alrededores · ${hours}`.replace(/\.\.+/g, '.')
+    locale === 'en'
+      ? `${c.lede} Serving ${zoneName} and nearby areas.`
+      : `${c.lede} ${zoneName} y alrededores.`
   return buildPageMetadata({
     locale,
     pathname: `/zonas/${z.slug}`,
@@ -72,15 +78,16 @@ export default async function ZonaPage({ params }: Props) {
   }))
 
   const zoneName = zoneDisplayName(z, locale as 'es' | 'en')
+  const c = getZoneContent(z, locale as 'es' | 'en')
   const zoneService = buildZoneServiceSchema({
     zoneName,
     zoneSlug: z.slug,
-    description: z.lede,
+    description: c.lede,
     locale,
   })
   const extraJsonLd: unknown[] = [zoneService]
-  if (z.localFaqs && z.localFaqs.length > 0) {
-    extraJsonLd.push(buildFaqSchema(z.localFaqs))
+  if (c.localFaqs && c.localFaqs.length > 0) {
+    extraJsonLd.push(buildFaqSchema(c.localFaqs))
   }
   const faqHeading = tZone('faqHeading', { zone: zoneName })
 
@@ -97,19 +104,19 @@ export default async function ZonaPage({ params }: Props) {
       ]}
       hero={
         <PageHero
-          eyebrow={z.eyebrow}
+          eyebrow={c.eyebrow}
           title={`${business.name} · ${zoneName}`}
-          lede={z.lede}
+          lede={c.lede}
         />
       }
     >
       <div className="px-6 sm:px-12 lg:px-24 pb-20 sm:pb-28">
         <div className="max-w-6xl mx-auto w-full">
         <p className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider mb-6">
-          {z.driveTime}
+          {c.driveTime}
         </p>
         <ul className="space-y-4 list-none p-0 m-0">
-          {z.localCues.map((line) => (
+          {c.localCues.map((line) => (
             <li
               key={line}
               className="border-l-2 border-accent/30 pl-4 text-zinc-400 text-sm sm:text-base leading-relaxed"
@@ -135,7 +142,7 @@ export default async function ZonaPage({ params }: Props) {
             ))}
           </ul>
         </div>
-        {z.localFaqs && z.localFaqs.length > 0 && (
+        {c.localFaqs && c.localFaqs.length > 0 && (
           <section
             aria-labelledby="zone-faq"
             className="mt-12 pt-10 border-t border-zinc-800/50"
@@ -147,7 +154,7 @@ export default async function ZonaPage({ params }: Props) {
               {faqHeading}
             </h2>
             <div className="space-y-0 border-t border-zinc-800/80">
-              {z.localFaqs.map((f) => (
+              {c.localFaqs.map((f) => (
                 <details
                   key={f.q}
                   className="group border-b border-zinc-800/80"

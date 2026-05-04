@@ -44,14 +44,10 @@ export const metadata: Metadata = {
   keywords: [...business.meta.keywords],
   applicationName: business.name,
   authors: [{ name: business.owner }],
-  alternates: {
-    canonical: '/',
-    languages: {
-      es: '/',
-      en: '/en',
-      'x-default': '/',
-    },
-  },
+  // No site-wide `alternates` here. Every page exports `generateMetadata`
+  // and emits its own self-canonical + hreflang cluster via `buildPageMetadata`.
+  // A site-wide default would leak `canonical: '/'` into pages that fail to
+  // override (e.g. `not-found.tsx`).
   openGraph: {
     type: 'website',
     locale: 'es_CR',
