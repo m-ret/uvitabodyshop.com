@@ -602,6 +602,11 @@ export const business = {
       url: 'https://maps.app.goo.gl/fyMXxbk5daJXw4Qu7',
       handle: 'uvita-body-shop',
     },
+    {
+      platform: 'facebook',
+      url: 'https://www.facebook.com/Uvitabodyshop/',
+      handle: 'Uvitabodyshop',
+    },
   ] as SocialLink[],
 
   map: {
