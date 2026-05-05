@@ -38,7 +38,14 @@
       "boothSubFallback": "Controlled finish",
       "warranty": "Written warranty",
       "warrantySub": "Every job documented",
-      "warrantySubFallback": "Documented work"
+      "warrantySubFallback": "Documented work",
+      "footnote": "№ 01 · {locality} · {country}"
+    },
+    "BrandReel": {
+      "play": "Play reel",
+      "pause": "Pause reel",
+      "replay": "Replay reel",
+      "aria": "Uvita Body Shop brand reel. 26 seconds. {years} years in the trade, written warranty."
     },
     "Testimonials": {
       "eyebrow": "Clients",

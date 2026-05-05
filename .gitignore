@@ -42,6 +42,9 @@ next-env.d.ts
 
 # exploration-phase artifacts (should not reappear)
 .gstack/
+.a5c/
+**/.a5c/
+**/.thumbnails/
 
 # playwright artifacts
 /test-results/

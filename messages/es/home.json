@@ -38,7 +38,14 @@
       "boothSubFallback": "Acabado controlado",
       "warranty": "Garantía escrita",
       "warrantySub": "Cada trabajo documentado",
-      "warrantySubFallback": "Trabajo documentado"
+      "warrantySubFallback": "Trabajo documentado",
+      "footnote": "№ 01 · {locality} · {country}"
+    },
+    "BrandReel": {
+      "play": "Reproducir reel",
+      "pause": "Pausar reel",
+      "replay": "Volver a reproducir",
+      "aria": "Reel de marca de Uvita Body Shop. 26 segundos. {years} años en el oficio, garantía escrita."
     },
     "Testimonials": {
       "eyebrow": "Clientes",

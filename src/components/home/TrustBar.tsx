@@ -2,9 +2,14 @@
 
 import { useTranslations } from 'next-intl'
 import { business } from '@/data/business'
+import BrandReel from '@/components/home/BrandReel'
 
 /**
- * Home trust strip — centered spec grid: display labels, mono eyebrow (DESIGN.md).
+ * Home trust panel — 35/65 hairline split:
+ *   left  → eyebrow + two trust marks (years of trade, written warranty)
+ *   right → 26-second brand reel (locale + aspect routed inside <BrandReel />)
+ *
+ * Below `lg`, the panel stacks: text on top, video below.
  */
 export default function TrustBar() {
   const t = useTranslations('Home.Trust')
@@ -15,12 +20,6 @@ export default function TrustBar() {
       sub: t('yearsSub'),
     },
     {
-      label: t('booth'),
-      sub: business.capabilities.hasPaintBooth
-        ? t('boothSub')
-        : t('boothSubFallback'),
-    },
-    {
       label: t('warranty'),
       sub: business.capabilities.offersWarranty
         ? t('warrantySub')
@@ -29,25 +28,44 @@ export default function TrustBar() {
   ]
 
   return (
-    <div className="w-full max-w-6xl mx-auto text-center">
-      <p className="font-mono text-[11px] sm:text-xs md:text-sm tracking-[0.32em] uppercase text-accent mb-7 sm:mb-10 md:mb-12">
-        {t('eyebrow')}
-      </p>
-      <ul className="grid grid-cols-1 md:grid-cols-3 gap-px border border-zinc-700/95 bg-zinc-700/60 list-none p-0 m-0 shadow-[0_0_0_1px_rgba(255,255,255,0.03)_inset]">
-        {items.map((item) => (
-          <li
-            key={item.label}
-            className="relative bg-background/90 px-5 py-8 sm:px-7 sm:py-10 md:px-8 md:py-12 min-h-[7.5rem] sm:min-h-[8.5rem] flex flex-col items-center justify-center"
+    <div className="w-full max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-[35fr_65fr] gap-px border border-zinc-700/95 bg-zinc-700/60 shadow-[0_0_0_1px_rgba(255,255,255,0.03)_inset]">
+        {/* LEFT — text 35% */}
+        <div className="bg-background/95 px-6 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14 flex flex-col justify-between gap-10 sm:gap-14 lg:min-h-[460px]">
+          <p className="font-mono text-[11px] sm:text-xs md:text-sm tracking-[0.32em] uppercase text-accent">
+            {t('eyebrow')}
+          </p>
+
+          <div className="flex flex-col gap-8 sm:gap-10">
+            {items.map((item) => (
+              <div key={item.label}>
+                <p className="font-display text-[clamp(2rem,4.4vw,3.25rem)] leading-[0.92] uppercase tracking-tight text-accent">
+                  {item.label}
+                </p>
+                <p className="text-sm sm:text-base text-zinc-400 leading-snug mt-3 max-w-[22rem]">
+                  {item.sub}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Hairline footnote, mirrors the spec-sheet language used elsewhere */}
+          <p
+            aria-hidden="true"
+            className="font-mono text-[10px] sm:text-[11px] tracking-[0.3em] uppercase text-zinc-500"
           >
-            <p className="font-display text-[clamp(1.35rem,4vw,2.25rem)] leading-[0.92] uppercase tracking-tight text-accent">
-              {item.label}
-            </p>
-            <p className="text-sm sm:text-base text-zinc-400 leading-snug sm:leading-relaxed mt-3 sm:mt-4 max-w-[16rem] mx-auto">
-              {item.sub}
-            </p>
-          </li>
-        ))}
-      </ul>
+            {t('footnote', {
+              locality: business.address.locality.toUpperCase(),
+              country: business.address.country.toUpperCase(),
+            })}
+          </p>
+        </div>
+
+        {/* RIGHT — video 65% */}
+        <div className="relative bg-background portrait:max-md:aspect-[9/16] aspect-video lg:aspect-auto overflow-hidden">
+          <BrandReel />
+        </div>
+      </div>
     </div>
   )
 }

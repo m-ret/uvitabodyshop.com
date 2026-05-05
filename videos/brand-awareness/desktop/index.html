@@ -52,7 +52,7 @@
         --hairline-strong: #2a2a30;
         --red: #cc0000;
         --red-hot: #e60000;
-        --red-bright: #ff5252; /* video-only: red lifted for contrast over dark imagery */
+        --red-bright: #cc0000; /* aligned to brand --accent now that imagery is gone */
         --amber: #c4922a;
         --text: #f4f4f5;
         --muted: #c4c4cb; /* lifted from #a1a1aa for video over red-tinted bg */
@@ -169,20 +169,38 @@
         width: 60px; height: 1px;
         background: var(--red);
       }
-      .s1-title {
+      .s1-line-1 {
         font-family: var(--display);
-        font-size: 320px;
-        line-height: 0.85;
-        letter-spacing: -0.01em;
+        font-size: 152px;
+        line-height: 0.92;
+        letter-spacing: -0.005em;
         color: var(--text);
-      }
-      .s1-subtitle {
-        font-family: var(--mono);
-        font-size: 32px;
         text-transform: uppercase;
-        letter-spacing: 0.4em;
-        color: var(--muted);
-        margin-top: 28px;
+        position: relative;
+        display: inline-block;
+        clip-path: inset(0 100% 0 0);
+      }
+      .s1-line-1 .strike {
+        position: absolute;
+        top: 50%; left: -8px; right: -8px;
+        height: 6px;
+        background: var(--red);
+        transform: scaleX(0);
+        transform-origin: left center;
+        box-shadow: 0 0 14px rgba(204,0,0,0.5);
+      }
+      .s1-line-2 {
+        font-family: var(--display);
+        font-size: 184px;
+        line-height: 0.86;
+        letter-spacing: -0.005em;
+        color: var(--red-bright);
+        text-transform: uppercase;
+        margin-top: 14px;
+        text-shadow: 0 0 24px rgba(204,0,0,0.35);
+        opacity: 0;
+        transform: translateY(60px);
+        filter: blur(18px);
       }
       .s1-rail {
         position: absolute;
@@ -202,53 +220,69 @@
         background: linear-gradient(to bottom, transparent, var(--red) 40%, var(--red) 60%, transparent);
       }
 
-      /* Scene 2 — Shop reveal (image left, text right) */
+      /* Scene 2 — Materials thesis (text-only, no image) */
       .s2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex; flex-direction: column;
+        justify-content: center; align-items: flex-start;
+        padding: 0 200px;
       }
-      .s2-image-wrap {
-        position: relative;
-        overflow: hidden;
-      }
-      .s2-image {
-        width: 100%; height: 100%;
-        object-fit: cover;
-        filter: brightness(0.78) contrast(1.05) saturate(0.85);
-      }
-      .s2-image-wrap::after {
-        content: '';
-        position: absolute; inset: 0;
-        background: linear-gradient(90deg, rgba(5,5,5,0) 60%, rgba(5,5,5,0.85) 100%);
-      }
-      .s2-text {
-        display: flex; flex-direction: column; justify-content: center;
-        padding: 0 160px 0 100px;
-      }
-      .s2-eyebrow {
+      .s2-stamp {
+        position: absolute;
+        right: 200px; top: 50%;
         font-family: var(--mono);
         font-size: 22px;
         text-transform: uppercase;
+        letter-spacing: 0.5em;
+        color: var(--soft);
+        writing-mode: vertical-rl;
+        line-height: 1;
+      }
+      .s2-stamp::before {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 80px;
+        background: var(--red);
+        margin-bottom: 22px;
+      }
+      .s2-eyebrow {
+        font-family: var(--mono);
+        font-size: 24px;
+        text-transform: uppercase;
         letter-spacing: 0.3em;
         color: var(--red-bright);
-        margin-bottom: 36px;
+        margin-bottom: 40px;
+        display: flex; align-items: center; gap: 18px;
+      }
+      .s2-eyebrow::before {
+        content: '';
+        display: inline-block;
+        width: 60px; height: 1px;
+        background: var(--red);
+        flex-shrink: 0;
       }
       .s2-headline {
         font-family: var(--display);
-        font-size: 132px;
-        line-height: 0.92;
+        font-size: 220px;
+        line-height: 0.88;
         color: var(--text);
         text-transform: uppercase;
+        letter-spacing: -0.005em;
+        display: flex; flex-direction: column; gap: 0;
       }
+      .s2-headline .line { display: block; }
+      .s2-headline .accent { color: var(--red-bright); }
       .s2-sub {
         font-family: var(--body);
-        font-size: 38px;
+        font-size: 40px;
         font-weight: 400;
-        line-height: 1.25;
+        line-height: 1.3;
         color: var(--muted);
-        margin-top: 36px;
-        max-width: 720px;
+        margin-top: 48px;
+        max-width: 980px;
+        display: flex; flex-direction: column; gap: 8px;
       }
+      .s2-sub .line { display: block; }
 
       /* Scene 3 — The promise (peak) */
       .s3 {
@@ -293,7 +327,7 @@
         background: var(--hairline-strong);
       }
 
-      /* Scene 4 — Service grid (2x2 on desktop) */
+      /* Scene 4 — Service grid (text-only cards) */
       .s4 {
         display: flex; flex-direction: column;
         padding: 200px 200px;
@@ -324,56 +358,74 @@
         background: var(--surface-1);
         border: 1px solid var(--hairline);
         overflow: hidden;
+        display: flex; flex-direction: column;
+        padding: 32px 28px;
       }
-      .s4-card img {
-        width: 100%; height: 100%;
-        object-fit: cover;
-        filter: brightness(0.7) contrast(1.05) saturate(0.85);
-      }
-      .s4-card::after {
+      .s4-card::before {
         content: '';
-        position: absolute; inset: 0;
-        background:
-          linear-gradient(to top, rgba(5,5,5,0.95), rgba(5,5,5,0.2) 50%, rgba(5,5,5,0.35) 88%, rgba(5,5,5,0.7) 100%);
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: var(--red);
       }
       .s4-card-num {
-        position: absolute;
-        top: 24px; left: 24px;
         font-family: var(--mono);
         font-size: 20px;
         font-weight: 500;
         letter-spacing: 0.3em;
         color: var(--text);
-        z-index: 2;
         background: var(--red-hot);
         padding: 6px 12px 5px;
-        text-shadow: 0 0 1px rgba(0,0,0,0.5);
+        align-self: flex-start;
       }
+      .s4-card-spacer { flex: 1; }
       .s4-card-label {
-        position: absolute;
-        bottom: 32px; left: 28px; right: 28px;
         font-family: var(--display);
-        font-size: 44px;
+        font-size: 56px;
         line-height: 0.95;
         color: var(--text);
         text-transform: uppercase;
-        z-index: 2;
+        margin-bottom: 16px;
+      }
+      .s4-card-detail {
+        font-family: var(--mono);
+        font-size: 18px;
+        line-height: 1.4;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--soft);
+      }
+      .s4-card-rule {
+        width: 32px; height: 1px;
+        background: var(--hairline-strong);
+        margin: 14px 0;
       }
 
-      /* Scene 5 — Close */
+      /* Scene 5 — Close (typographic only — no mark) */
       .s5 {
         display: flex; flex-direction: column;
         justify-content: center; align-items: center;
         text-align: center;
       }
-      .s5-mark {
-        width: 200px; height: 200px;
-        margin-bottom: 56px;
-        opacity: 0.95;
+      .s5-eyebrow {
+        font-family: var(--mono);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.4em;
+        color: var(--muted);
+        margin-bottom: 36px;
+        display: flex; align-items: center; gap: 18px;
+      }
+      .s5-eyebrow::before,
+      .s5-eyebrow::after {
+        content: '';
+        display: inline-block;
+        width: 48px; height: 1px;
+        background: var(--red);
       }
       .s5-name {
         font-family: var(--display);
-        font-size: 156px;
+        font-size: 220px;
         line-height: 0.86;
         color: var(--text);
         text-transform: uppercase;
@@ -385,7 +437,7 @@
         text-transform: uppercase;
         letter-spacing: 0.4em;
         color: var(--muted);
-        margin-top: 36px;
+        margin-top: 40px;
       }
       .s5-divider {
         width: 80px; height: 1px;
@@ -394,7 +446,7 @@
       }
       .s5-phone {
         font-family: var(--mono);
-        font-size: 32px;
+        font-size: 36px;
         letter-spacing: 0.2em;
         color: var(--text);
       }
@@ -434,11 +486,14 @@
         <span id="hud-tag">AWARENESS · 16:9</span>
       </div>
 
-      <!-- Scene 1 — Setting (0 → 3s) -->
+      <!-- Scene 1 — Setting (0 → 3s) — site thesis: "No reparamos carros. Los restauramos." -->
       <div id="scene-1" class="scene s1 clip" data-start="0" data-duration="3" data-track-index="1">
-        <div class="s1-eyebrow" id="s1-eyebrow">09°09'35"N · 83°44'16"W</div>
-        <div class="s1-title" id="s1-title">UVITA</div>
-        <div class="s1-subtitle" id="s1-subtitle">COSTA RICA</div>
+        <div class="s1-eyebrow" id="s1-eyebrow">UVITA BODY SHOP · DESDE 2020 · COSTA RICA</div>
+        <div class="s1-line-1" id="s1-line-1">
+          <span id="s1-line-1-text">No reparamos carros.</span>
+          <span class="strike" id="s1-strike"></span>
+        </div>
+        <div class="s1-line-2" id="s1-line-2">Los restauramos.</div>
         <div class="s1-rail">
           <span class="s1-rail-num">№ 01</span>
           <span class="s1-rail-bar"></span>
@@ -446,60 +501,70 @@
         </div>
       </div>
 
-      <!-- Scene 2 — Shop reveal (3 → 9s) -->
+      <!-- Scene 2 — Materials thesis (text-only) -->
       <div id="scene-2" class="scene s2 clip" data-start="3" data-duration="6" data-track-index="1">
-        <div class="s2-image-wrap" data-layout-allow-overflow>
-          <img class="s2-image" src="assets/craft.avif" alt="" />
-        </div>
-        <div class="s2-text">
-          <div class="s2-eyebrow" id="s2-eyebrow">№ 02 · TALLER</div>
-          <h2 class="s2-headline" id="s2-headline">Hay un taller acá.</h2>
-          <p class="s2-sub" id="s2-sub">Que toma el oficio en serio.</p>
-        </div>
+        <div class="s2-eyebrow" id="s2-eyebrow">SIN ATAJOS · MATERIALES PROFESIONALES</div>
+        <h2 class="s2-headline">
+          <span class="line" id="s2-l1">El acabado</span>
+          <span class="line accent" id="s2-l2">que dura.</span>
+        </h2>
+        <p class="s2-sub">
+          <span class="line" id="s2-sub-l1">Porque los materiales duran.</span>
+          <span class="line" id="s2-sub-l2">Roberlo · BESA · 3M · VICCO.</span>
+        </p>
+        <div class="s2-stamp" id="s2-stamp">№ 02 · MATERIALES</div>
       </div>
 
       <!-- Scene 3 — The promise / warranty (9 → 16s) — PEAK -->
       <div id="scene-3" class="scene s3 clip" data-start="9" data-duration="7" data-track-index="1">
         <div class="s3-eyebrow" id="s3-eyebrow">GARANTÍA ESCRITA · № 03</div>
         <h2 class="s3-headline" id="s3-headline">Si no queda perfecto, lo volvemos a hacer.</h2>
-        <div class="s3-attribution" id="s3-attribution">— Fabricio Ríos · Maestro &amp; Propietario</div>
+        <div class="s3-attribution" id="s3-attribution">— Fabricio Ríos · Propietario</div>
         <span class="s3-rule"></span>
       </div>
 
-      <!-- Scene 4 — Service grid (16 → 22s) -->
+      <!-- Scene 4 — Service grid (text-only) -->
       <div id="scene-4" class="scene s4 clip" data-start="16" data-duration="6" data-track-index="1">
-        <div class="s4-eyebrow" id="s4-eyebrow">OFICIO · № 04</div>
+        <div class="s4-eyebrow" id="s4-eyebrow">QUÉ HACEMOS · № 04</div>
         <div class="s4-grid">
           <div class="s4-card">
-            <img src="assets/enderezado.avif" alt="" />
             <span class="s4-card-num">01</span>
+            <span class="s4-card-spacer"></span>
             <span class="s4-card-label" id="s4-l1">Enderezado</span>
+            <span class="s4-card-rule"></span>
+            <span class="s4-card-detail" id="s4-d1">Bancada · Medición computarizada</span>
           </div>
           <div class="s4-card">
-            <img src="assets/pintura-completa.avif" alt="" />
             <span class="s4-card-num">02</span>
+            <span class="s4-card-spacer"></span>
             <span class="s4-card-label" id="s4-l2">Pintura completa</span>
+            <span class="s4-card-rule"></span>
+            <span class="s4-card-detail" id="s4-d2">Cabina · Horno infrarrojo</span>
           </div>
           <div class="s4-card">
-            <img src="assets/retoques-pintura.avif" alt="" />
             <span class="s4-card-num">03</span>
+            <span class="s4-card-spacer"></span>
             <span class="s4-card-label" id="s4-l3">Retoques</span>
+            <span class="s4-card-rule"></span>
+            <span class="s4-card-detail" id="s4-d3">Mezcla de color · Acabado invisible</span>
           </div>
           <div class="s4-card">
-            <img src="assets/instalacion-accesorios.avif" alt="" />
             <span class="s4-card-num">04</span>
+            <span class="s4-card-spacer"></span>
             <span class="s4-card-label" id="s4-l4">Accesorios</span>
+            <span class="s4-card-rule"></span>
+            <span class="s4-card-detail" id="s4-d4">Instalación · Pintura al tono</span>
           </div>
         </div>
       </div>
 
       <!-- Scene 5 — Close (22 → 26s) -->
       <div id="scene-5" class="scene s5 clip" data-start="22" data-duration="4" data-track-index="1">
-        <img class="s5-mark" src="assets/mark-square.png" alt="" />
+        <div class="s5-eyebrow" id="s5-eyebrow">DESDE 2020 · HECHO EN COSTA RICA</div>
         <div class="s5-name" id="s5-name">UVITA BODY SHOP</div>
         <div class="s5-zones" id="s5-zones">UVITA · DOMINICAL · OJOCHAL · BAHÍA BALLENA</div>
         <span class="s5-divider"></span>
-        <div class="s5-phone">(506) 876-9927</div>
+        <div class="s5-phone" id="s5-phone">(506) 8769-9927</div>
       </div>
     </div>
 
@@ -517,37 +582,59 @@
           hudStatus: 'REC · UVITA, CR',
           hudMeta: 'EST. 2020 · COSTA BALLENA',
           hudTag: 'AWARENESS · 16:9',
-          s1Eyebrow: "09°09'35\"N · 83°44'16\"W",
-          s1Title: 'UVITA',
-          s1Subtitle: 'COSTA RICA',
-          s2Eyebrow: '№ 02 · TALLER',
-          s2Headline: 'Hay un taller acá.',
-          s2Sub: 'Que toma el oficio en serio.',
+          s1Eyebrow: 'UVITA BODY SHOP · DESDE 2020 · COSTA RICA',
+          s1Line1: 'No reparamos carros.',
+          s1Line2: 'Los restauramos.',
+          s2Eyebrow: 'SIN ATAJOS · MATERIALES PROFESIONALES',
+          s2Stamp: '№ 02 · MATERIALES',
+          s2HeadlineL1: 'El acabado',
+          s2HeadlineL2: 'que dura.',
+          s2SubL1: 'Porque los materiales duran.',
+          s2SubL2: 'Roberlo · BESA · 3M · VICCO.',
           s3Eyebrow: 'GARANTÍA ESCRITA · № 03',
           s3Headline: 'Si no queda perfecto, lo volvemos a hacer.',
-          s3Attribution: '— Fabricio Ríos · Maestro & Propietario',
-          s4Eyebrow: 'OFICIO · № 04',
+          s3Attribution: '— Fabricio Ríos · Propietario',
+          s4Eyebrow: 'QUÉ HACEMOS · № 04',
           s4Labels: ['Enderezado', 'Pintura completa', 'Retoques', 'Accesorios'],
+          s4Details: [
+            'Bancada · Medición computarizada',
+            'Cabina · Horno infrarrojo',
+            'Mezcla de color · Acabado invisible',
+            'Instalación · Pintura al tono',
+          ],
+          s5Eyebrow: 'DESDE 2020 · HECHO EN COSTA RICA',
           s5Name: 'UVITA BODY SHOP',
           s5Zones: 'UVITA · DOMINICAL · OJOCHAL · BAHÍA BALLENA',
+          s5Phone: '(506) 8769-9927',
         },
         en: {
           hudStatus: 'REC · UVITA, CR',
           hudMeta: 'EST. 2020 · SOUTH PACIFIC',
           hudTag: 'AWARENESS · 16:9',
-          s1Eyebrow: "09°09'35\"N · 83°44'16\"W",
-          s1Title: 'UVITA',
-          s1Subtitle: 'COSTA RICA',
-          s2Eyebrow: '№ 02 · WORKSHOP',
-          s2Headline: 'There is a shop here.',
-          s2Sub: 'That takes the craft seriously.',
+          s1Eyebrow: 'UVITA BODY SHOP · SINCE 2020 · COSTA RICA',
+          s1Line1: "We don't repair cars.",
+          s1Line2: 'We restore them.',
+          s2Eyebrow: 'NO SHORTCUTS · PRO MATERIALS',
+          s2Stamp: '№ 02 · MATERIALS',
+          s2HeadlineL1: 'A finish',
+          s2HeadlineL2: 'that lasts.',
+          s2SubL1: 'Because the materials last.',
+          s2SubL2: 'Roberlo · BESA · 3M · VICCO.',
           s3Eyebrow: 'WRITTEN WARRANTY · № 03',
           s3Headline: "If it isn't perfect, we do it again.",
-          s3Attribution: '— Fabricio Ríos · Master & Owner',
-          s4Eyebrow: 'CRAFT · № 04',
-          s4Labels: ['Frame & Collision', 'Full Paint', 'Touch-ups', 'Accessories'],
+          s3Attribution: '— Fabricio Ríos · Owner',
+          s4Eyebrow: 'WHAT WE DO · № 04',
+          s4Labels: ['Frame Repair', 'Full Paint', 'Touch-ups', 'Accessories'],
+          s4Details: [
+            'Hydraulic bench · Computer measurement',
+            'Controlled booth · Infrared cure',
+            'Color match · Invisible finish',
+            'Install · Color-matched paint',
+          ],
+          s5Eyebrow: 'SINCE 2020 · MADE IN COSTA RICA',
           s5Name: 'UVITA BODY SHOP',
           s5Zones: 'UVITA · DOMINICAL · OJOCHAL · WHALE BAY',
+          s5Phone: '(506) 8769-9927',
         },
       };
 
@@ -560,11 +647,14 @@
       set('hud-meta', t.hudMeta);
       set('hud-tag', t.hudTag);
       set('s1-eyebrow', t.s1Eyebrow);
-      set('s1-title', t.s1Title);
-      set('s1-subtitle', t.s1Subtitle);
+      set('s1-line-1-text', t.s1Line1);
+      set('s1-line-2', t.s1Line2);
       set('s2-eyebrow', t.s2Eyebrow);
-      set('s2-headline', t.s2Headline);
-      set('s2-sub', t.s2Sub);
+      set('s2-stamp', t.s2Stamp);
+      set('s2-l1', t.s2HeadlineL1);
+      set('s2-l2', t.s2HeadlineL2);
+      set('s2-sub-l1', t.s2SubL1);
+      set('s2-sub-l2', t.s2SubL2);
       set('s3-eyebrow', t.s3Eyebrow);
       set('s3-headline', t.s3Headline);
       set('s3-attribution', t.s3Attribution);
@@ -573,8 +663,14 @@
       set('s4-l2', t.s4Labels[1]);
       set('s4-l3', t.s4Labels[2]);
       set('s4-l4', t.s4Labels[3]);
+      set('s4-d1', t.s4Details[0]);
+      set('s4-d2', t.s4Details[1]);
+      set('s4-d3', t.s4Details[2]);
+      set('s4-d4', t.s4Details[3]);
+      set('s5-eyebrow', t.s5Eyebrow);
       set('s5-name', t.s5Name);
       set('s5-zones', t.s5Zones);
+      set('s5-phone', t.s5Phone);
 
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
@@ -606,23 +702,22 @@
         },
       }, 0);
 
-      /* Scene 1 — Setting */
+      /* Scene 1 — Setting / brand thesis: "No reparamos carros. Los restauramos."
+         CSS holds initial states for line-1 (clipped) and line-2 (faded out). gsap.to() animates to rest. */
       tl.from('.s1-eyebrow', { opacity: 0, y: 16, duration: 0.55, ease: 'power2.out' }, 0.2);
-      tl.from('.s1-title', { clipPath: 'inset(0 100% 0 0)', duration: 1.0, ease: 'expo.out' }, 0.5);
-      tl.from('.s1-subtitle', { opacity: 0, y: 24, duration: 0.55, ease: 'power3.out' }, 1.0);
+      tl.to('.s1-line-1', { clipPath: 'inset(0 0% 0 0)', duration: 0.9, ease: 'expo.out' }, 0.5);
       tl.from('.s1-rail-bar', { scaleY: 0, transformOrigin: '50% 50%', duration: 0.7, ease: 'power2.out' }, 0.7);
-      tl.from('.s1-rail-num', { opacity: 0, x: 12, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, 1.1);
+      tl.from('.s1-rail-num', { opacity: 0, x: 12, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, 1.0);
+      // Strike-through draw across "No reparamos carros." — brand gesture
+      tl.to('#s1-strike', { scaleX: 1, duration: 0.6, ease: 'power3.inOut' }, 1.5);
+      // Then the restoration line drops in below (red)
+      tl.to('.s1-line-2', { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.9, ease: 'expo.out' }, 1.85);
 
-      /* Scene 2 — Shop reveal */
-      tl.from('.s2-image-wrap', { clipPath: 'inset(0 100% 0 0)', duration: 1.0, ease: 'expo.out' }, 3.1);
-      tl.fromTo('.s2-image',
-        { scale: 1.05 },
-        { scale: 1.12, duration: 6.0, ease: 'none' },
-        3.0
-      );
-      tl.from('.s2-eyebrow', { opacity: 0, x: -18, duration: 0.55, ease: 'power3.out' }, 3.5);
-      tl.from('.s2-headline', { opacity: 0, y: 50, filter: 'blur(20px)', duration: 0.9, ease: 'power3.out' }, 3.7);
-      tl.from('.s2-sub', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' }, 4.1);
+      /* Scene 2 — Materials thesis (text-only) */
+      tl.from('.s2-eyebrow', { opacity: 0, x: -18, duration: 0.55, ease: 'power3.out' }, 3.2);
+      tl.from('.s2-headline .line', { opacity: 0, y: 50, filter: 'blur(20px)', duration: 0.9, ease: 'power3.out', stagger: 0.18 }, 3.5);
+      tl.from('.s2-sub .line', { opacity: 0, y: 24, duration: 0.6, ease: 'power2.out', stagger: 0.12 }, 4.6);
+      tl.fromTo('.s2-stamp', { yPercent: -50, opacity: 0, y: 20 }, { yPercent: -50, opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 3.4);
 
       /* Scene 3 — The promise (peak) */
       tl.from('.s3-eyebrow', { opacity: 0, x: -18, duration: 0.55, ease: 'power3.out' }, 9.2);
@@ -635,10 +730,12 @@
       tl.from('.s4-card', { opacity: 0, y: 60, duration: 0.7, ease: 'power3.out', stagger: 0.12 }, 16.4);
       tl.from('.s4-card-num', { opacity: 0, y: 8, duration: 0.5, ease: 'power2.out', stagger: 0.12 }, 16.7);
       tl.from('.s4-card-label', { opacity: 0, y: 16, duration: 0.55, ease: 'power2.out', stagger: 0.12 }, 16.9);
+      tl.from('.s4-card-rule', { scaleX: 0, transformOrigin: '0% 50%', duration: 0.5, ease: 'power2.out', stagger: 0.12 }, 17.05);
+      tl.from('.s4-card-detail', { opacity: 0, y: 8, duration: 0.5, ease: 'power2.out', stagger: 0.12 }, 17.15);
 
       /* Scene 5 — Close (final scene — exit allowed) */
-      tl.from('.s5-mark', { opacity: 0, scale: 0.85, duration: 0.7, ease: 'power2.out' }, 22.2);
-      tl.from('.s5-name', { clipPath: 'inset(0 100% 0 0)', duration: 1.0, ease: 'expo.out' }, 22.5);
+      tl.from('.s5-eyebrow', { opacity: 0, y: 12, duration: 0.5, ease: 'power2.out' }, 22.2);
+      tl.from('.s5-name', { clipPath: 'inset(0 100% 0 0)', duration: 1.1, ease: 'expo.out' }, 22.4);
       tl.from('.s5-zones', { opacity: 0, y: 14, duration: 0.55, ease: 'power2.out' }, 23.2);
       tl.from('.s5-divider', { scaleX: 0, transformOrigin: '50% 50%', duration: 0.6, ease: 'power2.out' }, 23.4);
       tl.from('.s5-phone', { opacity: 0, y: 14, duration: 0.55, ease: 'power2.out' }, 23.6);
