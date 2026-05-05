@@ -1,0 +1,8 @@
+# HyperFrames render scratch
+output/work-*/
+**/.hyperframes/
+**/renders/
+
+# Local node_modules per-subproject (HyperFrames pulls deps via npx)
+**/node_modules/
+**/package-lock.json

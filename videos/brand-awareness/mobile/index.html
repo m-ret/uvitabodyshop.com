@@ -1,0 +1,640 @@
+<!doctype html>
+<html
+  lang="es"
+  data-composition-variables='[
+    {
+      "id": "lang",
+      "type": "enum",
+      "label": "Language",
+      "default": "es",
+      "options": [
+        { "value": "es", "label": "Español" },
+        { "value": "en", "label": "English" }
+      ]
+    }
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Uvita Body Shop — Brand Awareness · 9:16</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #050505;
+        color: #f4f4f5;
+        font-family: 'DM Sans', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      :root {
+        --canvas: #050505;
+        --surface-1: #0a0a0a;
+        --hairline: #1f1f22;
+        --hairline-strong: #2a2a30;
+        --red: #cc0000;
+        --red-hot: #e60000;
+        --red-bright: #ff5252;
+        --amber: #c4922a;
+        --text: #f4f4f5;
+        --muted: #c4c4cb;
+        --soft: #9d9da5;
+        --display: 'Bebas Neue', Impact, sans-serif;
+        --body: 'DM Sans', system-ui, sans-serif;
+        --mono: 'JetBrains Mono', ui-monospace, monospace;
+      }
+
+      /* Persistent chrome */
+      .bg-canvas {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 80% 50% at 50% 60%, rgba(204,0,0,0.18), transparent 65%),
+          radial-gradient(ellipse 70% 40% at 30% 90%, rgba(204,0,0,0.06), transparent 70%),
+          var(--canvas);
+      }
+      .bg-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 60px 60px;
+        opacity: 0.7;
+      }
+      .bg-grain {
+        position: absolute;
+        inset: 0;
+        opacity: 0.04;
+        mix-blend-mode: screen;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      }
+      .bg-vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 110% 90% at 50% 50%, transparent 55%, rgba(0,0,0,0.6) 100%);
+        pointer-events: none;
+      }
+
+      .frame {
+        position: absolute;
+        inset: 24px;
+        border: 1px solid var(--hairline);
+        pointer-events: none;
+      }
+      .corner {
+        position: absolute;
+        width: 24px; height: 24px;
+        border-color: var(--muted);
+        border-style: solid;
+        border-width: 0;
+      }
+      .corner.tl { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
+      .corner.tr { top: -1px; right: -1px; border-top-width: 2px; border-right-width: 2px; }
+      .corner.bl { bottom: -1px; left: -1px; border-bottom-width: 2px; border-left-width: 2px; }
+      .corner.br { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
+
+      .ticker-top {
+        position: absolute;
+        top: 56px; left: 60px; right: 60px;
+        display: flex; justify-content: space-between; align-items: center;
+        font-family: var(--mono);
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--soft);
+      }
+      .ticker-top .pulse {
+        display: inline-flex; align-items: center; gap: 12px;
+        color: var(--text);
+      }
+      .ticker-top .dot {
+        width: 8px; height: 8px;
+        background: var(--red);
+        box-shadow: 0 0 12px rgba(204,0,0,0.8);
+      }
+      .ticker-bottom {
+        position: absolute;
+        bottom: 56px; left: 60px; right: 60px;
+        display: flex; justify-content: space-between; align-items: center;
+        font-family: var(--mono);
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--soft);
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* Scene 1 — Setting */
+      .s1 {
+        display: flex; flex-direction: column;
+        justify-content: center; align-items: flex-start;
+        padding: 0 100px;
+      }
+      .s1-eyebrow {
+        font-family: var(--mono);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--muted);
+        margin-bottom: 36px;
+        display: flex; align-items: center; gap: 16px;
+      }
+      .s1-eyebrow::before {
+        content: '';
+        display: inline-block;
+        width: 60px; height: 1px;
+        background: var(--red);
+      }
+      .s1-title {
+        font-family: var(--display);
+        font-size: 280px;
+        line-height: 0.85;
+        letter-spacing: -0.01em;
+        color: var(--text);
+      }
+      .s1-subtitle {
+        font-family: var(--mono);
+        font-size: 28px;
+        text-transform: uppercase;
+        letter-spacing: 0.4em;
+        color: var(--muted);
+        margin-top: 28px;
+      }
+      .s1-rail {
+        position: absolute;
+        right: 100px; top: 50%;
+        transform: translateY(-50%);
+        display: flex; flex-direction: column; align-items: flex-end;
+        gap: 12px;
+      }
+      .s1-rail-num {
+        font-family: var(--mono);
+        font-size: 16px;
+        letter-spacing: 0.3em;
+        color: var(--soft);
+      }
+      .s1-rail-bar {
+        width: 1px; height: 240px;
+        background: linear-gradient(to bottom, transparent, var(--red) 40%, var(--red) 60%, transparent);
+      }
+
+      /* Scene 2 — Shop reveal — image TOP, text BOTTOM */
+      .s2 {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+      }
+      .s2-image-wrap {
+        position: relative;
+        overflow: hidden;
+      }
+      .s2-image {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        filter: brightness(0.78) contrast(1.05) saturate(0.85);
+      }
+      .s2-image-wrap::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(to bottom, rgba(5,5,5,0) 60%, rgba(5,5,5,0.85) 100%);
+      }
+      .s2-text {
+        display: flex; flex-direction: column; justify-content: center;
+        padding: 60px 100px;
+      }
+      .s2-eyebrow {
+        font-family: var(--mono);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--red-bright);
+        margin-bottom: 28px;
+      }
+      .s2-headline {
+        font-family: var(--display);
+        font-size: 130px;
+        line-height: 0.92;
+        color: var(--text);
+        text-transform: uppercase;
+      }
+      .s2-sub {
+        font-family: var(--body);
+        font-size: 36px;
+        font-weight: 400;
+        line-height: 1.25;
+        color: var(--muted);
+        margin-top: 28px;
+      }
+
+      /* Scene 3 — The promise (peak) */
+      .s3 {
+        display: flex; flex-direction: column; justify-content: center;
+        padding: 0 100px;
+      }
+      .s3-eyebrow {
+        font-family: var(--mono);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.4em;
+        color: var(--red-bright);
+        margin-bottom: 50px;
+        display: flex; align-items: center; gap: 18px;
+      }
+      .s3-eyebrow::before {
+        content: '';
+        width: 8px; height: 8px;
+        background: var(--red);
+        box-shadow: 0 0 14px rgba(204,0,0,0.7);
+      }
+      .s3-headline {
+        font-family: var(--display);
+        font-size: 152px;
+        line-height: 0.86;
+        color: var(--text);
+        text-transform: uppercase;
+      }
+      .s3-attribution {
+        font-family: var(--mono);
+        font-size: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--muted);
+        margin-top: 60px;
+      }
+      .s3-rule {
+        position: absolute;
+        right: 100px; bottom: 280px;
+        width: 200px; height: 1px;
+        background: var(--hairline-strong);
+      }
+
+      /* Scene 4 — Service grid (2x2) */
+      .s4 {
+        display: flex; flex-direction: column;
+        padding: 200px 100px;
+      }
+      .s4-eyebrow {
+        font-family: var(--mono);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--red-bright);
+        margin-bottom: 32px;
+        display: flex; align-items: center; gap: 16px;
+      }
+      .s4-eyebrow::before {
+        content: '';
+        display: inline-block;
+        width: 60px; height: 1px;
+        background: var(--red);
+      }
+      .s4-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 18px;
+        flex: 1;
+      }
+      .s4-card {
+        position: relative;
+        background: var(--surface-1);
+        border: 1px solid var(--hairline);
+        overflow: hidden;
+      }
+      .s4-card img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        filter: brightness(0.7) contrast(1.05) saturate(0.85);
+      }
+      .s4-card::after {
+        content: '';
+        position: absolute; inset: 0;
+        background:
+          linear-gradient(to top, rgba(5,5,5,0.95), rgba(5,5,5,0.2) 50%, rgba(5,5,5,0.35) 88%, rgba(5,5,5,0.7) 100%);
+      }
+      .s4-card-num {
+        position: absolute;
+        top: 20px; left: 20px;
+        font-family: var(--mono);
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 0.3em;
+        color: var(--text);
+        z-index: 2;
+        background: var(--red-hot);
+        padding: 6px 12px 5px;
+      }
+      .s4-card-label {
+        position: absolute;
+        bottom: 24px; left: 24px; right: 24px;
+        font-family: var(--display);
+        font-size: 40px;
+        line-height: 0.95;
+        color: var(--text);
+        text-transform: uppercase;
+        z-index: 2;
+      }
+
+      /* Scene 5 — Close */
+      .s5 {
+        display: flex; flex-direction: column;
+        justify-content: center; align-items: center;
+        text-align: center;
+        padding: 0 80px;
+      }
+      .s5-mark {
+        width: 220px; height: 220px;
+        margin-bottom: 56px;
+        opacity: 0.95;
+      }
+      .s5-name {
+        font-family: var(--display);
+        font-size: 132px;
+        line-height: 0.86;
+        color: var(--text);
+        text-transform: uppercase;
+        letter-spacing: -0.005em;
+      }
+      .s5-zones {
+        font-family: var(--mono);
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 0.4em;
+        color: var(--muted);
+        margin-top: 32px;
+        max-width: 100%;
+      }
+      .s5-divider {
+        width: 80px; height: 1px;
+        background: var(--red);
+        margin: 32px auto;
+      }
+      .s5-phone {
+        font-family: var(--mono);
+        font-size: 28px;
+        letter-spacing: 0.2em;
+        color: var(--text);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="26"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div class="bg-canvas"></div>
+      <div class="bg-grid" id="bg-grid"></div>
+      <div class="bg-grain"></div>
+      <div class="bg-vignette"></div>
+
+      <div class="frame">
+        <span class="corner tl"></span>
+        <span class="corner tr"></span>
+        <span class="corner bl"></span>
+        <span class="corner br"></span>
+      </div>
+
+      <div class="ticker-top">
+        <span class="pulse">
+          <span class="dot" id="hud-dot"></span>
+          <span id="hud-status">REC · UVITA</span>
+        </span>
+        <span id="hud-meta">EST. 2020</span>
+      </div>
+      <div class="ticker-bottom">
+        <span id="hud-frame">FR 0001 / 0780</span>
+        <span id="hud-tag">9:16</span>
+      </div>
+
+      <!-- Scene 1 -->
+      <div id="scene-1" class="scene s1 clip" data-start="0" data-duration="3" data-track-index="1">
+        <div class="s1-eyebrow" id="s1-eyebrow">09°09'35"N · 83°44'16"W</div>
+        <div class="s1-title" id="s1-title">UVITA</div>
+        <div class="s1-subtitle" id="s1-subtitle">COSTA RICA</div>
+        <div class="s1-rail">
+          <span class="s1-rail-num">№ 01</span>
+          <span class="s1-rail-bar"></span>
+          <span class="s1-rail-num">/ 05</span>
+        </div>
+      </div>
+
+      <!-- Scene 2 — image top / text bottom -->
+      <div id="scene-2" class="scene s2 clip" data-start="3" data-duration="6" data-track-index="1">
+        <div class="s2-image-wrap" data-layout-allow-overflow>
+          <img class="s2-image" src="assets/craft.avif" alt="" />
+        </div>
+        <div class="s2-text">
+          <div class="s2-eyebrow" id="s2-eyebrow">№ 02 · TALLER</div>
+          <h2 class="s2-headline" id="s2-headline">Hay un taller acá.</h2>
+          <p class="s2-sub" id="s2-sub">Que toma el oficio en serio.</p>
+        </div>
+      </div>
+
+      <!-- Scene 3 — the promise -->
+      <div id="scene-3" class="scene s3 clip" data-start="9" data-duration="7" data-track-index="1">
+        <div class="s3-eyebrow" id="s3-eyebrow">GARANTÍA ESCRITA · № 03</div>
+        <h2 class="s3-headline" id="s3-headline">Si no queda perfecto, lo volvemos a hacer.</h2>
+        <div class="s3-attribution" id="s3-attribution">— Fabricio Ríos · Maestro &amp; Propietario</div>
+        <span class="s3-rule"></span>
+      </div>
+
+      <!-- Scene 4 — service grid 2x2 -->
+      <div id="scene-4" class="scene s4 clip" data-start="16" data-duration="6" data-track-index="1">
+        <div class="s4-eyebrow" id="s4-eyebrow">OFICIO · № 04</div>
+        <div class="s4-grid">
+          <div class="s4-card">
+            <img src="assets/enderezado.avif" alt="" />
+            <span class="s4-card-num">01</span>
+            <span class="s4-card-label" id="s4-l1">Enderezado</span>
+          </div>
+          <div class="s4-card">
+            <img src="assets/pintura-completa.avif" alt="" />
+            <span class="s4-card-num">02</span>
+            <span class="s4-card-label" id="s4-l2">Pintura completa</span>
+          </div>
+          <div class="s4-card">
+            <img src="assets/retoques-pintura.avif" alt="" />
+            <span class="s4-card-num">03</span>
+            <span class="s4-card-label" id="s4-l3">Retoques</span>
+          </div>
+          <div class="s4-card">
+            <img src="assets/instalacion-accesorios.avif" alt="" />
+            <span class="s4-card-num">04</span>
+            <span class="s4-card-label" id="s4-l4">Accesorios</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 5 — close -->
+      <div id="scene-5" class="scene s5 clip" data-start="22" data-duration="4" data-track-index="1">
+        <img class="s5-mark" src="assets/mark-square.png" alt="" />
+        <div class="s5-name" id="s5-name">UVITA BODY SHOP</div>
+        <div class="s5-zones" id="s5-zones">UVITA · DOMINICAL · OJOCHAL · BAHÍA BALLENA</div>
+        <span class="s5-divider"></span>
+        <div class="s5-phone">(506) 876-9927</div>
+      </div>
+    </div>
+
+    <script>
+      const vars =
+        (typeof window !== 'undefined' &&
+          window.__hyperframes &&
+          typeof window.__hyperframes.getVariables === 'function')
+          ? window.__hyperframes.getVariables()
+          : { lang: 'es' };
+      const { lang } = vars;
+
+      const COPY = {
+        es: {
+          hudStatus: 'REC · UVITA',
+          hudMeta: 'EST. 2020',
+          hudTag: '9:16',
+          s1Eyebrow: "09°09'35\"N · 83°44'16\"W",
+          s1Title: 'UVITA',
+          s1Subtitle: 'COSTA RICA',
+          s2Eyebrow: '№ 02 · TALLER',
+          s2Headline: 'Hay un taller acá.',
+          s2Sub: 'Que toma el oficio en serio.',
+          s3Eyebrow: 'GARANTÍA ESCRITA · № 03',
+          s3Headline: 'Si no queda perfecto, lo volvemos a hacer.',
+          s3Attribution: '— Fabricio Ríos · Maestro & Propietario',
+          s4Eyebrow: 'OFICIO · № 04',
+          s4Labels: ['Enderezado', 'Pintura completa', 'Retoques', 'Accesorios'],
+          s5Name: 'UVITA BODY SHOP',
+          s5Zones: 'UVITA · DOMINICAL · OJOCHAL · BAHÍA BALLENA',
+        },
+        en: {
+          hudStatus: 'REC · UVITA',
+          hudMeta: 'EST. 2020',
+          hudTag: '9:16',
+          s1Eyebrow: "09°09'35\"N · 83°44'16\"W",
+          s1Title: 'UVITA',
+          s1Subtitle: 'COSTA RICA',
+          s2Eyebrow: '№ 02 · WORKSHOP',
+          s2Headline: 'There is a shop here.',
+          s2Sub: 'That takes the craft seriously.',
+          s3Eyebrow: 'WRITTEN WARRANTY · № 03',
+          s3Headline: "If it isn't perfect, we do it again.",
+          s3Attribution: '— Fabricio Ríos · Master & Owner',
+          s4Eyebrow: 'CRAFT · № 04',
+          s4Labels: ['Frame & Collision', 'Full Paint', 'Touch-ups', 'Accessories'],
+          s5Name: 'UVITA BODY SHOP',
+          s5Zones: 'UVITA · DOMINICAL · OJOCHAL · WHALE BAY',
+        },
+      };
+
+      const t = COPY[lang] ?? COPY.es;
+      const set = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      };
+      set('hud-status', t.hudStatus);
+      set('hud-meta', t.hudMeta);
+      set('hud-tag', t.hudTag);
+      set('s1-eyebrow', t.s1Eyebrow);
+      set('s1-title', t.s1Title);
+      set('s1-subtitle', t.s1Subtitle);
+      set('s2-eyebrow', t.s2Eyebrow);
+      set('s2-headline', t.s2Headline);
+      set('s2-sub', t.s2Sub);
+      set('s3-eyebrow', t.s3Eyebrow);
+      set('s3-headline', t.s3Headline);
+      set('s3-attribution', t.s3Attribution);
+      set('s4-eyebrow', t.s4Eyebrow);
+      set('s4-l1', t.s4Labels[0]);
+      set('s4-l2', t.s4Labels[1]);
+      set('s4-l3', t.s4Labels[2]);
+      set('s4-l4', t.s4Labels[3]);
+      set('s5-name', t.s5Name);
+      set('s5-zones', t.s5Zones);
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      /* Persistent ambient motion */
+      tl.to('#hud-dot', {
+        opacity: 0.35,
+        duration: 0.5,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: 51,
+      }, 0);
+      tl.fromTo('#bg-grid',
+        { backgroundPosition: '0px 0px' },
+        { backgroundPosition: '60px 60px', duration: 26, ease: 'none' },
+        0
+      );
+      const totalFrames = 26 * 30;
+      tl.to({}, {
+        duration: 26,
+        ease: 'none',
+        onUpdate() {
+          const f = Math.floor(this.progress() * totalFrames);
+          const el = document.getElementById('hud-frame');
+          if (el) el.textContent = 'FR ' + String(f).padStart(4, '0') + ' / 0780';
+        },
+      }, 0);
+
+      /* Scene 1 */
+      tl.from('.s1-eyebrow', { opacity: 0, y: 16, duration: 0.55, ease: 'power2.out' }, 0.2);
+      tl.from('.s1-title', { clipPath: 'inset(0 100% 0 0)', duration: 1.0, ease: 'expo.out' }, 0.5);
+      tl.from('.s1-subtitle', { opacity: 0, y: 24, duration: 0.55, ease: 'power3.out' }, 1.0);
+      tl.from('.s1-rail-bar', { scaleY: 0, transformOrigin: '50% 50%', duration: 0.7, ease: 'power2.out' }, 0.7);
+      tl.from('.s1-rail-num', { opacity: 0, x: 12, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, 1.1);
+
+      /* Scene 2 */
+      tl.from('.s2-image-wrap', { clipPath: 'inset(100% 0 0 0)', duration: 1.0, ease: 'expo.out' }, 3.1);
+      tl.fromTo('.s2-image',
+        { scale: 1.05 },
+        { scale: 1.12, duration: 6.0, ease: 'none' },
+        3.0
+      );
+      tl.from('.s2-eyebrow', { opacity: 0, x: -18, duration: 0.55, ease: 'power3.out' }, 3.5);
+      tl.from('.s2-headline', { opacity: 0, y: 50, filter: 'blur(20px)', duration: 0.9, ease: 'power3.out' }, 3.7);
+      tl.from('.s2-sub', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' }, 4.1);
+
+      /* Scene 3 */
+      tl.from('.s3-eyebrow', { opacity: 0, x: -18, duration: 0.55, ease: 'power3.out' }, 9.2);
+      tl.from('.s3-headline', { clipPath: 'inset(0 100% 0 0)', duration: 1.6, ease: 'expo.out' }, 9.5);
+      tl.from('.s3-rule', { scaleX: 0, transformOrigin: '0% 50%', duration: 0.8, ease: 'power2.out' }, 10.8);
+      tl.from('.s3-attribution', { opacity: 0, y: 18, duration: 0.7, ease: 'power2.out' }, 11.2);
+
+      /* Scene 4 */
+      tl.from('.s4-eyebrow', { opacity: 0, x: -18, duration: 0.55, ease: 'power3.out' }, 16.2);
+      tl.from('.s4-card', { opacity: 0, y: 60, duration: 0.7, ease: 'power3.out', stagger: 0.12 }, 16.4);
+      tl.from('.s4-card-num', { opacity: 0, y: 8, duration: 0.5, ease: 'power2.out', stagger: 0.12 }, 16.7);
+      tl.from('.s4-card-label', { opacity: 0, y: 16, duration: 0.55, ease: 'power2.out', stagger: 0.12 }, 16.9);
+
+      /* Scene 5 — final scene, exit allowed */
+      tl.from('.s5-mark', { opacity: 0, scale: 0.85, duration: 0.7, ease: 'power2.out' }, 22.2);
+      tl.from('.s5-name', { clipPath: 'inset(0 100% 0 0)', duration: 1.0, ease: 'expo.out' }, 22.5);
+      tl.from('.s5-zones', { opacity: 0, y: 14, duration: 0.55, ease: 'power2.out' }, 23.2);
+      tl.from('.s5-divider', { scaleX: 0, transformOrigin: '50% 50%', duration: 0.6, ease: 'power2.out' }, 23.4);
+      tl.from('.s5-phone', { opacity: 0, y: 14, duration: 0.55, ease: 'power2.out' }, 23.6);
+      tl.to('.s5', { opacity: 0.85, duration: 1.0, ease: 'power1.in' }, 25.0);
+
+      window.__timelines['main'] = tl;
+    </script>
+  </body>
+</html>
