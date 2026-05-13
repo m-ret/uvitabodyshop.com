@@ -15,7 +15,7 @@
       "Soy Fabricio Ríos Ortiz, fundador de Uvita Body Shop. Arranqué en la industria en 2017 después de años mirando a mi padre resolver problemas con las manos — y decidí que lo mío también iba a ser arreglar lo que otros daban por perdido.",
       "En 2020 abrí el taller en Uvita con una idea simple: traer a la Costa Ballena el nivel de acabado que solo se ve en San José. Nada de trabajos apurados, nada de pintura en el patio, nada de \"así queda bien\". Si no queda perfecto, no sale del taller.",
       "Hoy atendemos enderezado, pintura completa, retoques, reparación de golpes e instalación de accesorios para toda la Zona Sur — Uvita, Dominical, Ojochal, Bahía Ballena. Trabajamos con Roberlo, BESA, 3M y VICCO porque son los mismos materiales que usan las agencias, y porque nuestra garantía escrita depende de que duren.",
-      "El taller es mío, pero el acabado es de todos: del cliente que confía el carro, del equipo que lo prepara, de la cabina controlada y del horno infrarrojo que cura cada capa. No reparamos carros — los restauramos."
+      "El taller es mío, pero el acabado es de todos: del cliente que confía el carro, del equipo que lo prepara y de la cabina controlada donde cada capa cura según proceso. No reparamos carros — los restauramos."
     ],
     "ownerImageAlt": "Fabricio Ríos Ortiz en el taller de Uvita Body Shop",
     "contactLink": "Contactar al taller"
@@ -26,29 +26,29 @@
     "lede": "Cinco artesanos que enderezan, preparan, pintan y revisan cada carro que entra. Años de oficio entre ellos, un solo estándar entre nosotros.",
     "members": {
       "carlos": {
-        "role": "Chapa y enderezado",
-        "bio": "Lee el daño primero con las manos, después con los ojos. No hala un panel sin medirlo antes.",
-        "alt": "Carlos, técnico de chapa y enderezado en Uvita Body Shop"
+        "role": "Preparación para pintura y armado",
+        "bio": "Enmascara, imprima y deja todo listo para color; después arma con calce y huecos como mandan de fábrica.",
+        "alt": "Carlos, técnico de preparación para pintura y armado en Uvita Body Shop"
       },
       "rafael": {
-        "role": "Pintura y mezcla de color",
-        "bio": "Mezcla el color hasta que desaparece contra el panel original. Lo más difícil de pintar es que no se note.",
-        "alt": "Rafael, pintor y especialista en mezcla de color en Uvita Body Shop"
+        "role": "Preparación para pintura y armado",
+        "bio": "Lleva la preparación y el armado hasta que el carro entra limpio a cabina y vuelve armado sin juego ni holguras.",
+        "alt": "Rafael, técnico de preparación para pintura y armado en Uvita Body Shop"
       },
       "alfredo": {
-        "role": "Pintor sénior",
-        "bio": "Los años en cabina se notan en cada capa que cura limpia. Nos enseña lo que el manual no dice.",
-        "alt": "Alfredo, pintor sénior en Uvita Body Shop"
+        "role": "Pintor y preparación",
+        "bio": "Aplica color y laca y domina la preparación alrededor: mezcla, capas y lo que la ficha técnica no alcanza a decir.",
+        "alt": "Alfredo, pintor y preparación en Uvita Body Shop"
       },
       "luis": {
-        "role": "Preparación y superficie",
-        "bio": "Donde se decide el acabado. Lija, enmascara, imprima — deja el sustrato listo para que la pintura trabaje.",
-        "alt": "Luis, técnico de preparación y superficie en Uvita Body Shop"
+        "role": "Soldadura y armado",
+        "bio": "Solda, une paneles y recupera estructura para que la pintura tenga metal sólido debajo.",
+        "alt": "Luis, técnico de soldadura y armado en Uvita Body Shop"
       },
       "johel": {
-        "role": "Detallado e inspección final",
-        "bio": "Últimos ojos antes de que el carro salga. Encuentra lo que nadie quiere encontrar después.",
-        "alt": "Johel, técnico de detallado e inspección final en Uvita Body Shop"
+        "role": "Enderezado y detallado",
+        "bio": "Endereza chapa y cierra el acabado al nivel con el que firmamos antes de que el carro salga.",
+        "alt": "Johel, técnico de enderezado y detallado en Uvita Body Shop"
       }
     }
   },

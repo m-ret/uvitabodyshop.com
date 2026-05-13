@@ -26,7 +26,7 @@
 Computer-assisted structural measurement and hydraulic correction restore factory chassis geometry after collisions.
 
 ### 2. Pintura completa — Full Paint
-Multi-stage paint application in a dust-controlled spray booth with infrared curing oven. Primer, base, color, and clear coat.
+Multi-stage paint application in a dust-controlled spray booth with supervised cure cycles. Primer, base, color, and clear coat.
 
 ### 3. Retoques de pintura — Paint Touch-Up
 Localized color correction, scratch removal, and seamless blending.
@@ -40,7 +40,7 @@ Installation and paint-matching of aftermarket bumpers, spoilers, side skirts, a
 ## Materials and capabilities
 
 - **Paint brands used:** Roberlo, BESA, 3M, VICCO
-- **Paint booth with infrared oven:** yes
+- **Professional spray booth (dust-controlled, supervised cure):** yes
 - **Warranty on work:** yes (terms provided per job)
 - **Vehicles accepted:** all makes and models — no restrictions
 

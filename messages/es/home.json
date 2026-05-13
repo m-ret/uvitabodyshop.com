@@ -33,7 +33,7 @@
       "eyebrow": "Confiá en el proceso",
       "yearsLabel": "{years} años",
       "yearsSub": "de experiencia en el oficio",
-      "booth": "Cabina infrarroja",
+      "booth": "Cabina controlada",
       "boothSub": "Curado controlado y acabado de agencia",
       "boothSubFallback": "Acabado controlado",
       "warranty": "Garantía escrita",
@@ -83,8 +83,8 @@
         "slug": "pintura-completa",
         "number": "02",
         "title": "Pintura completa",
-        "subtitle": "Cabina y horno infrarrojo",
-        "description": "Aplicación en etapas dentro de nuestra cabina libre de polvo con horno de curado infrarrojo. Primer, base, color y laca — acabado perfecto.",
+        "subtitle": "Cabina libre de polvo",
+        "description": "Aplicación en etapas dentro de nuestra cabina libre de polvo con ciclos de curado supervisados. Primer, base, color y laca — acabado perfecto.",
         "image": "/images/services/pintura-completa.avif",
         "alt": "Vehículo enmascarado y preparado para pintura completa en cabina profesional"
       },
@@ -118,10 +118,10 @@
     ],
     "Booth": {
       "eyebrow": "Calidad y materiales",
-      "title1": "Horno infrarrojo.",
+      "title1": "Curado supervisado.",
       "title2": "Cabina controlada.",
       "titleAccent": "Con garantía.",
-      "body": "Roberlo y BESA para color y laca, 3M para preparación, VICCO para primer. Curado infrarrojo dentro de cabina controlada. Garantía escrita por trabajo.",
+      "body": "Roberlo y BESA para color y laca, 3M para preparación, VICCO para primer. Cada capa cura según proceso dentro de nuestra cabina controlada — sin atajos. Garantía escrita por trabajo.",
       "imageAlt": "Técnico de Uvita Body Shop pintando un vehículo con pistola HVLP en la cabina controlada"
     },
     "Materials": {
@@ -131,8 +131,8 @@
       "body": "Lo que usan las pintorerías de fábrica en todo el mundo es lo que usamos acá. Sin atajos y sin latas de marca rara. El acabado dura porque los materiales duran.",
       "trust": [
         {
-          "label": "Cabina con horno",
-          "desc": "Ambiente controlado con horno de curado infrarrojo para resultados de fábrica."
+          "label": "Cabina y curado",
+          "desc": "Cabina libre de polvo con ciclos de curado supervisados para resultados de fábrica."
         },
         {
           "label": "Garantía escrita",
@@ -164,7 +164,7 @@
       {
         "number": "03",
         "title": "Pintar",
-        "description": "Aplicación multicapa en cabina con horno de curado infrarrojo. Libre de polvo, color exacto."
+        "description": "Aplicación multicapa en cabina con ciclos de curado controlados. Libre de polvo, color exacto."
       },
       {
         "number": "04",

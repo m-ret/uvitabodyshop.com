@@ -33,7 +33,7 @@
       "eyebrow": "Trust the process",
       "yearsLabel": "{years} years",
       "yearsSub": "in the trade",
-      "booth": "Infrared booth",
+      "booth": "Controlled booth",
       "boothSub": "Controlled cure, OEM-level finish",
       "boothSubFallback": "Controlled finish",
       "warranty": "Written warranty",
@@ -83,8 +83,8 @@
         "slug": "pintura-completa",
         "number": "02",
         "title": "Full respray",
-        "subtitle": "Booth & IR oven",
-        "description": "Stage-built application in our dust-controlled booth with infrared cure. Primer, base, color, and clear — a flawless finish.",
+        "subtitle": "Dust-free booth",
+        "description": "Stage-built application in our dust-controlled booth with supervised cure cycles. Primer, base, color, and clear — a flawless finish.",
         "image": "/images/services/pintura-completa.avif",
         "alt": "Masked vehicle prepared for a full respray in a professional booth"
       },
@@ -118,10 +118,10 @@
     ],
     "Booth": {
       "eyebrow": "Quality & materials",
-      "title1": "Infrared cure.",
+      "title1": "Supervised cure.",
       "title2": "Controlled booth.",
       "titleAccent": "With a warranty.",
-      "body": "Roberlo and BESA for color and clear, 3M for prep, VICCO for primer. Infrared cure inside a controlled booth. Written warranty per job.",
+      "body": "Roberlo and BESA for color and clear, 3M for prep, VICCO for primer. Each layer cures to spec inside our controlled booth — no shortcuts. Written warranty per job.",
       "imageAlt": "Uvita Body Shop technician spraying a vehicle with an HVLP gun in the controlled booth"
     },
     "Materials": {
@@ -131,8 +131,8 @@
       "body": "What factory paint shops use worldwide is what we run. No shortcuts and no off-brand cans. The finish lasts because the materials do.",
       "trust": [
         {
-          "label": "Booth + oven",
-          "desc": "Controlled environment with infrared cure for factory-level results."
+          "label": "Booth + cure",
+          "desc": "Dust-controlled booth with supervised cure cycles for factory-level results."
         },
         {
           "label": "Written warranty",
@@ -164,7 +164,7 @@
       {
         "number": "03",
         "title": "Paint",
-        "description": "Multi-layer application in the booth with infrared cure. Dust-free, exact color."
+        "description": "Multi-layer application in the booth with controlled cure cycles. Dust-free, exact color."
       },
       {
         "number": "04",

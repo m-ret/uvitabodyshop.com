@@ -285,18 +285,18 @@ export const business = {
       es: 'Pintura completa',
       en: 'Full Paint',
       description:
-        'Pintura de vehículo completo en cabina con horno infrarrojo.',
+        'Pintura de vehículo completo en cabina profesional controlada.',
       descriptionEn:
-        'Full-vehicle respray in a controlled booth with infrared cure.',
+        'Full-vehicle respray in a dust-controlled professional booth.',
       longDescription:
-        'Pintura de carrocería completa dentro de cabina controlada con horno de curado infrarrojo. Aplicamos primer, base, color y laca en capas controladas para que la superficie quede uniforme, profunda y sin defectos. Igualamos el color original o cambiamos el tono entero si querés un carro nuevo.',
+        'Pintura de carrocería completa dentro de cabina controlada libre de polvo. Aplicamos primer, base, color y laca en capas controladas con ciclos de curado supervisados para que la superficie quede uniforme, profunda y sin defectos. Igualamos el color original o cambiamos el tono entero si querés un carro nuevo.',
       image: '/images/services/pintura-completa.avif',
       alt: 'Vehículo enmascarado dentro de la cabina controlada de Uvita Body Shop listo para pintura completa',
       included: [
         'Desmontaje controlado de molduras, emblemas y accesorios visibles.',
         'Preparación y masillado de paneles con igualación fina de superficie.',
         'Aplicación en cabina libre de polvo: primer, base, color y laca.',
-        'Curado multicapa con horno infrarrojo.',
+        'Curado multicapa según proceso dentro de la cabina.',
         'Pulido final y armado completo del vehículo.',
       ],
       process: [
@@ -309,8 +309,8 @@ export const business = {
           body: 'Aplicamos primer, base y color en capas cronometradas dentro de cabina libre de polvo. Cada carro entra limpio y sale intacto.',
         },
         {
-          title: '03 · Horno infrarrojo',
-          body: 'Curamos cada capa con horno de curado infrarrojo. Curado completo y uniforme — no media capa seca y media húmeda.',
+          title: '03 · Curado supervisado',
+          body: 'Curamos cada capa según tiempo y receta del sistema, dentro de la cabina. Curado completo y uniforme — no media capa seca y media húmeda.',
         },
         {
           title: '04 · Pulido y armado',
@@ -340,7 +340,7 @@ export const business = {
       meta: {
         title: 'Pintura completa de carro · Uvita CR',
         description:
-          'Pintura de carrocería completa en cabina con horno infrarrojo. Materiales Roberlo, BESA, 3M. Garantía escrita de 12 meses. Uvita, Zona Sur.',
+          'Pintura de carrocería completa en cabina controlada. Materiales Roberlo, BESA, 3M. Garantía escrita de 12 meses. Uvita, Zona Sur.',
         keywords: [
           'pintura automotriz uvita',
           'pintar carro completo costa rica',
@@ -552,7 +552,7 @@ export const business = {
     descriptionEs:
       'Taller profesional de enderezado, pintura completa y reparación de colisión en Uvita, Costa Rica. 9 años de experiencia, cabina de pintura con horno, garantía en todos los trabajos. Roberlo, BESA, 3M, VICCO.',
     descriptionEn:
-      'Professional auto body, paint, and collision repair in Uvita, Costa Rica. 9 years of experience, spray booth with infrared oven, warranty on all work. Roberlo, BESA, 3M, VICCO paint systems.',
+      'Professional auto body, paint, and collision repair in Uvita, Costa Rica. 9 years of experience, dust-controlled spray booth, warranty on all work. Roberlo, BESA, 3M, VICCO paint systems.',
     keywords: [
       'taller de pintura uvita',
       'enderezado y pintura costa rica',
@@ -692,7 +692,7 @@ export const business = {
       lede: 'Uvita es nuestra casa. Atendemos desde calle principal, con retiro coordinado por WhatsApp dentro del cantón.',
       localCues: [
         'A 2 minutos del centro de Uvita; entrada por la calle frente a la Costanera Sur, junto al cruce a Bahía.',
-        'Espacio techado para hasta 4 vehículos en proceso, más bahía de pintura cerrada con horno infrarrojo.',
+        'Espacio techado para hasta 4 vehículos en proceso, más bahía de pintura cerrada con cabina controlada.',
         'Atendemos pickups, sedanes y SUV familiares — el parque vehicular típico de Uvita centro y residencias en Bahía.',
         'Recogemos en hospedaje o mecánico aliado dentro de Uvita centro sin costo adicional para trabajos mayores a ₡300.000.',
         'Aire salino y humedad del 80% requieren limpieza de masilla y curado controlado — protocolo distinto al de un taller del Valle Central.',
@@ -842,7 +842,7 @@ export const business = {
         },
         {
           heading: '¿Qué diferencia un taller de ₡300.000 de uno de ₡600.000?',
-          body: 'A veces nada — muchas veces, el acabado. Un taller que pinta al aire libre, sin cabina controlada ni horno de curado, puede parecer aceptable a los tres meses y estar levantando la pintura al año. Un taller con cabina, horno infrarrojo y materiales de marca reconocida cobra más porque el trabajo dura más.',
+          body: 'A veces nada — muchas veces, el acabado. Un taller que pinta al aire libre, sin cabina controlada ni curado serio, puede parecer aceptable a los tres meses y estar levantando la pintura al año. Un taller con cabina profesional, ciclos de curado supervisados y materiales de marca reconocida cobra más porque el trabajo dura más.',
         },
         {
           heading: 'Factores que suben el precio real',
@@ -864,7 +864,7 @@ export const business = {
         },
         {
           heading: 'What separates a ₡300,000 shop from a ₡600,000 one',
-          body: 'Sometimes nothing — often it is the finish. A shop that sprays outdoors without a controlled booth or cure oven can look fine at three months and be lifting at a year. A booth, infrared cure, and branded materials cost more because the job lasts.',
+          body: 'Sometimes nothing — often it is the finish. A shop that sprays outdoors without a controlled booth or disciplined cure cycles can look fine at three months and be lifting at a year. A professional booth, supervised cure, and branded materials cost more because the job lasts.',
         },
         {
           heading: 'What really drives price',

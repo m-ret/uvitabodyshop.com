@@ -15,7 +15,7 @@
       "I am Fabricio Ríos Ortiz, founder of Uvita Body Shop. I entered the industry in 2017 after years of watching my father fix problems with his hands — and I decided mine would be fixing what others wrote off.",
       "In 2020 I opened the shop in Uvita with a simple idea: bring Costa Ballena the finish quality you usually only see in San José. No rushed jobs, no yard paint jobs, no \"good enough\". If it is not perfect, it does not leave the shop.",
       "Today we handle frame repair, full resprays, touch-ups, dent repair and accessory installs for the entire South Zone — Uvita, Dominical, Ojochal, Bahía Ballena. We run Roberlo, BESA, 3M and VICCO because they are the same systems dealerships use — and our written warranty depends on materials that last.",
-      "The shop is mine, but the finish belongs to everyone: the customer who trusts us with the car, the team that preps it, the controlled booth and the infrared oven that cures every coat. We do not patch cars up — we restore them."
+      "The shop is mine, but the finish belongs to everyone: the customer who trusts us with the car, the team that preps it, and the controlled booth where every coat cures to spec. We do not patch cars up — we restore them."
     ],
     "ownerImageAlt": "Fabricio Ríos Ortiz at work in the Uvita Body Shop booth",
     "contactLink": "Contact the shop"
@@ -26,29 +26,29 @@
     "lede": "Five craftsmen who pull, prep, paint and check every car that comes through. Years of trade between them, one standard between us.",
     "members": {
       "carlos": {
-        "role": "Body & frame",
-        "bio": "Reads damage by feel before sight. He measures every panel before he pulls it.",
-        "alt": "Carlos, body and frame technician at Uvita Body Shop"
+        "role": "Paint prep & assembly",
+        "bio": "Masks, primes and lines panels up for color — then reassembles with the gaps and fit the factory intended.",
+        "alt": "Carlos, paint-prep and assembly technician at Uvita Body Shop"
       },
       "rafael": {
-        "role": "Paint & color match",
-        "bio": "Mixes color until it disappears against the original panel. The hardest part of paint is making it look like nothing happened.",
-        "alt": "Rafael, paint and color-match specialist at Uvita Body Shop"
+        "role": "Paint prep & assembly",
+        "bio": "Builds the surface and hardware path into the booth: prep through fit-up so color goes on clean and the car goes back together tight.",
+        "alt": "Rafael, paint-prep and assembly technician at Uvita Body Shop"
       },
       "alfredo": {
-        "role": "Senior paint",
-        "bio": "Years in the booth show in every coat that cures clean. Trains the rest of us on what the manual leaves out.",
-        "alt": "Alfredo, senior painter at Uvita Body Shop"
+        "role": "Painter & prep",
+        "bio": "Runs the gun and the prep work around it — the mix, the coats, and the substrate work the datasheet never fully covers.",
+        "alt": "Alfredo, painter and prep technician at Uvita Body Shop"
       },
       "luis": {
-        "role": "Prep & surface",
-        "bio": "Where the finish is decided. Sands, masks, primes — gets the substrate right so the paint can do its job.",
-        "alt": "Luis, prep and surface technician at Uvita Body Shop"
+        "role": "Welding & assembly",
+        "bio": "Repairs structure, welds panels and puts metal back where it belongs so paint has a solid foundation.",
+        "alt": "Luis, welding and assembly technician at Uvita Body Shop"
       },
       "johel": {
-        "role": "Detail & final inspection",
-        "bio": "Last set of eyes before the car leaves. Catches what nobody wants to find later.",
-        "alt": "Johel, detail and final-inspection technician at Uvita Body Shop"
+        "role": "Straightening & detailing",
+        "bio": "Pulls sheet metal true, then finishes the car to the standard we sign off on before it leaves.",
+        "alt": "Johel, straightening and detailing technician at Uvita Body Shop"
       }
     }
   },
