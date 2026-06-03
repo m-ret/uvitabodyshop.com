@@ -570,6 +570,11 @@ export const business = {
       url: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
       handle: 'uvita-body-shop',
     },
+    {
+      platform: 'instagram',
+      url: 'https://www.instagram.com/uvitabody',
+      handle: 'uvitabody',
+    },
   ] as SocialLink[],
 
   map: {
