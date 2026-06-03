@@ -177,7 +177,7 @@ export const business = {
   rating: {
     value: 4.3,
     count: 6,
-    url: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
+    url: 'https://maps.app.goo.gl/fUM8cA6fxjxxKi8h6',
   },
 
   /**
@@ -564,18 +564,27 @@ export const business = {
   },
 
   socialLinks: [
-    // TODO: replace url with verified Google Business Profile short link once GBP is claimed.
     {
       platform: 'google',
-      url: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
+      url: 'https://maps.app.goo.gl/fUM8cA6fxjxxKi8h6',
       handle: 'uvita-body-shop',
+    },
+    {
+      platform: 'instagram',
+      url: 'https://www.instagram.com/uvitabody',
+      handle: 'uvitabody',
+    },
+    {
+      platform: 'facebook',
+      url: 'https://www.facebook.com/share/1BD8CvccqW/',
+      handle: 'uvitabody',
     },
   ] as SocialLink[],
 
   map: {
     embedUrl:
       'https://www.google.com/maps?q=Uvita+Body+Shop+Uvita+Puntarenas+Costa+Rica&output=embed',
-    linkUrl: 'https://maps.app.goo.gl/?q=Uvita+Body+Shop+Uvita+Costa+Rica',
+    linkUrl: 'https://maps.app.goo.gl/fUM8cA6fxjxxKi8h6',
   },
 
   /**
